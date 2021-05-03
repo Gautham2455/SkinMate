@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import com.example.skinmate.ui.auth.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
@@ -11,10 +12,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Handler().postDelayed({
-            val intent = Intent(this, WelcomeActivity::class.java)
-            startActivity(intent)
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
-        }, 7000)
+        }, 3000)
     }
 }
