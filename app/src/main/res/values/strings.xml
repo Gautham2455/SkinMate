@@ -39,4 +39,18 @@
     <string name="the_otp_has_been_successfully_verified">The OTP has been successfully verified.</string>
     <string name="verification_mail_sent">A verification mail has been sent to your mail id. Kindly verify it for proceeding.</string>
     <string name="okay">Okay</string>
+    <string name="enter_number_or_e_mail_id">Enter Number or E-mail Id</string>
+    <string name="phone_number_email_id">Phone Number/Email Id</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="or_sign_with">Or Sign with</string>
+    <string name="new_user_sign_up">New User?Sign Up</string>
+    <string name="privacy_policy_terms_and_conditions">Privacy Policy. Terms and Conditions</string>
+    <string name="touch_id_fingerprint">Touch_id_fingerprint</string>
+    <string name="continue_btn">CONTINUE</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="change_password">CHANGE PASSWORD</string>
 </resources>
