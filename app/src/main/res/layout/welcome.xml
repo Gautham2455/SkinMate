@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="81dp"
+                android:layout_marginStart="126dp"
+                android:text="@string/welcome_to"
+                android:fontFamily="Poppins Regular"
+                android:textSize="20sp"
+                android:textColor="@color/theme_text" />
+
+            <TextView
+                android:id="@+id/skinmate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="115dp"
+                android:layout_marginStart="120dp"
+                android:textSize="40sp"
+                android:fontFamily="Poppins Bold"
+                android:text="@string/skinmate"
+                android:textColor="@color/theme_text"/>
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="517dp"
+                android:layout_height="235dp"
+                android:layout_below="@id/skinmate"
+                android:src="@drawable/logo"
+                android:layout_marginTop="50dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="266dp"
+                android:layout_below="@id/logo"
+                android:layout_marginTop="100dp"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                android:background="@drawable/rounded_bottom_sheet">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="@string/sign_up"
+                    android:textSize="15sp"
+                    android:fontFamily="Poppins Bold"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginStart="19dp"
+                    app:backgroundTint="@null"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    android:layout_marginEnd="19dp"
+                    app:strokeWidth="2dp"
+                    android:strokeColor="@color/theme_button"
+                    android:background="@drawable/custom_button"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="@string/sign_in"
+                    android:textSize="15sp"
+                    app:backgroundTint="@color/theme_button"
+                    android:fontFamily="Poppins Bold"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginEnd="19dp"
+                    android:background="@drawable/custom_button_fill"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/pptc_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/privacy_policy_terms_and_conditions"
+                    android:textSize="10sp"
+                    android:textColor="@color/theme_button"
+                    android:layout_marginTop="200dp"
+                    android:layout_marginStart="120dp"
+                    android:fontFamily="Poppins Medium"/>
+
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

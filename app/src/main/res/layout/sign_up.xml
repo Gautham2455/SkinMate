@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone_number"
+            android:textColor="@color/theme_text"
+            android:textSize="12sp"
+            android:fontFamily="Poppins Medium"
+            android:layout_marginTop="124dp"
+            android:layout_marginStart="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="145dp"
+            app:cornerRadius = "7dp"
+            app:boxStrokeColor="@color/theme_background_light"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="1dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_number"
+                android:textColor="@color/theme_text"
+                android:fontFamily="Poppins SemiBold"
+                android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/eid_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email_id"
+            android:textColor="@color/theme_text"
+            android:textSize="12sp"
+            android:fontFamily="Poppins Medium"
+            android:layout_marginTop="215dp"
+            android:layout_marginStart="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eid_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="236dp"
+            app:cornerRadius = "7dp"
+            app:boxStrokeColor="@color/theme_background_light"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="1dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/eid_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_email"
+                android:textColor="@color/theme_text"
+                android:fontFamily="Poppins SemiBold"
+                android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/set_password_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_password"
+            android:textColor="@color/theme_text"
+            android:textSize="12sp"
+            android:fontFamily="Poppins Medium"
+            android:layout_marginTop="305dp"
+            android:layout_marginStart="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/set_password_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="326dp"
+            app:cornerRadius = "7dp"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="@color/theme_background_light"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="1dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/set_password_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_password"
+                android:textColor="@color/theme_text"
+                android:fontFamily="Poppins SemiBold"
+                android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/confirm_password_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_password"
+            android:textColor="@color/theme_text"
+            android:textSize="12sp"
+            android:fontFamily="Poppins Medium"
+            android:layout_marginTop="394dp"
+            android:layout_marginStart="20dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_password_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="415dp"
+            app:cornerRadius = "7dp"
+            app:passwordToggleEnabled="true"
+            app:boxStrokeColor="@color/theme_background_light"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="1dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_password_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:textColor="@color/theme_text"
+                android:fontFamily="Poppins SemiBold"
+                android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/proceed_btn"
+            android:layout_width="355dp"
+            android:layout_height="50dp"
+            android:text="@string/proceed"
+            android:textSize="15sp"
+            android:fontFamily="Poppins Bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="518dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginEnd="19dp"
+            app:backgroundTint="@color/theme_button"
+            android:background="@drawable/custom_button_fill"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/the_mobile_number_will_be_verified_with_one_time_password"
+            android:textColor="@color/theme_button"
+            android:textSize="12sp"
+            android:fontFamily="Poppins Medium"
+            android:layout_marginTop="598dp"
+            android:layout_marginStart="66dp"
+            android:layout_marginEnd="75dp"
+            android:textAlignment="center"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/existing_user_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/existing_user"
+            android:textColor="@color/theme_button"
+            android:textSize="12sp"
+            android:fontFamily="Poppins Medium"
+            android:layout_marginTop="680dp"
+            android:layout_marginStart="130dp"
+            android:textAlignment="center"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sign_in_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"
+            android:textColor="@color/theme_button"
+            android:textSize="12sp"
+            android:fontFamily="Poppins Bold"
+            android:layout_toEndOf="@id/existing_user_tv"
+            android:layout_marginTop="680dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/pptc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_policy_terms_and_conditions"
+            android:textSize="10sp"
+            android:textColor="@color/theme_button"
+            android:layout_marginTop="770dp"
+            android:layout_marginStart="110dp"
+            android:fontFamily="Poppins Medium"
+            android:layout_marginBottom="20dp"/>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
