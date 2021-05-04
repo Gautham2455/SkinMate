@@ -17,4 +17,10 @@ class InputValidation {
             return true
         return false
     }
+
+    fun isPasswordEqual(password: String,confirmPassword : String) : Boolean{
+        if(password==confirmPassword)
+            return true
+        return false
+    }
 }
