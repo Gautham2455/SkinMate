@@ -1,139 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-        <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:orientation="vertical"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.skinmate.ui.auth.AuthViewModel" />
+    </data>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:fontFamily="Poppins Medium"
-                            android:textColor="@color/theme_text"
-                            android:text="@string/phone_number_email_id"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textinput_phone_email"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            app:boxBackgroundColor="@color/white"
-                            app:boxStrokeColor="@color/theme_background_light"
-                            app:errorEnabled="true"
-                            app:boxStrokeWidth="1dp"
-                            app:cornerRadius="7dp"
-                            app:hintEnabled="false">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="Poppins Medium"
+            android:text="@string/phone_number_email_id"
+            android:textColor="@color/theme_text" />
 
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/etPhone_Email"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/enter_number_or_e_mail_id"
-                                    android:fontFamily="Poppins SemiBold"
-                                    android:textColor="@color/theme_text"
-                                    android:layout_marginTop="10dp"
-                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"/>
-                        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinput_phone_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/theme_background_light"
+            app:boxStrokeWidth="1dp"
+            app:cornerRadius="7dp"
+            app:errorEnabled="true"
+            app:hintEnabled="false">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:textColor="@color/theme_text"
-                            android:text="@string/password"/>
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/textinput_password"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                            app:passwordToggleEnabled="true"
-                            app:passwordToggleDrawable="@drawable/password_visibility"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            app:boxBackgroundColor="@color/white"
-                            app:boxStrokeColor="@color/theme_background_light"
-                            app:boxStrokeWidth="1dp"
-                            app:cornerRadius="7dp"
-                            app:errorEnabled="true"
-                            app:hintEnabled="false">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/etPassword"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/enter_password"
-                                    android:inputType="textPassword"/>
-                        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhone_Email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="Poppins SemiBold"
+                android:hint="@string/enter_number_or_e_mail_id"
+                android:textColor="@color/theme_text"
+                android:text="@={viewmodel.email}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-                        <TextView
-                            android:id="@+id/tv_forgot_password"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="@string/forgot_password"
-                            android:layout_gravity="end"
-                            android:textSize="12sp"
-                            android:textStyle="normal"
-                            android:clickable="true"
-                            android:textColor="@color/theme_button"
-                            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/password"
+            android:textColor="@color/theme_text" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinput_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/theme_background_light"
+            app:boxStrokeWidth="1dp"
+            app:cornerRadius="7dp"
+            app:errorEnabled="true"
+            app:hintEnabled="false"
+            app:passwordToggleDrawable="@drawable/password_visibility"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_password"
+                android:text="@={viewmodel.password}"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:text="@string/forgot_password"
+            android:textColor="@color/theme_button"
+            android:textSize="12sp"
+            android:textStyle="normal" />
 
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_signin"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:text="@string/sign_in"
-                            app:cornerRadius="50dp"
-                            android:backgroundTint="@color/theme_button"
-                            android:layout_marginTop="20dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/theme_button"
+            android:text="@string/sign_in"
+            app:cornerRadius="50dp"
+            android:onClick="@{viewmodel::onLoginBtnClick}">
 
-                        </com.google.android.material.button.MaterialButton>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/or_sign_with"
-                            android:layout_marginTop="30dp"
-                            android:textSize="15sp"
-                            android:layout_gravity="center_horizontal"/>
+        </com.google.android.material.button.MaterialButton>
 
-                        <ImageView
-                            android:id="@+id/touch_id"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center_horizontal"
-                            app:srcCompat="@drawable/finger_print"
-                            android:layout_marginTop="30dp"
-                            android:contentDescription="@string/touch_id_fingerprint" />
-                        <TextView
-                            android:id="@+id/tv_new_user"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="60dp"
-                            android:text="@string/new_user_sign_up"
-                            android:textColor="@color/theme_button"
-                            android:clickable="true"
-                            android:textSize="15sp"/>
-                        <TextView
-                            android:id="@+id/tv_privacy_tandc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/privacy_policy_terms_and_conditions"
-                            android:textColor="@color/theme_button"
-                            android:linksClickable="true"
-                            android:layout_marginTop="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:textSize="12sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="@string/or_sign_with"
+            android:textSize="15sp" />
 
-                </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        <ImageView
+            android:id="@+id/touch_id"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/touch_id_fingerprint"
+            app:srcCompat="@drawable/finger_print" />
+
+        <TextView
+            android:id="@+id/tv_new_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:clickable="true"
+            android:text="@string/new_user_sign_up"
+            android:textColor="@color/theme_button"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_privacy_tandc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:linksClickable="true"
+            android:text="@string/privacy_policy_terms_and_conditions"
+            android:textColor="@color/theme_button"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
 </layout>
