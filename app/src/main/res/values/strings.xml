@@ -64,4 +64,13 @@
     <string name="proceed">PROCEED</string>
     <string name="the_mobile_number_will_be_verified_with_one_time_password">The Mobile Number will be verified with One Time Password</string>
     <string name="existing_user">Existing User?</string>
+    <string name="current_password">Current Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="verification_required">Verification Required</string>
+    <string name="before_you_schedule_any_appointment_you_must_verify_your_mail_id_to_proceed">Before you schedule any appointment, you must verify your mail id to proceed.</string>
+    <string name="we_have_sent_a_verification_mail_sent_to">We have sent a verification mail sent to</string>
+    <string name="resend_mail">RESEND MAIL</string>
+    <string name="antony_robbins_gmail_com">Antony.Robbins@gmail.com</string>
+    <string name="email_verification">email_verification</string>
+
 </resources>

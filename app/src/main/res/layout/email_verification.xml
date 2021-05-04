@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/email_verify_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/email_verification"
+            android:layout_marginTop="80dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/email_verification" />
+
+
+        <TextView
+            android:id="@+id/tv_email_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verification_required"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp" />
+        <TextView
+            android:id="@+id/tv_email_verify_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/before_you_schedule_any_appointment_you_must_verify_your_mail_id_to_proceed"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/theme_text"
+            android:textStyle="normal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/we_have_sent_a_verification_mail_sent_to"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/theme_text"
+            android:textStyle="normal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp" />
+        <TextView
+            android:id="@+id/tv_emailid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/antony_robbins_gmail_com"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/theme_button"
+            android:linksClickable="true"
+            android:textStyle="normal"
+            android:layout_gravity="center_horizontal" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_resend_mail"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:backgroundTint="@color/theme_button"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="@string/resend_mail"
+            app:cornerRadius="25dp"
+            android:height="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="40dp">
+
+        </com.google.android.material.button.MaterialButton>
+
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
