@@ -9,7 +9,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SignUpBinding
 
-class SignUpFragment : BaseFragment(){
+class SignUpFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SignUpFragment()
