@@ -1,4 +1,4 @@
-package com.example.dummyproject
+package com.example.skinmate
 
 import androidx.fragment.app.DialogFragment
 
