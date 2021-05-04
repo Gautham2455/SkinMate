@@ -11,6 +11,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SigninBinding
 
+
 class SignInFragment : BaseFragment() {
 
     companion object {
@@ -22,6 +23,7 @@ class SignInFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val signInBinding : SigninBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
         signInBinding.tvNewUser.setOnClickListener { add(R.id.fragment_container,SignUpFragment.newInstance()) }
         return signInBinding.root
