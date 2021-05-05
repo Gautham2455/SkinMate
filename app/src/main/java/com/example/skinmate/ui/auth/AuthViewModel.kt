@@ -11,7 +11,32 @@ import com.example.skinmate.ui.home.HomeActivity
 
 class AuthViewModel : ViewModel() {
 
+    suspend fun userSignup(
+    )=null
 
+    var email: String? = null
+    var password: String? = null
+    var phonenumber: String? = null
+    var firstname: String? = null
+    var lastname: String? = null
+    var dob: String? = null
+    var mailingaddress: String? = null
+    var insuranceinfo: String? = null
+    var emergencycontactname: String? = null
+    var emergencyphonenumber: String? = null
+
+
+    fun onLoginBtnClick(view : View){
+
+        //Login
+
+    }
+
+    fun  onSignUpBtnClick(view : View){
+
+        //SignUp
+
+    }
 
 
 }
