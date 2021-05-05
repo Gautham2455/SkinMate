@@ -27,7 +27,7 @@ interface MyApi {
     )
 
     @POST("duplicate-checker")
-    suspend fun checkDuplicateUser(
+    fun checkDuplicateUser(
         @Field("email") email : String,
         @Field("phoneNumber") phoneNumber: String
     )

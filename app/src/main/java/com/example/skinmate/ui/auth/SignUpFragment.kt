@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
@@ -39,7 +40,7 @@ class SignUpFragment : BaseFragment() {
     ): View? {
 
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
-        //signupViewModel=ViewModelProvider(this,factory).get(AuthViewModel::javaClass)
+        signupViewModel=ViewModelProvider(this).get(AuthViewModel::javaClass)
 
         signUpBinding.signInTv.setOnClickListener {
             add(R.id.fragment_container, SignInFragment.newInstance())
