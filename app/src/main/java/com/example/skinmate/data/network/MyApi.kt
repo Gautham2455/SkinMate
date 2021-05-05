@@ -38,6 +38,22 @@ interface MyApi {
         @Field("password") password: String
     )
 
+    @POST("mobile-otp-verify")
+    suspend fun verifyMobleOtp(
+        @Field("otp") otp : String
+    )
+
+    @POST("registration-send-otp-to-email")
+    suspend fun registerEmail(
+        @Field("email") email : String
+    )
+
+    @POST("email-otp-verify")
+    suspend fun verifyEmailOtp(
+        @Field("email") email : String,
+        @Field("otp") otp : String
+    )
+
 
     companion object{
         operator fun invoke() : MyApi {
