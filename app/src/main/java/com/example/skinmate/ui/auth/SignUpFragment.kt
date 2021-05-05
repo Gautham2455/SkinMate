@@ -44,8 +44,14 @@ class SignUpFragment : BaseFragment() {
             add(R.id.fragment_container, SignInFragment.newInstance())
         }
 
-<<<<<<< HEAD
-        signUpBinding.proceedBtn.setOnClickListener { mobOtpBottomSheetfragment() }
+        signUpBinding.proceedBtn.setOnClickListener(){
+
+            if (validateInput()){
+                //add opt dialog
+                mobOtpBottomSheetfragment()
+            }
+
+        }
         return signUpBinding.root
     }
 
@@ -150,7 +156,7 @@ class SignUpFragment : BaseFragment() {
             val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
             OkayBtn.setOnClickListener {
                 dialog.dismiss()
-                add(R.id.fragment_container,SignInFragment.newInstance())
+                add(R.id.fragment_container,SetupProfileFragment.newInstance())
             }
             dialog.show()
         }
@@ -166,19 +172,6 @@ class SignUpFragment : BaseFragment() {
             }
             dialog.show()
         }
-    }
-
-
-
-=======
-        signUpBinding.proceedBtn.setOnClickListener(){
-
-            if (validateInput()){
-                //add opt dialog
-            }
-
-        }
-        return signUpBinding.root
     }
 
     private fun validateInput() : Boolean{
@@ -206,5 +199,6 @@ class SignUpFragment : BaseFragment() {
         }
         return flag
     }
->>>>>>> test
-}
+
+    }
+
