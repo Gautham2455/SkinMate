@@ -3,7 +3,6 @@ package com.example.skinmate.ui.auth
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.icu.text.NumberFormat
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -11,8 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import com.example.sampleslinmate.utils.InputValidation
@@ -20,9 +22,10 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SignUpBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import org.w3c.dom.Text
 
 class SignUpFragment : BaseFragment() {
+
+
     private lateinit var signUpBinding: SignUpBinding
     private lateinit var signupViewModel : AuthViewModel
     private lateinit var factory: AuthViewModelFactory
@@ -40,7 +43,8 @@ class SignUpFragment : BaseFragment() {
     ): View? {
 
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
-        signupViewModel=ViewModelProvider(this).get(AuthViewModel::javaClass)
+
+        //signupViewModel=ViewModelProvider(this).get(AuthViewModel::javaClass)
 
         signUpBinding.signInTv.setOnClickListener {
             add(R.id.fragment_container, SignInFragment.newInstance())
@@ -54,13 +58,11 @@ class SignUpFragment : BaseFragment() {
             }
 
         }
+
         return signUpBinding.root
     }
 
     private fun mobOtpBottomSheetfragment() {
-
-        //call api to send otp to mob
-
         val mobbottomSheetDialog = BottomSheetDialog(requireContext())
         mobbottomSheetDialog.setContentView(R.layout.mobile_otp)
         mobbottomSheetDialog.show()
@@ -69,14 +71,13 @@ class SignUpFragment : BaseFragment() {
         otpTimer(countTime)
         val resendBtn = mobbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
         resendBtn?.setOnClickListener {
-            //call api to resend otp
             otpTimer(countTime)
         }
         val ConfirmBtn = mobbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             mobbottomSheetDialog.dismiss()
-//            val otpnumber : Int = bottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
-            mobOtpVerify(1)
+            val otpnumber : Int = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
+            mobOtpVerify(otpnumber)
             }
 
     }
@@ -99,6 +100,10 @@ class SignUpFragment : BaseFragment() {
     private fun mobOtpVerify(otpnumber: Int) {
 
         //call api to verfify otp sent to mob
+        signupViewModel.getUser(otpnumber)?.observe(requireActivity(), Observer { otpResponse ->
+            Toast.makeText(requireContext(),otpResponse.message,Toast.LENGTH_LONG)
+        })
+
         val apiResponse : Boolean = true
         if (apiResponse==true) {
             val dialog = Dialog(requireContext())
@@ -143,7 +148,7 @@ class SignUpFragment : BaseFragment() {
         val ConfirmBtn = emailbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             emailbottomSheetDialog.dismiss()
-//            val otpemail : Int = bottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
+            val otpemail : Int = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
             emailOtpVerify(1) }
 
     }
@@ -195,7 +200,7 @@ class SignUpFragment : BaseFragment() {
             signUpBinding.eidLayout.setError("Enter valid Email")
             flag=false
         }
-        if (inputValidation.passwordValid(password)){
+        if (!inputValidation.passwordValid(password)){
             signUpBinding.setPasswordLayout.setError("Must be more 6 Character")
         }
         if (!inputValidation.isPasswordEqual(password,confirm_password)){

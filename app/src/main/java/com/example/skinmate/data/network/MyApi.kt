@@ -1,6 +1,9 @@
 package com.example.skinmate.data.network
 
+import com.example.skinmate.data.responses.OtpResponse
 import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
@@ -9,7 +12,7 @@ import retrofit2.http.POST
 interface MyApi {
 
     @POST("registration")
-    suspend fun userRegistration(
+    fun userRegistration(
         @Field("id") id: String,
         @Field("phoneNumber") phoneNumber: String,
         @Field("email") email : String,
@@ -33,37 +36,25 @@ interface MyApi {
     )
 
     @POST("login")
-    suspend fun userLogin(
+    fun userLogin(
         @Field("id") email : String,
         @Field("password") password: String
     )
 
     @POST("mobile-otp-verify")
-    suspend fun verifyMobleOtp(
-        @Field("otp") otp : String
-    )
+    fun verifyMobleOtp(
+        @Field("otp") otp : Int
+    ) : Call<OtpResponse>
 
     @POST("registration-send-otp-to-email")
-    suspend fun registerEmail(
+    fun registerEmail(
         @Field("email") email : String
     )
 
     @POST("email-otp-verify")
-    suspend fun verifyEmailOtp(
+    fun verifyEmailOtp(
         @Field("email") email : String,
         @Field("otp") otp : String
     )
-
-
-    companion object{
-        operator fun invoke() : MyApi {
-
-            return Retrofit.Builder()
-                .baseUrl("http://65.0.55.180/skinmate/v1.0/customer/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(MyApi::class.java)
-        }
-    }
 
 }
