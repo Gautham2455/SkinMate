@@ -11,10 +11,9 @@ import com.example.skinmate.ui.home.HomeActivity
 
 class AuthViewModel : ViewModel() {
 
-<<<<<<< HEAD
     suspend fun userSignup(
     )=null
-=======
+
     var email: String? = null
     var password: String? = null
     var phonenumber: String? = null
@@ -38,7 +37,6 @@ class AuthViewModel : ViewModel() {
         //SignUp
 
     }
->>>>>>> test
 
 
 }
