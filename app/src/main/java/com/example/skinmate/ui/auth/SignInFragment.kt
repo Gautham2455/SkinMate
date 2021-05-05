@@ -8,12 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+<<<<<<< HEAD
 import androidx.lifecycle.ViewModelProviders
 import com.example.sampleslinmate.utils.InputValidation
+=======
+>>>>>>> test
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SigninBinding
 import com.example.skinmate.ui.home.HomeActivity
+
 
 class SignInFragment : BaseFragment() {
     private lateinit var signInBinding: SigninBinding
@@ -27,7 +31,12 @@ class SignInFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+<<<<<<< HEAD
         signInBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
+=======
+
+        val signInBinding : SigninBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
+>>>>>>> test
         signInBinding.tvNewUser.setOnClickListener { add(R.id.fragment_container,SignUpFragment.newInstance()) }
 
         validate()

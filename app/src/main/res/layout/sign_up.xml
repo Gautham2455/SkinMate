@@ -29,6 +29,7 @@
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp"
                 android:layout_marginTop="145dp"
+
                 app:cornerRadius = "7dp"
                 app:boxStrokeColor="@color/theme_background_light"
                 app:boxBackgroundColor="@color/white"
@@ -72,7 +73,7 @@
                 app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/eid_text"
+                    android:id="@+id/eid_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_email"
