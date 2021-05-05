@@ -5,20 +5,8 @@ import androidx.lifecycle.ViewModel
 
 class AuthViewModel : ViewModel() {
 
-    var email: String? = null
-    var password: String? = null
-    var phonenumber: String? = null
-
-    fun onLoginBtnClick(view : View){
-
-        //Login
-
-    }
-
-    fun  onSignUpBtnClick(view : View){
-
-        //SignUp
-    }
+    suspend fun userSignup(
+    )=null
 
 
 }
