@@ -23,7 +23,19 @@ interface MyApi {
         @Field("address") address : String,
         @Field("emeregencyNumber") emeregencyNumber : String,
         @Field("insuranceInformation") insuranceInformation : String,
-        @Field("emeregencyContactName") emeregencyContactName : String,
+        @Field("emeregencyContactName") emeregencyContactName : String
+    )
+
+    @POST("duplicate-checker")
+    suspend fun checkDuplicateUser(
+        @Field("email") email : String,
+        @Field("phoneNumber") phoneNumber: String
+    )
+
+    @POST("login")
+    suspend fun userLogin(
+        @Field("id") email : String,
+        @Field("password") password: String
     )
 
 
