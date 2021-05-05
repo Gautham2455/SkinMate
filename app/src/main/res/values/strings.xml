@@ -72,6 +72,7 @@
     <string name="resend_mail">RESEND MAIL</string>
     <string name="antony_robbins_gmail_com">Antony.Robbins@gmail.com</string>
     <string name="email_verification">email_verification</string>
+    <string name="timer">\"\"</string>
     <string name="success">Success!</string>
     <string name="password_has_been_successfully_changed_please_login">Password has been successfully changed. Please Login!</string>
     <string name="continue_to_login">CONTINUE TO LOGIN</string>

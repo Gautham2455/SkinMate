@@ -1,6 +1,7 @@
 package com.example.skinmate
 
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 abstract class BaseFragment : DialogFragment() {
 
@@ -25,6 +26,12 @@ abstract class BaseFragment : DialogFragment() {
     fun replace(containerId: Int, fragment: BaseFragment, addToBackStack: Boolean) {
         activity?.run {
             (this as BaseActivity).replace(containerId, fragment, addToBackStack)
+        }
+    }
+
+    fun showbottomsheet(fragment: BottomSheetDialogFragment){
+        activity?.run{
+            (this as BaseActivity).showbottomsheet(fragment)
         }
     }
 

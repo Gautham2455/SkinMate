@@ -23,7 +23,35 @@ interface MyApi {
         @Field("address") address : String,
         @Field("emeregencyNumber") emeregencyNumber : String,
         @Field("insuranceInformation") insuranceInformation : String,
-        @Field("emeregencyContactName") emeregencyContactName : String,
+        @Field("emeregencyContactName") emeregencyContactName : String
+    )
+
+    @POST("duplicate-checker")
+    suspend fun checkDuplicateUser(
+        @Field("email") email : String,
+        @Field("phoneNumber") phoneNumber: String
+    )
+
+    @POST("login")
+    suspend fun userLogin(
+        @Field("id") email : String,
+        @Field("password") password: String
+    )
+
+    @POST("mobile-otp-verify")
+    suspend fun verifyMobleOtp(
+        @Field("otp") otp : String
+    )
+
+    @POST("registration-send-otp-to-email")
+    suspend fun registerEmail(
+        @Field("email") email : String
+    )
+
+    @POST("email-otp-verify")
+    suspend fun verifyEmailOtp(
+        @Field("email") email : String,
+        @Field("otp") otp : String
     )
 
 

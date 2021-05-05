@@ -1,6 +1,7 @@
 package com.example.skinmate
 
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -22,5 +23,9 @@ abstract class BaseActivity : AppCompatActivity() {
         ft.commit()
         fm.executePendingTransactions()
 
+    }
+
+    fun showbottomsheet(fragment: BottomSheetDialogFragment){
+        fragment.show(supportFragmentManager, "BottomSheet")
     }
 }

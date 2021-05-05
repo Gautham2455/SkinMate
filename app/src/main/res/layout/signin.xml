@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.example.skinmate.ui.auth.AuthViewModel" />
-    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +9,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,7 +42,7 @@
                 android:fontFamily="Poppins SemiBold"
                 android:hint="@string/enter_number_or_e_mail_id"
                 android:textColor="@color/theme_text"
-                android:text="@={viewmodel.email}"/>
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -76,7 +72,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_password"
-                android:text="@={viewmodel.password}"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,8 +95,7 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/theme_button"
             android:text="@string/sign_in"
-            app:cornerRadius="50dp"
-            android:onClick="@{viewmodel::onLoginBtnClick}">
+            app:cornerRadius="50dp">
 
         </com.google.android.material.button.MaterialButton>
 
