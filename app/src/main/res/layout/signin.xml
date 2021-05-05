@@ -96,10 +96,6 @@
             android:backgroundTint="@color/theme_button"
             android:text="@string/sign_in"
             app:cornerRadius="50dp">
-<<<<<<< HEAD
-<!--            android:onClick="@{viewmodel::onLoginBtnClick}">-->
-=======
->>>>>>> test
 
         </com.google.android.material.button.MaterialButton>
 
