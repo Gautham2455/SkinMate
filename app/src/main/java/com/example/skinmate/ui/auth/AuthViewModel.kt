@@ -36,6 +36,7 @@ class AuthViewModel : ViewModel() {
     fun  onSignUpBtnClick(view : View){
 
         //SignUp
+
     }
 >>>>>>> test
 
