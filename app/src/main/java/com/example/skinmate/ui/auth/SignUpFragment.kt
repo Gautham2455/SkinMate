@@ -19,6 +19,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SignUpBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import org.w3c.dom.Text
 
 class SignUpFragment : BaseFragment() {
     private lateinit var signUpBinding: SignUpBinding
@@ -62,6 +63,7 @@ class SignUpFragment : BaseFragment() {
         val mobbottomSheetDialog = BottomSheetDialog(requireContext())
         mobbottomSheetDialog.setContentView(R.layout.mobile_otp)
         mobbottomSheetDialog.show()
+        mobbottomSheetDialog.findViewById<TextView>(R.id.tv_mob_number_or_mail_id)?.text = signUpBinding.phoneEt.text.toString()
         val countTime = mobbottomSheetDialog.findViewById<TextView>(R.id.tv_timer)
         otpTimer(countTime)
         val resendBtn = mobbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
@@ -129,6 +131,7 @@ class SignUpFragment : BaseFragment() {
         val emailbottomSheetDialog = BottomSheetDialog(requireContext())
         emailbottomSheetDialog.setContentView(R.layout.email_otp)
         emailbottomSheetDialog.show()
+        emailbottomSheetDialog.findViewById<TextView>(R.id.tv_mob_number_or_mail_id)?.text =  signUpBinding.eidEmail.text.toString()
         val countTime = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_timer)
         otpTimer(countTime)
         val resendBtn = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
