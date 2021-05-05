@@ -1,7 +1,10 @@
 package com.example.skinmate.ui.auth
 
+import android.content.Intent
 import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
+import com.example.skinmate.ui.home.HomeActivity
 
 class AuthViewModel : ViewModel() {
 
@@ -12,6 +15,7 @@ class AuthViewModel : ViewModel() {
     fun onLoginBtnClick(view : View){
 
         //Login
+        //startActivity(Intent(SignInFragment::getContext,HomeActivity::class.java))
 
     }
 

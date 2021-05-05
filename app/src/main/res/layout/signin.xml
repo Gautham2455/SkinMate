@@ -14,7 +14,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,8 +101,8 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/theme_button"
             android:text="@string/sign_in"
-            app:cornerRadius="50dp"
-            android:onClick="@{viewmodel::onLoginBtnClick}">
+            app:cornerRadius="50dp">
+<!--            android:onClick="@{viewmodel::onLoginBtnClick}">-->
 
         </com.google.android.material.button.MaterialButton>
 
