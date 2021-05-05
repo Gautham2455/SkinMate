@@ -1,6 +1,6 @@
 package com.example.skinmate.data.network
 
-import com.example.skinmate.data.responses.OtpResponse
+import com.example.skinmate.data.responses.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Response
@@ -27,19 +27,19 @@ interface MyApi {
         @Field("emeregencyNumber") emeregencyNumber : String,
         @Field("insuranceInformation") insuranceInformation : String,
         @Field("emeregencyContactName") emeregencyContactName : String
-    )
+    ) : Call<registerUserResponse>
 
     @POST("duplicate-checker")
     fun checkDuplicateUser(
         @Field("email") email : String,
-        @Field("phoneNumber") phoneNumber: String
-    )
+        @Field("phoneNumber") phoneNumber: Int
+    ) : Call<duplicateUserResponse>
 
     @POST("login")
     fun userLogin(
         @Field("id") email : String,
         @Field("password") password: String
-    )
+    ) : Call<loginResponse>
 
     @POST("mobile-otp-verify")
     fun verifyMobleOtp(
@@ -49,12 +49,19 @@ interface MyApi {
     @POST("registration-send-otp-to-email")
     fun registerEmail(
         @Field("email") email : String
-    )
+    ) : Call<OtpResponse>
 
     @POST("email-otp-verify")
     fun verifyEmailOtp(
         @Field("email") email : String,
-        @Field("otp") otp : String
-    )
+        @Field("otp") otp : Int
+    ) : Call<OtpResponse>
+
+    @POST("change-password")
+    fun changePassword(
+        @Field("customerId") customerId : Int,
+        @Field("oldPassword")  oldPassword: String,
+        @Field("newPassword")  newPassword: String
+    ) : Call<passwordChangeResponse>
 
 }
