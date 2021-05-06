@@ -22,6 +22,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class ForgotPasswordFragment : BaseFragment() {
     private lateinit var forgotPasswordBinding: ForgotPasswordBinding
     private lateinit var signinBinding: SigninBinding
+    var EMAIL :String?=null
+
 
     companion object {
         fun newInstance() = ForgotPasswordFragment()
@@ -38,6 +40,7 @@ class ForgotPasswordFragment : BaseFragment() {
 
             val phone_mail : String = forgotPasswordBinding.etForgotpw.text.toString()
             val signin_phone_mail = signinBinding.etPhoneEmail.text.toString()
+            EMAIL=signinBinding.etPhoneEmail.text.toString()
 
             if (phone_mail == signin_phone_mail)
                 mobOtpBottomSheetfragment()
