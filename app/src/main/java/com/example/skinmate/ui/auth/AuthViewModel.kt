@@ -7,10 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.skinmate.data.repositories.UserRepository
 import com.example.skinmate.data.responses.OtpResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
 
 class AuthViewModel (
     private val repository: UserRepository
@@ -19,7 +15,7 @@ class AuthViewModel (
     var servicesLiveData: MutableLiveData<OtpResponse>? = null
 
     fun getUser(otp: Int) : LiveData<OtpResponse>? {
-        servicesLiveData = UserRepository.getServicesApiCall()
+        servicesLiveData = UserRepository.getServicesApiCall(otp)
         return servicesLiveData
     }
 

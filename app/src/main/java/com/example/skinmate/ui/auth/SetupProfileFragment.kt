@@ -26,7 +26,7 @@ class SetupProfileFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        setTitleWithBackButton("Setup Profile")
         val enterDetailsBinding : EnterDetailsBinding = DataBindingUtil.inflate(inflater,
             R.layout.enter_details,container,false)
         val inputval= InputValidation()

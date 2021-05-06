@@ -22,7 +22,7 @@ class SignInFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        setTitleWithBackButton("Sign In")
         val signInBinding : SigninBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
         signInBinding.tvNewUser.setOnClickListener { add(R.id.fragment_container,SignUpFragment.newInstance()) }
         return signInBinding.root

@@ -1,9 +1,49 @@
 package com.example.skinmate
 
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 abstract class BaseFragment : DialogFragment() {
+
+    val toolbar: Toolbar?
+        get() {
+            var toolbar: Toolbar? = null
+            activity?.run {
+                toolbar = (this as BaseActivity).mainToolbar
+            }
+            return toolbar
+        }
+
+    fun setTitle(resMessage: Int){
+        with(activity as BaseActivity){
+            setTitle(resMessage)
+            setBackDisabled()
+        }
+    }
+
+    fun setTitle(message: String?){
+        with(activity as BaseActivity){
+            setTitle(message)
+            setBackDisabled()
+        }
+    }
+
+    fun setTitleWithBackButton(resMessage: Int){
+        (activity as BaseActivity).showMainToolbar(resMessage)
+    }
+
+    fun setTitleWithBackButton(message: String?){
+        (activity as BaseActivity).showMainToolbar(message)
+    }
+
+    open fun onBackPress() {
+       //do nothing
+    }
+
+    open fun onHomeButtonPress() {
+        //do nothing
+    }
 
     fun add(containerId: Int, fragment: BaseFragment) {
         activity?.run {

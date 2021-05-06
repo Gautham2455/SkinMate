@@ -40,9 +40,9 @@ class SignUpFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        setTitleWithBackButton("Sign Up")
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
-        signupViewModel=ViewModelProvider(this,factory).get(AuthViewModel::javaClass)
+//        signupViewModel=ViewModelProvider(this,factory).get(AuthViewModel::javaClass)
 
         signUpBinding.signInTv.setOnClickListener {
             add(R.id.fragment_container, SignInFragment.newInstance())
@@ -152,7 +152,7 @@ class SignUpFragment : BaseFragment() {
     private fun emailOtpVerify(otpemail: Int) {
 
         //call api to verify otp sent to email
-        val apiResponse : Boolean = true
+        var apiResponse : Boolean = true
         if (apiResponse==true) {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

@@ -11,6 +11,8 @@ class WelcomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding : WelcomeBinding = DataBindingUtil.setContentView(this, R.layout.welcome)
+        setActionBar(R.id.toolbar_main)
+        setTitle("")
 
         binding.btnSignup.setOnClickListener {
             add(R.id.fragment_container,SignUpFragment.newInstance())
