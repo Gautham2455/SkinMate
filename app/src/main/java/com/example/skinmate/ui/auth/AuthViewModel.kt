@@ -1,5 +1,8 @@
 package com.example.skinmate.ui.auth
 
+
+import android.view.View
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +10,7 @@ import com.example.skinmate.data.repositories.UserRepository
 
 import com.example.skinmate.data.responses.OtpResponse
 import com.example.skinmate.data.responses.*
+
 
 class AuthViewModel() : ViewModel() {
 
@@ -17,6 +21,7 @@ class AuthViewModel() : ViewModel() {
     var changePasswordData  : MutableLiveData<passwordChangeResponse>? =null
     var checkDplicateUserData : MutableLiveData<duplicateUserResponse>? = null
     var registerUserData : MutableLiveData<registerUserResponse>? = null
+
 
     fun getUser(otp: Int) : LiveData<OtpResponse>? {
         servicesLiveData = UserRepository.getServicesApiCall(otp)
@@ -51,6 +56,7 @@ class AuthViewModel() : ViewModel() {
     fun postVerifyEmailOtp(email : String, otp :Int) : LiveData<OtpResponse>? {
         verifyEmaiilOtpData = UserRepository.verifyEmailOtpCall(email,otp)
         return verifyEmaiilOtpData
+
     }
 
 }
