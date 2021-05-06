@@ -4,13 +4,9 @@ package com.example.skinmate.ui.auth
 import android.app.Application
 import android.appwidget.AppWidgetManager.getInstance
 import android.view.View
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.*
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.skinmate.data.repositories.UserRepository
-
 import com.example.skinmate.data.responses.OtpResponse
 import com.example.skinmate.data.responses.*
 import kotlinx.coroutines.Dispatchers
@@ -19,47 +15,43 @@ import kotlinx.coroutines.Dispatchers
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private  val servicesLiveData = UserRepository.getInstance(application)
-    var registerEmailDdata : MutableLiveData<OtpResponse>? =null
-    var verifyEmaiilOtpData :MutableLiveData<OtpResponse>? =null
-    var loginUserData : MutableLiveData<loginResponse>? = null
-    var changePasswordData  : MutableLiveData<passwordChangeResponse>? =null
-    var checkDplicateUserData : MutableLiveData<duplicateUserResponse>? = null
-    var registerUserData : MutableLiveData<registerUserResponse>? = null
+    private  val registerEmailDdata = UserRepository.getInstance(application)
+    private  val verifyEmaiilOtpData = UserRepository.getInstance(application)
+    private  val loginUserData = UserRepository.getInstance(application)
+    private  val changePasswordData  = UserRepository.getInstance(application)
+    private  val checkDplicateUserData = UserRepository.getInstance(application)
+    private  val registerUserData = UserRepository.getInstance(application)
 
 
-    fun getUser(otp: Int) : LiveData<OtpResponse>: LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {
+    fun getUser(otp: Int) : LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {
         emitSource(servicesLiveData.getServicesApiCall(otp))
     }
 
-    /*fun postRegisterEmail(email : String) : LiveData<OtpResponse>? {
-        registerEmailDdata = UserRepository.registerEmailCall(email)
-        return registerEmailDdata
+    fun postRegisterEmail(email : String) : LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {
+        emitSource(registerEmailDdata.registerEmailCall(email))
     }
 
-    fun postLoginUser(id : String,password : String) : LiveData<loginResponse>? {
-        loginUserData = UserRepository.loginUserCall(id,password)
-        return  loginUserData
+    fun postLoginUser(id : String,password : String) : LiveData<List<loginResponse>> = liveData(Dispatchers.IO) {
+        emitSource(loginUserData.loginUserCall(id,password))
     }
 
-    fun postChangePassword(customerId : Int,oldPassword : String,newPassword :String) :LiveData<passwordChangeResponse>?{
-        changePasswordData = UserRepository.changePasswordCall(customerId,oldPassword,newPassword)
-        return changePasswordData
+    fun postChangePassword(customerId : Int,oldPassword : String,newPassword :String)
+    : LiveData<List<passwordChangeResponse>> = liveData(Dispatchers.IO){
+        emitSource(changePasswordData.changePasswordCall(customerId,oldPassword ,newPassword))
     }
 
-    fun postCheckDuplicateUser(email : String,phoneNumber : Int) : LiveData<duplicateUserResponse>? {
-        checkDplicateUserData = UserRepository.checkDuplicateUserCall(email,phoneNumber)
-        return checkDplicateUserData
+    fun postCheckDuplicateUser(email : String,phoneNumber : Int) : LiveData<List<duplicateUserResponse>> =
+        liveData(Dispatchers.IO){
+        emitSource(checkDplicateUserData.checkDuplicateUserCall(email,phoneNumber))
     }
 
-    fun posttRegisterUser() : LiveData<registerUserResponse>? {
+    fun posttRegisterUser() : LiveData<List<registerUserResponse>> = liveData(Dispatchers.IO) {
         //
-        return registerUserData
+        //emitSource(registerUserData.registerEmail())
     }
 
-    fun postVerifyEmailOtp(email : String, otp :Int) : LiveData<OtpResponse>? {
-        verifyEmaiilOtpData = UserRepository.verifyEmailOtpCall(email,otp)
-        return verifyEmaiilOtpData
-
-    }*/
+    fun postVerifyEmailOtp(email : String, otp :Int) : LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {
+        emitSource(verifyEmaiilOtpData.verifyEmailOtpCall(  email,otp))
+    }
 
 }

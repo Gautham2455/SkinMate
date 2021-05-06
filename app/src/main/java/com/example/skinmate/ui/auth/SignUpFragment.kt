@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -28,7 +29,7 @@ class SignUpFragment : BaseFragment() {
 
     private lateinit var signUpBinding: SignUpBinding
     //private lateinit var signupViewModel : AuthViewModel
-    //private val viewModel by viewModels<AuthViewModel>()
+    private val viewModel by viewModels<AuthViewModel>()
 
     companion object {
         fun newInstance() = SignUpFragment()
@@ -75,8 +76,8 @@ class SignUpFragment : BaseFragment() {
         val ConfirmBtn = mobbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             mobbottomSheetDialog.dismiss()
-            val otpnumber : Int = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
-            mobOtpVerify(otpnumber)
+            //var otpnumber : Int = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
+            mobOtpVerify(123123)
             }
 
     }
@@ -100,9 +101,9 @@ class SignUpFragment : BaseFragment() {
 
         //call api to verfify otp sent to mob
 
-        /*viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
+        viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
             Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
-        }*/
+        }
 
 
         val apiResponse : Boolean = true
