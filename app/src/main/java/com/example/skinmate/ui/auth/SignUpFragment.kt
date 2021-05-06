@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -104,6 +105,7 @@ class SignUpFragment : BaseFragment() {
 
         viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
             Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+
         }
 
 
