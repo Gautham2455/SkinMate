@@ -16,7 +16,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/phone_number"
                 android:textColor="@color/theme_text"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:fontFamily="Poppins Medium"
                 android:layout_marginTop="124dp"
                 android:layout_marginStart="20dp"/>
@@ -28,8 +28,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp"
-                android:layout_marginTop="145dp"
-
+                android:layout_marginTop="150dp"
                 app:cornerRadius = "7dp"
                 app:boxStrokeColor="@color/theme_background_light"
                 app:boxBackgroundColor="@color/white"
@@ -43,7 +42,7 @@
                     android:hint="@string/enter_number"
                     android:textColor="@color/theme_text"
                     android:fontFamily="Poppins SemiBold"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/email_id"
                 android:textColor="@color/theme_text"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:fontFamily="Poppins Medium"
                 android:layout_marginTop="215dp"
                 android:layout_marginStart="20dp"/>
@@ -65,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp"
-                android:layout_marginTop="236dp"
+                android:layout_marginTop="241dp"
                 app:cornerRadius = "7dp"
                 app:boxStrokeColor="@color/theme_background_light"
                 app:boxBackgroundColor="@color/white"
@@ -79,7 +78,7 @@
                     android:hint="@string/enter_email"
                     android:textColor="@color/theme_text"
                     android:fontFamily="Poppins SemiBold"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/set_password"
                 android:textColor="@color/theme_text"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:fontFamily="Poppins Medium"
                 android:layout_marginTop="305dp"
                 android:layout_marginStart="20dp"/>
@@ -101,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp"
-                android:layout_marginTop="326dp"
+                android:layout_marginTop="331dp"
                 app:cornerRadius = "7dp"
                 app:passwordToggleEnabled="true"
                 app:boxStrokeColor="@color/theme_background_light"
@@ -116,7 +115,7 @@
                     android:hint="@string/enter_password"
                     android:textColor="@color/theme_text"
                     android:fontFamily="Poppins SemiBold"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/confirm_password"
                 android:textColor="@color/theme_text"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:fontFamily="Poppins Medium"
                 android:layout_marginTop="394dp"
                 android:layout_marginStart="20dp"/>
@@ -138,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp"
-                android:layout_marginTop="415dp"
+                android:layout_marginTop="420dp"
                 app:cornerRadius = "7dp"
                 app:passwordToggleEnabled="true"
                 app:boxStrokeColor="@color/theme_background_light"
@@ -153,13 +152,13 @@
                     android:hint="@string/confirm_password"
                     android:textColor="@color/theme_text"
                     android:fontFamily="Poppins SemiBold"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/proceed_btn"
-                android:layout_width="355dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="@string/proceed"
                 android:textSize="15sp"
@@ -177,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/the_mobile_number_will_be_verified_with_one_time_password"
                 android:textColor="@color/theme_button"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:fontFamily="Poppins Medium"
                 android:layout_marginTop="598dp"
                 android:layout_marginStart="66dp"
@@ -190,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/existing_user"
                 android:textColor="@color/theme_button"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:fontFamily="Poppins Medium"
                 android:layout_marginTop="680dp"
                 android:layout_marginStart="130dp"
@@ -202,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sign_in"
                 android:textColor="@color/theme_button"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:fontFamily="Poppins Bold"
                 android:clickable="true"
                 android:layout_toEndOf="@id/existing_user_tv"
@@ -213,7 +212,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/privacy_policy_terms_and_conditions"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textColor="@color/theme_button"
                 android:layout_marginTop="770dp"
                 android:layout_marginStart="110dp"

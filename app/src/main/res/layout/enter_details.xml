@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <androidx.core.widget.NestedScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -73,7 +76,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="Poppins SemiBold"
                     android:hint="@string/enter_last_name"
-
                     android:textColor="@color/theme_text"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -290,7 +292,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="Poppins SemiBold"
                     android:hint="@string/select_date_of_birth"
-
                     android:textColor="@color/theme_text"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -479,7 +480,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="Poppins SemiBold"
                     android:hint="@string/enter_emergency_contact_number"
-
                     android:textColor="@color/theme_text"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>

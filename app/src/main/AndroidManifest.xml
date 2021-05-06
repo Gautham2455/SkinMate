@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkinMate">
         <activity android:name=".ui.auth.WelcomeActivity"/>
+        <activity android:name=".ui.home.HomeActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
