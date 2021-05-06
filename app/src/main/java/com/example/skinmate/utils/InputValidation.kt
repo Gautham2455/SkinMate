@@ -1,8 +1,10 @@
 package com.example.sampleslinmate.utils
 
+import com.example.skinmate.ui.auth.SignUpFragment
 
 
 class InputValidation {
+
 
     fun isemailValid(email : String) : Boolean{
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -13,7 +15,7 @@ class InputValidation {
     }
 
     fun passwordValid(password : String) : Boolean{
-        if(password.length>=6)
+        if(password.length>=3)
             return true
         return false
     }

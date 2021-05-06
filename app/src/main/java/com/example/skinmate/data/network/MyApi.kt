@@ -16,7 +16,7 @@ interface   MyApi {
     @POST("registration")
     fun userRegistration(
         @Field("id") id: String,
-        @Field("phoneNumber") phoneNumber: String,
+        @Field("phoneNumber") phoneNumber: Int,
         @Field("email") email : String,
         @Field("firstName") firstName : String,
         @Field("lastName") lastName : String,
@@ -26,7 +26,7 @@ interface   MyApi {
         @Field("loginType") loginType : String,
         @Field("password") password : String,
         @Field("address") address : String,
-        @Field("emeregencyNumber") emeregencyNumber : String,
+        @Field("emeregencyNumber") emeregencyNumber : Int,
         @Field("insuranceInformation") insuranceInformation : String,
         @Field("emeregencyContactName") emeregencyContactName : String
     ) : Call<List<registerUserResponse>>
@@ -42,7 +42,7 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("login")
     fun userLogin(
-        @Field("id") email : String,
+        @Field("email") email : String,
         @Field("password") password: String
     ) : Call<List<loginResponse>>
 

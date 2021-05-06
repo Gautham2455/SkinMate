@@ -45,9 +45,14 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(checkDplicateUserData.checkDuplicateUserCall(email,phoneNumber))
     }
 
-    fun posttRegisterUser() : LiveData<List<registerUserResponse>> = liveData(Dispatchers.IO) {
-        //
-        //emitSource(registerUserData.registerEmail())
+    fun postRegisterUser(id: String,phoneNumber: Int,email: String,firstName : String,
+                         lastName : String,gender : String, dob : String, bloodGroup : String, loginType : String,
+                         password: String, address : String,emeregencyNumber : Int,insuranceInformation :String,
+                         emeregencyContactName :String) : LiveData<List<registerUserResponse>> = liveData(Dispatchers.IO) {
+
+        emitSource(registerUserData.registerUserCall(id,phoneNumber,email,
+            firstName,lastName, gender, dob, bloodGroup, loginType, password, address,
+            emeregencyNumber, insuranceInformation, emeregencyContactName))
     }
 
     fun postVerifyEmailOtp(email : String, otp :Int) : LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {

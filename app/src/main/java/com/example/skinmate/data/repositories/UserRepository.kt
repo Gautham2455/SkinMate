@@ -51,14 +51,13 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object : Callback<List<duplicateUserResponse>>{
             override fun onFailure(call: Call<List<duplicateUserResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.v("DEBUG : ", t.message.toString())
             }
 
             override fun onResponse(
                 call: Call<List<duplicateUserResponse>>,
                 response: Response<List<duplicateUserResponse>>
             ) {
-                TODO("Not yet implemented")
 
                 checkDplicateUser.postValue(response.body() )
             }
@@ -71,7 +70,8 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object : Callback<List<loginResponse>>{
             override fun onFailure(call: Call<List<loginResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.v("DEBUG : ", t.message.toString())
+
             }
 
             override fun onResponse(
@@ -106,8 +106,28 @@ class UserRepository private constructor(application: Application){
         return changePassword
     }
 
-    fun registerUserCall() : MutableLiveData<List<registerUserResponse>>{
-        //val call =RetrofitClient.apiInterface.userRegistration()
+    fun registerUserCall(id: String,phoneNumber: Int,email: String,firstName : String,
+    lastName : String,gender : String, dob : String, bloodGroup : String, loginType : String,
+    password: String, address : String,emeregencyNumber : Int,insuranceInformation :String,
+                         emeregencyContactName :String)
+    : MutableLiveData<List<registerUserResponse>>{
+
+        val call =RetrofitClient.apiInterface.userRegistration(id,phoneNumber,email,
+        firstName,lastName, gender, dob, bloodGroup, loginType, password, address,
+            emeregencyNumber, insuranceInformation, emeregencyContactName)
+
+        call.enqueue(object :Callback<List<registerUserResponse>>{
+            override fun onFailure(call: Call<List<registerUserResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<registerUserResponse>>,
+                response: Response<List<registerUserResponse>>
+            ) {
+                registerUser.postValue(response.body())
+            }
+        })
 
         return registerUser
     }

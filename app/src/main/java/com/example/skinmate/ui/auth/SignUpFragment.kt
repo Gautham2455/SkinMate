@@ -27,10 +27,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class SignUpFragment : BaseFragment() {
 
-
     private lateinit var signUpBinding: SignUpBinding
-    //private lateinit var signupViewModel : AuthViewModel
     private val viewModel by viewModels<AuthViewModel>()
+
+    var EMAIL :String?=null
+    var PHONE_NO : Int? =null
+    var PASSWORD : String?=null
+    var CONFIRM_PASSWORRRD  : String?=null
 
     companion object {
         fun newInstance() = SignUpFragment()
@@ -53,14 +56,30 @@ class SignUpFragment : BaseFragment() {
 
         signUpBinding.proceedBtn.setOnClickListener(){
 
+            PHONE_NO=signUpBinding.phoneEt.text.toString()!!.toInt()
+            EMAIL=signUpBinding.eidEmail.text.toString()
+            PASSWORD=signUpBinding.setPasswordEt.text.toString()
+            CONFIRM_PASSWORRRD=signUpBinding.confirmPasswordEt.toString()
             if (validateInput()){
-                //add opt dialog
-                mobOtpBottomSheetfragment()
+
+                if(!checkUserExist())
+                    mobOtpBottomSheetfragment()
+                else
+                    signUpBinding.confirmPasswordLayout.setError("User Email/Phone Number Already Exist")
             }
 
         }
 
         return signUpBinding.root
+    }
+
+    private fun checkUserExist() :Boolean{
+        var flag=false
+        viewModel.postCheckDuplicateUser(EMAIL!!,PHONE_NO!!).observe(requireActivity()){ response->
+            if(response.get(0).responseMessage)
+                flag =true
+        }
+        return flag
     }
 
     private fun mobOtpBottomSheetfragment() {
@@ -188,27 +207,25 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun validateInput() : Boolean{
-        val phone_no=signUpBinding.phoneEt.text.toString()
-        val email=signUpBinding.eidEmail.text.toString()
-        val password=signUpBinding.setPasswordEt.text.toString()
-        val confirm_password=signUpBinding.confirmPasswordEt.toString()
         var flag=true
 
         val inputValidation = InputValidation()
 
-        if(!inputValidation.isPhoneValid(phone_no)){
+        if(!inputValidation.isPhoneValid(PHONE_NO.toString())){
             signUpBinding.phoneLayout.setError("Enter valid Phone no")
             flag=false
         }
-        if (!inputValidation.isemailValid(email)){
+        if (!inputValidation.isemailValid(EMAIL!!)){
             signUpBinding.eidLayout.setError("Enter valid Email")
             flag=false
         }
-        if (!inputValidation.passwordValid(password)){
+        if (!inputValidation.passwordValid(PASSWORD!!)){
             signUpBinding.setPasswordLayout.setError("Must be more 6 Character")
+            flag=false
         }
-        if (!inputValidation.isPasswordEqual(password,confirm_password)){
+        if (inputValidation.isPasswordEqual(PASSWORD!!,CONFIRM_PASSWORRRD!!)){
             signUpBinding.confirmPasswordLayout.setError("Passwaord Does Not Match")
+            flag=false
         }
         return flag
     }
