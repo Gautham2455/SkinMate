@@ -42,7 +42,9 @@ class SignInFragment : BaseFragment() {
                 signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
         }
 
-        signInBinding.tvForgotPassword.setOnClickListener { add(R.id.fragment_container,ForgotPasswordFragment.newInstance()) }
+        signInBinding.tvForgotPassword.setOnClickListener {
+
+            add(R.id.fragment_container,ForgotPasswordFragment.newInstance()) }
 
 
 
