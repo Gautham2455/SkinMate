@@ -58,7 +58,9 @@ class SignInFragment : BaseFragment() {
             }
         }
 
-        signInBinding.tvForgotPassword.setOnClickListener { add(R.id.fragment_container,ForgotPasswordFragment.newInstance()) }
+        signInBinding.tvForgotPassword.setOnClickListener {
+
+            add(R.id.fragment_container,ForgotPasswordFragment.newInstance()) }
 
         return signInBinding.root
 

@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,21 +14,19 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
+import androidx.lifecycle.observe
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SignUpBinding
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class SignUpFragment : BaseFragment() {
 
     private lateinit var signUpBinding: SignUpBinding
     private val viewModel by viewModels<AuthViewModel>()
-
     var EMAIL :String?=null
     var PHONE_NO : Int? =null
     var PASSWORD : String?=null
@@ -46,9 +43,6 @@ class SignUpFragment : BaseFragment() {
     ): View? {
         setTitleWithBackButton("Sign Up")
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
-
-
-
 
         signUpBinding.signInTv.setOnClickListener {
             add(R.id.fragment_container, SignInFragment.newInstance())
@@ -88,122 +82,109 @@ class SignUpFragment : BaseFragment() {
         mobbottomSheetDialog.show()
         mobbottomSheetDialog.findViewById<TextView>(R.id.tv_mob_number_or_mail_id)?.text = signUpBinding.phoneEt.text.toString()
         val countTime = mobbottomSheetDialog.findViewById<TextView>(R.id.tv_timer)
-        otpTimer(countTime)
         val resendBtn = mobbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
-        resendBtn?.setOnClickListener {
-            otpTimer(countTime)
-        }
+        otpTimer(countTime,resendBtn)
         val ConfirmBtn = mobbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             mobbottomSheetDialog.dismiss()
-            //var otpnumber : Int = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
-            mobOtpVerify(123123)
+            val mobotp = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            mobOtpVerify(mobotp)
             }
 
-    }
-
-    private fun otpTimer(countTime: TextView?) {
-        val timer = object : CountDownTimer(90000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                //display set text trime
-                val min  = (millisUntilFinished/60000) % 60
-                val sec = (millisUntilFinished/1000) % 60
-                countTime?.setText("" + min +"m " + sec + "s").toString()
-            }
-
-            override fun onFinish() {
-                countTime?.setText("00m 00s")
-            }
-        }.start()
     }
 
     private fun mobOtpVerify(otpnumber: Int) {
-
         //call api to verfify otp sent to mob
-
         viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
-            Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
-
+            successfulMobOtp(otpResponse.get(0).responseMessage)
         }
+    }
 
-
-        val apiResponse : Boolean = true
-        if (apiResponse==true) {
+    private fun successfulMobOtp(responseMessage: Boolean?) {
+        if (responseMessage == true) {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_verified)
             dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
             val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
             OkayBtn.setOnClickListener {
                 dialog.dismiss()
-                emailBottomSheetfragment()
+                viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
+                        otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
+                    Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+                }
             }
-            dialog.show()
         }
         else {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_error)
             dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
             val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
             RetryBtn.setOnClickListener {
                 dialog.dismiss()
                 mobOtpBottomSheetfragment()
             }
-            dialog.show()
         }
     }
 
+
     private fun emailBottomSheetfragment() {
 
-        //call api to send otp to email
         val emailbottomSheetDialog = BottomSheetDialog(requireContext())
         emailbottomSheetDialog.setContentView(R.layout.email_otp)
         emailbottomSheetDialog.show()
         emailbottomSheetDialog.findViewById<TextView>(R.id.tv_mob_number_or_mail_id)?.text =  signUpBinding.eidEmail.text.toString()
         val countTime = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_timer)
-        otpTimer(countTime)
         val resendBtn = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
-        resendBtn?.setOnClickListener {
-            //call api to resend otp
-            otpTimer(countTime)
-        }
+        otpTimer(countTime,resendBtn)
         val ConfirmBtn = emailbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             emailbottomSheetDialog.dismiss()
-            val otpemail : Int = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
-            emailOtpVerify(1) }
-
+            val otpemail = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            emailOtpVerify(signUpBinding.eidEmail.text.toString(),otpemail)
+        }
     }
 
-    private fun emailOtpVerify(otpemail: Int) {
+    private fun emailOtpVerify(email:String ,otpemail: Int) {
 
-        //call api to verify otp sent to email
-        var apiResponse : Boolean = true
-        if (apiResponse==true) {
+        viewModel.postVerifyEmailOtp(email,otpemail).observe(requireActivity()){otpResponse ->
+            successfulEmailOtp(otpResponse.get(0).responseMessage)
+            Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun successfulEmailOtp(responseMessageInformation:Boolean?) {
+        if (responseMessageInformation == true) {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.emil_otp_verified)
             dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
             val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
             OkayBtn.setOnClickListener {
                 dialog.dismiss()
-                add(R.id.fragment_container,SetupProfileFragment.newInstance())
+                add(R.id.fragment_container,SetupProfileFragment.newInstance(),false)
             }
-            dialog.show()
         }
         else {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_error)
             dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
             val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
             RetryBtn.setOnClickListener {
                 dialog.dismiss()
-                emailBottomSheetfragment()
+                viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
+                        otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
+                    Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+                }
             }
-            dialog.show()
         }
+
     }
 
     private fun validateInput() : Boolean{
@@ -230,5 +211,29 @@ class SignUpFragment : BaseFragment() {
         return flag
     }
 
+    private fun emailRegister(responseMessage: Boolean?) {
+        if(responseMessage==true){
+            emailBottomSheetfragment()
+        }
     }
+
+    private fun otpTimer(countTime: TextView?,resendBtn: TextView?) {
+        val timer = object : CountDownTimer(90000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                //display set text trime
+                val min  = (millisUntilFinished/60000) % 60
+                val sec = (millisUntilFinished/1000) % 60
+                countTime?.setText("" + min +"m " + sec + "s").toString()
+            }
+
+            override fun onFinish() {
+                countTime?.setText("00m 00s")
+                resendBtn?.isClickable = true
+                resendBtn?.setOnClickListener {
+                    otpTimer(countTime,resendBtn)
+                }
+            }
+        }.start()
+    }
+}
 

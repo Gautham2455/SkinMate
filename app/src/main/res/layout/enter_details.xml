@@ -274,6 +274,7 @@
                 android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tv_enter_dob"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -292,6 +293,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="Poppins SemiBold"
                     android:hint="@string/select_date_of_birth"
+                    android:inputType="none"
                     android:textColor="@color/theme_text"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -311,8 +313,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:endIconDrawable="@drawable/ic_baseline_keyboard_arrow_down"
-                app:endIconMode="custom"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeColor="@color/theme_background_light"
                 app:boxStrokeWidth="1dp"

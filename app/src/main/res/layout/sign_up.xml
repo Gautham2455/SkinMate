@@ -103,6 +103,7 @@
                 android:layout_marginTop="331dp"
                 app:cornerRadius = "7dp"
                 app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_visibility"
                 app:boxStrokeColor="@color/theme_background_light"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeWidth="1dp"
@@ -113,6 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_password"
+                    android:inputType="textPassword"
                     android:textColor="@color/theme_text"
                     android:fontFamily="Poppins SemiBold"
                     android:textSize="16sp" />
@@ -140,6 +142,7 @@
                 android:layout_marginTop="420dp"
                 app:cornerRadius = "7dp"
                 app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_visibility"
                 app:boxStrokeColor="@color/theme_background_light"
                 app:boxBackgroundColor="@color/white"
                 app:boxStrokeWidth="1dp"
@@ -150,6 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/confirm_password"
+                    android:inputType="textPassword"
                     android:textColor="@color/theme_text"
                     android:fontFamily="Poppins SemiBold"
                     android:textSize="16sp" />

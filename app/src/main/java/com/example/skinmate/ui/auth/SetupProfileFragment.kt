@@ -1,5 +1,6 @@
 package com.example.skinmate.ui.auth
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,8 +13,8 @@ import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.EnterDetailsBinding
-import com.example.skinmate.databinding.SigninBinding
 import com.example.skinmate.ui.home.HomeActivity
+import java.util.*
 
 class SetupProfileFragment : BaseFragment() {
 
@@ -30,6 +31,11 @@ class SetupProfileFragment : BaseFragment() {
         val enterDetailsBinding : EnterDetailsBinding = DataBindingUtil.inflate(inflater,
             R.layout.enter_details,container,false)
         val inputval= InputValidation()
+        val c=Calendar.getInstance()
+        val year=c.get(Calendar.YEAR)
+        val month=c.get(Calendar.MONTH)
+        val day=c.get(Calendar.DAY_OF_MONTH)
+
 
         val firstname=enterDetailsBinding.etFirstName.text.toString()
         val lastname=enterDetailsBinding.etLastName.text.toString()
@@ -45,28 +51,61 @@ class SetupProfileFragment : BaseFragment() {
 
         val bloodgroup_user=enterDetailsBinding.autocompleteBloodGrp.text.toString()
 
-        enterDetailsBinding.imageViewGenderFemale.setOnClickListener {
-            enterDetailsBinding.ImageViewSelectedGenderMale.setVisibility(View.VISIBLE)
-            val gender=enterDetailsBinding.tvGenderMale.text.toString()
+
+        enterDetailsBinding.imageViewGenderMale.setOnClickListener {
+            if(!enterDetailsBinding.ImageViewSelectedGenderMale.isVisible) {
+                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
+                val gender = enterDetailsBinding.tvGenderMale.text.toString()
+            }
+            else {
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
+            }
 
         }
 
-
         enterDetailsBinding.imageViewGenderFemale.setOnClickListener {
-            enterDetailsBinding.ImageViewSelectedGenderFemale.setVisibility(View.VISIBLE)
-            val gender=enterDetailsBinding.tvGenderFemale.text.toString()
-        }
+            if(!enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible) {
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
+                val gender = enterDetailsBinding.tvGenderFemale.text.toString()
+            }
+            else {
+            enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
+            }
 
+        }
         enterDetailsBinding.imageViewGenderOther.setOnClickListener {
-            enterDetailsBinding.ImageViewSelectedGenderOther.setVisibility(View.VISIBLE)
-            val gender=enterDetailsBinding.tvGenderOther.text.toString()
+            if(!enterDetailsBinding.ImageViewSelectedGenderOther.isVisible) {
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
+                val gender = enterDetailsBinding.tvGenderOther.text.toString()
+            }
+            else {
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+            }
+
         }
+        enterDetailsBinding.etDob.setOnClickListener {
+            var dpd = DatePickerDialog(requireContext(),
+                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                val mmMonth = mMonth+1
+                val date = "$mDay/$mmMonth/$mYear"
+                enterDetailsBinding.etDob.setText(date)
+            },year,month,day)
+            dpd.show()
+
+        }
+
 
 
         enterDetailsBinding.btnCreateMyAcnt.setOnClickListener {
 
             if (!inputval.isPhoneValid(emergencyphonenumber)) {
-                enterDetailsBinding.etEmergencyContactNumber.setError("Please Enter a valid Phone number")
+                enterDetailsBinding.EmergencyNumberLayout.setError("Please Enter a valid Phone number")
 
             }
             else {
