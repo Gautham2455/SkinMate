@@ -1,42 +1,26 @@
 package com.example.skinmate.ui.auth
 
-import android.content.Intent
-import android.view.View
-import androidx.core.content.ContextCompat.startActivity
-import androidx.databinding.DataBindingUtil
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sampleslinmate.utils.InputValidation
-import com.example.skinmate.databinding.EnterDetailsBinding
-import com.example.skinmate.ui.home.HomeActivity
-
-class AuthViewModel : ViewModel() {
-
-    suspend fun userSignup(
-    )=null
-
-    var email: String? = null
-    var password: String? = null
-    var phonenumber: String? = null
-    var firstname: String? = null
-    var lastname: String? = null
-    var dob: String? = null
-    var mailingaddress: String? = null
-    var insuranceinfo: String? = null
-    var emergencycontactname: String? = null
-    var emergencyphonenumber: String? = null
+import androidx.lifecycle.viewModelScope
+import com.example.skinmate.data.repositories.UserRepository
+import com.example.skinmate.data.responses.OtpResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
-    fun onLoginBtnClick(view : View){
+class AuthViewModel (
+    private val repository: UserRepository
+) : ViewModel() {
 
-        //Login
+    var servicesLiveData: MutableLiveData<OtpResponse>? = null
 
+    fun getUser(otp: Int) : LiveData<OtpResponse>? {
+        servicesLiveData = UserRepository.getServicesApiCall()
+        return servicesLiveData
     }
-
-    fun  onSignUpBtnClick(view : View){
-
-        //SignUp
-
-    }
-
 
 }
