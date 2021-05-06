@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 //import androidx.lifecycle.get
@@ -27,10 +29,8 @@ class SignUpFragment : BaseFragment() {
 
 
     private lateinit var signUpBinding: SignUpBinding
-    private lateinit var signupViewModel : AuthViewModel
-    private lateinit var factory: AuthViewModelFactory
-
-
+    //private lateinit var signupViewModel : AuthViewModel
+    private val viewModel by viewModels<AuthViewModel>()
 
     companion object {
         fun newInstance() = SignUpFragment()
@@ -43,10 +43,8 @@ class SignUpFragment : BaseFragment() {
     ): View? {
         setTitleWithBackButton("Sign Up")
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
-//        signupViewModel=ViewModelProvider(this,factory).get(AuthViewModel::javaClass)
 
 
-        //signupViewModel=ViewModelProvider(this).get(AuthViewModel::javaClass)
 
 
         signUpBinding.signInTv.setOnClickListener {
@@ -79,8 +77,8 @@ class SignUpFragment : BaseFragment() {
         val ConfirmBtn = mobbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             mobbottomSheetDialog.dismiss()
-            val otpnumber : Int = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
-            mobOtpVerify(otpnumber)
+            //var otpnumber : Int = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
+            mobOtpVerify(123123)
             }
 
     }
@@ -103,9 +101,12 @@ class SignUpFragment : BaseFragment() {
     private fun mobOtpVerify(otpnumber: Int) {
 
         //call api to verfify otp sent to mob
-        signupViewModel.getUser(otpnumber)?.observe(requireActivity(), Observer { otpResponse ->
-            Toast.makeText(requireContext(),otpResponse.message,Toast.LENGTH_LONG)
-        })
+
+        viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
+            Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+
+        }
+
 
         val apiResponse : Boolean = true
         if (apiResponse==true) {

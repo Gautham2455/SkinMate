@@ -66,6 +66,17 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
+    // kotlin ktx
+    implementation 'androidx.core:core-ktx:1.1.0'
+    // LiveData ktx
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc02'
+    // Lifecycle ktx
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-rc02'
+
+    implementation 'androidx.fragment:fragment-ktx:1.1.0'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
+
     
 
 
