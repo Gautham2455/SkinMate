@@ -17,7 +17,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-//import androidx.lifecycle.get
+import androidx.lifecycle.get
+import androidx.lifecycle.observe
+
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R

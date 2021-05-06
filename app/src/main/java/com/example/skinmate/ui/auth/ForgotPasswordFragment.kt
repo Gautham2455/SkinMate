@@ -5,25 +5,32 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.data.responses.OtpResponse
 import com.example.skinmate.databinding.ForgotPasswordBinding
 import com.example.skinmate.databinding.SigninBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ForgotPasswordFragment : BaseFragment() {
     private lateinit var forgotPasswordBinding: ForgotPasswordBinding
+
     private lateinit var signinBinding: SigninBinding
     var EMAIL :String?=null
-
+    private val viewModel by viewModels<AuthViewModel>()
 
     companion object {
         fun newInstance() = ForgotPasswordFragment()
@@ -37,47 +44,41 @@ class ForgotPasswordFragment : BaseFragment() {
         forgotPasswordBinding = DataBindingUtil.inflate(inflater,R.layout.forgot_password,container,false)
 
         forgotPasswordBinding.btnForgotPw.setOnClickListener(){
-
+            val inputValidation=InputValidation()
             val phone_mail : String = forgotPasswordBinding.etForgotpw.text.toString()
-            val signin_phone_mail = signinBinding.etPhoneEmail.text.toString()
-            EMAIL=signinBinding.etPhoneEmail.text.toString()
 
-            if (phone_mail == signin_phone_mail)
+
+
+            if (inputValidation.isPhoneValid(phone_mail)){
                 mobOtpBottomSheetfragment()
-
+            }
+            else if (inputValidation.isemailValid(phone_mail)){
+                emailBottomSheetfragment()
+            }
         }
-
         return forgotPasswordBinding.root
     }
 
     private fun mobOtpBottomSheetfragment() {
-
-        //call api to send otp to mob
-
         val mobbottomSheetDialog = BottomSheetDialog(requireContext())
         mobbottomSheetDialog.setContentView(R.layout.mobile_otp)
         mobbottomSheetDialog.show()
         mobbottomSheetDialog.findViewById<TextView>(R.id.tv_mob_number_or_mail_id)?.text = forgotPasswordBinding.etForgotpw.text.toString()
         val countTime = mobbottomSheetDialog.findViewById<TextView>(R.id.tv_timer)
-        otpTimer(countTime)
         val resendBtn = mobbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
-        resendBtn?.setOnClickListener {
-            //call api to resend otp
-            otpTimer(countTime)
-        }
+        otpTimer(countTime,resendBtn)
         val ConfirmBtn = mobbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             mobbottomSheetDialog.dismiss()
-//            val otpnumber : Int = bottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
-            mobOtpVerify(1)
+            val mobotp=mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            mobOtpVerify(mobotp)
         }
 
     }
 
-    private fun otpTimer(countTime: TextView?) {
+    private fun otpTimer(countTime: TextView?,resendBtn:TextView?) {
         val timer = object : CountDownTimer(90000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                //display set text trime
                 val min  = (millisUntilFinished/60000) % 60
                 val sec = (millisUntilFinished/1000) % 60
                 countTime?.setText("" + min +"m " + sec + "s").toString()
@@ -85,6 +86,10 @@ class ForgotPasswordFragment : BaseFragment() {
 
             override fun onFinish() {
                 countTime?.setText("00m 00s")
+                resendBtn?.isClickable=true
+                resendBtn?.setOnClickListener {
+                    otpTimer(countTime, resendBtn)
+                }
             }
         }.start()
     }
@@ -92,83 +97,92 @@ class ForgotPasswordFragment : BaseFragment() {
     private fun mobOtpVerify(otpnumber: Int) {
 
         //call api to verfify otp sent to mob
-        val apiResponse : Boolean = true
-        if (apiResponse==true) {
-            val dialog = Dialog(requireContext())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.otp_verified)
-            dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
-            OkayBtn.setOnClickListener {
-                dialog.dismiss()
-                emailBottomSheetfragment()
-            }
-            dialog.show()
+        viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
+            Toast.makeText(
+                requireActivity(),
+                otpResponse.get(0).responseInformation.toString(),
+                Toast.LENGTH_LONG
+            ).show()
+            successfulMobOtp(otpResponse.get(0).responseMessage)
+        }
+    }
+
+    private fun successfulMobOtp(responseMessage:Boolean?)
+    {
+        if(responseMessage==true){
+            add(R.id.fragment_container,SetPasswordFragment.newInstance())
         }
         else {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_error)
             dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
             val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
             RetryBtn.setOnClickListener {
                 dialog.dismiss()
                 mobOtpBottomSheetfragment()
             }
-            dialog.show()
         }
     }
 
     private fun emailBottomSheetfragment() {
-
-        //call api to send otp to email
+        viewModel.postRegisterEmail(forgotPasswordBinding.etForgotpw.text.toString()).observe(requireActivity()){
+                otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
+            Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+        }
         val emailbottomSheetDialog = BottomSheetDialog(requireContext())
         emailbottomSheetDialog.setContentView(R.layout.email_otp)
         emailbottomSheetDialog.show()
         emailbottomSheetDialog.findViewById<TextView>(R.id.tv_mob_number_or_mail_id)?.text =  forgotPasswordBinding.etForgotpw.text.toString()
         val countTime = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_timer)
-        otpTimer(countTime)
         val resendBtn = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
-        resendBtn?.setOnClickListener {
-            //call api to resend otp
-            otpTimer(countTime)
-        }
+        otpTimer(countTime,resendBtn)
         val ConfirmBtn = emailbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             emailbottomSheetDialog.dismiss()
-//            val otpemail : Int = bottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp).toString().toInt()
-            emailOtpVerify(1) }
+            val otpemail = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            emailOtpVerify(forgotPasswordBinding.etForgotpw.text.toString(),otpemail) }
 
     }
 
-    private fun emailOtpVerify(otpemail: Int) {
+    private fun emailOtpVerify(email:String,otpemail:Int) {
 
         //call api to verify otp sent to email
-        val apiResponse : Boolean = true
-        if (apiResponse==true) {
-            val dialog = Dialog(requireContext())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.emil_otp_verified)
-            dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
-            OkayBtn.setOnClickListener {
-                dialog.dismiss()
-                add(R.id.fragment_container,SetPasswordFragment.newInstance())
-            }
-            dialog.show()
+        viewModel.postVerifyEmailOtp(email, otpemail).observe(requireActivity()) { otpResponse ->
+            successfulEmailOtp(otpResponse.get(0).responseInformation)
         }
-        else {
+    }
+
+    private fun successfulEmailOtp(responseMessageInformation: String?){
+        if (responseMessageInformation == "Otp Verified"){
+            add(R.id.fragment_container,SetPasswordFragment.newInstance())
+        }
+        else  if(responseMessageInformation == "Invalid Otp" ){
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_error)
             dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.show()
             val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
             RetryBtn.setOnClickListener {
                 dialog.dismiss()
-                emailBottomSheetfragment()
+                viewModel.postRegisterEmail(forgotPasswordBinding.etForgotpw.text.toString())
+                    .observe(requireActivity()) { otpResponse ->
+                        emailRegister(otpResponse.get(0).responseMessage)
+                        Toast.makeText(
+                            requireActivity(),
+                            otpResponse.get(0).responseInformation.toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
             }
-            dialog.show()
         }
     }
 
+    private fun emailRegister(responseMessage: Boolean?){
+        if(responseMessage==true){
+            emailBottomSheetfragment()
+        }
+    }
 }
