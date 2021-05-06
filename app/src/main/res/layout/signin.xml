@@ -30,7 +30,6 @@
             app:boxStrokeColor="@color/theme_background_light"
             app:boxStrokeWidth="1dp"
             app:cornerRadius="7dp"
-            app:errorEnabled="true"
             app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
