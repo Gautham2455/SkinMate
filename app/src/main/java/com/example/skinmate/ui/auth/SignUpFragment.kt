@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
@@ -43,6 +44,10 @@ class SignUpFragment : BaseFragment() {
         setTitleWithBackButton("Sign Up")
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
 //        signupViewModel=ViewModelProvider(this,factory).get(AuthViewModel::javaClass)
+
+
+        //signupViewModel=ViewModelProvider(this).get(AuthViewModel::javaClass)
+
 
         signUpBinding.signInTv.setOnClickListener {
             add(R.id.fragment_container, SignInFragment.newInstance())
@@ -98,7 +103,9 @@ class SignUpFragment : BaseFragment() {
     private fun mobOtpVerify(otpnumber: Int) {
 
         //call api to verfify otp sent to mob
-        signupViewModel.getUser(otpnumber)?.observe(requireActivity(), Observer { otpResponse -> Toast.makeText(requireContext(),otpResponse.message,Toast.LENGTH_LONG)})
+        signupViewModel.getUser(otpnumber)?.observe(requireActivity(), Observer { otpResponse ->
+            Toast.makeText(requireContext(),otpResponse.message,Toast.LENGTH_LONG)
+        })
 
         val apiResponse : Boolean = true
         if (apiResponse==true) {
