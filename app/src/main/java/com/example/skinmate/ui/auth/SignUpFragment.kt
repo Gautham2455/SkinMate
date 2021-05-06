@@ -194,7 +194,7 @@ class SignUpFragment : BaseFragment() {
             signUpBinding.eidLayout.setError("Enter valid Email")
             flag=false
         }
-        if (inputValidation.passwordValid(password)){
+        if (!inputValidation.passwordValid(password)){
             signUpBinding.setPasswordLayout.setError("Must be more 6 Character")
         }
         if (!inputValidation.isPasswordEqual(password,confirm_password)){

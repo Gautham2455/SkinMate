@@ -31,45 +31,40 @@ class SignInFragment : BaseFragment() {
         signInBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
         signInBinding.tvNewUser.setOnClickListener { add(R.id.fragment_container,SignUpFragment.newInstance()) }
 
-        validate()
-        /*signInBinding.btnSignin.setOnClickListener {
-            val inputvalidation=InputValidation()
-            if (((inputvalidation.isPhoneValid(phno_mail)) || (inputvalidation.isemailValid(phno_mail))))
-            {
-                signInBinding.etPhoneEmail.setError("Please enter a valid Phone Number/Email")
-                Log.e("phno_mail","phno_mail invalid")
-                //signInBinding.etPassword.setError("Invalid Phone Number/Password combination")
-            }
-            if ((inputvalidation.passwordValid(pass))){
-                signInBinding.etPassword.setError("Invalid Phone Number/Password combination")
+        signInBinding.btnSignin.setOnClickListener {
+            if (validateInput()){
+                //Call api method
+                startActivity(Intent(context,HomeActivity::class.java))
             }
             else
-                startActivity(Intent(context,HomeActivity::class.java))
-        }*/
+                signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
+        }
 
         signInBinding.tvForgotPassword.setOnClickListener { add(R.id.fragment_container,ForgotPasswordFragment.newInstance()) }
+
+
 
         return signInBinding.root
 
     }
 
-    fun validate(){
-        signInBinding.btnSignin.setOnClickListener {
-            val phno_mail: String=signInBinding.etPhoneEmail.toString()
-            val pass: String=signInBinding.etPassword.toString()
-            val inputvalidation=InputValidation()
-            if (((!inputvalidation.isPhoneValid(phno_mail)) || (!inputvalidation.isemailValid(phno_mail))))
-            {
-                signInBinding.etPhoneEmail.setError("Please enter a valid Phone Number/Email")
-                Log.e("phno_mail","phno_mail invalid")
-                //signInBinding.etPassword.setError("Invalid Phone Number/Password combination")
-            }
-            else if ((!inputvalidation.passwordValid(pass))){
-                signInBinding.etPassword.setError("Invalid Phone Number/Password combination")
-            }
-            else
-                startActivity(Intent(context,HomeActivity::class.java))
+
+    private fun validateInput() : Boolean{
+        val phone_no=signInBinding.etPhoneEmail.text.toString()
+        val email=signInBinding.etPhoneEmail.text.toString()
+
+        val inputValidation = InputValidation()
+
+        if(!inputValidation.isPhoneValid(phone_no)){
+            signInBinding.textinputPhoneEmail.setError("Please enter a valid Phone Number/Email")
+            return false
         }
+        if (!inputValidation.isemailValid(email)){
+            signInBinding.textinputPhoneEmail.setError("Please enter a valid Phone Number/Email")
+            return false
+        }
+
+        return true
     }
 
 }
