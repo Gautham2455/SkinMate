@@ -1,5 +1,6 @@
 package com.example.skinmate.data.repositories
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.skinmate.data.network.RetrofitClient
@@ -8,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object UserRepository {
+class UserRepository private constructor(application: Application){
 
     val serviceSetterGetter = MutableLiveData<OtpResponse>()
     val registerEmail = MutableLiveData<OtpResponse>()
@@ -37,6 +38,8 @@ object UserRepository {
                 val data = response.body()
 
                 val msg = data!!.message
+
+                serviceSetterGetter.postValue(response.body())
             }
         })
 
@@ -135,6 +138,27 @@ object UserRepository {
             }
         })
         return emailOtp
+    }
+
+
+    // Singleton Pattern for Repository.
+    companion object {
+        /**
+         *  This is where the EmployeeRepository all callers will receive. Set it to null at first
+         *  and make it private so it can't be directly accessed.
+         */
+        private var INSTANCE: UserRepository? = null
+
+        /**
+         * This method checks whether or not INSTANCE is null. If it's not null, it returns the
+         * Singleton INSTANCE. If it is null, it creates a new Object, sets INSTANCE equal to that,
+         * and returns INSTANCE. From here on out, this method will now return the same INSTANCE,
+         * every time.
+         */
+        fun getInstance(application: Application): UserRepository = INSTANCE ?: kotlin.run {
+            INSTANCE = UserRepository(application = application)
+            INSTANCE!!
+        }
     }
 
 }
