@@ -23,7 +23,6 @@ class UserRepository private constructor(application: Application){
 
         val call = RetrofitClient.apiInterface.verifyMobleOtp(otp)
 
-
         call.enqueue(object: Callback<List<OtpResponse>> {
             override fun onFailure(call: Call<List<OtpResponse>>, t: Throwable) {
                 Log.v("DEBUG : ", t.message.toString())

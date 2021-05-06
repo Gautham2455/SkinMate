@@ -7,10 +7,12 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface   MyApi {
 
+    @FormUrlEncoded
     @POST("registration")
     fun userRegistration(
         @Field("id") id: String,
@@ -29,34 +31,41 @@ interface   MyApi {
         @Field("emeregencyContactName") emeregencyContactName : String
     ) : Call<List<registerUserResponse>>
 
+
+    @FormUrlEncoded
     @POST("duplicate-checker")
     fun checkDuplicateUser(
         @Field("email") email : String,
         @Field("phoneNumber") phoneNumber: Int
     ) : Call<List<duplicateUserResponse>>
 
+    @FormUrlEncoded
     @POST("login")
     fun userLogin(
         @Field("id") email : String,
         @Field("password") password: String
     ) : Call<List<loginResponse>>
 
+    @FormUrlEncoded
     @POST("mobile-otp-verify")
     fun verifyMobleOtp(
         @Field("otp") otp : Int
     ) : Call<List<OtpResponse>>
 
+    @FormUrlEncoded
     @POST("registration-send-otp-to-email")
     fun registerEmail(
         @Field("email") email : String
     ) : Call<List<OtpResponse>>
 
+    @FormUrlEncoded
     @POST("email-otp-verify")
     fun verifyEmailOtp(
         @Field("email") email : String,
         @Field("otp") otp : Int
     ) : Call<List<OtpResponse>>
 
+    @FormUrlEncoded
     @POST("change-password")
     fun changePassword(
         @Field("customerId") customerId : Int,
