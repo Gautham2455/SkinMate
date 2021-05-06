@@ -1,30 +1,61 @@
 package com.example.skinmate.ui.auth
 
-import android.content.Intent
+
 import android.view.View
-import androidx.core.content.ContextCompat.startActivity
 
-import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sampleslinmate.utils.InputValidation
-import com.example.skinmate.databinding.EnterDetailsBinding
-
-import com.example.skinmate.ui.home.HomeActivity
-
-class AuthViewModel : ViewModel() {
+import com.example.skinmate.data.repositories.UserRepository
+import com.example.skinmate.data.responses.*
 
 
 
-    fun onLoginBtnClick(view : View){
+class AuthViewModel() : ViewModel() {
 
-        //Login
-        //startActivity(Intent(SignInFragment::getContext,HomeActivity::class.java))
+    var servicesLiveData: MutableLiveData<OtpResponse>? = null
+    var registerEmailDdata : MutableLiveData<OtpResponse>? =null
+    var verifyEmaiilOtpData :MutableLiveData<OtpResponse>? =null
+    var loginUserData : MutableLiveData<loginResponse>? = null
+    var changePasswordData  : MutableLiveData<passwordChangeResponse>? =null
+    var checkDplicateUserData : MutableLiveData<duplicateUserResponse>? = null
+    var registerUserData : MutableLiveData<registerUserResponse>? = null
 
+
+    fun getUser(otp: Int) : LiveData<OtpResponse>? {
+        servicesLiveData = UserRepository.getServicesApiCall(otp)
+        return servicesLiveData
     }
 
-    fun  onSignUpBtnClick(view : View){
+    fun postRegisterEmail(email : String) : LiveData<OtpResponse>? {
+        registerEmailDdata = UserRepository.registerEmailCall(email)
+        return registerEmailDdata
+    }
 
-        //SignUp
+    fun postLoginUser(id : String,password : String) : LiveData<loginResponse>? {
+        loginUserData = UserRepository.loginUserCall(id,password)
+        return  loginUserData
+    }
+
+    fun postChangePassword(customerId : Int,oldPassword : String,newPassword :String) :LiveData<passwordChangeResponse>?{
+        changePasswordData = UserRepository.changePasswordCall(customerId,oldPassword,newPassword)
+        return changePasswordData
+    }
+
+    fun postCheckDuplicateUser(email : String,phoneNumber : Int) : LiveData<duplicateUserResponse>? {
+        checkDplicateUserData = UserRepository.checkDuplicateUserCall(email,phoneNumber)
+        return checkDplicateUserData
+    }
+
+    fun posttRegisterUser() : LiveData<registerUserResponse>? {
+        //
+        return registerUserData
+    }
+
+    fun postVerifyEmailOtp(email : String, otp :Int) : LiveData<OtpResponse>? {
+        verifyEmaiilOtpData = UserRepository.verifyEmailOtpCall(email,otp)
+        return verifyEmaiilOtpData
+
     }
 
 }

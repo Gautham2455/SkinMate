@@ -1,6 +1,9 @@
 package com.example.skinmate.data.network
 
+import com.example.skinmate.data.responses.*
 import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
@@ -9,7 +12,7 @@ import retrofit2.http.POST
 interface MyApi {
 
     @POST("registration")
-    suspend fun userRegistration(
+    fun userRegistration(
         @Field("id") id: String,
         @Field("phoneNumber") phoneNumber: String,
         @Field("email") email : String,
@@ -24,46 +27,41 @@ interface MyApi {
         @Field("emeregencyNumber") emeregencyNumber : String,
         @Field("insuranceInformation") insuranceInformation : String,
         @Field("emeregencyContactName") emeregencyContactName : String
-    )
+    ) : Call<registerUserResponse>
 
     @POST("duplicate-checker")
-    suspend fun checkDuplicateUser(
+    fun checkDuplicateUser(
         @Field("email") email : String,
-        @Field("phoneNumber") phoneNumber: String
-    )
+        @Field("phoneNumber") phoneNumber: Int
+    ) : Call<duplicateUserResponse>
 
     @POST("login")
-    suspend fun userLogin(
+    fun userLogin(
         @Field("id") email : String,
         @Field("password") password: String
-    )
+    ) : Call<loginResponse>
 
     @POST("mobile-otp-verify")
-    suspend fun verifyMobleOtp(
-        @Field("otp") otp : String
-    )
+    fun verifyMobleOtp(
+        @Field("otp") otp : Int
+    ) : Call<OtpResponse>
 
     @POST("registration-send-otp-to-email")
-    suspend fun registerEmail(
+    fun registerEmail(
         @Field("email") email : String
-    )
+    ) : Call<OtpResponse>
 
     @POST("email-otp-verify")
-    suspend fun verifyEmailOtp(
+    fun verifyEmailOtp(
         @Field("email") email : String,
-        @Field("otp") otp : String
-    )
+        @Field("otp") otp : Int
+    ) : Call<OtpResponse>
 
-
-    companion object{
-        operator fun invoke() : MyApi {
-
-            return Retrofit.Builder()
-                .baseUrl("http://65.0.55.180/skinmate/v1.0/customer/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(MyApi::class.java)
-        }
-    }
+    @POST("change-password")
+    fun changePassword(
+        @Field("customerId") customerId : Int,
+        @Field("oldPassword")  oldPassword: String,
+        @Field("newPassword")  newPassword: String
+    ) : Call<passwordChangeResponse>
 
 }
