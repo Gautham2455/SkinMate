@@ -2,6 +2,7 @@ package com.example.skinmate.ui.auth
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,10 +58,12 @@ class SetupProfileFragment : BaseFragment() {
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
                 val gender = enterDetailsBinding.tvGenderMale.text.toString()
             }
             else {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
 
         }
@@ -70,10 +73,13 @@ class SetupProfileFragment : BaseFragment() {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
+                //enterDetailsBinding.cardFemale.setBackgroundColor(resources.getColor(R.color.theme_background_light))
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
                 val gender = enterDetailsBinding.tvGenderFemale.text.toString()
             }
             else {
             enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
 
         }
@@ -82,10 +88,12 @@ class SetupProfileFragment : BaseFragment() {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
                 val gender = enterDetailsBinding.tvGenderOther.text.toString()
             }
             else {
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
 
         }
