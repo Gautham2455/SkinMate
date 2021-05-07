@@ -1,6 +1,8 @@
 package com.example.skinmate.ui.auth
 
 import android.app.Dialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -32,8 +34,10 @@ class ForgotPasswordFragment : BaseFragment() {
     var EMAIL :String?=null
     private val viewModel by viewModels<AuthViewModel>()
 
+
     companion object {
         fun newInstance() = ForgotPasswordFragment()
+        const val EMAIL : String = "email"
     }
 
     override fun onCreateView(
@@ -41,19 +45,27 @@ class ForgotPasswordFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setTitleWithBackButton("Forgot Password")
         forgotPasswordBinding = DataBindingUtil.inflate(inflater,R.layout.forgot_password,container,false)
 
         forgotPasswordBinding.btnForgotPw.setOnClickListener(){
             val inputValidation=InputValidation()
-            val phone_mail : String = forgotPasswordBinding.etForgotpw.text.toString()
 
+            val phone_mail : String = forgotPasswordBinding.etForgotpw.text.toString()
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor=sharedPref!!.edit()
+            editor.putString(EMAIL,phone_mail!!)
+            editor.commit()
 
 
             if (inputValidation.isPhoneValid(phone_mail)){
                 mobOtpBottomSheetfragment()
             }
             else if (inputValidation.isemailValid(phone_mail)){
-                emailBottomSheetfragment()
+                viewModel.postRegisterEmail(forgotPasswordBinding.etForgotpw.text.toString()).observe(requireActivity()){
+                        otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
+                    Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+                }
             }
         }
         return forgotPasswordBinding.root
@@ -127,10 +139,7 @@ class ForgotPasswordFragment : BaseFragment() {
     }
 
     private fun emailBottomSheetfragment() {
-        viewModel.postRegisterEmail(forgotPasswordBinding.etForgotpw.text.toString()).observe(requireActivity()){
-                otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
-            Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
-        }
+
         val emailbottomSheetDialog = BottomSheetDialog(requireContext())
         emailbottomSheetDialog.setContentView(R.layout.email_otp)
         emailbottomSheetDialog.show()
@@ -150,15 +159,15 @@ class ForgotPasswordFragment : BaseFragment() {
 
         //call api to verify otp sent to email
         viewModel.postVerifyEmailOtp(email, otpemail).observe(requireActivity()) { otpResponse ->
-            successfulEmailOtp(otpResponse.get(0).responseInformation)
+            successfulEmailOtp(otpResponse.get(0).responseMessage)
         }
     }
 
-    private fun successfulEmailOtp(responseMessageInformation: String?){
-        if (responseMessageInformation == "Otp Verified"){
+    private fun successfulEmailOtp(responseMessageInformation:Boolean?){
+        if (responseMessageInformation == true){
             add(R.id.fragment_container,SetPasswordFragment.newInstance())
         }
-        else  if(responseMessageInformation == "Invalid Otp" ){
+        else  {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_error)
