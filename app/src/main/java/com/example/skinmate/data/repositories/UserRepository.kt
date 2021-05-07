@@ -124,8 +124,6 @@ class UserRepository private constructor(application: Application){
                 call: Call<List<OtpResponse>>,
                 response: Response<List<OtpResponse>>
             ) {
-                TODO("Not yet implemented")
-
                 registerEmail.postValue(response.body())
             }
         })
@@ -144,7 +142,6 @@ class UserRepository private constructor(application: Application){
                 call: Call<List<OtpResponse>>,
                 response: Response<List<OtpResponse>>
             ) {
-                TODO("Not yet implemented")
                 emailOtp.postValue(response.body())
             }
         })
