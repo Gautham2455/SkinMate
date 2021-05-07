@@ -35,7 +35,8 @@ class SignUpFragment : BaseFragment() {
     var PHONE_NO : Int?= null
     var PASSWORD : String?=null
     var CONFIRM_PASSWORRRD  : String?=null
-    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+
+
 
     companion object {
         fun newInstance() = SignUpFragment()
@@ -58,12 +59,14 @@ class SignUpFragment : BaseFragment() {
 
         signUpBinding.proceedBtn.setOnClickListener(){
 
-            PHONE_NO=signUpBinding.phoneEt.text.toString()!!.toInt()
+//            PHONE_NO=signUpBinding.phoneEt.text.toString()!!.toInt()
+            PHONE_NO = signUpBinding.phoneEt.text.toString().toInt()
             EMAIL=signUpBinding.eidEmail.text.toString()
             PASSWORD=signUpBinding.setPasswordEt.text.toString()
             CONFIRM_PASSWORRRD=signUpBinding.confirmPasswordEt.toString()
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor =  sharedPref!!.edit()
-                editor.putString(EMAIL_ID,EMAIL!! )
+            editor.putString(EMAIL_ID,EMAIL!! )
             editor.putInt(MOB_NO,PHONE_NO!!)
             editor.putString(USER_PASSWORD,PASSWORD!!)
             editor.commit()

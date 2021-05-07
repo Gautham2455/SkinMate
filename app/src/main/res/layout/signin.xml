@@ -34,13 +34,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPhone_Email"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="Poppins SemiBold"
                 android:hint="@string/enter_number_or_e_mail_id"
                 android:textColor="@color/theme_text"
+                android:inputType="textEmailAddress"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

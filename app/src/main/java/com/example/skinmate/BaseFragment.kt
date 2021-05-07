@@ -40,6 +40,9 @@ abstract class BaseFragment : DialogFragment() {
 
     open fun onBackPress() {
        //do nothing
+        activity?.run {
+            supportFragmentManager.popBackStack()
+        }
     }
 
     open fun onHomeButtonPress() {

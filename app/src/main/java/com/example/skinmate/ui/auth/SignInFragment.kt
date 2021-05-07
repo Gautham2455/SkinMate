@@ -4,8 +4,10 @@ import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import android.os.Bundle
+import android.os.CancellationSignal
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,24 +18,27 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SigninBinding
 import androidx.lifecycle.observe
 import com.example.skinmate.ui.home.HomeActivity
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 
 
 class SignInFragment : BaseFragment() {
     private lateinit var signInBinding: SigninBinding
     private val viewModel by viewModels<AuthViewModel>()
 
+
     companion object {
         fun newInstance() = SignInFragment()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,20 +49,34 @@ class SignInFragment : BaseFragment() {
         signInBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
         signInBinding.tvNewUser.setOnClickListener {  add(R.id.fragment_container,SignUpFragment.newInstance()) }
 
-        //checkBiometricSupport()
 
         signInBinding.btnSignin.setOnClickListener {
             val email=signInBinding.etPhoneEmail.text.toString()
             val password=signInBinding.etPassword.text.toString()
+
+            // Create JSON using JSONObject
+            val jsonObject = JSONObject()
+            jsonObject.put("id", email)
+            jsonObject.put("password",password)
+
+
+// Convert JSONObject to String
+            val jsonObjectString = jsonObject.toString()
+
+// Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
+            val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+
             if (validateInput(email,password)){
-                viewModel.postLoginUser(email,password).observe(requireActivity()) { loginResponse ->
-                    if (loginResponse.get(0).responseMessage)
-                        startActivity(Intent(context, HomeActivity::class.java))
+                viewModel.postLoginUser(requestBody).observe(requireActivity()) { loginResponse ->
+                    Log.v("DEBUG : ", loginResponse.responseInformation)
+                    if (loginResponse.responseMessage)
+                        startActivity(Intent(requireActivity(), HomeActivity::class.java))
                     else
                         signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
                 }
             }
         }
+
 
         signInBinding.tvForgotPassword.setOnClickListener {
 
@@ -85,25 +104,6 @@ class SignInFragment : BaseFragment() {
         return flag
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun checkBiometricSupport(): Boolean {
-        /*val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-        if (!keyguardManager.isDeviceSecure) {
-            notifyUser("Fingerprint authentication has not been enabled in settings")
-            return false
-        }
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.USE_BIOMETRIC) != PackageManager.PERMISSION_GRANTED) {
-            notifyUser("Fingerprint Authentication Permission is not enabled")
-            return false
-        }
-        return if (packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            true
-        } else true*/
 
-        return true
-    }
-    private fun notifyUser(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
 
 }

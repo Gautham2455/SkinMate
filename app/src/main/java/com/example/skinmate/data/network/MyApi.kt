@@ -1,10 +1,9 @@
 package com.example.skinmate.data.network
 
 import com.example.skinmate.data.responses.*
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface   MyApi {
 
@@ -30,16 +29,14 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("duplicate-checker")
     fun checkDuplicateUser(
-        @Field("email") email : String,
+        @Field("id") id : String,
         @Field("phoneNumber") phoneNumber: Int
     ) : Call<List<duplicateUserResponse>>
 
-    @FormUrlEncoded
     @POST("login")
     fun userLogin(
-        @Field("email") email : String,
-        @Field("password") password: String
-    ) : Call<List<loginResponse>>
+        @Body requestBody: RequestBody
+    ) : Call<loginResponse>
 
     @FormUrlEncoded
     @POST("mobile-otp-verify")

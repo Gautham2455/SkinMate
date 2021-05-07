@@ -40,7 +40,7 @@ class SetupProfileFragment : BaseFragment() {
     var PERMISSION_ID = 1000
     lateinit var enterDetailsBinding: EnterDetailsBinding
     lateinit var locationRequest: LocationRequest
-    var currentLocation : String = " "
+    var currentLocation : String ?= null
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
     private var lastLocation: Location? = null
@@ -125,7 +125,7 @@ class SetupProfileFragment : BaseFragment() {
             var dpd = DatePickerDialog(requireContext(),
                 DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
                 var mmMonth = mMonth+1
-                dateofbirth = "$mDay/$mmMonth/$mYear"
+                dateofbirth = "$mDay-$mmMonth-$mYear"
                 enterDetailsBinding.etDob.setText(dateofbirth)
             },year,month,day)
             dpd.show()
@@ -160,10 +160,10 @@ class SetupProfileFragment : BaseFragment() {
 
                 viewModel.postRegisterUser(sharedPref!!.getInt(SignUpFragment.MOB_NO!!,0),
                     sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none")!!,firstname!!,lastname!!,
-                gender!!,dateofbirth!!,bloodgroup_user!!,"Android",sharedPref!!.getString(SignUpFragment.USER_PASSWORD!!,null)!!,
-                mailingaddress!!,emergencyphonenumber!!.toInt(),insuranceinfo!!,emergencyphonenumber!!).observe(requireActivity()){
-                    if(it.get(0).responseMessage)
-                        startActivity(Intent(context, HomeActivity::class.java))
+                gender!!,dateofbirth!!,bloodgroup_user!!,"Android",sharedPref!!.getString(SignUpFragment.USER_PASSWORD!!,"none")!!,
+                mailingaddress!!,emergencyphonenumber.toString()!!.toInt(),insuranceinfo!!,emergencycontactname!!).observe(requireActivity()){
+                    if(it.get(0).responseMessage!!)
+                        startActivity(Intent(requireContext(), HomeActivity::class.java))
                 }
             }
 
@@ -218,7 +218,7 @@ class SetupProfileFragment : BaseFragment() {
                 lastLocation = task.result
                 currentLocation = getCurrentLocation((lastLocation)!!.latitude, (lastLocation)!!.longitude)
                 enterDetailsBinding.etMailingAddress.setText(currentLocation)
-                Log.d("Location",currentLocation)
+                Log.d("Location",currentLocation.toString())
             }
             else {
 //                Log.w(TAG, "getLastLocation:exception", task.exception)
@@ -239,6 +239,6 @@ class SetupProfileFragment : BaseFragment() {
         countryName = Adress.get(0).countryName
         currentLocation = address + cityName + countryName
         Log.d("Debug:", "Your City: " + cityName + " ; your Country " + countryName)
-        return currentLocation
+        return currentLocation!!
     }
 }

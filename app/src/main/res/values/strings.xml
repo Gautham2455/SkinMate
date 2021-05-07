@@ -86,4 +86,41 @@
         <item>AB +ve</item>
         <item>AB -ve</item>
     </string-array>
+
+    <string name="selectionheadding">Please choose your option to schedule an appointment</string>
+    <string name="medical_examination">Medical Examination</string>
+    <string name="superficial_radiation_therapy">Superficial Radiation Therapy</string>
+    <string name="select_date_heading">Select Date for Appointment</string>
+    <string name="avalible_time_slot">Avalible Time slot</string>
+    <string name="morning">Morning</string>
+    <string name="time_zone_est">Time Zone:EST</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="service">Service</string>
+    <string name="date_time"><![CDATA[Date & Time]]></string>
+    <string name="appointment_for">This Appointment is for</string>
+    <string name="insurance_details">Please provide Insurance details:</string>
+    <string name="insurance">Insurance</string>
+    <string name="paying_self">Paying Self</string>
+    <string name="pay_with_insurance">Pay with Insurance</string>
+    <string name="select_from_existing">Select from Existing</string>
+    <string name="new_insurance_details">Add new Insurance details</string>
+    <string name="enter_comments">Enter Comments</string>
+    <string name="comments_if_any">Comments (If any)</string>
+    <string name="appointment_scheduled">Appointment Scheduled</string>
+    <string name="medical">Medical</string>
+    <string name="done">DONE</string>
+    <string name="cancel_appointment">Cancel Appointment</string>
+    <string name="landing_screen_title">Schedule Appointment for Dermatology Services</string>
+    <string name="telehealth_video_visits">Telehealth Video Visits</string>
+    <string name="cosmetic_text">Cosmetic Appointment Botox, Fillers, and other</string>
+    <string name="symptom_check_instruction"><![CDATA[With your health & safety our number one priority against COVID-19, Are you experiencing any of the following symptoms?]]></string>
+    <string name="cough">Cough</string>
+    <string name="fever">Fever</string>
+    <string name="cold">Cold</string>
+    <string name="family_members">Family Members</string>
+    <string name="add_insurance">Add Insurance</string>
+    <string name="touchid_authentication">TouchID Authentication</string>
+    <string name="terms_and_condition">Terms and Condition</string>
+    <string name="logout">Logout</string>
+    <string name="members">Members</string>
 </resources>

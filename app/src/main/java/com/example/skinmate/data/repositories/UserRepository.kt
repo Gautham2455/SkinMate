@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.skinmate.data.network.RetrofitClient
 import com.example.skinmate.data.responses.*
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +18,7 @@ class UserRepository private constructor(application: Application){
     val emailOtp = MutableLiveData<List<OtpResponse>>()
     val checkDplicateUser = MutableLiveData<List<duplicateUserResponse>>()
     val registerUser = MutableLiveData<List<registerUserResponse>>()
-    val loginUser = MutableLiveData<List<loginResponse>>()
+    val loginUser = MutableLiveData<loginResponse>()
     val changePassword = MutableLiveData<List<passwordChangeResponse>>()
     val updatePassword= MutableLiveData<List<updatePasswordResponse>>()
 
@@ -66,20 +68,19 @@ class UserRepository private constructor(application: Application){
         return checkDplicateUser
     }
 
-    fun loginUserCall(id : String,password : String) : MutableLiveData<List<loginResponse>>{
-        val call = RetrofitClient.apiInterface.userLogin(id,password)
+    fun loginUserCall(requesrBody: RequestBody) : MutableLiveData<loginResponse>{
+        val call = RetrofitClient.apiInterface.userLogin(requesrBody)
 
-        call.enqueue(object : Callback<List<loginResponse>>{
-            override fun onFailure(call: Call<List<loginResponse>>, t: Throwable) {
+        call.enqueue(object : Callback<loginResponse>{
+            override fun onFailure(call: Call<loginResponse>, t: Throwable) {
                 Log.v("DEBUG : ", t.message.toString())
 
             }
 
             override fun onResponse(
-                call: Call<List<loginResponse>>,
-                response: Response<List<loginResponse>>
+                call: Call<loginResponse>,
+                response: Response<loginResponse>
             ) {
-                TODO("Not yet implemented")
 
                 loginUser.postValue(response.body())
             }
@@ -119,6 +120,8 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object :Callback<List<registerUserResponse>>{
             override fun onFailure(call: Call<List<registerUserResponse>>, t: Throwable) {
+
+                Log.v("DEBUG : ", t.message.toString())
 
             }
 

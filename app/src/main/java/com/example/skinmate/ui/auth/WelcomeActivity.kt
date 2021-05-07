@@ -15,11 +15,11 @@ class WelcomeActivity : BaseActivity() {
         setTitle("")
 
         binding.btnSignup.setOnClickListener {
-            add(R.id.fragment_container,SignUpFragment.newInstance())
+            add(R.id.fragment_container,SignUpFragment.newInstance(),true)
         }
 
         binding.btnSignin.setOnClickListener {
-            add(R.id.fragment_container,SignInFragment.newInstance())
+            add(R.id.fragment_container,SignInFragment.newInstance(),true)
         }
     }
 }

@@ -8,6 +8,8 @@ import com.example.skinmate.data.repositories.UserRepository
 import com.example.skinmate.data.responses.OtpResponse
 import com.example.skinmate.data.responses.*
 import kotlinx.coroutines.Dispatchers
+import okhttp3.RequestBody
+import org.json.JSONObject
 
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
@@ -29,8 +31,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(registerEmailDdata.registerEmailCall(email))
     }
 
-    fun postLoginUser(id : String,password : String) : LiveData<List<loginResponse>> = liveData(Dispatchers.IO) {
-        emitSource(loginUserData.loginUserCall(id,password))
+    fun postLoginUser(requesrBody: RequestBody) : LiveData<loginResponse> = liveData(Dispatchers.IO) {
+        emitSource(loginUserData.loginUserCall(requesrBody))
     }
 
     fun postChangePassword(customerId : Int,oldPassword : String,newPassword :String)
@@ -38,9 +40,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(changePasswordData.changePasswordCall(customerId,oldPassword ,newPassword))
     }
 
-    fun postCheckDuplicateUser(email : String,phoneNumber : Int) : LiveData<List<duplicateUserResponse>> =
+    fun postCheckDuplicateUser(id : String,phoneNumber : Int) : LiveData<List<duplicateUserResponse>> =
         liveData(Dispatchers.IO){
-        emitSource(checkDplicateUserData.checkDuplicateUserCall(email,phoneNumber))
+        emitSource(checkDplicateUserData.checkDuplicateUserCall(id,phoneNumber))
     }
 
     fun postRegisterUser(phoneNumber: Int,email: String,firstName : String,
