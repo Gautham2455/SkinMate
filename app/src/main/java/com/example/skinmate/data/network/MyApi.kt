@@ -1,11 +1,7 @@
 package com.example.skinmate.data.network
 
 import com.example.skinmate.data.responses.*
-import okhttp3.OkHttpClient
 import retrofit2.Call
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -73,5 +69,10 @@ interface   MyApi {
         @Field("newPassword")  newPassword: String
     ) : Call<List<passwordChangeResponse>>
 
-
+    @FormUrlEncoded
+    @POST("update-password")
+    fun updatePassword(
+        @Field("email") customerId : String,
+        @Field("Password")  oldPassword: String,
+    ) : Call<List<updatePasswordResponse>>
 }

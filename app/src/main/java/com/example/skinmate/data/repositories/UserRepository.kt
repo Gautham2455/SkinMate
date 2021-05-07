@@ -18,6 +18,7 @@ class UserRepository private constructor(application: Application){
     val registerUser = MutableLiveData<List<registerUserResponse>>()
     val loginUser = MutableLiveData<List<loginResponse>>()
     val changePassword = MutableLiveData<List<passwordChangeResponse>>()
+    val updatePassword= MutableLiveData<List<updatePasswordResponse>>()
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<OtpResponse>> {
 
@@ -130,6 +131,31 @@ class UserRepository private constructor(application: Application){
         return registerEmail
     }
 
+    fun updatePasswordCall(email: String,password: String): MutableLiveData<List<updatePasswordResponse>> {
+
+        val call = RetrofitClient.apiInterface.updatePassword(email,password)
+        call.enqueue(object: Callback<List<updatePasswordResponse>> {
+            override fun onFailure(call: Call<List<updatePasswordResponse>>, t: Throwable) {
+                Log.v("DEBUG : ", t.message.toString())
+            }
+
+            override fun onResponse(
+                call: Call<List<updatePasswordResponse>>,
+                response: Response<List<updatePasswordResponse>>
+            ) {
+                Log.v("DEBUG : ", response.body().toString())
+
+                val data = response.body()
+
+                val msg = data!!.get(0).responseInformation
+
+                updatePassword.postValue(response.body())
+            }
+        })
+
+        return updatePassword
+    }
+
     fun verifyEmailOtpCall(email : String, otp :Int) :MutableLiveData<List<OtpResponse>>{
         val call = RetrofitClient.apiInterface.verifyEmailOtp(email,otp)
 
@@ -148,8 +174,6 @@ class UserRepository private constructor(application: Application){
         return emailOtp
     }
 
-
-    // Singleton Pattern for Repository.
     companion object {
         /**
          *  This is where the EmployeeRepository all callers will receive. Set it to null at first
