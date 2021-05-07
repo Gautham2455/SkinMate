@@ -77,7 +77,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun add(containerId: Int, fragment: BaseFragment, addToBackStack: Boolean = true) {
         val fm = supportFragmentManager
         val ft = fm.beginTransaction()
-        ft.add(containerId, fragment, Integer.toString(supportFragmentManager.backStackEntryCount))
+        ft.add(containerId, fragment ,Integer.toString(supportFragmentManager.backStackEntryCount))
         if (addToBackStack) ft.addToBackStack(null)
         ft.commit()
     }
