@@ -41,6 +41,7 @@ class ForgotPasswordFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setTitleWithBackButton("Forgot Password")
         forgotPasswordBinding = DataBindingUtil.inflate(inflater,R.layout.forgot_password,container,false)
 
         forgotPasswordBinding.btnForgotPw.setOnClickListener(){

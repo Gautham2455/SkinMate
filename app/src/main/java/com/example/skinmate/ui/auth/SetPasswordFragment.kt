@@ -28,6 +28,7 @@ class SetPasswordFragment: BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setTitleWithBackButton("Change Password")
         setPasswordBinding= DataBindingUtil.inflate(inflater, R.layout.set_password,container,false)
 
         setPasswordBinding.btnSetPwd.setOnClickListener(){
