@@ -1,6 +1,8 @@
 package com.example.skinmate.ui.auth
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,12 +36,18 @@ class SetPasswordFragment: BaseFragment() {
         setPasswordBinding.btnSetPwd.setOnClickListener(){
 
             if(inputValidate()){
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
-                val fpwemail=ForgotPassword.EMAIL.toString()
+                val fpwemail=sharedPref!!.getString(ForgotPasswordFragment.EMAIL!!," ")
                 val fpwpassword=setPasswordBinding.etConfirmPassword.text.toString()
-                viewModel.postUpdatePassword(fpwemail,fpwpassword).observe(requireActivity()){
-                    pwdResponse->
-                    successfulUpdatePwd(pwdResponse.get(0).responseMessage)
+                sharedPref!!.getString(ForgotPasswordFragment.EMAIL!!," ")?.let { it1 ->
+                    viewModel.postUpdatePassword(it1,fpwpassword).observe(requireActivity()){ pwdResponse->
+                        successfulUpdatePwd(pwdResponse.get(0).responseMessage)
+                        if (fpwemail != null) {
+                            Log.d("msg",fpwemail)
+                        }
+
+                    }
                 }
             }
         }

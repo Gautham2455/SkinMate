@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.content.ContentProvider
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -43,6 +44,8 @@ class SetupProfileFragment : BaseFragment() {
     var currentLocation : String ?= null
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
+
+    //private var fusedLocationClient: FusedLocationProviderClient? = null
     private var lastLocation: Location? = null
 
 
@@ -90,10 +93,15 @@ class SetupProfileFragment : BaseFragment() {
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
+
+
                 gender = enterDetailsBinding.tvGenderMale.text.toString()
+
             }
             else {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
 
         }
@@ -103,10 +111,15 @@ class SetupProfileFragment : BaseFragment() {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
+
+                //enterDetailsBinding.cardFemale.setBackgroundColor(resources.getColor(R.color.theme_background_light))
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
                 gender = enterDetailsBinding.tvGenderFemale.text.toString()
+
             }
             else {
             enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
 
         }
@@ -115,10 +128,14 @@ class SetupProfileFragment : BaseFragment() {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
+
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
                 gender = enterDetailsBinding.tvGenderOther.text.toString()
+
             }
             else {
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
         }
         enterDetailsBinding.etDob.setOnClickListener {
