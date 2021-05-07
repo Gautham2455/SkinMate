@@ -28,7 +28,7 @@ class SignUpFragment : BaseFragment() {
     private lateinit var signUpBinding: SignUpBinding
     private val viewModel by viewModels<AuthViewModel>()
     var EMAIL :String?=null
-    var PHONE_NO : Int? =null
+    var PHONE_NO : Int?= null
     var PASSWORD : String?=null
     var CONFIRM_PASSWORRRD  : String?=null
 
