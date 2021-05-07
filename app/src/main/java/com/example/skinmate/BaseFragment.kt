@@ -16,6 +16,10 @@ abstract class BaseFragment : DialogFragment() {
             return toolbar
         }
 
+    fun hideToolbar(){
+        (activity as? BaseActivity)?.hideMainToolbar()
+    }
+
     fun setTitle(resMessage: Int){
         with(activity as BaseActivity){
             setTitle(resMessage)
@@ -40,9 +44,8 @@ abstract class BaseFragment : DialogFragment() {
 
     open fun onBackPress() {
        //do nothing
-        activity?.run {
-            supportFragmentManager.popBackStack()
-        }
+        println( "im here")
+        activity?.supportFragmentManager?.popBackStack()
     }
 
     open fun onHomeButtonPress() {
@@ -50,9 +53,7 @@ abstract class BaseFragment : DialogFragment() {
     }
 
     fun add(containerId: Int, fragment: BaseFragment) {
-        activity?.run {
-            (this as BaseActivity).add(containerId, fragment)
-        }
+        (activity as? BaseActivity)?.add(containerId,fragment)
     }
 
     fun add(containerId: Int, fragment: BaseFragment, addToBackStack:Boolean) {

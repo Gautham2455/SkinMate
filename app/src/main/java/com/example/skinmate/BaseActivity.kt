@@ -24,6 +24,7 @@ abstract class BaseActivity : AppCompatActivity() {
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayShowTitleEnabled(true)
             toolbar.setNavigationOnClickListener {
+                println("tool bar")
                 val fragment = supportFragmentManager.findFragmentByTag(
                     (supportFragmentManager.backStackEntryCount - 1).toString()
                 )
@@ -72,6 +73,10 @@ abstract class BaseActivity : AppCompatActivity() {
         showMainToolbar(getString(resourceId))
     }
 
+    fun hideMainToolbar(){
+        supportActionBar?.hide()
+    }
+
 
     @JvmOverloads
     fun add(containerId: Int, fragment: BaseFragment, addToBackStack: Boolean = true) {
@@ -99,6 +104,8 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
+        println("count value")
+        println(count)
         if (count <= 1) {
             finish()
         } else {
@@ -121,4 +128,6 @@ abstract class BaseActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(false)
         }
     }
+
+
 }

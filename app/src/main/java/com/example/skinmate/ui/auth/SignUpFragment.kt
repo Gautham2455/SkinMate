@@ -54,13 +54,13 @@ class SignUpFragment : BaseFragment() {
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
 
         signUpBinding.signInTv.setOnClickListener {
-            add(R.id.fragment_container, SignInFragment.newInstance())
+            replace(R.id.fragment_container, SignInFragment.newInstance())
         }
 
         signUpBinding.proceedBtn.setOnClickListener(){
 
 //            PHONE_NO=signUpBinding.phoneEt.text.toString()!!.toInt()
-            PHONE_NO = signUpBinding.phoneEt.text.toString().toInt()
+            PHONE_NO = signUpBinding.phoneEt.text.toString()!!.toInt()
             EMAIL=signUpBinding.eidEmail.text.toString()
             PASSWORD=signUpBinding.setPasswordEt.text.toString()
             CONFIRM_PASSWORRRD=signUpBinding.confirmPasswordEt.toString()
@@ -167,7 +167,7 @@ class SignUpFragment : BaseFragment() {
     private fun emailOtpVerify(email:String ,otpemail: Int) {
 
         viewModel.postVerifyEmailOtp(email,otpemail).observe(requireActivity()){otpResponse ->
-            successfulEmailOtp(otpResponse.get(0).responseMessage)
+            successfulEmailOtp(otpResponse.firstOrNull()?.responseMessage)
             Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
         }
     }
@@ -182,7 +182,7 @@ class SignUpFragment : BaseFragment() {
             val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
             OkayBtn.setOnClickListener {
                 dialog.dismiss()
-                add(R.id.fragment_container,SetupProfileFragment.newInstance(),false)
+                replace(R.id.fragment_container,SetupProfileFragment.newInstance(),false)
             }
         }
         else {

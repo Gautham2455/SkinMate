@@ -4,22 +4,17 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.skinmate.BaseActivity
 import com.example.skinmate.R
-import com.example.skinmate.databinding.WelcomeBinding
+
 
 class WelcomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding : WelcomeBinding = DataBindingUtil.setContentView(this, R.layout.welcome)
+        //val binding : WelcomeBinding = DataBindingUtil.setContentView(this, R.layout.activity_welcome)
+        setContentView(R.layout.activity_welcome)
         setActionBar(R.id.toolbar_main)
-        setTitle("")
 
-        binding.btnSignup.setOnClickListener {
-            add(R.id.fragment_container,SignUpFragment.newInstance(),true)
-        }
+        replace(R.id.fragment_container,AuthenticationFragment.newInstance())
 
-        binding.btnSignin.setOnClickListener {
-            add(R.id.fragment_container,SignInFragment.newInstance(),true)
-        }
     }
 }
