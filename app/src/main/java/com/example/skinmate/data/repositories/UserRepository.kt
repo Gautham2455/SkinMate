@@ -107,13 +107,13 @@ class UserRepository private constructor(application: Application){
         return changePassword
     }
 
-    fun registerUserCall(id: String,phoneNumber: Int,email: String,firstName : String,
+    fun registerUserCall(phoneNumber: Int,email: String,firstName : String,
     lastName : String,gender : String, dob : String, bloodGroup : String, loginType : String,
     password: String, address : String,emeregencyNumber : Int,insuranceInformation :String,
                          emeregencyContactName :String)
     : MutableLiveData<List<registerUserResponse>>{
 
-        val call =RetrofitClient.apiInterface.userRegistration(id,phoneNumber,email,
+        val call =RetrofitClient.apiInterface.userRegistration(phoneNumber,email,
         firstName,lastName, gender, dob, bloodGroup, loginType, password, address,
             emeregencyNumber, insuranceInformation, emeregencyContactName)
 

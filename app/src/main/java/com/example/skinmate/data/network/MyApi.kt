@@ -11,7 +11,6 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("registration")
     fun userRegistration(
-        @Field("id") id: String,
         @Field("phoneNumber") phoneNumber: Int,
         @Field("email") email : String,
         @Field("firstName") firstName : String,

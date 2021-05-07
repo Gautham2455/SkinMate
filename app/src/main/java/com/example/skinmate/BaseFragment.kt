@@ -1,5 +1,6 @@
 package com.example.skinmate
 
+import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -51,9 +52,9 @@ abstract class BaseFragment : DialogFragment() {
         }
     }
 
-    fun add(containerId: Int, fragment: BaseFragment, addToBackStack: Boolean) {
+    fun add(containerId: Int, fragment: BaseFragment, addToBackStack:Boolean) {
         activity?.run {
-            (this as BaseActivity).add(containerId, fragment, addToBackStack)
+            (this as BaseActivity).add(containerId, fragment , addToBackStack)
         }
     }
 

@@ -22,6 +22,7 @@ import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SigninBinding
+import androidx.lifecycle.observe
 import com.example.skinmate.ui.home.HomeActivity
 
 
@@ -41,7 +42,7 @@ class SignInFragment : BaseFragment() {
         setTitleWithBackButton("Sign In")
 
         signInBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
-        signInBinding.tvNewUser.setOnClickListener { add(R.id.fragment_container,SignUpFragment.newInstance()) }
+        signInBinding.tvNewUser.setOnClickListener {  add(R.id.fragment_container,SignUpFragment.newInstance()) }
 
         //checkBiometricSupport()
 

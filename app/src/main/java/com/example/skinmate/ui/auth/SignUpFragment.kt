@@ -1,6 +1,8 @@
 package com.example.skinmate.ui.auth
 
 import android.app.Dialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -25,15 +27,21 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class SignUpFragment : BaseFragment() {
 
+
+
     private lateinit var signUpBinding: SignUpBinding
     private val viewModel by viewModels<AuthViewModel>()
     var EMAIL :String?=null
     var PHONE_NO : Int?= null
     var PASSWORD : String?=null
     var CONFIRM_PASSWORRRD  : String?=null
+    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
     companion object {
         fun newInstance() = SignUpFragment()
+        const val EMAIL_ID : String="emaiil_id"
+        const val MOB_NO :String="phoone_no"
+        const val USER_PASSWORD:String ="password"
     }
 
     override fun onCreateView(
@@ -54,6 +62,11 @@ class SignUpFragment : BaseFragment() {
             EMAIL=signUpBinding.eidEmail.text.toString()
             PASSWORD=signUpBinding.setPasswordEt.text.toString()
             CONFIRM_PASSWORRRD=signUpBinding.confirmPasswordEt.toString()
+            val editor: SharedPreferences.Editor =  sharedPref!!.edit()
+                editor.putString(EMAIL_ID,EMAIL!! )
+            editor.putInt(MOB_NO,PHONE_NO!!)
+            editor.putString(USER_PASSWORD,PASSWORD!!)
+            editor.commit()
             if (validateInput()){
 
                 if(!checkUserExist())

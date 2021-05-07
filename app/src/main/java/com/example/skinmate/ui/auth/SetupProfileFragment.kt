@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.ContentProvider
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -23,15 +24,18 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.EnterDetailsBinding
 import com.example.skinmate.ui.home.HomeActivity
 import com.google.android.gms.location.*
+import androidx.lifecycle.observe
 import java.util.*
 
 class SetupProfileFragment : BaseFragment() {
+
 
     var PERMISSION_ID = 1000
     lateinit var enterDetailsBinding: EnterDetailsBinding
@@ -42,8 +46,22 @@ class SetupProfileFragment : BaseFragment() {
     private var lastLocation: Location? = null
 
 
+    private val viewModel by viewModels<AuthViewModel>()
+
+    var firstname : String?=null
+    var lastname : String?=null
+    var dateofbirth : String?=null
+    var mailingaddress : String?=null
+    var insuranceinfo : String?=null
+    var emergencycontactname : String?=null
+    var emergencyphonenumber : String?=null
+    var bloodgroup_user : String?=null
+    var gender :String?= null
+
+
     companion object {
         fun newInstance() = SetupProfileFragment()
+
     }
 
     override fun onCreateView(
@@ -52,79 +70,64 @@ class SetupProfileFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         setTitleWithBackButton("Setup Profile")
-         enterDetailsBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.enter_details, container, false
-        )
+        val enterDetailsBinding : EnterDetailsBinding = DataBindingUtil.inflate(inflater,
+            R.layout.enter_details,container,false)
+        val inputval= InputValidation()
+        val c=Calendar.getInstance()
+        var year=c.get(Calendar.YEAR)
+        var month=c.get(Calendar.MONTH)
+        var day=c.get(Calendar.DAY_OF_MONTH)
 
-        fusedLocationClient =
-            LocationServices.getFusedLocationProviderClient(requireActivity())
-
-
-        val inputval = InputValidation()
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-
-
-        val firstname = enterDetailsBinding.etFirstName.text.toString()
-        val lastname = enterDetailsBinding.etLastName.text.toString()
-        val dateofbirth = enterDetailsBinding.etDob.text.toString()
-        val mailingaddress = enterDetailsBinding.etMailingAddress.text.toString()
-        val insuranceinfo = enterDetailsBinding.etInsuranceInfo.text.toString()
-        val emergencycontactname = enterDetailsBinding.etEmergencyContactName.text.toString()
-        val emergencyphonenumber = enterDetailsBinding.etEmergencyContactNumber.text.toString()
-
-        val bloodgroups = resources.getStringArray(R.array.Bloodgroup)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu, bloodgroups)
+        var bloodgroups=resources.getStringArray(R.array.Bloodgroup)
+        var arrayAdapter=ArrayAdapter(requireContext(),R.layout.dropdown_menu,bloodgroups)
         enterDetailsBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
 
-        val bloodgroup_user = enterDetailsBinding.autocompleteBloodGrp.text.toString()
+
 
 
         enterDetailsBinding.imageViewGenderMale.setOnClickListener {
-            if (!enterDetailsBinding.ImageViewSelectedGenderMale.isVisible) {
-                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible = false
-                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible = false
-                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible = true
-                val gender = enterDetailsBinding.tvGenderMale.text.toString()
-            } else {
-                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible = false
+            if(!enterDetailsBinding.ImageViewSelectedGenderMale.isVisible) {
+                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
+                gender = enterDetailsBinding.tvGenderMale.text.toString()
+            }
+            else {
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
             }
 
         }
 
         enterDetailsBinding.imageViewGenderFemale.setOnClickListener {
-            if (!enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible) {
-                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible = false
-                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible = false
-                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible = true
-                val gender = enterDetailsBinding.tvGenderFemale.text.toString()
-            } else {
-                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible = false
+            if(!enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible) {
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
+                gender = enterDetailsBinding.tvGenderFemale.text.toString()
+            }
+            else {
+            enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
             }
 
         }
         enterDetailsBinding.imageViewGenderOther.setOnClickListener {
-            if (!enterDetailsBinding.ImageViewSelectedGenderOther.isVisible) {
-                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible = false
-                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible = false
-                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible = true
-                val gender = enterDetailsBinding.tvGenderOther.text.toString()
-            } else {
-                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible = false
+            if(!enterDetailsBinding.ImageViewSelectedGenderOther.isVisible) {
+                enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
+                gender = enterDetailsBinding.tvGenderOther.text.toString()
             }
-
+            else {
+                enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
+            }
         }
         enterDetailsBinding.etDob.setOnClickListener {
             var dpd = DatePickerDialog(requireContext(),
                 DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-                    val mmMonth = mMonth + 1
-                    val date = "$mDay/$mmMonth/$mYear"
-                    enterDetailsBinding.etDob.setText(date)
-                }, year, month, day
-            )
+                var mmMonth = mMonth+1
+                dateofbirth = "$mDay/$mmMonth/$mYear"
+                enterDetailsBinding.etDob.setText(dateofbirth)
+            },year,month,day)
             dpd.show()
 
         }
@@ -139,12 +142,29 @@ class SetupProfileFragment : BaseFragment() {
 
 
         enterDetailsBinding.btnCreateMyAcnt.setOnClickListener {
+            firstname=enterDetailsBinding.etFirstName.text.toString()
+            lastname=enterDetailsBinding.etLastName.text.toString()
+            mailingaddress=enterDetailsBinding.etMailingAddress.text.toString()
+            insuranceinfo=enterDetailsBinding.etInsuranceInfo.text.toString()
+            emergencycontactname=enterDetailsBinding.etEmergencyContactName.text.toString()
+            emergencyphonenumber=enterDetailsBinding.etEmergencyContactNumber.text.toString()
+            bloodgroup_user=enterDetailsBinding.autocompleteBloodGrp.text.toString()
 
-            if (!inputval.isPhoneValid(emergencyphonenumber)) {
+
+            if (!inputval.isPhoneValid(emergencyphonenumber!!)) {
                 enterDetailsBinding.EmergencyNumberLayout.setError("Please Enter a valid Phone number")
+            }
+            else {
 
-            } else {
-                startActivity(Intent(context, HomeActivity::class.java))
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+
+                viewModel.postRegisterUser(sharedPref!!.getInt(SignUpFragment.MOB_NO!!,0),
+                    sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none")!!,firstname!!,lastname!!,
+                gender!!,dateofbirth!!,bloodgroup_user!!,"Android",sharedPref!!.getString(SignUpFragment.USER_PASSWORD!!,null)!!,
+                mailingaddress!!,emergencyphonenumber!!.toInt(),insuranceinfo!!,emergencyphonenumber!!).observe(requireActivity()){
+                    if(it.get(0).responseMessage)
+                        startActivity(Intent(context, HomeActivity::class.java))
+                }
             }
 
         }
@@ -221,4 +241,4 @@ class SetupProfileFragment : BaseFragment() {
         Log.d("Debug:", "Your City: " + cityName + " ; your Country " + countryName)
         return currentLocation
     }
-    }
+}
