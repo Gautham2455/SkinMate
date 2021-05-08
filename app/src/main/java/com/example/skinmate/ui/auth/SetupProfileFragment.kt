@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -44,14 +45,12 @@ class SetupProfileFragment : BaseFragment() {
 
 
     var PERMISSION_ID = 1000
-    lateinit var enterDetailsBinding: EnterDetailsBinding
-    lateinit var locationRequest: LocationRequest
-    var currentLocation : String ?= null
-
+    private lateinit var enterDetailsBinding: EnterDetailsBinding
     private var fusedLocationClient: FusedLocationProviderClient? = null
-
-    //private var fusedLocationClient: FusedLocationProviderClient? = null
     private var lastLocation: Location? = null
+
+
+
 
 
     private val viewModel by viewModels<AuthViewModel>()
@@ -65,6 +64,7 @@ class SetupProfileFragment : BaseFragment() {
     var emergencyphonenumber : String?=null
     var bloodgroup_user : String?=null
     var gender :String?= null
+    var currentLocation : String? = null
 
 
     companion object {
@@ -90,7 +90,7 @@ class SetupProfileFragment : BaseFragment() {
         var arrayAdapter=ArrayAdapter(requireContext(),R.layout.dropdown_menu,bloodgroups)
         enterDetailsBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
 
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
         enterDetailsBinding.imageViewGenderMale.setOnClickListener {
@@ -159,7 +159,8 @@ class SetupProfileFragment : BaseFragment() {
             RequestPermission()
         }
         else {
-            getLastLocation()
+            enterDetailsBinding.etMailingAddress.setText(getLastLocation())
+
         }}
 
 
@@ -208,26 +209,7 @@ class SetupProfileFragment : BaseFragment() {
         return enterDetailsBinding.root
     }
 
-
-    fun RequestPermission(){
-        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION),
-           PERMISSION_ID)
-    }
-
-    fun CheckPermission():Boolean{
-
-        if(
-            context?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.ACCESS_COARSE_LOCATION) } == PackageManager.PERMISSION_GRANTED ||
-            context?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.ACCESS_FINE_LOCATION) } == PackageManager.PERMISSION_GRANTED
-        ){
-            return true
-        }
-
-        return false
-
-    }
-
-    private fun getLastLocation() {
+    private fun getLastLocation() : String? {
         if (context?.let {
                 ActivityCompat.checkSelfPermission(
                     it,
@@ -247,21 +229,39 @@ class SetupProfileFragment : BaseFragment() {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return
+            return null
         }
         fusedLocationClient?.lastLocation!!.addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful && task.result != null) {
                 lastLocation = task.result
-                currentLocation = getCurrentLocation((lastLocation)!!.latitude, (lastLocation)!!.longitude)
-                enterDetailsBinding.etMailingAddress.setText(currentLocation)
-                Log.d("Location",currentLocation.toString())
-            }
-            else {
-//                Log.w(TAG, "getLastLocation:exception", task.exception)
-//                ("No location detected. Make sure location is enabled on the device.")
+               currentLocation= getCurrentLocation((lastLocation)!!.latitude,(lastLocation)!!.longitude)
+               Log.d("location address",currentLocation.toString())
             }
         }
+        return currentLocation
     }
+
+
+    fun RequestPermission(){
+        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION),
+           PERMISSION_ID)
+    }
+
+    fun CheckPermission():Boolean{
+
+        if(
+            context?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.ACCESS_COARSE_LOCATION) } == PackageManager.PERMISSION_GRANTED ||
+            context?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.ACCESS_FINE_LOCATION) } == PackageManager.PERMISSION_GRANTED
+        ){
+            return true
+        }
+
+        return false
+
+    }
+
+
+
 
     private fun getCurrentLocation(lat: Double,long: Double):String {
         var cityName: String = ""
