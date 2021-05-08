@@ -4,7 +4,6 @@ import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
@@ -14,7 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.biometric.BiometricPrompt
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -27,11 +28,15 @@ import com.example.skinmate.ui.home.HomeActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
+import java.util.concurrent.Executor
 
 
 class SignInFragment : BaseFragment() {
     private lateinit var signInBinding: SigninBinding
     private val viewModel by viewModels<AuthViewModel>()
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
 
     companion object {
@@ -48,6 +53,8 @@ class SignInFragment : BaseFragment() {
 
         signInBinding = DataBindingUtil.inflate(inflater,R.layout.signin,container,false)
         signInBinding.tvNewUser.setOnClickListener {  add(R.id.fragment_container,SignUpFragment.newInstance()) }
+        executor = ContextCompat.getMainExecutor(requireContext())
+
 
 
         signInBinding.btnSignin.setOnClickListener {
@@ -73,6 +80,42 @@ class SignInFragment : BaseFragment() {
                 }
             }
         }
+
+        biometricPrompt= BiometricPrompt(this@SignInFragment,executor,object : BiometricPrompt.AuthenticationCallback(){
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                super.onAuthenticationError(errorCode, errString)
+                Toast.makeText(requireContext(),"Authentication Error: $errString",Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                Toast.makeText(requireContext(),"Authentication Success",Toast.LENGTH_SHORT).show()
+                startActivity(Intent(requireActivity(), HomeActivity::class.java))
+
+
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                Toast.makeText(requireContext(),"Authentication Failed!!",Toast.LENGTH_SHORT).show()
+
+            }
+
+        })
+
+
+        promptInfo=BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Finger Print Authentication")
+            .setSubtitle("Login using fingerprint")
+            .setNegativeButtonText("Use App password").build()
+
+        signInBinding.touchId.setOnClickListener{
+            biometricPrompt.authenticate(promptInfo)
+
+        }
+
+
+
 
 
         signInBinding.tvForgotPassword.setOnClickListener {
