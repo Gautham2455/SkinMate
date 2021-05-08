@@ -7,22 +7,9 @@ import retrofit2.http.*
 
 interface   MyApi {
 
-    @FormUrlEncoded
     @POST("registration")
     fun userRegistration(
-        @Field("phoneNumber") phoneNumber: Int,
-        @Field("email") email : String,
-        @Field("firstName") firstName : String,
-        @Field("lastName") lastName : String,
-        @Field("gender") gender : String,
-        @Field("dob") dob : String,
-        @Field("bloodGroup") bloodGroup : String,
-        @Field("loginType") loginType : String,
-        @Field("password") password : String,
-        @Field("address") address : String,
-        @Field("emeregencyNumber") emeregencyNumber : Int,
-        @Field("insuranceInformation") insuranceInformation : String,
-        @Field("emeregencyContactName") emeregencyContactName : String
+        @Body requestBody: RequestBody
     ) : Call<List<registerUserResponse>>
 
 

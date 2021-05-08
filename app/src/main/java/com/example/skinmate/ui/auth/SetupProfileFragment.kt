@@ -33,6 +33,11 @@ import com.example.skinmate.databinding.EnterDetailsBinding
 import com.example.skinmate.ui.home.HomeActivity
 import com.google.android.gms.location.*
 import androidx.lifecycle.observe
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.util.*
 
 class SetupProfileFragment : BaseFragment() {
@@ -175,10 +180,24 @@ class SetupProfileFragment : BaseFragment() {
 
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
-                viewModel.postRegisterUser(sharedPref!!.getInt(SignUpFragment.MOB_NO!!,0),
-                    sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none")!!,firstname!!,lastname!!,
-                gender!!,dateofbirth!!,bloodgroup_user!!,"Android",sharedPref!!.getString(SignUpFragment.USER_PASSWORD!!,"none")!!,
-                mailingaddress!!,emergencyphonenumber.toString()!!.toInt(),insuranceinfo!!,emergencycontactname!!).observe(requireActivity()){
+                val jsonObject=JSONObject()
+                jsonObject.put("phoneNumber",sharedPref!!.getInt(SignUpFragment.MOB_NO!!,0))
+                jsonObject.put("email", sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none"))
+                jsonObject.put("firstName",firstname)
+                jsonObject.put("lastName",lastname)
+                jsonObject.put("gender",gender)
+                jsonObject.put("dob",dateofbirth)
+                jsonObject.put("bloodGroup",bloodgroup_user)
+                jsonObject.put("loginType","Android")
+                jsonObject.put("password",sharedPref!!.getString(SignUpFragment.USER_PASSWORD!!,"none"))
+                jsonObject.put("address",mailingaddress)
+                jsonObject.put("emeregencyNumber",emergencyphonenumber)
+                jsonObject.put("insuranceInformation",insuranceinfo)
+                jsonObject.put("emeregencyContactName",emergencycontactname)
+                val jsonObjectString = jsonObject.toString()
+
+                val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+                viewModel.postRegisterUser(requestBody).observe(requireActivity()){
                     if(it.get(0).responseMessage!!)
                         startActivity(Intent(requireContext(), HomeActivity::class.java))
                 }

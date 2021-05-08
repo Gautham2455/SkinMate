@@ -59,11 +59,8 @@ class SignInFragment : BaseFragment() {
             jsonObject.put("id", email)
             jsonObject.put("password",password)
 
-
-// Convert JSONObject to String
             val jsonObjectString = jsonObject.toString()
 
-// Create RequestBody ( We're not using any converter, like GsonConverter, MoshiConverter e.t.c, that's why we use RequestBody )
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
             if (validateInput(email,password)){

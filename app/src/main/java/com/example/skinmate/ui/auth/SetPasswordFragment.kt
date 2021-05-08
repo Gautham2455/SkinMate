@@ -42,7 +42,7 @@ class SetPasswordFragment: BaseFragment() {
                 val fpwpassword=setPasswordBinding.etConfirmPassword.text.toString()
                 sharedPref!!.getString(ForgotPasswordFragment.EMAIL!!," ")?.let { it1 ->
                     viewModel.postUpdatePassword(it1,fpwpassword).observe(requireActivity()){ pwdResponse->
-                        successfulUpdatePwd(pwdResponse.get(0).responseMessage)
+                        successfulUpdatePwd(pwdResponse.firstOrNull()?.Code)
                         if (fpwemail != null) {
                             Log.d("msg",fpwemail)
                         }
@@ -55,9 +55,12 @@ class SetPasswordFragment: BaseFragment() {
         return setPasswordBinding.root
     }
 
-    private fun successfulUpdatePwd(responseMessage: Boolean?) {
-        if(responseMessage==true){
+    private fun successfulUpdatePwd(responseMessage: Int?) {
+        if(responseMessage==200){
             add(R.id.fragment_container,SuccessMessageFragment.newInstance())
+        }
+        else{
+            Toast.makeText(requireContext(),"Unsucessfull",0).show()
         }
 
     }

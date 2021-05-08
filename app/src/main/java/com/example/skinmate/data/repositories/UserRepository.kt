@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.skinmate.data.network.RetrofitClient
 import com.example.skinmate.data.responses.*
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -108,15 +109,10 @@ class UserRepository private constructor(application: Application){
         return changePassword
     }
 
-    fun registerUserCall(phoneNumber: Int,email: String,firstName : String,
-    lastName : String,gender : String, dob : String, bloodGroup : String, loginType : String,
-    password: String, address : String,emeregencyNumber : Int,insuranceInformation :String,
-                         emeregencyContactName :String)
+    fun registerUserCall(requesrBody: RequestBody)
     : MutableLiveData<List<registerUserResponse>>{
 
-        val call =RetrofitClient.apiInterface.userRegistration(phoneNumber,email,
-        firstName,lastName, gender, dob, bloodGroup, loginType, password, address,
-            emeregencyNumber, insuranceInformation, emeregencyContactName)
+        val call =RetrofitClient.apiInterface.userRegistration(requesrBody)
 
         call.enqueue(object :Callback<List<registerUserResponse>>{
             override fun onFailure(call: Call<List<registerUserResponse>>, t: Throwable) {
