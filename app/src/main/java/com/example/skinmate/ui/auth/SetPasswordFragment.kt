@@ -14,6 +14,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import androidx.lifecycle.observe
 import com.example.skinmate.databinding.SetPasswordBinding
+import org.json.JSONObject
 
 class SetPasswordFragment: BaseFragment() {
     private lateinit var setPasswordBinding: SetPasswordBinding
@@ -38,10 +39,13 @@ class SetPasswordFragment: BaseFragment() {
             if(inputValidate()){
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
-                val fpwemail=sharedPref!!.getString(ForgotPasswordFragment.EMAIL!!," ")
+                val fpwemail=sharedPref!!.getString(SignUpFragment.EMAIL_ID," ")
                 val fpwpassword=setPasswordBinding.etConfirmPassword.text.toString()
+
+
+
                 sharedPref!!.getString(ForgotPasswordFragment.EMAIL!!," ")?.let { it1 ->
-                    viewModel.postUpdatePassword(it1,fpwpassword).observe(requireActivity()){ pwdResponse->
+                    viewModel.postUpdatePassword(fpwemail!!,fpwpassword).observe(requireActivity()){ pwdResponse->
                         successfulUpdatePwd(pwdResponse.firstOrNull()?.Code)
                         if (fpwemail != null) {
                             Log.d("msg",fpwemail)
