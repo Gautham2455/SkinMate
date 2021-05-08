@@ -60,14 +60,14 @@ class SignUpFragment : BaseFragment() {
         signUpBinding.proceedBtn.setOnClickListener(){
 
 //            PHONE_NO=signUpBinding.phoneEt.text.toString()!!.toInt()
-            PHONE_NO = signUpBinding.phoneEt.text.toString()!!.toInt()
+            PHONE_NO = signUpBinding.phoneEt.text.toString().toIntOrNull()
             EMAIL=signUpBinding.eidEmail.text.toString()
             PASSWORD=signUpBinding.setPasswordEt.text.toString()
             CONFIRM_PASSWORRRD=signUpBinding.confirmPasswordEt.toString()
             val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor =  sharedPref!!.edit()
             editor.putString(EMAIL_ID,EMAIL!! )
-            editor.putInt(MOB_NO,PHONE_NO!!)
+            PHONE_NO?.let { it1 -> editor.putInt(MOB_NO, it1) }
             editor.putString(USER_PASSWORD,PASSWORD!!)
             editor.commit()
             if (validateInput()){
