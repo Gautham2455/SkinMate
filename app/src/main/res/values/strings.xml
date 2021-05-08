@@ -77,14 +77,14 @@
     <string name="password_has_been_successfully_changed_please_login">Password has been successfully changed. Please Login!</string>
     <string name="continue_to_login">CONTINUE TO LOGIN</string>
     <string-array name="Bloodgroup">
-        <item>O +ve</item>
-        <item>O -ve</item>
-        <item>A +ve</item>
-        <item>A -ve</item>
-        <item>B +ve</item>
-        <item>B -ve</item>
-        <item>AB +ve</item>
-        <item>AB -ve</item>
+        <item>O+ve</item>
+        <item>O-ve</item>
+        <item>A+ve</item>
+        <item>A-ve</item>
+        <item>B+ve</item>
+        <item>B-ve</item>
+        <item>AB+ve</item>
+        <item>AB-ve</item>
     </string-array>
 
     <string name="selectionheadding">Please choose your option to schedule an appointment</string>
