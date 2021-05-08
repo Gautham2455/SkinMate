@@ -103,7 +103,7 @@ class SignUpFragment : BaseFragment() {
         val ConfirmBtn = mobbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             mobbottomSheetDialog.dismiss()
-            val mobotp = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            var mobotp = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
             mobOtpVerify(mobotp)
             }
 
@@ -116,8 +116,8 @@ class SignUpFragment : BaseFragment() {
         }
     }
 
-    private fun successfulMobOtp(responseMessage: Boolean?) {
-        if (responseMessage == true) {
+    private fun successfulMobOtp(responseMessage: Boolean?=false) {
+        if (responseMessage!!) {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.otp_verified)
@@ -125,9 +125,9 @@ class SignUpFragment : BaseFragment() {
             dialog.show()
             val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
             OkayBtn.setOnClickListener {
-                dialog.dismiss()
                 viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
-                        otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
+                        otpResponse ->
+                    emailRegister(otpResponse.get(0).responseMessage)
                     Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
                 }
             }
@@ -158,9 +158,9 @@ class SignUpFragment : BaseFragment() {
         otpTimer(countTime,resendBtn)
         val ConfirmBtn = emailbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
-            emailbottomSheetDialog.dismiss()
-            val otpemail = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            var otpemail = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
             emailOtpVerify(signUpBinding.eidEmail.text.toString(),otpemail)
+            emailbottomSheetDialog.dismiss()
         }
     }
 
@@ -173,7 +173,7 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun successfulEmailOtp(responseMessageInformation:Boolean?) {
-        if (responseMessageInformation == true) {
+        if (responseMessageInformation!!) {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.emil_otp_verified)
@@ -181,8 +181,8 @@ class SignUpFragment : BaseFragment() {
             dialog.show()
             val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
             OkayBtn.setOnClickListener {
-                dialog.dismiss()
                 replace(R.id.fragment_container,SetupProfileFragment.newInstance(),false)
+                dialog.dismiss()
             }
         }
         else {
@@ -193,10 +193,11 @@ class SignUpFragment : BaseFragment() {
             dialog.show()
             val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
             RetryBtn.setOnClickListener {
-                dialog.dismiss()
                 viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
-                        otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
+                        otpResponse ->
+                    emailRegister(otpResponse.get(0).responseMessage)
                     Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+                    dialog.dismiss()
                 }
             }
         }
