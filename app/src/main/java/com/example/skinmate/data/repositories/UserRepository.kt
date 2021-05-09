@@ -22,6 +22,7 @@ class UserRepository private constructor(application: Application){
     val loginUser = MutableLiveData<loginResponse>()
     val changePassword = MutableLiveData<List<passwordChangeResponse>>()
     val updatePassword= MutableLiveData<List<updatePasswordResponse>>()
+    val familyMember=MutableLiveData<familyMemberList>()
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<OtpResponse>> {
 
@@ -180,7 +181,7 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object : Callback<List<OtpResponse>>{
             override fun onFailure(call: Call<List<OtpResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onResponse(
@@ -191,6 +192,24 @@ class UserRepository private constructor(application: Application){
             }
         })
         return emailOtp
+    }
+
+    fun getFamilyMemberCall(customerId:String) : MutableLiveData<familyMemberList>{
+        val call = RetrofitClient.apiInterface.familyList(customerId)
+
+        call.enqueue(object :Callback<familyMemberList>{
+            override fun onFailure(call: Call<familyMemberList>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<familyMemberList>,
+                response: Response<familyMemberList>
+            ) {
+                familyMember.postValue(response.body())
+            }
+        })
+        return familyMember
     }
 
     companion object {

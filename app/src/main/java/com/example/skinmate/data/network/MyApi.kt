@@ -58,4 +58,10 @@ interface   MyApi {
         @Field("email") customerId : String,
         @Field("password")  oldPassword: String,
     ) : Call<List<updatePasswordResponse>>
+
+    @FormUrlEncoded
+    @GET("family-member/list/")
+    fun familyList(
+        @Query("customerId") customerId:String
+    ) :Call<familyMemberList>
 }

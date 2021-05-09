@@ -3,6 +3,7 @@ package com.example.skinmate.ui.auth
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -41,6 +42,8 @@ class SignInFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SignInFragment()
+        const val CUSTOMER_ID:String="customerId"
+        const val TOKEN:String="token"
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -73,6 +76,11 @@ class SignInFragment : BaseFragment() {
             if (validateInput(email,password)){
                 viewModel.postLoginUser(requestBody).observe(requireActivity()) { loginResponse ->
                     Log.v("DEBUG : ", loginResponse.responseInformation)
+                    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                    val editor: SharedPreferences.Editor =  sharedPref!!.edit()
+                    editor.putString(TOKEN,loginResponse.token)
+                    editor.putString(CUSTOMER_ID,loginResponse.customerId)
+                    editor.commit()
                     if (loginResponse.responseMessage)
                         startActivity(Intent(requireActivity(), HomeActivity::class.java))
                     else
