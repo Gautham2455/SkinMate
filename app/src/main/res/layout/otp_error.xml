@@ -1,68 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:background="@drawable/dialog_background">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView_otp_error"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        android:background="@drawable/dialog_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/otp_error"
-      android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_otp_invalid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:fontFamily="Poppins SemiBold"
-        android:gravity="center_horizontal"
-        android:text="@string/invalid_otp"
-        android:textColor="@color/theme_text"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView_otp_error" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/otp_error"
+            android:padding="8dp"
+            android:layout_marginTop="30dp"
+            />
 
-    <TextView
-        android:id="@+id/tv_otp_verification_failed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="40dp"
-        android:fontFamily="Poppins Medium"
-        android:gravity="center_horizontal"
-        android:text="@string/otp_validation_failed_please_retry"
-        android:textColor="@color/theme_text"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_otp_invalid" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:text="@string/invalid_otp"
+            android:textAlignment="center"
+            android:textColor="@color/theme_text"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="Poppins SemiBold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="70dp"
+            android:gravity="center_horizontal"
+            android:text="@string/otp_validation_failed_please_retry"
+            android:textAlignment="center"
+            android:textColor="@color/theme_text"
+            android:textSize="16sp"
+            android:fontFamily="Poppins Medium"/>
+
+
+    </LinearLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_retry"
-        style="@style/Buttoncardviewstyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:text="@string/retry"
-        android:textSize="25sp"
-        app:backgroundTint="@color/theme_button"
-        app:layout_constraintTop_toBottomOf="@id/tv_otp_verification_failed" />
-
+        android:layout_marginTop="20dp"
+        android:background="@drawable/dialog_button_background"
+        android:backgroundTint="@color/theme_button"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/ll"
+        app:layout_constraintEnd_toEndOf="@id/ll"
+        app:layout_constraintBottom_toBottomOf="@id/ll"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
