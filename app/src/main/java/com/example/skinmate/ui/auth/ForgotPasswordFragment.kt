@@ -24,7 +24,6 @@ import androidx.lifecycle.observe
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
-import com.example.skinmate.data.responses.OtpResponse
 import com.example.skinmate.databinding.ForgotPasswordBinding
 import com.example.skinmate.databinding.SigninBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog

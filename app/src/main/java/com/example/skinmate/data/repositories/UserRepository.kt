@@ -6,36 +6,38 @@ import androidx.lifecycle.MutableLiveData
 import com.example.skinmate.data.network.RetrofitClient
 import com.example.skinmate.data.responses.*
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class UserRepository private constructor(application: Application){
 
-    val serviceSetterGetter = MutableLiveData<List<OtpResponse>>()
-    val registerEmail = MutableLiveData<List<OtpResponse>>()
-    val emailOtp = MutableLiveData<List<OtpResponse>>()
+    val serviceSetterGetter = MutableLiveData<List<generalResponse>>()
+    val registerEmail = MutableLiveData<List<generalResponse>>()
+    val emailOtp = MutableLiveData<List<generalResponse>>()
     val checkDplicateUser = MutableLiveData<List<duplicateUserResponse>>()
     val registerUser = MutableLiveData<List<registerUserResponse>>()
     val loginUser = MutableLiveData<loginResponse>()
     val changePassword = MutableLiveData<List<passwordChangeResponse>>()
     val updatePassword= MutableLiveData<List<updatePasswordResponse>>()
-    val familyMember=MutableLiveData<familyMemberList>()
+    val familyMemberList=MutableLiveData<familyMemberList>()
+    val familyMember=MutableLiveData<familyMemberResponse>()
+    val subService=MutableLiveData<subServiceResponse>()
+    val deleteFamilyMember=MutableLiveData<List<generalResponse>>()
 
-    fun getServicesApiCall(otp : Int): MutableLiveData<List<OtpResponse>> {
+
+    fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
 
         val call = RetrofitClient.apiInterface.verifyMobleOtp(otp)
 
-        call.enqueue(object: Callback<List<OtpResponse>> {
-            override fun onFailure(call: Call<List<OtpResponse>>, t: Throwable) {
+        call.enqueue(object: Callback<List<generalResponse>> {
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
                 Log.v("DEBUG : ", t.message.toString())
             }
 
             override fun onResponse(
-                call: Call<List<OtpResponse>>,
-                response: Response<List<OtpResponse>>
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
             ) {
                 Log.v("DEBUG : ", response.body().toString())
 
@@ -50,7 +52,7 @@ class UserRepository private constructor(application: Application){
         return serviceSetterGetter
     }
 
-    fun checkDuplicateUserCall(email : String,phoneNumber : Int) : MutableLiveData<List<duplicateUserResponse>> {
+    fun checkDuplicateUserCall(email : String,phoneNumber : String) : MutableLiveData<List<duplicateUserResponse>> {
 
         val call = RetrofitClient.apiInterface.checkDuplicateUser(email,phoneNumber)
 
@@ -90,7 +92,7 @@ class UserRepository private constructor(application: Application){
         return loginUser
     }
 
-    fun changePasswordCall(customerId : Int,oldPassword : String,newPassword :String) : MutableLiveData<List<passwordChangeResponse>>{
+    fun changePasswordCall(customerId : String,oldPassword : String,newPassword :String) : MutableLiveData<List<passwordChangeResponse>>{
         val call= RetrofitClient.apiInterface.changePassword(customerId,oldPassword,newPassword)
 
         call.enqueue(object : Callback<List<passwordChangeResponse>>{
@@ -133,17 +135,17 @@ class UserRepository private constructor(application: Application){
         return registerUser
     }
 
-    fun registerEmailCall(email : String) :MutableLiveData<List<OtpResponse>>{
+    fun registerEmailCall(email : String) :MutableLiveData<List<generalResponse>>{
         val call = RetrofitClient.apiInterface.registerEmail(email)
 
-        call.enqueue(object : Callback<List<OtpResponse>>{
-            override fun onFailure(call: Call<List<OtpResponse>>, t: Throwable) {
+        call.enqueue(object : Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
 
             override fun onResponse(
-                call: Call<List<OtpResponse>>,
-                response: Response<List<OtpResponse>>
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
             ) {
                 registerEmail.postValue(response.body())
             }
@@ -176,17 +178,17 @@ class UserRepository private constructor(application: Application){
         return updatePassword
     }
 
-    fun verifyEmailOtpCall(email : String, otp :Int) :MutableLiveData<List<OtpResponse>>{
+    fun verifyEmailOtpCall(email : String, otp :Int) :MutableLiveData<List<generalResponse>>{
         val call = RetrofitClient.apiInterface.verifyEmailOtp(email,otp)
 
-        call.enqueue(object : Callback<List<OtpResponse>>{
-            override fun onFailure(call: Call<List<OtpResponse>>, t: Throwable) {
+        call.enqueue(object : Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
 
             }
 
             override fun onResponse(
-                call: Call<List<OtpResponse>>,
-                response: Response<List<OtpResponse>>
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
             ) {
                 emailOtp.postValue(response.body())
             }
@@ -194,7 +196,7 @@ class UserRepository private constructor(application: Application){
         return emailOtp
     }
 
-    fun getFamilyMemberCall(customerId:String) : MutableLiveData<familyMemberList>{
+    fun getFamilyMemberListCall(customerId:String) : MutableLiveData<familyMemberList>{
         val call = RetrofitClient.apiInterface.familyList(customerId)
 
         call.enqueue(object :Callback<familyMemberList>{
@@ -206,25 +208,72 @@ class UserRepository private constructor(application: Application){
                 call: Call<familyMemberList>,
                 response: Response<familyMemberList>
             ) {
+                familyMemberList.postValue(response.body())
+            }
+        })
+        return familyMemberList
+    }
+
+    fun getFamilyMemberCall(id :String) : MutableLiveData<familyMemberResponse>
+    {
+        val call=RetrofitClient.apiInterface.famllyMember(id)
+
+        call.enqueue(object :Callback<familyMemberResponse>{
+            override fun onFailure(call: Call<familyMemberResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<familyMemberResponse>,
+                response: Response<familyMemberResponse>
+            ) {
                 familyMember.postValue(response.body())
             }
         })
         return familyMember
     }
 
+    fun getSubServiceCall(serviceId:String):MutableLiveData<subServiceResponse>{
+        val call =RetrofitClient.apiInterface.getSubService(serviceId )
+
+        call.enqueue(object : Callback<subServiceResponse>{
+            override fun onFailure(call: Call<subServiceResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<subServiceResponse>,
+                response: Response<subServiceResponse>
+            ) {
+                subService.postValue(response.body())
+            }
+        })
+        return  subService
+    }
+
+    fun deleteFamilyMemberCall(familyProfileId:String):MutableLiveData<List<generalResponse>>{
+
+        val call = RetrofitClient.apiInterface.deleteFamilyMember(familyProfileId)
+
+        call.enqueue(object : Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                deleteFamilyMember.postValue(response.body())
+            }
+        })
+        return  deleteFamilyMember
+    }
+
     companion object {
-        /**
-         *  This is where the EmployeeRepository all callers will receive. Set it to null at first
-         *  and make it private so it can't be directly accessed.
-         */
+
         private var INSTANCE: UserRepository? = null
 
-        /**
-         * This method checks whether or not INSTANCE is null. If it's not null, it returns the
-         * Singleton INSTANCE. If it is null, it creates a new Object, sets INSTANCE equal to that,
-         * and returns INSTANCE. From here on out, this method will now return the same INSTANCE,
-         * every time.
-         */
         fun getInstance(application: Application): UserRepository = INSTANCE ?: kotlin.run {
             INSTANCE = UserRepository(application = application)
             INSTANCE!!

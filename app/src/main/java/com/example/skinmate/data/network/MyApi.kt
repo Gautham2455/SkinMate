@@ -7,61 +7,85 @@ import retrofit2.http.*
 
 interface   MyApi {
 
-    @POST("registration")
+    @POST("customer/registration")
     fun userRegistration(
         @Body requestBody: RequestBody
     ) : Call<List<registerUserResponse>>
 
 
     @FormUrlEncoded
-    @POST("duplicate-checker")
+    @POST("customer/duplicate-checker")
     fun checkDuplicateUser(
         @Field("id") id : String,
-        @Field("phoneNumber") phoneNumber: Int
+        @Field("phoneNumber") phoneNumber: String
     ) : Call<List<duplicateUserResponse>>
 
-    @POST("login")
+    @POST("customer/login")
     fun userLogin(
         @Body requestBody: RequestBody
     ) : Call<loginResponse>
 
     @FormUrlEncoded
-    @POST("mobile-otp-verify")
+    @POST("customer/mobile-otp-verify")
     fun verifyMobleOtp(
         @Field("otp") otp : Int
-    ) : Call<List<OtpResponse>>
+    ) : Call<List<generalResponse>>
 
     @FormUrlEncoded
-    @POST("registration-send-otp-to-email")
+    @POST("customer/registration-send-otp-to-email")
     fun registerEmail(
         @Field("email") email : String
-    ) : Call<List<OtpResponse>>
+    ) : Call<List<generalResponse>>
 
     @FormUrlEncoded
-    @POST("email-otp-verify")
+    @POST("customer/email-otp-verify")
     fun verifyEmailOtp(
         @Field("email") email : String,
         @Field("otp") otp : Int
-    ) : Call<List<OtpResponse>>
+    ) : Call<List<generalResponse>>
 
     @FormUrlEncoded
-    @POST("change-password")
+    @POST("customer/change-password")
     fun changePassword(
-        @Field("customerId") customerId : Int,
+        @Field("customerId") customerId : String,
         @Field("oldPassword")  oldPassword: String,
         @Field("newPassword")  newPassword: String
     ) : Call<List<passwordChangeResponse>>
 
     @FormUrlEncoded
-    @POST("update-password")
+    @POST("customer/update-password")
     fun updatePassword(
         @Field("email") customerId : String,
         @Field("password")  oldPassword: String,
     ) : Call<List<updatePasswordResponse>>
 
     @FormUrlEncoded
-    @GET("family-member/list/")
+    @GET("customer/family-member/list/")
     fun familyList(
         @Query("customerId") customerId:String
     ) :Call<familyMemberList>
+
+    @FormUrlEncoded
+    @POST("customer/family-member/delete")
+    fun deleteFamilyMember(
+        @Field("familyProfileId") familyProfileId:String
+    ): Call<List<generalResponse>>
+
+    @FormUrlEncoded
+    @GET("subtype-of-service/list")
+    fun getSubService(
+        @Query("serviceId") serviceId:String
+    ):Call<subServiceResponse>
+
+    @FormUrlEncoded
+    @GET("customer/family-member/list/")
+    fun famllyMember(
+        @Query("familyProfileId") familyProfileId:String
+    ):Call<familyMemberResponse>
+
+    @FormUrlEncoded
+    @GET("customer/view")
+    fun customerDetails(
+        @Query("id") id :String
+    ):Call<customerViewResponse>
 }

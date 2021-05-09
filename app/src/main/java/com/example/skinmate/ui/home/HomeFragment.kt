@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.databinding.LadingScreenBinding
 
 
 class HomeFragment : BaseFragment() {
+
+    private lateinit var ladingScreenBinding: LadingScreenBinding
 
 
     companion object {
@@ -22,9 +25,11 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         hideToolbar()
-        val view = inflater.inflate(R.layout.lading_screen, container, false)
 
-        return view
+        ladingScreenBinding=DataBindingUtil.inflate(inflater,R.layout.lading_screen,container,false)
+
+
+        return ladingScreenBinding.root
 
     }
 }

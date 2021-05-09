@@ -5,11 +5,10 @@ import android.app.Application
 import androidx.lifecycle.*
 
 import com.example.skinmate.data.repositories.UserRepository
-import com.example.skinmate.data.responses.OtpResponse
+import com.example.skinmate.data.responses.generalResponse
 import com.example.skinmate.data.responses.*
 import kotlinx.coroutines.Dispatchers
 import okhttp3.RequestBody
-import org.json.JSONObject
 
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
@@ -23,11 +22,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private  val registerUserData = UserRepository.getInstance(application)
     private val updatepasswordData=UserRepository.getInstance(application)
 
-    fun getUser(otp: Int) : LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {
+    fun getUser(otp: Int) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
         emitSource(servicesLiveData.getServicesApiCall(otp))
     }
 
-    fun postRegisterEmail(email : String) : LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {
+    fun postRegisterEmail(email : String) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
         emitSource(registerEmailDdata.registerEmailCall(email))
     }
 
@@ -35,12 +34,12 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(loginUserData.loginUserCall(requesrBody))
     }
 
-    fun postChangePassword(customerId : Int,oldPassword : String,newPassword :String)
+    fun postChangePassword(customerId : String,oldPassword : String,newPassword :String)
     : LiveData<List<passwordChangeResponse>> = liveData(Dispatchers.IO){
         emitSource(changePasswordData.changePasswordCall(customerId,oldPassword ,newPassword))
     }
 
-    fun postCheckDuplicateUser(id : String,phoneNumber : Int) : LiveData<List<duplicateUserResponse>> =
+    fun postCheckDuplicateUser(id : String,phoneNumber : String) : LiveData<List<duplicateUserResponse>> =
         liveData(Dispatchers.IO){
         emitSource(checkDplicateUserData.checkDuplicateUserCall(id,phoneNumber))
     }
@@ -50,7 +49,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(registerUserData.registerUserCall(requesrBody))
     }
 
-    fun postVerifyEmailOtp(email : String, otp :Int) : LiveData<List<OtpResponse>> = liveData(Dispatchers.IO) {
+    fun postVerifyEmailOtp(email : String, otp :Int) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
         emitSource(verifyEmaiilOtpData.verifyEmailOtpCall(  email,otp))
     }
 

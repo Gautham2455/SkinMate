@@ -33,12 +33,12 @@ class SignUpFragment : BaseFragment() {
 
     private lateinit var signUpBinding: SignUpBinding
     private val viewModel by viewModels<AuthViewModel>()
-    var EMAIL: String? = null
-    var PHONE_NO: Int? = null
-    var PASSWORD: String? = null
-    var CONFIRM_PASSWORRRD: String? = null
     val inputValidation = InputValidation()
 
+    var EMAIL :String?=null
+    var PHONE_NO : String?= null
+    var PASSWORD : String?=null
+    var CONFIRM_PASSWORRRD  : String?=null
 
     companion object {
         fun newInstance() = SignUpFragment()
@@ -101,16 +101,15 @@ class SignUpFragment : BaseFragment() {
         }
 
         signUpBinding.proceedBtn.setOnClickListener() {
-
-            PHONE_NO = signUpBinding.phoneEt.text.toString().toIntOrNull()
-            EMAIL = signUpBinding.eidEmail.text.toString()
-            PASSWORD = signUpBinding.setPasswordEt.text.toString()
-            CONFIRM_PASSWORRRD = signUpBinding.confirmPasswordEt.toString()
+            PHONE_NO = signUpBinding.phoneEt.text.toString()
+            EMAIL=signUpBinding.eidEmail.text.toString()
+            PASSWORD=signUpBinding.setPasswordEt.text.toString()
+            CONFIRM_PASSWORRRD=signUpBinding.confirmPasswordEt.toString()
             val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor = sharedPref!!.edit()
-            editor.putString(EMAIL_ID, EMAIL!!)
-            PHONE_NO?.let { it1 -> editor.putInt(MOB_NO, it1) }
-            editor.putString(USER_PASSWORD, PASSWORD!!)
+            val editor: SharedPreferences.Editor =  sharedPref!!.edit()
+            editor.putString(EMAIL_ID,EMAIL!! )
+            PHONE_NO?.let { it1 -> editor.putString(MOB_NO, it1) }
+            editor.putString(USER_PASSWORD,PASSWORD!!)
             editor.commit()
 
             if (validateInput()){
