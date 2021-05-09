@@ -28,6 +28,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SigninBinding
 import androidx.lifecycle.observe
+import com.example.skinmate.ui.home.AccountFragment
 import com.example.skinmate.ui.home.HomeActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -76,6 +77,7 @@ class SignInFragment : BaseFragment() {
             val jsonObjectString = jsonObject.toString()
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+
             viewModel.postLoginUser(requestBody).observe(requireActivity()) { loginResponse ->
                 Log.v("DEBUG : ", loginResponse.responseInformation)
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
@@ -83,8 +85,10 @@ class SignInFragment : BaseFragment() {
                 editor.putString(TOKEN,loginResponse.token)
                 editor.putString(CUSTOMER_ID,loginResponse.customerId)
                 editor.commit()
-                if (loginResponse.responseMessage)
+                if (loginResponse.responseMessage) {
+                    activity?.finish()
                     startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                }
                 else
                     signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
             }
@@ -119,7 +123,14 @@ class SignInFragment : BaseFragment() {
             .setNegativeButtonText("Use App password").build()
 
         signInBinding.touchId.setOnClickListener{
-            biometricPrompt.authenticate(promptInfo)
+
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+
+            val touchIdEnabled = sharedPref!!.getBoolean(AccountFragment.TOUCH_ID,false)
+            if(touchIdEnabled)
+                biometricPrompt.authenticate(promptInfo)
+            else
+                Toast.makeText(requireContext(),"Touch ID Authentication is not Enabled ",Toast.LENGTH_SHORT).show()
 
         }
 

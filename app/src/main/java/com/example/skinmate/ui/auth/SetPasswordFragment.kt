@@ -62,6 +62,7 @@ class SetPasswordFragment: BaseFragment() {
             add(R.id.fragment_container,SuccessMessageFragment.newInstance())
         }
         else{
+
             Toast.makeText(requireContext(),"Unsucessfull",Toast.LENGTH_SHORT).show()
         }
 
