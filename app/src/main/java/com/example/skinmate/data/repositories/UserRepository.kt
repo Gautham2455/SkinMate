@@ -52,7 +52,7 @@ class UserRepository private constructor(application: Application){
         return serviceSetterGetter
     }
 
-    fun checkDuplicateUserCall(email : String,phoneNumber : Int) : MutableLiveData<List<duplicateUserResponse>> {
+    fun checkDuplicateUserCall(email : String,phoneNumber : String) : MutableLiveData<List<duplicateUserResponse>> {
 
         val call = RetrofitClient.apiInterface.checkDuplicateUser(email,phoneNumber)
 
@@ -92,7 +92,7 @@ class UserRepository private constructor(application: Application){
         return loginUser
     }
 
-    fun changePasswordCall(customerId : Int,oldPassword : String,newPassword :String) : MutableLiveData<List<passwordChangeResponse>>{
+    fun changePasswordCall(customerId : String,oldPassword : String,newPassword :String) : MutableLiveData<List<passwordChangeResponse>>{
         val call= RetrofitClient.apiInterface.changePassword(customerId,oldPassword,newPassword)
 
         call.enqueue(object : Callback<List<passwordChangeResponse>>{
