@@ -17,7 +17,7 @@ interface   MyApi {
     @POST("customer/duplicate-checker")
     fun checkDuplicateUser(
         @Field("id") id : String,
-        @Field("phoneNumber") phoneNumber: Int
+        @Field("phoneNumber") phoneNumber: String
     ) : Call<List<duplicateUserResponse>>
 
     @POST("customer/login")
@@ -47,7 +47,7 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("customer/change-password")
     fun changePassword(
-        @Field("customerId") customerId : Int,
+        @Field("customerId") customerId : String,
         @Field("oldPassword")  oldPassword: String,
         @Field("newPassword")  newPassword: String
     ) : Call<List<passwordChangeResponse>>
