@@ -7,6 +7,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,10 +31,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ForgotPasswordFragment : BaseFragment() {
     private lateinit var forgotPasswordBinding: ForgotPasswordBinding
-
-    private lateinit var signinBinding: SigninBinding
     var EMAIL :String?=null
     private val viewModel by viewModels<AuthViewModel>()
+    val inputValidation=InputValidation()
 
 
     companion object {
@@ -49,7 +50,7 @@ class ForgotPasswordFragment : BaseFragment() {
         forgotPasswordBinding = DataBindingUtil.inflate(inflater,R.layout.forgot_password,container,false)
 
         forgotPasswordBinding.btnForgotPw.setOnClickListener(){
-            val inputValidation=InputValidation()
+
 
             val phone_mail : String = forgotPasswordBinding.etForgotpw.text.toString()
             val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
@@ -68,6 +69,9 @@ class ForgotPasswordFragment : BaseFragment() {
                 }
             }
         }
+
+        forgotPasswordBinding.etForgotpw.addTextChangedListener(textWatcher)
+
         return forgotPasswordBinding.root
     }
 
@@ -194,4 +198,23 @@ class ForgotPasswordFragment : BaseFragment() {
             emailBottomSheetfragment()
         }
     }
+
+    private val textWatcher=object :TextWatcher{
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_mail : String = forgotPasswordBinding.etForgotpw.text.toString()
+
+            forgotPasswordBinding.textinputNameForgotpw.error= if (inputValidation.isPhoneValid(phone_mail) || inputValidation.isemailValid(phone_mail)) null else "Please enter valid Phone/Email"
+            forgotPasswordBinding.btnForgotPw.isEnabled = ! phone_mail.isEmpty()
+        }
+
+    }
+
 }

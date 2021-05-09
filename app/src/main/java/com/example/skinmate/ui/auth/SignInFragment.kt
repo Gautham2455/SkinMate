@@ -5,9 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +41,7 @@ class SignInFragment : BaseFragment() {
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    val inputValidation = InputValidation()
 
 
     companion object {
@@ -72,20 +76,17 @@ class SignInFragment : BaseFragment() {
             val jsonObjectString = jsonObject.toString()
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-
-            if (validateInput(email,password)){
-                viewModel.postLoginUser(requestBody).observe(requireActivity()) { loginResponse ->
-                    Log.v("DEBUG : ", loginResponse.responseInformation)
-                    val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-                    val editor: SharedPreferences.Editor =  sharedPref!!.edit()
-                    editor.putString(TOKEN,loginResponse.token)
-                    editor.putString(CUSTOMER_ID,loginResponse.customerId)
-                    editor.commit()
-                    if (loginResponse.responseMessage)
-                        startActivity(Intent(requireActivity(), HomeActivity::class.java))
-                    else
-                        signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
-                }
+            viewModel.postLoginUser(requestBody).observe(requireActivity()) { loginResponse ->
+                Log.v("DEBUG : ", loginResponse.responseInformation)
+                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                val editor: SharedPreferences.Editor =  sharedPref!!.edit()
+                editor.putString(TOKEN,loginResponse.token)
+                editor.putString(CUSTOMER_ID,loginResponse.customerId)
+                editor.commit()
+                if (loginResponse.responseMessage)
+                    startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                else
+                    signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
             }
         }
 
@@ -122,9 +123,8 @@ class SignInFragment : BaseFragment() {
 
         }
 
-
-
-
+        signInBinding.etPhoneEmail.addTextChangedListener(textWatcher)
+        signInBinding.etPassword.addTextChangedListener(textWatcher)
 
         signInBinding.tvForgotPassword.setOnClickListener {
 
@@ -134,24 +134,25 @@ class SignInFragment : BaseFragment() {
 
     }
 
+    private val textWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
 
-    private fun validateInput(email : String,password : String) : Boolean{
 
-        var flag=true
-        val inputValidation = InputValidation()
-
-        if (!inputValidation.isemailValid(email)){
-            signInBinding.textinputPhoneEmail.setError("Please enter a valid Phone Number/Email")
-            flag = false
-        }
-        if (!inputValidation.passwordValid(password)){
-            signInBinding.textinputPassword.setError("Must be more 6 Character")
-            flag=false
         }
 
-        return flag
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_mail : String = signInBinding.etPhoneEmail.text.toString()
+            val pass: String = signInBinding.etPassword.text.toString()
+
+            signInBinding.textinputPhoneEmail.error = if (inputValidation.isPhoneValid(phone_mail) || inputValidation.isemailValid(phone_mail)) null else "Please enter valid Phone/Email"
+            signInBinding.textinputPassword.error = if (inputValidation.passwordValid(pass)) null else "Must be mininmum 4 Characters"
+            signInBinding.btnSignin.isEnabled = !phone_mail.isEmpty() && !pass.isEmpty()
+        }
+
     }
-
-
 
 }

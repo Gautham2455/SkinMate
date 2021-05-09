@@ -13,6 +13,8 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,16 +46,11 @@ import java.util.*
 
 class SetupProfileFragment : BaseFragment() {
 
-
+    private val inputValidation=InputValidation()
     var PERMISSION_ID = 1000
     private lateinit var enterDetailsBinding: EnterDetailsBinding
     private var fusedLocationClient: FusedLocationProviderClient? = null
     private var lastLocation: Location? = null
-
-
-
-
-
     private val viewModel by viewModels<AuthViewModel>()
 
     var firstname : String?=null
@@ -79,7 +76,7 @@ class SetupProfileFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         setTitleWithBackButton("Setup Profile")
-        val enterDetailsBinding : EnterDetailsBinding = DataBindingUtil.inflate(inflater,
+        enterDetailsBinding = DataBindingUtil.inflate(inflater,
             R.layout.enter_details,container,false)
         val inputval= InputValidation()
         val c=Calendar.getInstance()
@@ -206,6 +203,8 @@ class SetupProfileFragment : BaseFragment() {
 
         }
 
+        enterDetailsBinding.etEmergencyContactNumber.addTextChangedListener(textWatcher)
+
         return enterDetailsBinding.root
     }
 
@@ -277,4 +276,23 @@ class SetupProfileFragment : BaseFragment() {
         Log.d("Debug:", "Your City: " + cityName + " ; your Country " + countryName)
         return currentLocation!!
     }
+
+    private val textWatcher=object : TextWatcher{
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_no: String=enterDetailsBinding.etEmergencyContactNumber.text.toString()
+
+            enterDetailsBinding.EmergencyNumberLayout.error = if (inputValidation.isPhoneValid(phone_no)) null else "Enter Valid Phone Number"
+
+        }
+
+    }
+
 }
