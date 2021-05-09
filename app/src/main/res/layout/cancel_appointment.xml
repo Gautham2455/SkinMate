@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <view
+        android:id="@+id/divider1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/stroke_width"
+        android:background="@color/theme_background_light"
+        app:layout_constraintBottom_toTopOf="@id/tv_medical"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_medical"
+        android:text="@string/medical"
+        android:textColor="@color/theme_background_light"
+        app:layout_constraintTop_toBottomOf="@id/divider1"
+        android:layout_margin="@dimen/layout_magin"
+        app:layout_constraintBottom_toTopOf="@id/tv_medical_id"
+        android:textSize="16sp"
+        android:gravity="left"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_medical_id"
+        android:text="ID- 36546"
+        android:textColor="@color/theme_background_light"
+        android:textSize="16sp"
+        android:gravity="right"
+        android:layout_margin="@dimen/layout_magin"
+        app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_info"
+        android:text="1Craig A. Mohney, MD FAAD, FASMS"
+        android:textSize="16sp"
+        android:textColor="@color/theme_color_dark"
+        android:layout_margin="@dimen/layout_magin"
+        app:layout_constraintTop_toBottomOf="@id/tv_medical_id"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <view
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/stroke_width"
+        android:background="@color/theme_background_light"
+        app:layout_constraintTop_toBottomOf="@id/doctor_info"
+        android:layout_margin="@dimen/layout_magin"
+        app:layout_constraintBottom_toTopOf="@id/date"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_magin"
+        app:layout_constraintTop_toBottomOf="@id/divider2"
+        android:text="10-jun-2021"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/theme_color_dark"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/time"
+        android:text="10:00 AM"
+        android:layout_margin="@dimen/layout_magin"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/theme_color_dark"
+        />
+
+    <view
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/stroke_width"
+        android:background="@color/theme_background_light"
+        app:layout_constraintTop_toBottomOf="@id/time"
+        android:layout_marginTop="@dimen/layout_magin"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel_appointment"
+        android:text="@string/cancel_appointment"
+        app:layout_constraintTop_toBottomOf="@id/divider3"
+        android:layout_margin="20dp"
+        app:cornerRadius="@dimen/button_corner_radius"
+        android:backgroundTint="@color/theme_button"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

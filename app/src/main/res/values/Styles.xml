@@ -90,8 +90,17 @@
         <item name="android:textColor">@color/theme_button</item>
     </style>
 
+    <style name="Input_layout_style" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="shapeAppearanceOverlay">@style/Input_layout_styles_shapeOverlay</item>
+    </style>
 
-
+    <style name="Input_layout_styles_shapeOverlay" parent="">
+        <item name="strokeWidth">@dimen/stroke_width</item>
+        <item name="strokeColor">@color/theme_background_light</item>
+        <item name="hintEnabled">false</item>
+        <item name="cornerSize">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
 
 
 </resources>
