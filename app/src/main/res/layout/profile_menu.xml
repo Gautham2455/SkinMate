@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -381,11 +382,12 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:id="@+id/logout_btn"
             android:backgroundTint="@color/white"
             app:layout_constraintTop_toBottomOf="@id/terms_condition_card"
             android:layout_marginTop="@dimen/layout_magin"
+            android:layout_marginBottom="20dp"
             android:textColor="@color/red"
             android:text="@string/logout"/>
 
@@ -394,3 +396,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
+</layout>

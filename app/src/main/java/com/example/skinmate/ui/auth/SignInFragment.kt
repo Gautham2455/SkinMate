@@ -81,8 +81,10 @@ class SignInFragment : BaseFragment() {
                     editor.putString(TOKEN,loginResponse.token)
                     editor.putString(CUSTOMER_ID,loginResponse.customerId)
                     editor.commit()
-                    if (loginResponse.responseMessage)
+                    if (loginResponse.responseMessage) {
+                        activity?.finish()
                         startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                    }
                     else
                         signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
                 }

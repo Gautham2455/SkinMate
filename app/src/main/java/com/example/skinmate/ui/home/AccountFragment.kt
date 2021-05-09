@@ -1,13 +1,19 @@
 package com.example.skinmate.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.databinding.ProfileMenuBinding
+import com.example.skinmate.ui.auth.WelcomeActivity
 
 class AccountFragment : BaseFragment() {
+
+    private lateinit var profileMenuBinding: ProfileMenuBinding
 
     companion object {
         fun newInstance() = AccountFragment()
@@ -19,9 +25,13 @@ class AccountFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         hideToolbar()
-        val view = inflater.inflate(R.layout.profile_menu, container, false)
+        profileMenuBinding = DataBindingUtil.inflate(inflater,R.layout.profile_menu,container,false)
 
-        return view
+        profileMenuBinding.logoutBtn.setOnClickListener {
+            activity?.finish()
+            startActivity(Intent(requireActivity(), WelcomeActivity::class.java))
+        }
 
+        return profileMenuBinding.root
     }
 }
