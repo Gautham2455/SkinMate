@@ -11,6 +11,7 @@
         <item name="cornerSizeTopLeft">20dp</item>
         <item name="cornerSizeBottomRight">20dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="backgroundColor">#B2BFB8</item>
     </style>
 
 

@@ -23,6 +23,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -89,58 +90,57 @@ class SetupProfileFragment : BaseFragment() {
         var bloodgroups=resources.getStringArray(R.array.Bloodgroup)
         var arrayAdapter=ArrayAdapter(requireContext(),R.layout.dropdown_menu,bloodgroups)
         enterDetailsBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
-        enterDetailsBinding.imageViewGenderMale.setOnClickListener {
+        enterDetailsBinding.cardMale.setOnClickListener {
             if(!enterDetailsBinding.ImageViewSelectedGenderMale.isVisible) {
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
-                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
 
+                enterDetailsBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
 
                 gender = enterDetailsBinding.tvGenderMale.text.toString()
 
             }
             else {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
-                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                enterDetailsBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+
             }
 
         }
 
-        enterDetailsBinding.imageViewGenderFemale.setOnClickListener {
+        enterDetailsBinding.cardFemale.setOnClickListener {
             if(!enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible) {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
 
-                //enterDetailsBinding.cardFemale.setBackgroundColor(resources.getColor(R.color.theme_background_light))
-                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
+                enterDetailsBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
                 gender = enterDetailsBinding.tvGenderFemale.text.toString()
 
             }
             else {
             enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
-                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                enterDetailsBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             }
 
         }
-        enterDetailsBinding.imageViewGenderOther.setOnClickListener {
+        enterDetailsBinding.cardOther.setOnClickListener {
             if(!enterDetailsBinding.ImageViewSelectedGenderOther.isVisible) {
                 enterDetailsBinding.ImageViewSelectedGenderMale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
+                enterDetailsBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
 
-                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#B2BFB8"))
                 gender = enterDetailsBinding.tvGenderOther.text.toString()
 
             }
             else {
                 enterDetailsBinding.ImageViewSelectedGenderOther.isVisible=false
-                enterDetailsBinding.cardFemale.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                enterDetailsBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
             }
         }
         enterDetailsBinding.etDob.setOnClickListener {
