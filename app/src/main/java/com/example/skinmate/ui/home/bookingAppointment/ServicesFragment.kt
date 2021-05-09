@@ -1,4 +1,7 @@
 package com.example.skinmate.ui.home.bookingAppointment
 
-class ServicesFragment {
+import com.example.skinmate.BaseFragment
+
+class ServicesFragment : BaseFragment(){
+
 }
