@@ -19,7 +19,7 @@ class AccountFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         hideToolbar()
-        val view = inflater.inflate(R.layout.fragment_authentication, container, false)
+        val view = inflater.inflate(R.layout.profile_menu, container, false)
 
         return view
 

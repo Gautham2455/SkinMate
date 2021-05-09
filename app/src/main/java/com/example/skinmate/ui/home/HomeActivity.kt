@@ -19,7 +19,7 @@ class HomeActivity : BaseActivity() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.selectedItemId = R.id.navigation_home
 
-        bottomNavigationView.setOnNavigationItemReselectedListener {
+        bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navigation_home -> replace(R.id.fragment_container,HomeFragment.newInstance())
                 R.id.navigation_appointment -> replace(R.id.fragment_container,AppointmentFragment.newInstance())
