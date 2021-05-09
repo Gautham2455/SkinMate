@@ -1,69 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="20dp"
-        android:orientation="vertical"
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/tv_phone_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="Poppins Medium"
             android:text="@string/phone_number_email_id"
-            android:textColor="@color/theme_text" />
+            android:textColor="@color/theme_text"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textinput_phone_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/theme_background_light"
             app:boxStrokeWidth="1dp"
             app:cornerRadius="7dp"
-            app:hintEnabled="false">
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tv_phone_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPhone_Email"
-                
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="Poppins SemiBold"
                 android:hint="@string/enter_number_or_e_mail_id"
-                android:textColor="@color/theme_text"
                 android:inputType="textEmailAddress"
-                />
+                android:textColor="@color/theme_text"
+                android:textSize="16sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/tv_pwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:textSize="16sp"
             android:text="@string/password"
-            android:textColor="@color/theme_text" />
+            android:textColor="@color/theme_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textinput_phone_email" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textinput_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             app:boxBackgroundColor="@color/white"
             app:boxStrokeColor="@color/theme_background_light"
             app:boxStrokeWidth="1dp"
             app:cornerRadius="7dp"
             app:errorEnabled="true"
             app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/tv_pwd"
             app:passwordToggleDrawable="@drawable/password_visibility"
             app:passwordToggleEnabled="true">
 
@@ -72,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_password"
+                android:textSize="16sp"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,32 +91,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:clickable="true"
             android:text="@string/forgot_password"
             android:textColor="@color/theme_button"
-            android:textSize="12sp"
-            android:textStyle="normal" />
-
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textinput_password" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_signin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="20dp"
             android:backgroundTint="@color/theme_button"
             android:text="@string/sign_in"
-            app:cornerRadius="50dp">
+            app:cornerRadius="50dp"
+            android:background="@drawable/custom_button_fill"
+            app:layout_constraintTop_toBottomOf="@id/tv_forgot_password">
 
         </com.google.android.material.button.MaterialButton>
 
         <TextView
+            android:id="@+id/tv_or_sigin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:text="@string/or_sign_with"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_signin"
+            />
 
         <ImageView
             android:id="@+id/touch_id"
@@ -114,18 +136,24 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:contentDescription="@string/touch_id_fingerprint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_or_sigin"
             app:srcCompat="@drawable/finger_print" />
+
 
         <TextView
             android:id="@+id/tv_new_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:text="@string/new_user_sign_up"
             android:textColor="@color/theme_button"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/touch_id" />
 
         <TextView
             android:id="@+id/tv_privacy_tandc"
@@ -133,12 +161,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_user"
             android:linksClickable="true"
             android:text="@string/privacy_policy_terms_and_conditions"
             android:layout_marginBottom="15dp"
             android:textColor="@color/theme_button"
             android:textSize="12sp" />
 
-    </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
