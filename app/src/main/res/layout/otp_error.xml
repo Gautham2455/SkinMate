@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:orientation="vertical"
@@ -50,7 +50,7 @@
             android:text="@string/otp_validation_failed_please_retry"
             android:textAlignment="center"
             android:textColor="@color/theme_text"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:fontFamily="Poppins Medium"/>
 
 

@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +60,6 @@ class SignUpFragment : BaseFragment() {
 
         signUpBinding.proceedBtn.setOnClickListener(){
 
-//            PHONE_NO=signUpBinding.phoneEt.text.toString()!!.toInt()
             PHONE_NO = signUpBinding.phoneEt.text.toString().toIntOrNull()
             EMAIL=signUpBinding.eidEmail.text.toString()
             PASSWORD=signUpBinding.setPasswordEt.text.toString()
@@ -103,7 +103,7 @@ class SignUpFragment : BaseFragment() {
         val ConfirmBtn = mobbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             mobbottomSheetDialog.dismiss()
-            val mobotp = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            var mobotp = mobbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
             mobOtpVerify(mobotp)
             }
 
@@ -112,39 +112,44 @@ class SignUpFragment : BaseFragment() {
     private fun mobOtpVerify(otpnumber: Int) {
         //call api to verfify otp sent to mob
         viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
-            successfulMobOtp(otpResponse.get(0).responseMessage)
-        }
-    }
+           val responseMessageOtpVerification = otpResponse.get(0).responseMessage!!
+            if (responseMessageOtpVerification == true) {
+                val dialog = Dialog(requireContext())
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.otp_verified)
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+                val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
+                OkayBtn.setOnClickListener {
+                    dialog.dismiss()
+                    viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
+                            otpResponse -> val responseMessageEmailRegister = otpResponse.get(0).responseMessage!!
+                        Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+                        if(responseMessageEmailRegister == true){
+                            dialog.dismiss()
+                            emailBottomSheetfragment()
+                        }
+                    }
+                }
 
-    private fun successfulMobOtp(responseMessage: Boolean?) {
-        if (responseMessage == true) {
-            val dialog = Dialog(requireContext())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.otp_verified)
-            dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-            val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
-            OkayBtn.setOnClickListener {
-                dialog.dismiss()
-                viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
-                        otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
-                    Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+            }
+            else {
+                val dialog = Dialog(requireContext())
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.otp_error)
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+                val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
+                RetryBtn.setOnClickListener {
+                    dialog.dismiss()
+                    mobOtpBottomSheetfragment()
                 }
             }
         }
-        else {
-            val dialog = Dialog(requireContext())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.otp_error)
-            dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-            val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
-            RetryBtn.setOnClickListener {
-                dialog.dismiss()
-                mobOtpBottomSheetfragment()
-            }
-        }
+
     }
+
+
 
 
     private fun emailBottomSheetfragment() {
@@ -158,50 +163,54 @@ class SignUpFragment : BaseFragment() {
         otpTimer(countTime,resendBtn)
         val ConfirmBtn = emailbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
-            emailbottomSheetDialog.dismiss()
-            val otpemail = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
+            var otpemail = emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
             emailOtpVerify(signUpBinding.eidEmail.text.toString(),otpemail)
+            emailbottomSheetDialog.dismiss()
         }
     }
 
     private fun emailOtpVerify(email:String ,otpemail: Int) {
 
         viewModel.postVerifyEmailOtp(email,otpemail).observe(requireActivity()){otpResponse ->
-            successfulEmailOtp(otpResponse.firstOrNull()?.responseMessage)
+           val responseMessageEmailVerification = otpResponse.get(0).responseMessage
             Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun successfulEmailOtp(responseMessageInformation:Boolean?) {
-        if (responseMessageInformation == true) {
-            val dialog = Dialog(requireContext())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.emil_otp_verified)
-            dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-            val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
-            OkayBtn.setOnClickListener {
-                dialog.dismiss()
-                replace(R.id.fragment_container,SetupProfileFragment.newInstance(),false)
+            Log.d("otp",otpResponse.get(0).responseMessage.toString())
+            if (responseMessageEmailVerification!!) {
+                val dialog = Dialog(requireContext())
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.emil_otp_verified)
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+                val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
+                OkayBtn.setOnClickListener {
+                    dialog.dismiss()
+                    replace(R.id.fragment_container,SetupProfileFragment.newInstance(),false)
+                }
             }
-        }
-        else {
-            val dialog = Dialog(requireContext())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.otp_error)
-            dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-            val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
-            RetryBtn.setOnClickListener {
-                dialog.dismiss()
-                viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
-                        otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
-                    Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+            else {
+                val dialog = Dialog(requireContext())
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.otp_error)
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+                val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
+                RetryBtn.setOnClickListener {
+                    dialog.dismiss()
+                    viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString()).observe(requireActivity()){
+                            otpResponse -> val responseMessageEmailRegister = otpResponse.get(0).responseMessage
+                        Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
+                        if(responseMessageEmailRegister == true){
+                            emailBottomSheetfragment()
+                            dialog.dismiss()
+                        }
+                    }
                 }
             }
         }
 
     }
+
+
 
     private fun validateInput() : Boolean{
         var flag=true
@@ -227,11 +236,7 @@ class SignUpFragment : BaseFragment() {
         return flag
     }
 
-    private fun emailRegister(responseMessage: Boolean?) {
-        if(responseMessage==true){
-            emailBottomSheetfragment()
-        }
-    }
+
 
     private fun otpTimer(countTime: TextView?,resendBtn: TextView?) {
         val timer = object : CountDownTimer(90000, 1000) {
