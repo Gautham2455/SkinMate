@@ -21,7 +21,7 @@ object RetrofitClient  {
         okhttpClient.addInterceptor(logging)
 
         Retrofit.Builder()
-            .baseUrl("http://65.0.55.180/skinmate/v1.0/customer/")
+            .baseUrl("http://65.0.55.180/skinmate/v1.0/")
             .client(okhttpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
     }
