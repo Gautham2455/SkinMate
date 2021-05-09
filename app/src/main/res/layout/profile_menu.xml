@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_light_background">
+        android:background="#ECEFF3">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -59,8 +59,8 @@
                     />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -209,6 +209,11 @@
                     android:layout_height="46dp"
                     android:layout_marginLeft="@dimen/layout_magin"
                     android:text="@string/touchid_authentication"
+                    app:trackTint="@drawable/drawable_switch_track"
+                    app:thumbTint="@drawable/drawable_switch_tumb"
+                    android:switchMinWidth="56dp"
+                    android:minWidth="100dp"
+                    android:maxHeight="10dp"
                     android:textColor="@color/theme_color_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/touch_id_icon"
