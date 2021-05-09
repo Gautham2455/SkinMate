@@ -56,6 +56,6 @@ interface   MyApi {
     @POST("update-password")
     fun updatePassword(
         @Field("email") customerId : String,
-        @Field("Password")  oldPassword: String,
+        @Field("password")  oldPassword: String,
     ) : Call<List<updatePasswordResponse>>
 }
