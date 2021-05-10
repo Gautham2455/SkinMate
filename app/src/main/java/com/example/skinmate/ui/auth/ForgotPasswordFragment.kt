@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import androidx.lifecycle.observe
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
-import com.example.skinmate.data.responses.OtpResponse
 import com.example.skinmate.databinding.ForgotPasswordBinding
 import com.example.skinmate.databinding.SigninBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
