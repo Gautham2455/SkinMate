@@ -298,6 +298,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/confirmbtn"
             android:text="Comfirm"
+            android:background="@drawable/custom_button_fill"
             android:layout_marginRight="@dimen/layout_magin"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="10dp"

@@ -35,7 +35,7 @@ class AccountFragment : BaseFragment() {
 
         profileMenuBinding.profileInfoCard.setOnClickListener { replace(R.id.fragment_container,ViewOrEditProfileFragment.newInstance()) }
 
-        profileMenuBinding.familyCard.setOnClickListener { replace(R.id.fragment_container,AddFamilyMemberFragment.newInstance()) }
+        profileMenuBinding.familyCard.setOnClickListener { replace(R.id.fragment_container,FamilyMemberListFragment.newInstance()) }
 
         profileMenuBinding.insuranceCard.setOnClickListener { replace(R.id.fragment_container,AddInsuranceFragment.newInstance()) }
 

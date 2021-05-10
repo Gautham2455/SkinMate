@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/proceed_btn"
         android:text="@string/proceed"
+        android:background="@drawable/custom_button_fill"
         android:enabled="false"
         android:layout_margin="@dimen/layout_padding"
         app:layout_constraintTop_toBottomOf="@id/doctor_list"
