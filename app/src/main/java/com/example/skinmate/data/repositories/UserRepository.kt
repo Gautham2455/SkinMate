@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.skinmate.data.network.RetrofitClient
+import com.example.skinmate.data.network.SecuredRetrofitClient
 import com.example.skinmate.data.responses.*
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -24,6 +25,11 @@ class UserRepository private constructor(application: Application){
     val familyMember=MutableLiveData<familyMemberResponse>()
     val subService=MutableLiveData<subServiceResponse>()
     val deleteFamilyMember=MutableLiveData<List<generalResponse>>()
+    val doctorList=MutableLiveData<doctorListResponse>()
+    val addFamilyMember=MutableLiveData<List<generalResponse>>()
+    val customerView=MutableLiveData<customerViewResponse>()
+    val editCustomerDetails=MutableLiveData<List<generalResponse>>()
+    val bookedAppointment=MutableLiveData<bookedAppointmentResponse>()
 
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
@@ -43,7 +49,7 @@ class UserRepository private constructor(application: Application){
 
                 val data = response.body()
 
-                val msg = data!!.get(0).responseInformation
+//                val msg = data!!.get(0).responseInformation
 
                 serviceSetterGetter.postValue(response.body())
             }
@@ -92,12 +98,12 @@ class UserRepository private constructor(application: Application){
         return loginUser
     }
 
-    fun changePasswordCall(customerId : String,oldPassword : String,newPassword :String) : MutableLiveData<List<passwordChangeResponse>>{
-        val call= RetrofitClient.apiInterface.changePassword(customerId,oldPassword,newPassword)
+    fun changePasswordCall(token:String,customerId : String,oldPassword : String,newPassword :String) : MutableLiveData<List<passwordChangeResponse>>{
+        val call= SecuredRetrofitClient.apiInterface.changePassword(token, customerId,oldPassword,newPassword)
 
         call.enqueue(object : Callback<List<passwordChangeResponse>>{
             override fun onFailure(call: Call<List<passwordChangeResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onResponse(
@@ -195,8 +201,8 @@ class UserRepository private constructor(application: Application){
         return emailOtp
     }
 
-    fun getFamilyMemberListCall(customerId:String) : MutableLiveData<familyMemberList>{
-        val call = RetrofitClient.apiInterface.familyList(customerId)
+    fun getFamilyMemberListCall(token:String,customerId:String) : MutableLiveData<familyMemberList>{
+        val call = SecuredRetrofitClient.apiInterface.familyList(token,customerId)
 
         call.enqueue(object :Callback<familyMemberList>{
             override fun onFailure(call: Call<familyMemberList>, t: Throwable) {
@@ -213,9 +219,9 @@ class UserRepository private constructor(application: Application){
         return familyMemberList
     }
 
-    fun getFamilyMemberCall(id :String) : MutableLiveData<familyMemberResponse>
+    fun getFamilyMemberCall(token:String,id :String) : MutableLiveData<familyMemberResponse>
     {
-        val call=RetrofitClient.apiInterface.famllyMember(id)
+        val call=SecuredRetrofitClient.apiInterface.famllyMember(token,id)
 
         call.enqueue(object :Callback<familyMemberResponse>{
             override fun onFailure(call: Call<familyMemberResponse>, t: Throwable) {
@@ -232,8 +238,8 @@ class UserRepository private constructor(application: Application){
         return familyMember
     }
 
-    fun getSubServiceCall(serviceId:String):MutableLiveData<subServiceResponse>{
-        val call=RetrofitClient.apiInterface.getSubService(serviceId )
+    fun getSubServiceCall(token:String,serviceId:String):MutableLiveData<subServiceResponse>{
+        val call=RetrofitClient.apiInterface.getSubService(token,serviceId )
 
         call.enqueue(object : Callback<subServiceResponse>{
             override fun onFailure(call: Call<subServiceResponse>, t: Throwable) {
@@ -250,9 +256,9 @@ class UserRepository private constructor(application: Application){
         return  subService
     }
 
-    fun deleteFamilyMemberCall(familyProfileId:String):MutableLiveData<List<generalResponse>>{
+    fun deleteFamilyMemberCall(token:String,familyProfileId:String):MutableLiveData<List<generalResponse>>{
 
-        val call = RetrofitClient.apiInterface.deleteFamilyMember(familyProfileId)
+        val call = SecuredRetrofitClient.apiInterface.deleteFamilyMember(token,familyProfileId)
 
         call.enqueue(object : Callback<List<generalResponse>>{
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
@@ -267,6 +273,103 @@ class UserRepository private constructor(application: Application){
             }
         })
         return  deleteFamilyMember
+    }
+
+    fun doctorListCall(token:String,serviceId:String):MutableLiveData<doctorListResponse>{
+        val call=SecuredRetrofitClient.apiInterface.doctorList(token,serviceId)
+
+        call.enqueue(object :Callback<doctorListResponse>{
+            override fun onFailure(call: Call<doctorListResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<doctorListResponse>,
+                response: Response<doctorListResponse>
+            ) {
+                doctorList.postValue(response.body())
+            }
+        })
+        return doctorList
+    }
+
+    fun addFamilyMemberCall(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,
+                            bloodGroup:String,address:String,insuranceInformation:String,emeregencyContactName:String,
+                            emeregencyNumber:String):MutableLiveData<List<generalResponse>>{
+
+        val call =SecuredRetrofitClient.apiInterface.addFamilyMember(token,customerId,relationshipId,firstName,lastName,
+        gender,bloodGroup,address, insuranceInformation, emeregencyContactName, emeregencyNumber)
+
+        call.enqueue(object :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                addFamilyMember.postValue(response.body())
+            }
+        })
+        return addFamilyMember
+    }
+
+    fun getCustomerViewCall(token:String,id:String):MutableLiveData<customerViewResponse>{
+        val call =SecuredRetrofitClient.apiInterface.customerDetails(token,id)
+
+        call.enqueue(object :Callback<customerViewResponse>{
+            override fun onFailure(call: Call<customerViewResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<customerViewResponse>,
+                response: Response<customerViewResponse>
+            ) {
+                customerView.postValue(response.body())
+            }
+        })
+        return  customerView
+    }
+
+    fun postEditCustomerDetailsCall(token:String,customerId:String,address:String,email : String,
+                                insuranceInformation:String,emeregencyContactName:String,
+                                emeregencyNumber:String):MutableLiveData<List<generalResponse>>{
+
+        val call=SecuredRetrofitClient.apiInterface.customerEdit(token,customerId, address, email, insuranceInformation, emeregencyContactName, emeregencyNumber)
+
+        call.enqueue(object :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                editCustomerDetails.postValue(response.body())
+            }
+        })
+        return editCustomerDetails
+    }
+
+    fun getBookedAppointmentCall(token:String,doctorId:String,date:String):MutableLiveData<bookedAppointmentResponse>{
+        val call =SecuredRetrofitClient.apiInterface.bookedAppointments(token,doctorId, date)
+
+        call.enqueue(object :Callback<bookedAppointmentResponse>{
+            override fun onFailure(call: Call<bookedAppointmentResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<bookedAppointmentResponse>,
+                response: Response<bookedAppointmentResponse>
+            ) {
+                bookedAppointment.postValue(response.body())
+            }
+        })
+        return bookedAppointment
     }
 
     companion object {
