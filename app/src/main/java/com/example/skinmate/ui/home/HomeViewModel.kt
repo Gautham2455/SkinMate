@@ -17,6 +17,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val addFamilyMemberData=UserRepository.getInstance(application)
     private val customerViewData=UserRepository.getInstance(application)
     private val editCustomerData=UserRepository.getInstance(application)
+    private val bookedAppointmentData=UserRepository.getInstance(application)
     //[0].responseInformation.get(0).address
 
     fun getFamilyMembersList(customerid:String):LiveData<familyMemberList> = liveData(Dispatchers.IO) {
@@ -55,4 +56,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                          emeregencyNumber:String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
                              emitSource(editCustomerData.postEditCustomerDetailsCall(customerId, address, email, insuranceInformation, emeregencyContactName, emeregencyNumber))
     }
+
+    fun getBookedAppointments(doctorId:String,date:String):LiveData<bookedAppointmentResponse> =
+        liveData(Dispatchers.IO) {
+            emitSource(bookedAppointmentData.getBookedAppointmentCall(doctorId, date))
+        }
+
 }

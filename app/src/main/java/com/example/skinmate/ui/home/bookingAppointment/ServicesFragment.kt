@@ -25,10 +25,6 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
 
         subServiceBinding=DataBindingUtil.inflate(inflater,R.layout.sub_service,container,false)
 
-        viewModel.getSubService("1").observe(requireActivity()){
-            //it[0].responseInformation[0].x1
-
-        }
 
         subServiceBinding.medicalCard.setOnClickListener(this)
         subServiceBinding.superficialCard.setOnClickListener(this)
