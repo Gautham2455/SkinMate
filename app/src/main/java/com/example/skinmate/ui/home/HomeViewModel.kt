@@ -5,10 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.skinmate.data.repositories.UserRepository
-import com.example.skinmate.data.responses.familyMemberList
-import com.example.skinmate.data.responses.familyMemberResponse
-import com.example.skinmate.data.responses.generalResponse
-import com.example.skinmate.data.responses.subServiceResponse
+import com.example.skinmate.data.responses.*
 import kotlinx.coroutines.Dispatchers
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,6 +13,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val familyMemberData=UserRepository.getInstance(application)
     private val subServiceData=UserRepository.getInstance(application)
     private val deletedFamilyMember=UserRepository.getInstance(application)
+    private val doctorListData=UserRepository.getInstance(application)
+    private val addFamilyMemberData=UserRepository.getInstance(application)
+    private val customerViewData=UserRepository.getInstance(application)
     //[0].responseInformation.get(0).address
 
     fun getFamilyMembersList(customerid:String):LiveData<familyMemberList> = liveData(Dispatchers.IO) {
@@ -32,5 +32,20 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun postDeleteFamilyMember(familyProfileId:String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
         emitSource(deletedFamilyMember.deleteFamilyMemberCall(familyProfileId))
+    }
+
+    fun getDoctorList(serviceId:String):LiveData<doctorListResponse> = liveData (Dispatchers.IO){
+        emitSource(doctorListData.doctorListCall(serviceId))
+    }
+
+    fun postAddFamilyMember(customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,
+                            bloodGroup:String,address:String,insuranceInformation:String,emeregencyContactName:String,
+                            emeregencyNumber:String):LiveData<List<generalResponse>> = liveData {
+
+                      emitSource(addFamilyMemberData.addFamilyMemberCall(customerId, relationshipId, firstName, lastName, gender, bloodGroup, address, insuranceInformation, emeregencyContactName, emeregencyNumber))
+    }
+
+    fun getCustomerDetails(id:String):LiveData<customerViewResponse> = liveData(Dispatchers.IO) {
+        emitSource(customerViewData.getCustomerViewCall(id))
     }
 }

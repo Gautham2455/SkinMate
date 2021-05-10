@@ -24,6 +24,9 @@ class UserRepository private constructor(application: Application){
     val familyMember=MutableLiveData<familyMemberResponse>()
     val subService=MutableLiveData<subServiceResponse>()
     val deleteFamilyMember=MutableLiveData<List<generalResponse>>()
+    val doctorList=MutableLiveData<doctorListResponse>()
+    val addFamilyMember=MutableLiveData<List<generalResponse>>()
+    val customerView=MutableLiveData<customerViewResponse>()
 
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
@@ -267,6 +270,64 @@ class UserRepository private constructor(application: Application){
             }
         })
         return  deleteFamilyMember
+    }
+
+    fun doctorListCall(serviceId:String):MutableLiveData<doctorListResponse>{
+        val call=RetrofitClient.apiInterface.doctorList(serviceId)
+
+        call.enqueue(object :Callback<doctorListResponse>{
+            override fun onFailure(call: Call<doctorListResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<doctorListResponse>,
+                response: Response<doctorListResponse>
+            ) {
+                doctorList.postValue(response.body())
+            }
+        })
+        return doctorList
+    }
+
+    fun addFamilyMemberCall(customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,
+                            bloodGroup:String,address:String,insuranceInformation:String,emeregencyContactName:String,
+                            emeregencyNumber:String):MutableLiveData<List<generalResponse>>{
+
+        val call =RetrofitClient.apiInterface.addFamilyMember(customerId,relationshipId,firstName,lastName,
+        gender,bloodGroup,address, insuranceInformation, emeregencyContactName, emeregencyNumber)
+
+        call.enqueue(object :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                addFamilyMember.postValue(response.body())
+            }
+        })
+        return addFamilyMember
+    }
+
+    fun getCustomerViewCall(id:String):MutableLiveData<customerViewResponse>{
+        val call =RetrofitClient.apiInterface.customerDetails(id)
+
+        call.enqueue(object :Callback<customerViewResponse>{
+            override fun onFailure(call: Call<customerViewResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<customerViewResponse>,
+                response: Response<customerViewResponse>
+            ) {
+                customerView.postValue(response.body())
+            }
+        })
+        return  customerView
     }
 
     companion object {
