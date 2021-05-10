@@ -44,10 +44,10 @@ class ChangePwdFragment : BaseFragment() {
                 val old_pwd = changePasswordBinding.etCurrentPassword.text.toString()
                 val new_pwd = changePasswordBinding.etNewPassword.text.toString()
 
-                custId.toString().toIntOrNull()?.let { it1 ->
-                    viewModel.postChangePassword(it1,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse -> onSuccesfullChangePwd(pwdResponse.get(0).responseMessage)
+
+                    viewModel.postChangePassword(custId,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse -> onSuccesfullChangePwd(pwdResponse.get(0).responseMessage)
                     }
-                }
+
 
             }
         }
