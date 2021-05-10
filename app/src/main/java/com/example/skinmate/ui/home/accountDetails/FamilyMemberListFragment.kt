@@ -8,14 +8,13 @@ import androidx.databinding.DataBindingUtil
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.FamilyMembersOptionBinding
-import com.example.skinmate.databinding.FragmentAddFamilyMemberSetupProfileBinding
 
-class AddFamilyMemberFragment : BaseFragment() {
+class FamilyMemberListFragment : BaseFragment() {
 
-    lateinit var addFamilyMemberSetupProfileBinding: FragmentAddFamilyMemberSetupProfileBinding
+    lateinit var familyMembersOptionBinding: FamilyMembersOptionBinding
 
     companion object{
-        fun newInstance() = AddFamilyMemberFragment()
+        fun newInstance() = FamilyMemberListFragment()
     }
 
     override fun onCreateView(
@@ -23,12 +22,13 @@ class AddFamilyMemberFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setTitleWithBackButton("Setup Profile")
+        setTitleWithBackButton("Family Members")
 
-        addFamilyMemberSetupProfileBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_family_member_setup_profile,container,false)
+        familyMembersOptionBinding = DataBindingUtil.inflate(inflater, R.layout.family_members_option,container,false)
+
+        familyMembersOptionBinding.fab.setOnClickListener { replace(R.id.fragment_container,AddFamilyMemberFragment.newInstance()) }
 
 
-
-        return addFamilyMemberSetupProfileBinding.root
+        return familyMembersOptionBinding.root
     }
 }

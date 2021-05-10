@@ -12,7 +12,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="100dp"/>
+            android:layout_marginTop="50dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toBottomOf="@id/comfirmation_img"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="60dp"/>
+            android:layout_marginTop="50dp"/>
 
         <view
             android:id="@+id/divider1"
@@ -112,6 +112,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/done_btn"
             android:text="@string/done"
+            android:background="@drawable/custom_button_fill"
             app:layout_constraintTop_toBottomOf="@id/divider3"
             android:layout_margin="@dimen/layout_magin"
             app:cornerRadius="@dimen/button_corner_radius"
