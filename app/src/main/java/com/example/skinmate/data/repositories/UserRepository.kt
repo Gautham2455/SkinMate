@@ -27,6 +27,7 @@ class UserRepository private constructor(application: Application){
     val doctorList=MutableLiveData<doctorListResponse>()
     val addFamilyMember=MutableLiveData<List<generalResponse>>()
     val customerView=MutableLiveData<customerViewResponse>()
+    val editCustomerDetails=MutableLiveData<List<generalResponse>>()
 
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
@@ -328,6 +329,27 @@ class UserRepository private constructor(application: Application){
             }
         })
         return  customerView
+    }
+
+    fun postEditCustomerDetailsCall(customerId:String,address:String,email : String,
+                                insuranceInformation:String,emeregencyContactName:String,
+                                emeregencyNumber:String):MutableLiveData<List<generalResponse>>{
+
+        val call=RetrofitClient.apiInterface.customerEdit(customerId, address, email, insuranceInformation, emeregencyContactName, emeregencyNumber)
+
+        call.enqueue(object :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                editCustomerDetails.postValue(response.body())
+            }
+        })
+        return editCustomerDetails
     }
 
     companion object {

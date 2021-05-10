@@ -1,6 +1,7 @@
 package com.example.skinmate.ui.home.accountDetails
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -40,7 +41,7 @@ class ChangePwdFragment : BaseFragment() {
         changePasswordBinding.btnChangePw.setOnClickListener {
 
             if(inputValidate()){
-                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
                 val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
                 val old_pwd = changePasswordBinding.etCurrentPassword.text.toString()
                 val new_pwd = changePasswordBinding.etNewPassword.text.toString()
