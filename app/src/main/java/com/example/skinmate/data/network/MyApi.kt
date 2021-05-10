@@ -84,4 +84,30 @@ interface   MyApi {
     fun customerDetails(
         @Query("id") id :String
     ):Call<customerViewResponse>
+
+    @FormUrlEncoded
+    @POST("customer/doctors/list")
+    fun doctorList(
+        @Field("serviceId") serviceId:String
+    ):Call<doctorListResponse>
+
+    @FormUrlEncoded
+    @POST("customer/family/add")
+    fun addFamilyMember(
+        @Field("customerId") customerId:String,
+        @Field("relationshipId") relationshipId:String,
+        @Field("firstName") firstName:String,
+        @Field("lastName") lastName:String,
+        @Field("gender") gender:String,
+        @Field("bloodGroup") bloodGroup:String,
+        @Field("address") address:String,
+        @Field("insuranceInformation") insuranceInformation:String,
+        @Field("emeregencyContactName") emeregencyContactName:String,
+        @Field("emeregencyNumber") emeregencyNumber:String
+    ):Call<List<generalResponse>>
+
+    @FormUrlEncoded
+    @POST("customer/edit")
+    fun customerEdit()
+
 }
