@@ -74,11 +74,12 @@ class SignInFragment : BaseFragment() {
 
             viewModel.postLoginUser(requestBody).observe(requireActivity()) { loginResponse ->
                 Log.v("DEBUG : ", loginResponse.responseInformation)
-                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+                val sharedPref:SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
                 val editor: SharedPreferences.Editor =  sharedPref!!.edit()
                 editor.putString(TOKEN,loginResponse.token)
                 editor.putString(CUSTOMER_ID,loginResponse.customerId.toString())
                 editor.apply()
+                editor.commit()
                 Log.v("Signin",sharedPref.getString(CUSTOMER_ID," ")!!)
                 if (loginResponse.responseMessage) {
                     activity?.finish()
