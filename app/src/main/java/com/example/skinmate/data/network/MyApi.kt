@@ -118,4 +118,12 @@ interface   MyApi {
         @Field("emeregencyNumber") emeregencyNumber:String
     ):Call<List<generalResponse>>
 
+    @FormUrlEncoded
+    @POST("doctor/timeslots")
+    fun bookedAppointments(
+        @Field("doctorId") doctorId:String,
+        @Field("date") date:String
+    ):Call<bookedAppointmentResponse>
+
+
 }

@@ -28,6 +28,7 @@ class UserRepository private constructor(application: Application){
     val addFamilyMember=MutableLiveData<List<generalResponse>>()
     val customerView=MutableLiveData<customerViewResponse>()
     val editCustomerDetails=MutableLiveData<List<generalResponse>>()
+    val bookedAppointment=MutableLiveData<bookedAppointmentResponse>()
 
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
@@ -350,6 +351,24 @@ class UserRepository private constructor(application: Application){
             }
         })
         return editCustomerDetails
+    }
+
+    fun getBookedAppointmentCall(doctorId:String,date:String):MutableLiveData<bookedAppointmentResponse>{
+        val call =RetrofitClient.apiInterface.bookedAppointments(doctorId, date)
+
+        call.enqueue(object :Callback<bookedAppointmentResponse>{
+            override fun onFailure(call: Call<bookedAppointmentResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<bookedAppointmentResponse>,
+                response: Response<bookedAppointmentResponse>
+            ) {
+                bookedAppointment.postValue(response.body())
+            }
+        })
+        return bookedAppointment
     }
 
     companion object {
