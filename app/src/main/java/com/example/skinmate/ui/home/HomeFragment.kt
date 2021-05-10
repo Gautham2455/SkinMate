@@ -8,9 +8,10 @@ import androidx.databinding.DataBindingUtil
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.LadingScreenBinding
+import com.example.skinmate.ui.home.bookingAppointment.ServicesFragment
 
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var ladingScreenBinding: LadingScreenBinding
 
@@ -28,8 +29,19 @@ class HomeFragment : BaseFragment() {
 
         ladingScreenBinding=DataBindingUtil.inflate(inflater,R.layout.lading_screen,container,false)
 
+        ladingScreenBinding.cosmeticCard.setOnClickListener(this)
+        ladingScreenBinding.medicalCard.setOnClickListener(this)
+        ladingScreenBinding.skinCareCard.setOnClickListener(this)
+        ladingScreenBinding.telehealthVideoCard.setOnClickListener(this)
+
 
         return ladingScreenBinding.root
 
     }
+
+    override fun onClick(p0: View?) {
+        replace(R.id.fragment_container,ServicesFragment.newInstance())
+
+    }
+
 }

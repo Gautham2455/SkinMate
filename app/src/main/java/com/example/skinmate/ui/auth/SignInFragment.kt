@@ -77,8 +77,9 @@ class SignInFragment : BaseFragment() {
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
                 val editor: SharedPreferences.Editor =  sharedPref!!.edit()
                 editor.putString(TOKEN,loginResponse.token)
-                editor.putString(CUSTOMER_ID,loginResponse.customerId)
-                editor.commit()
+                editor.putString(CUSTOMER_ID,loginResponse.customerId.toString())
+                editor.apply()
+                Log.v("Signin",sharedPref.getString(CUSTOMER_ID," ")!!)
                 if (loginResponse.responseMessage) {
                     activity?.finish()
                     startActivity(Intent(requireActivity(), HomeActivity::class.java))

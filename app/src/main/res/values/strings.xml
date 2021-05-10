@@ -47,7 +47,7 @@
     <string name="touch_id_fingerprint">Touch_id_fingerprint</string>
     <string name="continue_btn">CONTINUE</string>
     <string name="new_password">New Password</string>
-    <string name="change_password">CHANGE PASSWORD</string>
+    <string name="change_password">Change Password</string>
     <string name="phone_number">Phone Number</string>
     <string name="welcome_to">Welcome to</string>
     <string name="skinmate">SkinMate</string>
@@ -127,5 +127,7 @@
     <string name="insurance_information">Enter Insurance Information</string>
     <string name="schedule_appointment">Schedule Appointment</string>
     <string name="no_active_appointments">No Active Appointments !</string>
+    <string name="relationship_type">Relationship Type</string>
+    <string name="enter_relationship_type">Enter Relationship Type</string>
     <!--<string name="insurance_information">Insurance Information</string>-->
 </resources>

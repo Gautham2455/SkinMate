@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient  {
+    const val BASE_URL="http://65.0.55.180/skinmate/v1.0/"
 
     val retrofitClient: Retrofit.Builder by lazy{
 
@@ -21,7 +22,7 @@ object RetrofitClient  {
         okhttpClient.addInterceptor(logging)
 
         Retrofit.Builder()
-            .baseUrl("http://65.0.55.180/skinmate/v1.0/")
+            .baseUrl(BASE_URL)
             .client(okhttpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
     }
