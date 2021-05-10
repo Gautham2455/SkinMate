@@ -40,13 +40,15 @@ class AccountFragment : BaseFragment() {
 
         profileMenuBinding.tvTouchId.setOnCheckedChangeListener { buttonView, isChecked ->
 
+            val editor: SharedPreferences.Editor = sharedPref!!.edit()
             if(isChecked) {
-                val editor: SharedPreferences.Editor = sharedPref!!.edit()
                 editor.putBoolean(AccountFragment.TOUCH_ID, isChecked)
                 editor.commit()
             }
-
-
+            if(!isChecked){
+                editor.putBoolean(AccountFragment.TOUCH_ID, isChecked)
+                editor.commit()
+            }
         }
 
         profileMenuBinding.logoutBtn.setOnClickListener {
