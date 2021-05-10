@@ -2,6 +2,7 @@ package com.example.skinmate.ui.home.accountDetails
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,12 +41,13 @@ class ChangePwdFragment : BaseFragment() {
 
             if(inputValidate()){
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-                val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID," ").toString()
+                val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
                 val old_pwd = changePasswordBinding.etCurrentPassword.text.toString()
                 val new_pwd = changePasswordBinding.etNewPassword.text.toString()
+                Log.v("CAhange Password",custId.toString())
 
-
-                    viewModel.postChangePassword(custId,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse -> onSuccesfullChangePwd(pwdResponse.get(0).responseMessage)
+                    viewModel.postChangePassword(custId!!,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse ->
+                        onSuccesfullChangePwd(pwdResponse.get(0).responseMessage)
                     }
 
 

@@ -1,14 +1,10 @@
 package com.example.skinmate.ui.auth
 
-import android.app.KeyguardManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.CancellationSignal
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -18,9 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricPrompt
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.sampleslinmate.utils.InputValidation
@@ -28,7 +22,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SigninBinding
 import androidx.lifecycle.observe
-import com.example.skinmate.ui.home.AccountFragment
+import com.example.skinmate.ui.home.accountDetails.AccountFragment
 import com.example.skinmate.ui.home.HomeActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -83,8 +77,9 @@ class SignInFragment : BaseFragment() {
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
                 val editor: SharedPreferences.Editor =  sharedPref!!.edit()
                 editor.putString(TOKEN,loginResponse.token)
-                editor.putString(CUSTOMER_ID,loginResponse.customerId)
-                editor.commit()
+                editor.putString(CUSTOMER_ID,loginResponse.customerId.toString())
+                editor.apply()
+                Log.v("Signin",sharedPref.getString(CUSTOMER_ID," ")!!)
                 if (loginResponse.responseMessage) {
                     activity?.finish()
                     startActivity(Intent(requireActivity(), HomeActivity::class.java))
