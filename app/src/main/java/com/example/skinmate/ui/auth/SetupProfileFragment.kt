@@ -179,6 +179,7 @@ class SetupProfileFragment : BaseFragment() {
                 val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
                 val jsonObject=JSONObject()
+
                 jsonObject.put("phoneNumber",sharedPref!!.getString(SignUpFragment.MOB_NO!!,"00"))
                 jsonObject.put("email", sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none"))
                 jsonObject.put("firstName",firstname)

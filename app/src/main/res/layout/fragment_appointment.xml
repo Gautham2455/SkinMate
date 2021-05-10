@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/img_mob_appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_no_active_appointments" />
+
+    <TextView
+        android:id="@+id/tv_no_active_appointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="Poppins SemiBold"
+        android:gravity="center_horizontal"
+        android:text="@string/no_active_appointments"
+        android:textColor="@color/theme_text"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/img_mob_appointment" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_retry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/schedule_appointment"
+        app:backgroundTint="@color/theme_button"
+        app:cornerRadius="25dp"
+        android:background="@drawable/custom_button_fill"
+        app:layout_constraintTop_toBottomOf="@id/tv_no_active_appointment" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

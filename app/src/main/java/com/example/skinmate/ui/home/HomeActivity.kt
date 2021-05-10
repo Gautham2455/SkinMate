@@ -1,10 +1,10 @@
 package com.example.skinmate.ui.home
 
 import android.os.Bundle
-import android.view.MenuItem
 import com.example.skinmate.BaseActivity
 import com.example.skinmate.R
-import com.example.skinmate.ui.auth.AuthenticationFragment
+import com.example.skinmate.ui.home.accountDetails.AccountFragment
+import com.example.skinmate.ui.home.appointments.AppointmentFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : BaseActivity() {
@@ -22,9 +22,11 @@ class HomeActivity : BaseActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navigation_home -> replace(R.id.fragment_container,HomeFragment.newInstance())
-                R.id.navigation_appointment -> replace(R.id.fragment_container,AppointmentFragment.newInstance())
+                R.id.navigation_appointment -> replace(R.id.fragment_container,
+                    AppointmentFragment.newInstance())
                 R.id.navigation_notification -> replace(R.id.fragment_container,NotificationFragment.newInstance())
-                R.id.navigation_account -> replace(R.id.fragment_container,AccountFragment.newInstance())
+                R.id.navigation_account -> replace(R.id.fragment_container,
+                    AccountFragment.newInstance())
             }
             true
         }
