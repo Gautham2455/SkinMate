@@ -1,4 +1,4 @@
-package com.example.skinmate.ui.home
+package com.example.skinmate.ui.home.appointments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,8 @@ import com.example.skinmate.R
 class AppointmentFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = AppointmentFragment()
+        fun newInstance() =
+            AppointmentFragment()
     }
 
     override fun onCreateView(
@@ -18,7 +19,7 @@ class AppointmentFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        hideToolbar()
+        setTitle("My Appointments")
         val view = inflater.inflate(R.layout.fragment_appointment, container, false)
 
         return view

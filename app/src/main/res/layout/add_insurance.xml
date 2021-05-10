@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="@string/add_insurance"
+            android:background="@drawable/custom_button_fill"
             app:cornerRadius="50dp"
             android:backgroundTint="@color/theme_button"
             android:layout_marginTop="56dp">

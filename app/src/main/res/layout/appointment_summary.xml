@@ -220,7 +220,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_insurance_information"
-            android:text="@string/insurance_information"
+            android:text="@string/insurance_details"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="@dimen/layout_magin"
             app:layout_constraintStart_toStartOf="parent"
