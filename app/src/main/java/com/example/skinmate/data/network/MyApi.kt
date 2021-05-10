@@ -55,7 +55,7 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("customer/update-password")
     fun updatePassword(
-        @Field("email") customerId : String,
+        @Field("email") email : String,
         @Field("password")  oldPassword: String,
     ) : Call<List<updatePasswordResponse>>
 
@@ -108,6 +108,13 @@ interface   MyApi {
 
     @FormUrlEncoded
     @POST("customer/edit")
-    fun customerEdit()
+    fun customerEdit(
+        @Field("customerId") customerId:String,
+        @Field("address") address:String,
+        @Field("email") email : String,
+        @Field("insuranceInformation") insuranceInformation:String,
+        @Field("emeregencyContactName") emeregencyContactName:String,
+        @Field("emeregencyNumber") emeregencyNumber:String
+    ):Call<List<generalResponse>>
 
 }
