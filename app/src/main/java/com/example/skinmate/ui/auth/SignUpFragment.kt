@@ -212,8 +212,7 @@ class SignUpFragment : BaseFragment() {
         val ConfirmBtn = emailbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
         ConfirmBtn?.setOnClickListener {
             var otpemail =
-                emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString()
-                    .toInt()
+                emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
             emailOtpVerify(signUpBinding.eidEmail.text.toString(), otpemail)
             emailbottomSheetDialog.dismiss()
         }
