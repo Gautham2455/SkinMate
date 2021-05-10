@@ -34,9 +34,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(loginUserData.loginUserCall(requesrBody))
     }
 
-    fun postChangePassword(customerId : String,oldPassword : String,newPassword :String)
+    fun postChangePassword(token:String,customerId : String,oldPassword : String,newPassword :String)
     : LiveData<List<passwordChangeResponse>> = liveData(Dispatchers.IO){
-        emitSource(changePasswordData.changePasswordCall(customerId,oldPassword ,newPassword))
+        emitSource(changePasswordData.changePasswordCall(token,customerId,oldPassword ,newPassword))
     }
 
     fun postCheckDuplicateUser(id : String,phoneNumber : String) : LiveData<List<duplicateUserResponse>> =

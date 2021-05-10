@@ -24,11 +24,12 @@ class SlectDoctorFragment :BaseFragment(){
 
         val view:View = inflater?.inflate(R.layout.select_doctor, container, false)
 
-        proceed_btn.setOnClickListener(View.OnClickListener {
+        val proocdBtn=view.findViewById<Button>(R.id.proceed_btn)
+        proocdBtn.setOnClickListener {
             replace(R.id.fragment_container,ScheduleAppointmentFragment.newInstance())
-        })
+        }
 
-        return view.rootView
+        return view
     }
 
     companion object{

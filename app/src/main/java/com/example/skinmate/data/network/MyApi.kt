@@ -44,9 +44,11 @@ interface   MyApi {
         @Field("otp") otp : Int
     ) : Call<List<generalResponse>>
 
+
     @FormUrlEncoded
     @POST("customer/change-password")
     fun changePassword(
+        @Header("Authorization") token :String,
         @Field("customerId") customerId : String,
         @Field("oldPassword")  oldPassword: String,
         @Field("newPassword")  newPassword: String
@@ -61,39 +63,46 @@ interface   MyApi {
 
     @GET("customer/family-member/list/")
     fun familyList(
+        @Header("Authorization") token :String,
         @Query("customerId") customerId:String
     ) :Call<familyMemberList>
 
     @FormUrlEncoded
     @POST("customer/family-member/delete")
     fun deleteFamilyMember(
+        @Header("Authorization") token :String,
         @Field("familyProfileId") familyProfileId:String
     ): Call<List<generalResponse>>
 
     @GET("subtype-of-service/list")
     fun getSubService(
+        @Header("Authorization") token :String,
         @Query("serviceId") serviceId:String
     ):Call<subServiceResponse>
 
     @GET("customer/family-member/list/")
     fun famllyMember(
+        @Header("Authorization") token :String,
         @Query("familyProfileId") familyProfileId:String
     ):Call<familyMemberResponse>
 
     @GET("customer/view")
     fun customerDetails(
+        @Header("Authorization") token :String,
         @Query("id") id :String
     ):Call<customerViewResponse>
 
     @FormUrlEncoded
     @POST("customer/doctors/list")
     fun doctorList(
+        @Header("Authorization") token :String,
         @Field("serviceId") serviceId:String
     ):Call<doctorListResponse>
 
     @FormUrlEncoded
     @POST("customer/family/add")
     fun addFamilyMember(
+        @Header("Authorization") token :String,
         @Field("customerId") customerId:String,
         @Field("relationshipId") relationshipId:String,
         @Field("firstName") firstName:String,
@@ -109,7 +118,7 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("customer/edit")
     fun customerEdit(
-
+        @Header("Authorization") token :String,
         @Field("customerId") customerId:String,
         @Field("address") address:String,
         @Field("email") email : String,
@@ -121,6 +130,7 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("doctor/timeslots")
     fun bookedAppointments(
+        @Header("Authorization") token :String,
         @Field("doctorId") doctorId:String,
         @Field("date") date:String
     ):Call<bookedAppointmentResponse>
