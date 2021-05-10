@@ -43,7 +43,7 @@ class UserRepository private constructor(application: Application){
 
                 val data = response.body()
 
-                val msg = data!!.get(0).responseInformation
+//                val msg = data!!.get(0).responseInformation
 
                 serviceSetterGetter.postValue(response.body())
             }
