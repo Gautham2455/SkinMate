@@ -17,7 +17,7 @@ data class FamilyMemberDetails(
     @SerializedName("firstName")
     val firstName: String,
     @SerializedName("gender")
-    val gender: String,
+    val gender: Int,
     @SerializedName("insuranceInformation")
     val insuranceInformation: String,
     @SerializedName("lastName")

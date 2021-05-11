@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/layout_magin">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="Mary E. Jensen, MD FAAD,\nFASMS"
+                android:text="Mary E. Jensen, MD FAAD, FASMS"
                 android:textColor="@color/theme_color_dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/doctor_card"/>
+        app:layout_constraintTop_toBottomOf="@id/doctor_card"
+        android:layout_marginTop="@dimen/layout_magin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

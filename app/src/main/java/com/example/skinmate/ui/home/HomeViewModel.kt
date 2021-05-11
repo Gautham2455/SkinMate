@@ -18,6 +18,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val customerViewData=UserRepository.getInstance(application)
     private val editCustomerData=UserRepository.getInstance(application)
     private val bookedAppointmentData=UserRepository.getInstance(application)
+    private val addInsuranceData=UserRepository.getInstance(application)
     //[0].responseInformation.get(0).address
 
     fun getFamilyMembersList(token:String,customerid:String):LiveData<familyMemberList> = liveData(Dispatchers.IO) {
@@ -40,11 +41,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(doctorListData.doctorListCall(token,serviceId))
     }
 
-    fun postAddFamilyMember(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,
+    fun postAddFamilyMember(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,dob:String,
                             bloodGroup:String,address:String,insuranceInformation:String,emeregencyContactName:String,
                             emeregencyNumber:String):LiveData<List<generalResponse>> = liveData {
 
-                      emitSource(addFamilyMemberData.addFamilyMemberCall(token,customerId, relationshipId, firstName, lastName, gender, bloodGroup, address, insuranceInformation, emeregencyContactName, emeregencyNumber))
+                      emitSource(addFamilyMemberData.addFamilyMemberCall(token,customerId, relationshipId, firstName, lastName, gender,dob, bloodGroup, address, insuranceInformation, emeregencyContactName, emeregencyNumber))
     }
 
     fun getCustomerDetails(token:String,id:String):LiveData<customerViewResponse> = liveData(Dispatchers.IO) {
@@ -61,5 +62,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         liveData(Dispatchers.IO) {
             emitSource(bookedAppointmentData.getBookedAppointmentCall(token,doctorId, date))
         }
+
+
+
+    fun postAddInsurance(token:String,customerId:String,insuranceInformation:String):LiveData<List<generalResponse>> = liveData {
+        emitSource(addInsuranceData.postAddInsuranceCall(token,customerId,insuranceInformation))
+    }
 
 }

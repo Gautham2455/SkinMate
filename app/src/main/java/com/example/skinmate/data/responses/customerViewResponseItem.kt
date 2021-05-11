@@ -7,7 +7,7 @@ data class customerViewResponseItem(
     @SerializedName("Code")
     val code: Int,
     @SerializedName("responseInformation")
-    val responseInformation: ResponseInformationXX,
+    val responseInformation: List<ResponseInformationXX>,
     @SerializedName("responseMessage")
     val responseMessage: Boolean
 )

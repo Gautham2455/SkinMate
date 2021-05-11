@@ -13,6 +13,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
 
     lateinit var viewEditProfileBinding: FragmentViewEditProfileBinding
 
+
     companion object {
         fun newInstance() = ViewOrEditProfileFragment()
     }
@@ -24,6 +25,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
     ): View? {
         setTitleWithBackButton("Setup Profile")
         viewEditProfileBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_view_edit_profile,container,false)
+
 
         return viewEditProfileBinding.root
     }
