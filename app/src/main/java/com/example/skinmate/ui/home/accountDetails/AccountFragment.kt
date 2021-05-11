@@ -4,18 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.ProfileMenuBinding
+import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.WelcomeActivity
+import com.example.skinmate.ui.home.HomeViewModel
 
 class AccountFragment : BaseFragment() {
 
     private lateinit var profileMenuBinding: ProfileMenuBinding
+    private val viewModel by viewModels<HomeViewModel>()
 
     companion object {
         fun newInstance() =
@@ -35,7 +41,8 @@ class AccountFragment : BaseFragment() {
 
         profileMenuBinding.profileInfoCard.setOnClickListener { replace(R.id.fragment_container,ViewOrEditProfileFragment.newInstance()) }
 
-        profileMenuBinding.familyCard.setOnClickListener { replace(R.id.fragment_container,FamilyMemberListFragment.newInstance()) }
+        profileMenuBinding.familyCard.setOnClickListener {
+            replace(R.id.fragment_container,FamilyMemberListFragment.newInstance()) }
 
         profileMenuBinding.insuranceCard.setOnClickListener { replace(R.id.fragment_container,AddInsuranceFragment.newInstance()) }
 

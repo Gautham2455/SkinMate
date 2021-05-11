@@ -179,20 +179,6 @@ class AddFamilyMemberFragment : BaseFragment() {
                 val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
                 val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
 
-                println("Bearer $token")
-                println(custId)
-                println(relationshipid)
-                println(firstname)
-                println(lastname)
-                println(genderId)
-                println(dateofbirth)
-                println(bloodgroup_user)
-                println(mailingaddress)
-                println(insuranceinfo)
-                println(emergencycontactname)
-                println(emergencyphonenumber)
-
-
 
                 viewModel.postAddFamilyMember("Bearer $token",custId!!,relationshipid!!,firstname!!,lastname!!,genderId!!,dateofbirth!!
                 ,bloodgroup_user!!,mailingaddress!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(requireActivity()){

@@ -62,10 +62,10 @@ interface   MyApi {
     ) : Call<List<updatePasswordResponse>>
 
 
-    @GET("customer/family-member/list/")
+    @GET("customer/family-member/list/{customerId}")
     fun familyList(
         @Header("Authorization") token :String,
-        @Query("customerId") customerId:String
+        @Path("customerId") customerId:String
     ) :Call<familyMemberList>
 
     @FormUrlEncoded
@@ -138,5 +138,12 @@ interface   MyApi {
         @Field("date") date:String
     ):Call<bookedAppointmentResponse>
 
+    @FormUrlEncoded
+    @POST("customer/insurance/add")
+    fun addInsurance(
+        @Header("Authorization") token :String,
+        @Field("customerId") customerId:String,
+        @Field("insuranceInformation") insuranceInformation:String
+    ):Call<List<generalResponse>>
 
 }
