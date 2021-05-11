@@ -2,6 +2,7 @@ package com.example.skinmate.data.repositories
 
 import android.app.Application
 import android.util.Log
+
 import androidx.lifecycle.MutableLiveData
 import com.example.skinmate.data.network.RetrofitClient
 import com.example.skinmate.data.network.SecuredRetrofitClient
@@ -30,6 +31,7 @@ class UserRepository private constructor(application: Application){
     val customerView=MutableLiveData<customerViewResponse>()
     val editCustomerDetails=MutableLiveData<List<generalResponse>>()
     val bookedAppointment=MutableLiveData<bookedAppointmentResponse>()
+    val addInsurance = MutableLiveData<List<generalResponse>>()
 
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
@@ -145,7 +147,7 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object : Callback<List<generalResponse>>{
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onResponse(
@@ -214,7 +216,7 @@ class UserRepository private constructor(application: Application){
                 response: Response<familyMemberList>
             ) {
                 familyMemberList.postValue(response.body())
-                Log.v("family","list")
+                Log.v("user Repo",response.body().toString())
             }
         })
         return familyMemberList
@@ -371,6 +373,26 @@ class UserRepository private constructor(application: Application){
             }
         })
         return bookedAppointment
+    }
+
+    fun postAddInsuranceCall(token: String, customerId: String,  insuranceInformation:String): MutableLiveData<List<generalResponse>> {
+        val call = SecuredRetrofitClient.apiInterface.addInsurance(token,customerId,insuranceInformation)
+
+        call.enqueue(object : Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                addInsurance.postValue(response.body())
+            }
+
+        })
+        return addInsurance
+
     }
 
     companion object {

@@ -3,23 +3,28 @@ package com.example.skinmate.ui.home.accountDetails
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
-import com.example.skinmate.databinding.FamilyMembersOptionBinding
+import com.example.skinmate.data.responses.doctorListResponse
+import com.example.skinmate.data.responses.familyMemberList
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.ui.home.bookingAppointment.DoctorAdapter
+import com.example.skinmate.ui.home.bookingAppointment.ScheduleAppointmentFragment
 
 class FamilyMemberListFragment : BaseFragment() {
 
-    lateinit var familyMembersOptionBinding: FamilyMembersOptionBinding
+
     private val viewModel by viewModels<HomeViewModel>()
 
     companion object{
@@ -33,8 +38,8 @@ class FamilyMemberListFragment : BaseFragment() {
     ): View? {
         setTitleWithBackButton("Family Members")
 
-        familyMembersOptionBinding = DataBindingUtil.inflate(inflater, R.layout.family_members_option,container,false)
-
+        val view:View = inflater?.inflate(R.layout.family_members_option, container, false)
+        var familyResponse: familyMemberList?=null
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
             Context.MODE_PRIVATE)
@@ -43,13 +48,21 @@ class FamilyMemberListFragment : BaseFragment() {
 
 
         viewModel.getFamilyMembersList("Bearer $token",custId!!).observe(requireActivity()){
-            familyList ->
-            Log.d("family list",familyList[0].responseInformation[0].firstName)
+           familyResponse=it
+
+            val familyAdapter= FamilyAdapter(familyResponse!![0].responseInformation,requireContext())
+            val dl=view.findViewById<RecyclerView>(R.id.family_member_list)
+            dl.layoutManager= LinearLayoutManager(requireContext())
+            dl.setAdapter(familyAdapter)
         }
 
-        familyMembersOptionBinding.fab.setOnClickListener { replace(R.id.fragment_container,AddFamilyMemberFragment.newInstance()) }
+
+            val fabBtn =view.findViewById<View>(R.id.fab)
+        fabBtn.setOnClickListener {
+            replace(R.id.fragment_container,AddFamilyMemberFragment.newInstance())
+        }
 
 
-        return familyMembersOptionBinding.root
+        return view
     }
 }
