@@ -40,11 +40,11 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(doctorListData.doctorListCall(token,serviceId))
     }
 
-    fun postAddFamilyMember(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,
+    fun postAddFamilyMember(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,dob:String,
                             bloodGroup:String,address:String,insuranceInformation:String,emeregencyContactName:String,
                             emeregencyNumber:String):LiveData<List<generalResponse>> = liveData {
 
-                      emitSource(addFamilyMemberData.addFamilyMemberCall(token,customerId, relationshipId, firstName, lastName, gender, bloodGroup, address, insuranceInformation, emeregencyContactName, emeregencyNumber))
+                      emitSource(addFamilyMemberData.addFamilyMemberCall(token,customerId, relationshipId, firstName, lastName, gender,dob, bloodGroup, address, insuranceInformation, emeregencyContactName, emeregencyNumber))
     }
 
     fun getCustomerDetails(token:String,id:String):LiveData<customerViewResponse> = liveData(Dispatchers.IO) {

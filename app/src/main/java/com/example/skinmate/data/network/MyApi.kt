@@ -110,6 +110,7 @@ interface   MyApi {
         @Field("firstName") firstName:String,
         @Field("lastName") lastName:String,
         @Field("gender") gender:String,
+        @Field("dob")dob:String,
         @Field("bloodGroup") bloodGroup:String,
         @Field("address") address:String,
         @Field("insuranceInformation") insuranceInformation:String,

@@ -16,6 +16,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.doctorListResponse
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.auth.SignUpFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.select_doctor.view.*
 

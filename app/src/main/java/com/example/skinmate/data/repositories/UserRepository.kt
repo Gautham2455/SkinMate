@@ -293,12 +293,12 @@ class UserRepository private constructor(application: Application){
         return doctorList
     }
 
-    fun addFamilyMemberCall(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,
+    fun addFamilyMemberCall(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,dob:String,
                             bloodGroup:String,address:String,insuranceInformation:String,emeregencyContactName:String,
                             emeregencyNumber:String):MutableLiveData<List<generalResponse>>{
 
         val call =SecuredRetrofitClient.apiInterface.addFamilyMember(token,customerId,relationshipId,firstName,lastName,
-        gender,bloodGroup,address, insuranceInformation, emeregencyContactName, emeregencyNumber)
+        gender,dob,bloodGroup,address, insuranceInformation, emeregencyContactName, emeregencyNumber)
 
         call.enqueue(object :Callback<List<generalResponse>>{
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
