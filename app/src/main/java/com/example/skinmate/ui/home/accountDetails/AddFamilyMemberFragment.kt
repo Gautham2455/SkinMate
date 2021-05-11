@@ -2,6 +2,8 @@ package com.example.skinmate.ui.home.accountDetails
 
 import android.Manifest
 import android.app.DatePickerDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -13,24 +15,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.example.sampleslinmate.utils.InputValidation
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
-import com.example.skinmate.databinding.FamilyMembersOptionBinding
 import com.example.skinmate.databinding.FragmentAddFamilyMemberSetupProfileBinding
+import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.utils.StringToValue
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.util.*
 
 class AddFamilyMemberFragment : BaseFragment() {
 
     lateinit var addFamilyMemberSetupProfileBinding: FragmentAddFamilyMemberSetupProfileBinding
-
+    private val viewModel by viewModels<HomeViewModel>()
     private val inputValidation= InputValidation()
+    private val stringTovalue = StringToValue()
     var PERMISSION_ID = 1000
     private var fusedLocationClient: FusedLocationProviderClient? = null
     private var lastLocation: Location? = null
@@ -47,6 +58,7 @@ class AddFamilyMemberFragment : BaseFragment() {
     var emergencyphonenumber : String?=null
     var bloodgroup_user : String?=null
     var gender :String?= null
+    var genderId : String?=null
     var currentLocation : String? = null
 
     companion object{
@@ -153,12 +165,45 @@ class AddFamilyMemberFragment : BaseFragment() {
             relationshiptype =  addFamilyMemberSetupProfileBinding.etRelationshipType.text.toString()
 
 
+            relationshipid = stringTovalue.relationTypeTorealtionId(relationshiptype!!)
+            genderId = stringTovalue.genderToGenderId(gender!!)
+
+
             if (!inputval.isPhoneValid(emergencyphonenumber!!)) {
                 addFamilyMemberSetupProfileBinding.EmergencyNumberLayout.setError("Please Enter a valid Phone number")
             }
             else{
 
                 // call api to post data
+                val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
+                val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
+                val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
+
+                println("Bearer $token")
+                println(custId)
+                println(relationshipid)
+                println(firstname)
+                println(lastname)
+                println(genderId)
+                println(dateofbirth)
+                println(bloodgroup_user)
+                println(mailingaddress)
+                println(insuranceinfo)
+                println(emergencycontactname)
+                println(emergencyphonenumber)
+
+
+
+                viewModel.postAddFamilyMember("Bearer $token",custId!!,relationshipid!!,firstname!!,lastname!!,genderId!!,dateofbirth!!
+                ,bloodgroup_user!!,mailingaddress!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(requireActivity()){
+                    if(it.get(0).Code == 200)
+                        replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+
+                    else
+                        Toast.makeText(requireContext(),"Unsuccessfull",Toast.LENGTH_LONG).show()
+                }
+
+
             }
 
         }
