@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,9 +21,10 @@ import com.example.skinmate.R
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.OnClickInterface
+import com.example.skinmate.utils.OnClickInterface_
 
 
-class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface{
+class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInterface_ {
 
     private val viewModel by viewModels<HomeViewModel>()
     var MorningSlots= mutableListOf<String>(
@@ -118,9 +118,9 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface{
             }else   {
 
             }
-            val morningSlots_adapter=TimeSlotAdapter(MorningSlots,requireContext(),this)
+            val morningSlots_adapter=MorningTimeSlotAdapter(MorningSlots,requireContext(),this)
             rv_morningSlots.layoutManager = GridLayoutManager(context, 3)
-            val afternoonSlots_adapter=TimeSlotAdapter(AfternoonSlots,requireContext(),this)
+            val afternoonSlots_adapter=AfternoonTimeSlotAdapter(AfternoonSlots,requireContext(),this)
             rv_morningSlots.setAdapter(morningSlots_adapter)
             rv_afternoonSlots.layoutManager = GridLayoutManager(context, 3)
             rv_afternoonSlots.setAdapter(afternoonSlots_adapter)
@@ -140,6 +140,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface{
                     selectedDate="$year/$month/$dayOfMonth"
                 }
             })
+            appointmentDate=selectedDate
 
             replace(R.id.fragment_container, AppointmentSummary.newInstance())
         }
@@ -164,6 +165,11 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface{
     }
 
     override fun getViewPosition(position: Int) {
+        Log.v("Btn",position.toString())
+        appointmentSlots?.add("aa")
+    }
+
+    override fun getViewPosition_(position: Int) {
         Log.v("Btn",position.toString())
     }
 }

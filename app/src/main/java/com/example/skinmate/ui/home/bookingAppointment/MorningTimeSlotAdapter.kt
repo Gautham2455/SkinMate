@@ -1,7 +1,6 @@
 package com.example.skinmate.ui.home.bookingAppointment
 
 import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.utils.OnClickInterface
 
-class TimeSlotAdapter(val slots:MutableList<String>,val context:Context,val onClickPosition: OnClickInterface) :
-    RecyclerView.Adapter<TimeSlotAdapter.ButtonViewHolder>() {
+class MorningTimeSlotAdapter(val slots:MutableList<String>, val context:Context, val onClickPosition: OnClickInterface) :
+    RecyclerView.Adapter<MorningTimeSlotAdapter.ButtonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ButtonViewHolder {
         val itemView=LayoutInflater.from(parent.context)
@@ -25,11 +24,11 @@ class TimeSlotAdapter(val slots:MutableList<String>,val context:Context,val onCl
         holder.TimeSlots.setText(time)
         holder.TimeSlots.setOnClickListener(View.OnClickListener {
             holder.TimeSlots.setBackgroundColor(ContextCompat.getColor(context, R.color.theme_background_light))
-            holder.TimeSlots.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(view: View) {
-                    onClickPosition.getViewPosition(position)
-                }
-            })
+        })
+        holder.TimeSlots.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View) {
+                onClickPosition.getViewPosition(position)
+            }
         })
 
     }
