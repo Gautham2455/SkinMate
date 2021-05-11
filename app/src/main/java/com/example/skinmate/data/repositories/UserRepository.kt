@@ -239,7 +239,7 @@ class UserRepository private constructor(application: Application){
     }
 
     fun getSubServiceCall(token:String,serviceId:String):MutableLiveData<subServiceResponse>{
-        val call=RetrofitClient.apiInterface.getSubService(token,serviceId )
+        val call=SecuredRetrofitClient.apiInterface.getSubService(token,serviceId)
 
         call.enqueue(object : Callback<subServiceResponse>{
             override fun onFailure(call: Call<subServiceResponse>, t: Throwable) {

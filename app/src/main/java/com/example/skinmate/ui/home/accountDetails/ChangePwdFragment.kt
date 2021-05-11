@@ -48,7 +48,7 @@ class ChangePwdFragment : BaseFragment() {
                 val new_pwd = changePasswordBinding.etNewPassword.text.toString()
                 Log.v("CAhange Password",custId.toString())
 
-                    viewModel.postChangePassword(token!!,custId!!,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse ->
+                    viewModel.postChangePassword("Bearer $token",custId!!,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse ->
                         onSuccesfullChangePwd(pwdResponse.get(0).responseMessage)
                     }
 
