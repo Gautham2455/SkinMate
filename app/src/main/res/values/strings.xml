@@ -130,4 +130,59 @@
     <string name="relationship_type">Relationship Type</string>
     <string name="enter_relationship_type">Enter Relationship Type</string>
     <!--<string name="insurance_information">Insurance Information</string>-->
+
+    <string-array name="morningSlots">
+        <item>09:00</item>
+        <item>09:10</item>
+        <item>09:20</item>
+        <item>09:30</item>
+        <item>09:40</item>
+        <item>09:50</item>
+        <item>10:00</item>
+        <item>10:10</item>
+        <item>10:20</item>
+        <item>10:30</item>
+        <item>10:40</item>
+        <item>10:50</item>
+        <item>11:00</item>
+        <item>11:10</item>
+        <item>11:20</item>
+        <item>11:30</item>
+        <item>11:40</item>
+        <item>11:50</item>
+    </string-array>
+
+    <string-array name="afternoonSlot">
+        <item>01:00</item>
+        <item>01:10</item>
+        <item>01:20</item>
+        <item>01:30</item>
+        <item>01:40</item>
+        <item>01:50</item>
+        <item>02:00</item>
+        <item>02:10</item>
+        <item>02:20</item>
+        <item>02:30</item>
+        <item>02:40</item>
+        <item>02:50</item>
+        <item>03:00</item>
+        <item>03:10</item>
+        <item>03:20</item>
+        <item>03:30</item>
+        <item>03:40</item>
+        <item>03:50</item>
+        <item>04:00</item>
+        <item>04:10</item>
+        <item>04:20</item>
+        <item>04:30</item>
+        <item>04:40</item>
+        <item>04:50</item>
+        <item>05:00</item>
+        <item>05:10</item>
+        <item>05:20</item>
+        <item>05:30</item>
+        <item>05:40</item>
+        <item>05:50</item>
+    </string-array>
+
 </resources>

@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.ResponseInformationXXX
+import com.example.skinmate.utils.OnClickInterface
 
-class DoctorAdapter(val doctorArray:List<ResponseInformationXXX>, context:Context):
+class DoctorAdapter(val doctorArray:List<ResponseInformationXXX>, context:Context,val onClickPosition:OnClickInterface):
     RecyclerView.Adapter<DoctorAdapter.DoctorCardHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorCardHolder {
@@ -20,6 +21,7 @@ class DoctorAdapter(val doctorArray:List<ResponseInformationXXX>, context:Contex
     override fun onBindViewHolder(holder: DoctorCardHolder, position: Int) {
         val doctor=doctorArray[position]
         holder.doctorDetails.setText("${doctor.firstName} ${doctor.lastName} ${doctor.designation}")
+
     }
 
     override fun getItemCount(): Int {
@@ -28,5 +30,7 @@ class DoctorAdapter(val doctorArray:List<ResponseInformationXXX>, context:Contex
 
     class DoctorCardHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         var doctorDetails=itemView.findViewById<TextView>(R.id.doctor_details)
+
+
     }
 }
