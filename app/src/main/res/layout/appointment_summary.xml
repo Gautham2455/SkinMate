@@ -152,6 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/paying_self"
+                    android:theme="@style/RadioButtonAccent"
                     android:id="@+id/self_pay"
                     android:layout_weight="0.5"/>
 
@@ -159,6 +160,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/pay_with_insurance"
+                    android:theme="@style/RadioButtonAccent"
                     android:id="@+id/pay_insurance"
                     android:layout_weight="0.5"/>
             </RadioGroup>

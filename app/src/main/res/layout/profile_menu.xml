@@ -24,11 +24,11 @@
                 android:layout_margin="@dimen/layout_magin"
                 app:layout_constraintTop_toTopOf="parent">
 
-               <ImageView
+               <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/user_profile_img"
                    android:layout_width="110dp"
                    android:layout_height="110dp"
-                   android:id="@+id/user_profile_img"
-                   android:background="@color/theme_text"
+                   android:src="@drawable/ic_launcher_background"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toTopOf="parent"
                    app:layout_constraintBottom_toBottomOf="parent"/>
