@@ -5,22 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.ResponseInformationXXX
 import com.example.skinmate.utils.OnClickInterface
 
-class DoctorAdapter(val doctorArray:List<ResponseInformationXXX>, context:Context,val onClickPosition:OnClickInterface):
+class DoctorAdapter(
+    val doctorArray: List<ResponseInformationXXX>,
+    val context: Context,
+    val onClickPosition: OnClickInterface
+):
     RecyclerView.Adapter<DoctorAdapter.DoctorCardHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorCardHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.doctor_card,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.doctor_card,
+            parent,
+            false
+        )
         return DoctorCardHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: DoctorCardHolder, position: Int) {
         val doctor=doctorArray[position]
         holder.doctorDetails.setText("${doctor.firstName} ${doctor.lastName} ${doctor.designation}")
+            holder.doctorCard.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(view: View) {
+                    onClickPosition.getViewPosition(position)
+                }
+            })
 
     }
 
@@ -30,6 +44,7 @@ class DoctorAdapter(val doctorArray:List<ResponseInformationXXX>, context:Contex
 
     class DoctorCardHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         var doctorDetails=itemView.findViewById<TextView>(R.id.doctor_details)
+        val doctorCard=itemView.findViewById<CardView>(R.id.doctor_card)
 
 
     }
