@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.select_doctor.view.*
 class SlectDoctorFragment :BaseFragment(),OnClickInterface{
 
     private val viewModel by viewModels<HomeViewModel>()
+    var doctorResponse: doctorListResponse?=null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +36,7 @@ class SlectDoctorFragment :BaseFragment(),OnClickInterface{
         val view:View = inflater?.inflate(R.layout.select_doctor, container, false)
 
         setTitleWithBackButton("Select Doctor")
-        var doctorResponse: doctorListResponse?=null
+
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate", Context.MODE_PRIVATE)
         val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
@@ -68,6 +69,7 @@ class SlectDoctorFragment :BaseFragment(),OnClickInterface{
     }
 
     override fun getViewPosition(position: Int) {
+        Log.v("Position",position.toString()+" ")
 
     }
 
