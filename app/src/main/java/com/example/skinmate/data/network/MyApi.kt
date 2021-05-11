@@ -61,10 +61,10 @@ interface   MyApi {
         @Field("password")  oldPassword: String,
     ) : Call<List<updatePasswordResponse>>
 
-    @GET("customer/family-member/list/")
+    @GET("customer/family-member/list/{customerId}")
     fun familyList(
         @Header("Authorization") token :String,
-        @Query("customerId") customerId:String
+        @Path("customerId") customerId:String
     ) :Call<familyMemberList>
 
     @FormUrlEncoded

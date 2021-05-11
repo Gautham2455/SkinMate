@@ -214,6 +214,7 @@ class UserRepository private constructor(application: Application){
                 response: Response<familyMemberList>
             ) {
                 familyMemberList.postValue(response.body())
+                Log.v("family","list")
             }
         })
         return familyMemberList
