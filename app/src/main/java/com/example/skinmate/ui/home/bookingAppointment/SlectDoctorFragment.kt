@@ -19,9 +19,10 @@ import com.example.skinmate.data.responses.doctorListResponse
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.SignUpFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.utils.OnClickInterface
 import kotlinx.android.synthetic.main.select_doctor.view.*
 
-class SlectDoctorFragment :BaseFragment(){
+class SlectDoctorFragment :BaseFragment(),OnClickInterface{
 
     private val viewModel by viewModels<HomeViewModel>()
 
@@ -41,7 +42,7 @@ class SlectDoctorFragment :BaseFragment(){
         viewModel.getDoctorList(token,ServicesFragment.subServiceId!!).observe(requireActivity()){
             doctorResponse=it
 
-            val doctorAdapter=DoctorAdapter(doctorResponse!![0].responseInformation,requireContext())
+            val doctorAdapter=DoctorAdapter(doctorResponse!![0].responseInformation,requireContext(),this)
             val dl=view.findViewById<RecyclerView>(R.id.doctor_list)
             dl.layoutManager=LinearLayoutManager(requireContext())
             dl.setAdapter(doctorAdapter)
@@ -62,6 +63,13 @@ class SlectDoctorFragment :BaseFragment(){
     }
 
     companion object{
+        var  doctorID:String?="4"
         fun newInstance()=SlectDoctorFragment()
     }
+
+    override fun getViewPosition(position: Int) {
+
+    }
+
+
 }
