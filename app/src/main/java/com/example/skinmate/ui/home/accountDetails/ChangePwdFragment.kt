@@ -43,11 +43,12 @@ class ChangePwdFragment : BaseFragment() {
             if(inputValidate()){
                 val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
                 val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
+                val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
                 val old_pwd = changePasswordBinding.etCurrentPassword.text.toString()
                 val new_pwd = changePasswordBinding.etNewPassword.text.toString()
                 Log.v("CAhange Password",custId.toString())
 
-                    viewModel.postChangePassword(custId!!,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse ->
+                    viewModel.postChangePassword(token!!,custId!!,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse ->
                         onSuccesfullChangePwd(pwdResponse.get(0).responseMessage)
                     }
 
