@@ -7,7 +7,7 @@ data class subServiceResponseItem(
     @SerializedName("Code")
     val code: Int,
     @SerializedName("responseInformation")
-    val responseInformation: List<ResponseInformation>,
+    val responseInformation: ResponseInformation,
     @SerializedName("responseMessage")
     val responseMessage: Boolean
 )

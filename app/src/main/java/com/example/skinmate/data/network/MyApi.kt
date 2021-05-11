@@ -61,6 +61,7 @@ interface   MyApi {
         @Field("password")  oldPassword: String,
     ) : Call<List<updatePasswordResponse>>
 
+
     @GET("customer/family-member/list/{customerId}")
     fun familyList(
         @Header("Authorization") token :String,
@@ -74,7 +75,8 @@ interface   MyApi {
         @Field("familyProfileId") familyProfileId:String
     ): Call<List<generalResponse>>
 
-    @GET("subtype-of-service/list")
+
+    @GET("subtype-of-service/list/1")
     fun getSubService(
         @Header("Authorization") token :String,
         @Query("serviceId") serviceId:String
@@ -83,7 +85,7 @@ interface   MyApi {
     @GET("customer/family-member/list/")
     fun famllyMember(
         @Header("Authorization") token :String,
-        @Query("familyProfileId") familyProfileId:String
+        @Field("familyProfileId") familyProfileId:String
     ):Call<familyMemberResponse>
 
     @GET("customer/view")
@@ -93,7 +95,7 @@ interface   MyApi {
     ):Call<customerViewResponse>
 
     @FormUrlEncoded
-    @POST("customer/doctors/list")
+    @POST("doctors/list")
     fun doctorList(
         @Header("Authorization") token :String,
         @Field("serviceId") serviceId:String
