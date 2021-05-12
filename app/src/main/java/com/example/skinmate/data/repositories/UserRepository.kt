@@ -35,6 +35,7 @@ class UserRepository private constructor(application: Application){
     val addAppointment=MutableLiveData<List<generalResponse>>()
     val regiusterID=MutableLiveData<List<generalResponse>>()
     val verifyEmailOtp=MutableLiveData<List<generalResponse>>()
+    val mainService=MutableLiveData<MainServiceResponse>()
 
 
     fun getServicesApiCall(otp : Int,phoneNo :String): MutableLiveData<List<generalResponse>> {
@@ -450,6 +451,24 @@ class UserRepository private constructor(application: Application){
             }
         })
         return verifyEmailOtp
+    }
+
+    fun getMainService(token: String):MutableLiveData<MainServiceResponse>{
+        val call =SecuredRetrofitClient.apiInterface.getMainSerice(token)
+
+        call.enqueue(object :Callback<MainServiceResponse>{
+            override fun onFailure(call: Call<MainServiceResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<MainServiceResponse>,
+                response: Response<MainServiceResponse>
+            ) {
+                mainService.postValue(response.body())
+            }
+        })
+        return mainService
     }
 
 

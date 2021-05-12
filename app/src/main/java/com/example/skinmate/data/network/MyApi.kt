@@ -167,6 +167,11 @@ interface   MyApi {
         @Field("otp") otp: String
     ):Call<List<generalResponse>>
 
+    @GET("service/list")
+    fun getMainSerice(
+        @Header("Authorization") token:String
+    ):Call<MainServiceResponse>
+
 
 
 }
