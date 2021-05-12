@@ -26,7 +26,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val registerIData=UserRepository.getInstance(application)
     private val emailOtpData=UserRepository.getInstance(application)
 
-    fun getFamilyMembersList(token:String,customerid:String):LiveData<familyMemberList> = liveData(Dispatchers.IO) {
+    fun getFamilyMembersList(token:String,customerid:String):LiveData<List<familyMemberListItem>> = liveData(Dispatchers.IO) {
         emitSource(familyMemberListData.getFamilyMemberListCall(token,customerid))
     }
 

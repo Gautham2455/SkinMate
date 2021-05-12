@@ -18,6 +18,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.doctorListResponse
 import com.example.skinmate.data.responses.familyMemberList
+import com.example.skinmate.data.responses.familyMemberListItem
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.bookingAppointment.DoctorAdapter
@@ -40,7 +41,7 @@ class FamilyMemberListFragment : BaseFragment() {
         setTitleWithBackButton("Family Members")
 
         val view:View = inflater?.inflate(R.layout.family_members_option, container, false)
-        var familyResponse: familyMemberList?=null
+//        var familyResponse: familyMemberListItem?=null
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
             Context.MODE_PRIVATE)
@@ -49,14 +50,11 @@ class FamilyMemberListFragment : BaseFragment() {
 
 
         viewModel.getFamilyMembersList("Bearer $token",custId!!).observe(requireActivity()){
-           familyResponse=it
-            Log.v("Member",it[0].responseInformation[0].address)
-            val familyAdapter= FamilyAdapter(familyResponse!![0].responseInformation,requireContext())
-            val dl=view.findViewById<RecyclerView>(R.id.family_member_list)
-            dl.layoutManager= LinearLayoutManager(requireContext())
+                val familyAdapter = FamilyAdapter(it.get(0).responseInformation,requireContext())
+            val dl = view.findViewById<RecyclerView>(R.id.family_member_list)
+            dl.layoutManager = LinearLayoutManager(requireContext())
             dl.setAdapter(familyAdapter)
-            Log.v("Doctor",familyResponse!![0].responseInformation[0].firstName.toString())
-            Log.v("Doctor",it[0].responseInformation[0].firstName)
+            Log.v("familyList",it.get(0).responseInformation.get(0).firstName)
         }
 
 

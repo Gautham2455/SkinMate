@@ -22,7 +22,7 @@ class UserRepository private constructor(application: Application){
     val loginUser = MutableLiveData<loginResponse>()
     val changePassword = MutableLiveData<List<passwordChangeResponse>>()
     val updatePassword= MutableLiveData<List<updatePasswordResponse>>()
-    val familyMemberList=MutableLiveData<familyMemberList>()
+    val familyMemberList=MutableLiveData<List<familyMemberListItem>>()
     val familyMember=MutableLiveData<familyMemberResponse>()
     val subService=MutableLiveData<subServiceResponse>()
     val deleteFamilyMember=MutableLiveData<List<generalResponse>>()
@@ -37,9 +37,9 @@ class UserRepository private constructor(application: Application){
     val verifyEmailOtp=MutableLiveData<List<generalResponse>>()
 
 
-    fun getServicesApiCall(otp : Int,phoneNo :String): MutableLiveData<List<generalResponse>> {
+    fun getServicesApiCall(otp : Int,mobileNumber :String): MutableLiveData<List<generalResponse>> {
 
-        val call = RetrofitClient.apiInterface.verifyMobleOtp(otp,phoneNo)
+        val call = RetrofitClient.apiInterface.verifyMobleOtp(otp,mobileNumber)
 
         call.enqueue(object: Callback<List<generalResponse>> {
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
@@ -206,24 +206,45 @@ class UserRepository private constructor(application: Application){
         return emailOtp
     }
 
-    fun getFamilyMemberListCall(token:String,customerId:String) : MutableLiveData<familyMemberList>{
+//    fun getFamilyMemberListCall(token:String,customerId:String) : MutableLiveData<familyMemberList>{
+//        val call = SecuredRetrofitClient.apiInterface.familyList(token,customerId)
+//
+//        call.enqueue(object :Callback<familyMemberList>{
+//            override fun onFailure(call: Call<familyMemberList>, t: Throwable) {
+//
+//            }
+//
+//            override fun onResponse(
+//                call: Call<familyMemberList>,
+//                response: Response<familyMemberList>
+//            ) {
+//                familyMemberList.postValue(response.body())
+//                Log.v("user Repo",response.body().toString())
+//            }
+//        })
+//        return familyMemberList
+//    }
+
+    fun getFamilyMemberListCall(token:String,customerId: String):MutableLiveData<List<familyMemberListItem>>{
         val call = SecuredRetrofitClient.apiInterface.familyList(token,customerId)
 
-        call.enqueue(object :Callback<familyMemberList>{
-            override fun onFailure(call: Call<familyMemberList>, t: Throwable) {
+        call.enqueue(object :Callback<List<familyMemberListItem>>{
+            override fun onFailure(call: Call<List<familyMemberListItem>>, t: Throwable) {
 
             }
 
             override fun onResponse(
-                call: Call<familyMemberList>,
-                response: Response<familyMemberList>
+                call: Call<List<familyMemberListItem>>,
+                response: Response<List<familyMemberListItem>>
             ) {
                 familyMemberList.postValue(response.body())
-                Log.v("user Repo",response.body().toString())
             }
+
         })
         return familyMemberList
+
     }
+
 
     fun getFamilyMemberCall(token:String,id :String) : MutableLiveData<familyMemberResponse>
     {

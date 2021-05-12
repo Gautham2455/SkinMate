@@ -16,7 +16,7 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("customer/duplicate-checker")
     fun checkDuplicateUser(
-        @Field("id") id : String,
+        @Field("email") email : String,
         @Field("phoneNumber") phoneNumber: String
     ) : Call<List<duplicateUserResponse>>
 
@@ -29,7 +29,7 @@ interface   MyApi {
     @POST("customer/mobile-otp-verify")
     fun verifyMobleOtp(
         @Field("otp") otp : Int,
-        @Field("phoneNumber") phoneNo :String
+        @Field("mobileNumber") mobileNumber :String
     ) : Call<List<generalResponse>>
 
     @FormUrlEncoded
@@ -67,7 +67,7 @@ interface   MyApi {
     fun familyList(
         @Header("Authorization") token :String,
         @Path("customerId") customerId:String
-    ) :Call<familyMemberList>
+    ) :Call<List<familyMemberListItem>>
 
     @FormUrlEncoded
     @POST("customer/family-member/delete")

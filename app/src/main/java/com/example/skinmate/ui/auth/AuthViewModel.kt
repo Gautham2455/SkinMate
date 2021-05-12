@@ -22,8 +22,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private  val registerUserData = UserRepository.getInstance(application)
     private val updatepasswordData=UserRepository.getInstance(application)
 
-    fun getUser(otp: Int,phoneNo :String) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
-        emitSource(servicesLiveData.getServicesApiCall(otp,phoneNo))
+    fun getUser(otp: Int,mobileNumber :String) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
+        emitSource(servicesLiveData.getServicesApiCall(otp,mobileNumber))
     }
 
     fun postRegisterEmail(email : String) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
@@ -39,9 +39,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(changePasswordData.changePasswordCall(token,customerId,oldPassword ,newPassword))
     }
 
-    fun postCheckDuplicateUser(id : String,phoneNumber : String) : LiveData<List<duplicateUserResponse>> =
+    fun postCheckDuplicateUser(email : String,phoneNumber : String) : LiveData<List<duplicateUserResponse>> =
         liveData(Dispatchers.IO){
-        emitSource(checkDplicateUserData.checkDuplicateUserCall(id,phoneNumber))
+        emitSource(checkDplicateUserData.checkDuplicateUserCall(email,phoneNumber))
     }
 
     fun postRegisterUser(requesrBody: RequestBody) : LiveData<List<registerUserResponse>> = liveData(Dispatchers.IO) {
