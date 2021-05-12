@@ -40,6 +40,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
     private var fusedLocationClient: FusedLocationProviderClient? = null
     private var lastLocation: Location? = null
     var currentLocation : String? = null
+    var PERMISSION_ID = 1000
 
     companion object {
         fun newInstance() = ViewOrEditProfileFragment()
