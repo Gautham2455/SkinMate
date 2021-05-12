@@ -45,7 +45,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun postAddFamilyMember(token:String,customerId:String, relationshipId:String,firstName:String, lastName:String,gender:String,dob:String,
                             bloodGroup:String,address:String,insuranceInformation:String,emeregencyContactName:String,
-                            emeregencyNumber:String):LiveData<List<generalResponse>> = liveData {
+                            emeregencyNumber:String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
 
                       emitSource(addFamilyMemberData.addFamilyMemberCall(token,customerId, relationshipId, firstName, lastName, gender,dob, bloodGroup, address, insuranceInformation, emeregencyContactName, emeregencyNumber))
     }
@@ -69,6 +69,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun postAddInsurance(token:String,requestBody: RequestBody):LiveData<List<generalResponse>> = liveData {
         emitSource(addInsuranceData.postAddInsuranceCall(token,requestBody))
+
     }
 
 }

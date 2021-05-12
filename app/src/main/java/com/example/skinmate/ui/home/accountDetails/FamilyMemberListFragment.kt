@@ -3,6 +3,7 @@ package com.example.skinmate.ui.home.accountDetails
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +50,7 @@ class FamilyMemberListFragment : BaseFragment() {
 
         viewModel.getFamilyMembersList("Bearer $token",custId!!).observe(requireActivity()){
            familyResponse=it
-
+            Log.v("Member",it[0].responseInformation[0].address)
             val familyAdapter= FamilyAdapter(familyResponse!![0].responseInformation,requireContext())
             val dl=view.findViewById<RecyclerView>(R.id.family_member_list)
             dl.layoutManager= LinearLayoutManager(requireContext())
