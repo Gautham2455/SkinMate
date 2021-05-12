@@ -1,13 +1,18 @@
 package com.example.skinmate.ui.home.accountDetails
 
+import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -20,6 +25,9 @@ import com.example.skinmate.ui.auth.AuthViewModel
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.SignUpFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import java.util.*
 
 class ViewOrEditProfileFragment : BaseFragment() {
 
@@ -29,6 +37,9 @@ class ViewOrEditProfileFragment : BaseFragment() {
     var insuranceinfo : String?=null
     var emergencycontactname : String?=null
     var emergencyphonenumber : String?=null
+    private var fusedLocationClient: FusedLocationProviderClient? = null
+    private var lastLocation: Location? = null
+    var currentLocation : String? = null
 
     companion object {
         fun newInstance() = ViewOrEditProfileFragment()
@@ -41,6 +52,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
     ): View? {
         setTitleWithBackButton("Setup Profile")
         viewEditProfileBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_view_edit_profile,container,false)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
             Context.MODE_PRIVATE)
@@ -95,6 +107,84 @@ class ViewOrEditProfileFragment : BaseFragment() {
             }
         }
 
+       viewEditProfileBinding.tvCurrentLocation.setOnClickListener {if (!CheckPermission()) {
+
+            RequestPermission()
+        }
+        else {
+            viewEditProfileBinding.etMailingAddress.setText(getLastLocation())
+
+        }}
+
         return viewEditProfileBinding.root
+    }
+
+    private fun getLastLocation() : String? {
+        if (context?.let {
+                ActivityCompat.checkSelfPermission(
+                    it,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            } != PackageManager.PERMISSION_GRANTED && context?.let {
+                ActivityCompat.checkSelfPermission(
+                    it,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            } != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return null
+        }
+        fusedLocationClient?.lastLocation!!.addOnCompleteListener(requireActivity()) { task ->
+            if (task.isSuccessful && task.result != null) {
+                lastLocation = task.result
+                currentLocation= getCurrentLocation((lastLocation)!!.latitude,(lastLocation)!!.longitude)
+                Log.d("location address",currentLocation.toString())
+            }
+        }
+        return currentLocation
+    }
+
+
+    fun RequestPermission(){
+        requestPermissions(arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_ID)
+    }
+
+    fun CheckPermission():Boolean{
+
+        if(
+            context?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.ACCESS_COARSE_LOCATION) } == PackageManager.PERMISSION_GRANTED ||
+            context?.let { ActivityCompat.checkSelfPermission(it,android.Manifest.permission.ACCESS_FINE_LOCATION) } == PackageManager.PERMISSION_GRANTED
+        ){
+            return true
+        }
+
+        return false
+
+    }
+
+
+
+
+    private fun getCurrentLocation(lat: Double,long: Double):String {
+        var cityName: String = ""
+        var countryName = ""
+        var address = ""
+        var geoCoder = Geocoder(requireContext(), Locale.getDefault())
+        var Adress = geoCoder.getFromLocation(lat, long, 3)
+
+        address = Adress.get(0).getAddressLine(0)
+        cityName = Adress.get(0).locality
+        countryName = Adress.get(0).countryName
+        currentLocation = address + cityName + countryName
+        Log.d("Debug:", "Your City: " + cityName + " ; your Country " + countryName)
+        return currentLocation!!
     }
 }

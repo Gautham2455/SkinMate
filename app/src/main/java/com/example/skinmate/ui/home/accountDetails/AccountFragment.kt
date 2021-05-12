@@ -3,6 +3,7 @@ package com.example.skinmate.ui.home.accountDetails
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,14 +15,18 @@ import androidx.lifecycle.observe
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.ProfileMenuBinding
+import com.example.skinmate.ui.auth.SetupProfileFragment
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.WelcomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class AccountFragment : BaseFragment() {
 
     private lateinit var profileMenuBinding: ProfileMenuBinding
     private val viewModel by viewModels<HomeViewModel>()
+
 
     companion object {
         fun newInstance() =
@@ -36,7 +41,12 @@ class AccountFragment : BaseFragment() {
     ): View? {
         hideToolbar()
         profileMenuBinding = DataBindingUtil.inflate(inflater,R.layout.profile_menu,container,false)
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+
+
+        val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
+        val firstname=sharedPref!!.getString(SetupProfileFragment.FIRSTNAME,"none")
+        val lastname =sharedPref!!.getString(SetupProfileFragment.LASTNAME,"none")
+        profileMenuBinding.userName.setText(firstname +" " + lastname)
         profileMenuBinding.tvTouchId.setChecked(sharedPref!!.getBoolean(TOUCH_ID,false))
 
         profileMenuBinding.profileInfoCard.setOnClickListener { replace(R.id.fragment_container,ViewOrEditProfileFragment.newInstance()) }

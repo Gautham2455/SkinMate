@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.content.ContentProvider
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -67,7 +68,8 @@ class SetupProfileFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SetupProfileFragment()
-
+        const val FIRSTNAME:String="firstname"
+        const val LASTNAME:String="lastname"
     }
 
     override fun onCreateView(
@@ -169,6 +171,13 @@ class SetupProfileFragment : BaseFragment() {
             emergencycontactname=enterDetailsBinding.etEmergencyContactName.text.toString()
             emergencyphonenumber=enterDetailsBinding.etEmergencyContactNumber.text.toString()
             bloodgroup_user=enterDetailsBinding.autocompleteBloodGrp.text.toString()
+
+            val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor =  sharedPref!!.edit()
+            editor.putString(SetupProfileFragment.FIRSTNAME,firstname)
+            editor.putString(SetupProfileFragment.LASTNAME,lastname)
+            editor.apply()
+            editor.commit()
 
 
             if (!inputval.isPhoneValid(emergencyphonenumber!!)) {
