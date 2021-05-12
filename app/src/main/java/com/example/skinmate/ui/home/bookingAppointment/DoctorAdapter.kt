@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.ResponseInformationXXX
@@ -37,7 +38,13 @@ class DoctorAdapter(
             }
         })
         holder.doctorCard.setOnClickListener({
-            holder.done_mark.visibility=View.VISIBLE
+            if(holder.done_mark.isVisible){
+                holder.done_mark.visibility=View.GONE
+            }
+            else
+                holder.done_mark.visibility=View.VISIBLE
+
+
         })
 
     }

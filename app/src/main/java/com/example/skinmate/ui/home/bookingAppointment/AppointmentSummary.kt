@@ -54,7 +54,7 @@ class AppointmentSummary :BaseFragment(){
             val payment_type=view.findViewById<RadioButton>(payment.getCheckedRadioButtonId())
             val jsonObject= JSONObject()
             val time=JSONObject()
-            val aarray= arrayOf("aaa","sdad")
+            val aarray= arrayOf("10:00",":10:20")
             time.put("time",aarray)
             jsonObject.put("customerId",custId!!)
             jsonObject.put("doctorId",SlectDoctorFragment.doctorID)
@@ -70,10 +70,11 @@ class AppointmentSummary :BaseFragment(){
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
             viewModel.postAddAppointment(token,requestBody).observe(requireActivity()){
                 Log.v("Add",it.get(0).responseMessage.toString())
+                replace(R.id.fragment_container,ConfirmationFragment.newInstance())
             }
 
 
-            //replace(R.id.fragment_container,ConfirmationFragment.newInstance())
+
         })
 
         return view
