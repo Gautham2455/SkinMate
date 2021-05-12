@@ -156,7 +156,7 @@ class SignUpFragment : BaseFragment() {
 
     private fun mobOtpVerify(otpnumber: Int) {
         //call api to verfify otp sent to mob
-        viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
+        viewModel.getUser(otpnumber,signUpBinding.phoneEt.text.toString()).observe(requireActivity()) { otpResponse ->
             val responseMessageOtpVerification = otpResponse.get(0).responseMessage!!
             if (responseMessageOtpVerification == true) {
                 val dialog = Dialog(requireContext())

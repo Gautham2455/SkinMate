@@ -33,11 +33,13 @@ class UserRepository private constructor(application: Application){
     val bookedAppointment=MutableLiveData<bookedAppointmentResponse>()
     val addInsurance = MutableLiveData<List<generalResponse>>()
     val addAppointment=MutableLiveData<List<generalResponse>>()
+    val regiusterID=MutableLiveData<List<generalResponse>>()
+    val verifyEmailOtp=MutableLiveData<List<generalResponse>>()
 
 
-    fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
+    fun getServicesApiCall(otp : Int,phoneNo :String): MutableLiveData<List<generalResponse>> {
 
-        val call = RetrofitClient.apiInterface.verifyMobleOtp(otp)
+        val call = RetrofitClient.apiInterface.verifyMobleOtp(otp,phoneNo)
 
         call.enqueue(object: Callback<List<generalResponse>> {
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
@@ -412,6 +414,42 @@ class UserRepository private constructor(application: Application){
             }
         })
         return  addAppointment
+    }
+
+    fun postRegisterIDCall(token: String,customerId: String):MutableLiveData<List<generalResponse>>{
+        val call =SecuredRetrofitClient.apiInterface.registerId(token,customerId)
+
+        call.enqueue(object :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                regiusterID.postValue(response.body())
+            }
+        })
+        return  regiusterID
+    }
+
+    fun postVerifyEmailOtpCall(token: String,customerId: String,otp:String):MutableLiveData<List<generalResponse>>{
+        val call = SecuredRetrofitClient.apiInterface.emailOtpVerify(token, customerId, otp)
+
+        call.enqueue(object :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                verifyEmailOtp.postValue(response.body())
+            }
+        })
+        return verifyEmailOtp
     }
 
 

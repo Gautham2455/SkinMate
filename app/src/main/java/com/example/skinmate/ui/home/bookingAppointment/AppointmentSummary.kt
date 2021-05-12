@@ -73,7 +73,7 @@ class AppointmentSummary :BaseFragment(){
             }
 
 
-            replace(R.id.fragment_container,ConfirmationFragment.newInstance())
+            //replace(R.id.fragment_container,ConfirmationFragment.newInstance())
         })
 
         return view

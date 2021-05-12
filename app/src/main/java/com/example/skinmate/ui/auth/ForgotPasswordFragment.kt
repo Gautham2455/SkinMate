@@ -112,7 +112,7 @@ class ForgotPasswordFragment : BaseFragment() {
     private fun mobOtpVerify(otpnumber: Int) {
 
         //call api to verfify otp sent to mob
-        viewModel.getUser(otpnumber).observe(requireActivity()) { otpResponse ->
+        viewModel.getUser(otpnumber,"dsd").observe(requireActivity()) { otpResponse ->
             Toast.makeText(
                 requireActivity(),
                 otpResponse.get(0).responseInformation.toString(),
