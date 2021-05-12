@@ -111,27 +111,18 @@ class SignUpFragment : BaseFragment() {
             PHONE_NO?.let { it1 -> editor.putString(MOB_NO, it1) }
             editor.putString(USER_PASSWORD,PASSWORD!!)
             editor.commit()
-
-            if (validateInput()){
-
-                if(!checkUserExist())
-                    mobOtpBottomSheetfragment()
-                else
+            viewModel.postCheckDuplicateUser(EMAIL!!,PHONE_NO!!).observe(requireActivity()){
+                if(it.get(0).responseMessage == true)
                     signUpBinding.confirmPasswordLayout.setError("User Email/Phone Number Already Exist")
+                else if(it.get(0).responseMessage ==  false && it.get(0).responseInformation == "1")
+                    mobOtpBottomSheetfragment()
+                else if(it.get(0).responseMessage == false && it.get(0).responseInformation == "2")
+                    replace(R.id.fragment_container,SetupProfileFragment.newInstance())
             }
+
         }
 
         return signUpBinding.root
-    }
-
-    private fun checkUserExist(): Boolean {
-        var flag = false
-        viewModel.postCheckDuplicateUser(EMAIL!!, PHONE_NO!!)
-            .observe(requireActivity()) { response ->
-                if (response.get(0).responseMessage)
-                    flag = true
-            }
-        return flag
     }
 
     private fun mobOtpBottomSheetfragment() {
@@ -158,7 +149,7 @@ class SignUpFragment : BaseFragment() {
         //call api to verfify otp sent to mob
         viewModel.getUser(otpnumber,signUpBinding.phoneEt.text.toString()).observe(requireActivity()) { otpResponse ->
             val responseMessageOtpVerification = otpResponse.get(0).responseMessage!!
-            if (responseMessageOtpVerification == true) {
+            if (otpResponse.get(0).responseMessage!!) {
                 val dialog = Dialog(requireContext())
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 dialog.setContentView(R.layout.otp_verified)
@@ -167,19 +158,7 @@ class SignUpFragment : BaseFragment() {
                 val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
                 OkayBtn.setOnClickListener {
                     dialog.dismiss()
-                    viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString())
-                        .observe(requireActivity()) { otpResponse ->
-                            val responseMessageEmailRegister = otpResponse.get(0).responseMessage!!
-                            Toast.makeText(
-                                requireActivity(),
-                                otpResponse.get(0).responseInformation.toString(),
-                                Toast.LENGTH_LONG
-                            ).show()
-                            if (responseMessageEmailRegister == true) {
-                                dialog.dismiss()
-                                emailBottomSheetfragment()
-                            }
-                        }
+                   replace(R.id.fragment_container,SetupProfileFragment.newInstance())
                 }
 
             } else {
@@ -192,75 +171,6 @@ class SignUpFragment : BaseFragment() {
                 RetryBtn.setOnClickListener {
                     dialog.dismiss()
                     mobOtpBottomSheetfragment()
-                }
-            }
-        }
-
-    }
-
-
-    private fun emailBottomSheetfragment() {
-
-        val emailbottomSheetDialog = BottomSheetDialog(requireContext())
-        emailbottomSheetDialog.setContentView(R.layout.email_otp)
-        emailbottomSheetDialog.show()
-        emailbottomSheetDialog.findViewById<TextView>(R.id.tv_mob_number_or_mail_id)?.text =
-            signUpBinding.eidEmail.text.toString()
-        val countTime = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_timer)
-        val resendBtn = emailbottomSheetDialog.findViewById<TextView>(R.id.tv_Resend_otp)
-        otpTimer(countTime, resendBtn)
-        val ConfirmBtn = emailbottomSheetDialog.findViewById<Button>(R.id.btn_confirm)
-        ConfirmBtn?.setOnClickListener {
-            var otpemail =
-                emailbottomSheetDialog.findViewById<EditText>(R.id.et_enter_otp)!!.text.toString().toInt()
-            emailOtpVerify(signUpBinding.eidEmail.text.toString(), otpemail)
-            emailbottomSheetDialog.dismiss()
-        }
-    }
-
-    private fun emailOtpVerify(email: String, otpemail: Int) {
-
-        viewModel.postVerifyEmailOtp(email, otpemail).observe(requireActivity()) { otpResponse ->
-            val responseMessageEmailVerification = otpResponse.get(0).responseMessage
-            Toast.makeText(
-                requireActivity(),
-                otpResponse.get(0).responseInformation.toString(),
-                Toast.LENGTH_LONG
-            ).show()
-            Log.d("otp", otpResponse.get(0).responseMessage.toString())
-            if (responseMessageEmailVerification!!) {
-                val dialog = Dialog(requireContext())
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.setContentView(R.layout.emil_otp_verified)
-                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.show()
-                val OkayBtn = dialog.findViewById(R.id.btn_okay) as Button
-                OkayBtn.setOnClickListener {
-                    dialog.dismiss()
-                    replace(R.id.fragment_container, SetupProfileFragment.newInstance(), false)
-                }
-            } else {
-                val dialog = Dialog(requireContext())
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.setContentView(R.layout.otp_error)
-                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.show()
-                val RetryBtn = dialog.findViewById(R.id.btn_retry) as Button
-                RetryBtn.setOnClickListener {
-                    dialog.dismiss()
-                    viewModel.postRegisterEmail(signUpBinding.eidEmail.text.toString())
-                        .observe(requireActivity()) { otpResponse ->
-                            val responseMessageEmailRegister = otpResponse.get(0).responseMessage
-                            Toast.makeText(
-                                requireActivity(),
-                                otpResponse.get(0).responseInformation.toString(),
-                                Toast.LENGTH_LONG
-                            ).show()
-                            if (responseMessageEmailRegister == true) {
-                                emailBottomSheetfragment()
-                                dialog.dismiss()
-                            }
-                        }
                 }
             }
         }
