@@ -142,8 +142,7 @@ interface   MyApi {
     @POST("customer/insurance/add")
     fun addInsurance(
         @Header("Authorization") token :String,
-        @Field("customerId") customerId:String,
-        @Field("insuranceInformation") insuranceInformation:String
+        @Body requestBody: RequestBody
     ):Call<List<generalResponse>>
 
 }

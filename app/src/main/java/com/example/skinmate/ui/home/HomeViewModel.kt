@@ -7,6 +7,8 @@ import androidx.lifecycle.liveData
 import com.example.skinmate.data.repositories.UserRepository
 import com.example.skinmate.data.responses.*
 import kotlinx.coroutines.Dispatchers
+import okhttp3.RequestBody
+import retrofit2.http.Body
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val familyMemberListData=UserRepository.getInstance(application)
@@ -65,8 +67,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
 
 
-    fun postAddInsurance(token:String,customerId:String,insuranceInformation:String):LiveData<List<generalResponse>> = liveData {
-        emitSource(addInsuranceData.postAddInsuranceCall(token,customerId,insuranceInformation))
+    fun postAddInsurance(token:String,requestBody: RequestBody):LiveData<List<generalResponse>> = liveData {
+        emitSource(addInsuranceData.postAddInsuranceCall(token,requestBody))
     }
 
 }

@@ -15,6 +15,9 @@ import com.example.skinmate.R
 import com.example.skinmate.databinding.AddInsuranceBinding
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 
 class AddInsuranceFragment : BaseFragment() {
 
@@ -42,7 +45,15 @@ class AddInsuranceFragment : BaseFragment() {
             val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
             insuranceInfo = addInsuranceBinding.insuranceInformation.text.toString()
 
-            viewModel.postAddInsurance("Bearer $token",custId!!,insuranceInfo!!).observe(requireActivity()){
+            val jsonObject = JSONObject()
+            jsonObject.put("customerId", custId)
+            jsonObject.put("insuranceInfo",insuranceInfo)
+
+            val jsonObjectString = jsonObject.toString()
+
+            val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+
+            viewModel.postAddInsurance("Bearer $token",requestBody).observe(requireActivity()){
                 if(it.get(0).Code == 200)
                     Toast.makeText(requireActivity(),"Insurance Added Successfully",Toast.LENGTH_LONG).show()
             }
