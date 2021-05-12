@@ -65,7 +65,7 @@ interface   MyApi {
     @GET("customer/family-member/list/{customerId}")
     fun familyList(
         @Header("Authorization") token :String,
-        @Path("customerId", encoded=false) customerId:String
+        @Path("customerId") customerId:String
     ) :Call<familyMemberList>
 
     @FormUrlEncoded
@@ -88,10 +88,11 @@ interface   MyApi {
         @Field("familyProfileId") familyProfileId:String
     ):Call<familyMemberResponse>
 
-    @GET("customer/view")
+    @FormUrlEncoded
+    @POST("customer/view")
     fun customerDetails(
         @Header("Authorization") token :String,
-        @Query("id") id :String
+        @Field("customerId") customerId :String
     ):Call<customerViewResponse>
 
     @FormUrlEncoded
@@ -124,7 +125,7 @@ interface   MyApi {
         @Header("Authorization") token :String,
         @Field("customerId") customerId:String,
         @Field("address") address:String,
-        @Field("email") email : String,
+        @Field("email") email:String,
         @Field("insuranceInformation") insuranceInformation:String,
         @Field("emeregencyContactName") emeregencyContactName:String,
         @Field("emeregencyNumber") emeregencyNumber:String

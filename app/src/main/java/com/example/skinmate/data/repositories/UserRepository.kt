@@ -318,8 +318,8 @@ class UserRepository private constructor(application: Application){
         return addFamilyMember
     }
 
-    fun getCustomerViewCall(token:String,id:String):MutableLiveData<customerViewResponse>{
-        val call =SecuredRetrofitClient.apiInterface.customerDetails(token,id)
+    fun getCustomerViewCall(token:String,customerId:String):MutableLiveData<customerViewResponse>{
+        val call =SecuredRetrofitClient.apiInterface.customerDetails(token,customerId)
 
         call.enqueue(object :Callback<customerViewResponse>{
             override fun onFailure(call: Call<customerViewResponse>, t: Throwable) {
@@ -336,11 +336,11 @@ class UserRepository private constructor(application: Application){
         return  customerView
     }
 
-    fun postEditCustomerDetailsCall(token:String,customerId:String,address:String,email : String,
+    fun postEditCustomerDetailsCall(token:String,customerId:String,address:String,email:String,
                                 insuranceInformation:String,emeregencyContactName:String,
                                 emeregencyNumber:String):MutableLiveData<List<generalResponse>>{
 
-        val call=SecuredRetrofitClient.apiInterface.customerEdit(token,customerId, address, email, insuranceInformation, emeregencyContactName, emeregencyNumber)
+        val call=SecuredRetrofitClient.apiInterface.customerEdit(token,customerId, address,email, insuranceInformation, emeregencyContactName, emeregencyNumber)
 
         call.enqueue(object :Callback<List<generalResponse>>{
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {

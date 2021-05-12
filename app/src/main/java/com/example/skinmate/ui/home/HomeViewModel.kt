@@ -50,14 +50,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                       emitSource(addFamilyMemberData.addFamilyMemberCall(token,customerId, relationshipId, firstName, lastName, gender,dob, bloodGroup, address, insuranceInformation, emeregencyContactName, emeregencyNumber))
     }
 
-    fun getCustomerDetails(token:String,id:String):LiveData<customerViewResponse> = liveData(Dispatchers.IO) {
-        emitSource(customerViewData.getCustomerViewCall(token,id))
+    fun getCustomerDetails(token:String,customerId:String):LiveData<customerViewResponse> = liveData(Dispatchers.IO) {
+        emitSource(customerViewData.getCustomerViewCall(token,customerId))
     }
 
-    fun postEditCustomer(token:String,customerId:String,address:String,email : String,
+    fun postEditCustomer(token:String,customerId:String,address:String,email:String,
                          insuranceInformation:String,emeregencyContactName:String,
                          emeregencyNumber:String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
-                             emitSource(editCustomerData.postEditCustomerDetailsCall(token,customerId, address, email, insuranceInformation, emeregencyContactName, emeregencyNumber))
+                             emitSource(editCustomerData.postEditCustomerDetailsCall(token,customerId, address,email, insuranceInformation, emeregencyContactName, emeregencyNumber))
     }
 
     fun getBookedAppointments(token:String,doctorId:String,date:String):LiveData<bookedAppointmentResponse> =
