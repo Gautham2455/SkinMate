@@ -21,6 +21,8 @@ import com.example.skinmate.ui.auth.SignUpFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.OnClickInterface
 import kotlinx.android.synthetic.main.select_doctor.view.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class SlectDoctorFragment :BaseFragment(),OnClickInterface{
 

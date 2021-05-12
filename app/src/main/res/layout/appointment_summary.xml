@@ -20,7 +20,7 @@
             android:text="@string/service"
             android:layout_margin="@dimen/layout_magin"
             android:textColor="@color/theme_background_light"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/et_service"
@@ -29,7 +29,7 @@
             android:text="Medical"
             android:layout_marginLeft="@dimen/layout_magin"
             android:textColor="@color/theme_color_dark"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/tv_service"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -50,7 +50,7 @@
             android:text="@string/date_time"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="@dimen/layout_magin"
-            android:textSize="15sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/divider1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/date_time"
@@ -64,7 +64,7 @@
             android:text="6 July 2020, 10:00 EST"
             android:textColor="@color/theme_color_dark"
             android:layout_marginTop="10dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/tv_date_time"
             app:layout_constraintBottom_toTopOf="@id/divider2"
             app:layout_constraintStart_toStartOf="parent" />
@@ -76,7 +76,7 @@
             android:text="2 days 1hr"
             android:textColor="@color/theme_background_light"
             android:layout_marginTop="10dp"
-            android:textSize="15sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/tv_date_time"
             app:layout_constraintStart_toEndOf="@id/date_time" />
 
@@ -97,19 +97,33 @@
             android:layout_marginLeft="@dimen/layout_magin"
             android:text="@string/appointment_for"
             android:textColor="@color/theme_background_light"
-            android:textSize="15sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider2" />
 
-        <Spinner
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_marginTop="10dp"
             android:id="@+id/appointment_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Input_layout_style"
             android:textColor="@color/theme_color_dark"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginRight="@dimen/layout_magin"
-            app:layout_constraintTop_toBottomOf="@id/tv_appointment" />
+            app:layout_constraintTop_toBottomOf="@id/tv_appointment"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/appoint_for"
+                android:text="Self"
+                android:drawableRight="@drawable/arrow_down"
+                app:layout_constraintTop_toBottomOf="@id/appointment_spinner"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_insurance_details"
@@ -117,7 +131,7 @@
             android:layout_height="wrap_content"
             android:text="@string/insurance_details"
             android:textColor="@color/theme_color_dark"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="@dimen/layout_magin"
             app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/insurance"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:layout_marginLeft="@dimen/layout_magin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_insurance_details"
@@ -226,6 +240,7 @@
             android:text="@string/insurance_details"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="@dimen/layout_magin"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             android:textColor="@color/theme_background_light"
             app:layout_constraintTop_toBottomOf="@id/ll_insurance2"
@@ -266,6 +281,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_comments"
             android:text="@string/comments_if_any"
+            android:textSize="18sp"
             android:layout_marginLeft="@dimen/layout_magin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider4"
