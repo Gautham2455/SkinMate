@@ -274,8 +274,6 @@
             android:layout_weight="0.5"
             android:layout_margin="5dp"
 
-            app:strokeColor="@color/theme_text"
-            app:strokeWidth="1dp"
             >
 
         </com.google.android.material.card.MaterialCardView>
