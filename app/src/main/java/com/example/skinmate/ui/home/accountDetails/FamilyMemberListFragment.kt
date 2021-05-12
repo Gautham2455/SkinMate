@@ -55,6 +55,8 @@ class FamilyMemberListFragment : BaseFragment() {
             val dl=view.findViewById<RecyclerView>(R.id.family_member_list)
             dl.layoutManager= LinearLayoutManager(requireContext())
             dl.setAdapter(familyAdapter)
+            Log.v("Doctor",familyResponse!![0].responseInformation[0].firstName.toString())
+            Log.v("Doctor",it[0].responseInformation[0].firstName)
         }
 
 

@@ -53,7 +53,7 @@ class AddInsuranceFragment : BaseFragment() {
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
-            viewModel.postAddInsurance("Bearer $token",requestBody).observe(requireActivity()){
+            viewModel.postAddInsurance(requestBody,"Bearer $token").observe(requireActivity()){
                 if(it.get(0).Code == 200)
                     Toast.makeText(requireActivity(),"Insurance Added Successfully",Toast.LENGTH_LONG).show()
             }

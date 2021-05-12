@@ -65,7 +65,7 @@ interface   MyApi {
     @GET("customer/family-member/list/{customerId}")
     fun familyList(
         @Header("Authorization") token :String,
-        @Path("customerId") customerId:String
+        @Path("customerId", encoded=false) customerId:String
     ) :Call<familyMemberList>
 
     @FormUrlEncoded
@@ -141,8 +141,8 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("customer/insurance/add")
     fun addInsurance(
-        @Header("Authorization") token :String,
-        @Body requestBody: RequestBody
+        @Body requestBody: RequestBody,
+        @Header("Authorization") token :String
     ):Call<List<generalResponse>>
 
 }

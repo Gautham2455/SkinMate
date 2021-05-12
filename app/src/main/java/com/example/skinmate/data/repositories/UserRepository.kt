@@ -375,8 +375,8 @@ class UserRepository private constructor(application: Application){
         return bookedAppointment
     }
 
-    fun postAddInsuranceCall(token: String, requestBody: RequestBody): MutableLiveData<List<generalResponse>> {
-        val call = SecuredRetrofitClient.apiInterface.addInsurance(token,requestBody)
+    fun postAddInsuranceCall(requestBody: RequestBody,token: String): MutableLiveData<List<generalResponse>> {
+        val call = SecuredRetrofitClient.apiInterface.addInsurance(requestBody,token)
 
         call.enqueue(object : Callback<List<generalResponse>>{
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
