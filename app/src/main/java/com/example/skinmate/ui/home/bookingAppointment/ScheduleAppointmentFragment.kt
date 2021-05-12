@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.data.responses.bookedAppointmentResponse
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.OnClickInterface
@@ -27,6 +28,7 @@ import com.example.skinmate.utils.OnClickInterface_
 class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInterface_ {
 
     private val viewModel by viewModels<HomeViewModel>()
+
     var MorningSlots= mutableListOf<String>(
         "09:00",
         "09:10",
@@ -96,7 +98,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
         viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!, "2021-05/13").observe(
             requireActivity()
         ){
-
+            appointmentinfo=it
             Log.v("Book", it[0].responseInformation.toString())
 
             val rv_morningSlots=view.findViewById<RecyclerView>(R.id.morning_slots)
@@ -161,6 +163,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
     companion object{
         var appointmentDate:String?=null
         var appointmentSlots:MutableList<String>?=null
+        var appointmentinfo:bookedAppointmentResponse?=null
         fun newInstance()=ScheduleAppointmentFragment()
     }
 
@@ -170,6 +173,6 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
     }
 
     override fun getViewPosition_(position: Int) {
-        Log.v("Btn",position.toString())
+        Log.v("Btn",appointmentinfo!![0].responseInformation[position])
     }
 }
