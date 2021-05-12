@@ -69,8 +69,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
 
 
-    fun postAddInsurance(requestBody: RequestBody,token:String):LiveData<List<generalResponse>> = liveData {
-        emitSource(addInsuranceData.postAddInsuranceCall(requestBody,token))
+    fun postAddInsurance(token:String,requestBody: RequestBody):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
+        emitSource(addInsuranceData.postAddInsuranceCall(token,requestBody))
 
     }
 

@@ -95,6 +95,7 @@ class SetupProfileFragment : BaseFragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
+
         enterDetailsBinding.cardMale.setOnClickListener {
             if(!enterDetailsBinding.ImageViewSelectedGenderMale.isVisible) {
                 enterDetailsBinding.ImageViewSelectedGenderFemale.isVisible=false
@@ -183,12 +184,11 @@ class SetupProfileFragment : BaseFragment() {
             editor.commit()
 
 
+
             if (!inputval.isPhoneValid(emergencyphonenumber!!)) {
                 enterDetailsBinding.EmergencyNumberLayout.setError("Please Enter a valid Phone number")
             }
             else {
-
-                val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
                 val jsonObject=JSONObject()
 
