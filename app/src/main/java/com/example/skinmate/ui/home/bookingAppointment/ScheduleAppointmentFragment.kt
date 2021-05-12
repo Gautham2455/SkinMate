@@ -15,6 +15,7 @@ import android.widget.CalendarView.OnDateChangeListener
 import androidx.annotation.RequiresApi
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.BaseFragment

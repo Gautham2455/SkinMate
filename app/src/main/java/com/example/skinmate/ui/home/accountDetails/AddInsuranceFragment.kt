@@ -23,7 +23,7 @@ class AddInsuranceFragment : BaseFragment() {
 
     lateinit var addInsuranceBinding: AddInsuranceBinding
     private val viewModel by viewModels<HomeViewModel>()
-    var insuranceInfo : String?=null
+    var insuranceInformation : String?=null
 
     companion object {
         fun newInstance() = AddInsuranceFragment()
@@ -43,17 +43,17 @@ class AddInsuranceFragment : BaseFragment() {
                 Context.MODE_PRIVATE)
             val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
             val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
-            insuranceInfo = addInsuranceBinding.insuranceInformation.text.toString()
+            insuranceInformation = addInsuranceBinding.insuranceInformation.text.toString()
 
             val jsonObject = JSONObject()
             jsonObject.put("customerId", custId)
-            jsonObject.put("insuranceInfo",insuranceInfo)
+            jsonObject.put("insuranceInformation",insuranceInformation)
 
             val jsonObjectString = jsonObject.toString()
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
 
-            viewModel.postAddInsurance(requestBody,"Bearer $token").observe(requireActivity()){
+            viewModel.postAddInsurance("Bearer $token",requestBody).observe(requireActivity()){
                 if(it.get(0).Code == 200)
                     Toast.makeText(requireActivity(),"Insurance Added Successfully",Toast.LENGTH_LONG).show()
             }
