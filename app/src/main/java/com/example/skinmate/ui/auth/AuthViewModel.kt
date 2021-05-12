@@ -22,8 +22,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private  val registerUserData = UserRepository.getInstance(application)
     private val updatepasswordData=UserRepository.getInstance(application)
 
-    fun getUser(otp: Int) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
-        emitSource(servicesLiveData.getServicesApiCall(otp))
+    fun getUser(otp: Int,phoneNo :String) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
+        emitSource(servicesLiveData.getServicesApiCall(otp,phoneNo))
     }
 
     fun postRegisterEmail(email : String) : LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {

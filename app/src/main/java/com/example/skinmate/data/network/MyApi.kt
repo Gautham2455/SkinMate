@@ -28,7 +28,8 @@ interface   MyApi {
     @FormUrlEncoded
     @POST("customer/mobile-otp-verify")
     fun verifyMobleOtp(
-        @Field("otp") otp : Int
+        @Field("otp") otp : Int,
+        @Field("phoneNumber") phoneNo :String
     ) : Call<List<generalResponse>>
 
     @FormUrlEncoded
@@ -150,5 +151,22 @@ interface   MyApi {
         @Header("Authorization") token :String,
         @Body requestBody: RequestBody
     ):Call<List<generalResponse>>
+
+    @FormUrlEncoded
+    @POST("customer/email-send-otp")
+    fun registerId(
+        @Header("Authorization") token:String,
+        @Field("customerId") customerId: String
+    ):Call<List<generalResponse>>
+
+    @FormUrlEncoded
+    @POST("customer/email-verify")
+    fun emailOtpVerify(
+        @Header("Authorization") token:String,
+        @Field("customerId") customerId: String,
+        @Field("otp") otp: String
+    ):Call<List<generalResponse>>
+
+
 
 }
