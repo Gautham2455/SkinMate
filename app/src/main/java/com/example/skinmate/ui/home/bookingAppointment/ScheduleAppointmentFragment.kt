@@ -87,6 +87,8 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
         val view=inflater?.inflate(R.layout.schedule_appointment, container, false)
 
         val caldendar= view.findViewById<CalendarView>(R.id.date_picker_actions)
+        val rv_morningSlots=view.findViewById<RecyclerView>(R.id.morning_slots)
+        val rv_afternoonSlots=view.findViewById<RecyclerView>(R.id.afternoon_slots)
         val today = Calendar.getInstance().timeInMillis
         caldendar.setMinDate(today)
         var selectedDate:String?=null
@@ -95,69 +97,59 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
             Context.MODE_PRIVATE
         )
         val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN, "none")
-        viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!, "2021-05/13").observe(
-            requireActivity()
-        ){
-            appointmentinfo=it
-            Log.v("Book", it[0].responseInformation.toString())
-
-            val rv_morningSlots=view.findViewById<RecyclerView>(R.id.morning_slots)
-            val rv_afternoonSlots=view.findViewById<RecyclerView>(R.id.afternoon_slots)
-
-            if(it[0].code==200) {
-                if (it[0].responseInformation.isEmpty()) {
-
-                } else {
-
-                    for (bookedSlots in it[0].responseInformation) {
-                        if(MorningSlots.contains(bookedSlots)){
-                            MorningSlots.remove(bookedSlots)
-                        }
-                        if(AfternoonSlots.contains(bookedSlots))
-                            AfternoonSlots.remove(bookedSlots)
-                    }
-                }
-            }else   {
-
-            }
-            val morningSlots_adapter=MorningTimeSlotAdapter(MorningSlots,requireContext(),this)
-            rv_morningSlots.layoutManager = GridLayoutManager(context, 3)
-            val afternoonSlots_adapter=AfternoonTimeSlotAdapter(AfternoonSlots,requireContext(),this)
-            rv_morningSlots.setAdapter(morningSlots_adapter)
-            rv_afternoonSlots.layoutManager = GridLayoutManager(context, 3)
-            rv_afternoonSlots.setAdapter(afternoonSlots_adapter)
-            Log.v("Slots", AfternoonSlots.toString())
-        }
 
         var date = caldendar.getDate();
+        caldendar.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
+
+            date = caldendar.getDate()
+            selectedDate="$year/$month/$dayOfMonth"
+            appointmentDate="$year/$month/$dayOfMonth"
+
+            Log.v("Date","$year/$month/$dayOfMonth")
+
+            viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!,selectedDate!! ).observe(
+                requireActivity()
+            ){
+                appointmentinfo=it
+                Log.v("Book", it[0].responseInformation.toString())
+
+                if(it[0].code==200) {
+                    if (it[0].responseInformation.isEmpty()) {
+
+                    } else {
+
+                        for (bookedSlots in it[0].responseInformation) {
+                            if(MorningSlots.contains(bookedSlots)){
+                                MorningSlots.remove(bookedSlots)
+                            }
+                            if(AfternoonSlots.contains(bookedSlots))
+                                AfternoonSlots.remove(bookedSlots)
+                        }
+                    }
+                }else   {
+
+                }
+                val morningSlots_adapter=MorningTimeSlotAdapter(MorningSlots,requireContext(),this)
+                rv_morningSlots.layoutManager = GridLayoutManager(context, 3)
+                val afternoonSlots_adapter=AfternoonTimeSlotAdapter(AfternoonSlots,requireContext(),this)
+                rv_morningSlots.setAdapter(morningSlots_adapter)
+                rv_afternoonSlots.layoutManager = GridLayoutManager(context, 3)
+                rv_afternoonSlots.setAdapter(afternoonSlots_adapter)
+                Log.v("Slots", AfternoonSlots.toString())
+            }
+
+        })
 
 
         val proocdBtn=view.findViewById<Button>(R.id.proceedBtn)
         proocdBtn.setOnClickListener {
-
-            //var day=caldendar.setOnDateChangeListener()
-            caldendar.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
-                if (caldendar.getDate() !== date) {
-                    date = caldendar.getDate()
-                    selectedDate="$year/$month/$dayOfMonth"
-                }
-            })
-            appointmentDate=selectedDate
+            //appointmentDate=selectedDate
+            appointmentSlots?.add("10:10")
 
             replace(R.id.fragment_container, AppointmentSummary.newInstance())
         }
 
         return view
-    }
-
-    fun remove(arr: Array<String>, index: Int): Array<String> {
-        if (index < 0 || index >= arr.size) {
-            return arr
-        }
-
-        val result = arr.toMutableList()
-        result.removeAt(index)
-        return result.toTypedArray()
     }
 
     companion object{
@@ -173,6 +165,6 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
     }
 
     override fun getViewPosition_(position: Int) {
-        Log.v("Btn",appointmentinfo!![0].responseInformation[position])
+        Log.v("Btn",position.toString())
     }
 }

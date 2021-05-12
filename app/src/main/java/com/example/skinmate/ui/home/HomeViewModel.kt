@@ -7,6 +7,7 @@ import androidx.lifecycle.liveData
 import com.example.skinmate.data.repositories.UserRepository
 import com.example.skinmate.data.responses.*
 import kotlinx.coroutines.Dispatchers
+import okhttp3.RequestBody
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val familyMemberListData=UserRepository.getInstance(application)
@@ -19,6 +20,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val editCustomerData=UserRepository.getInstance(application)
     private val bookedAppointmentData=UserRepository.getInstance(application)
     private val addInsuranceData=UserRepository.getInstance(application)
+    private val addAppointmentData=UserRepository.getInstance(application)
     //[0].responseInformation.get(0).address
 
     fun getFamilyMembersList(token:String,customerid:String):LiveData<familyMemberList> = liveData(Dispatchers.IO) {
@@ -67,6 +69,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun postAddInsurance(token:String,customerId:String,insuranceInformation:String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
         emitSource(addInsuranceData.postAddInsuranceCall(token,customerId,insuranceInformation))
+    }
+
+    fun postAddAppointment(token:String,requestBody: RequestBody):LiveData<List<generalResponse>> = liveData (Dispatchers.IO){
+        emitSource(addAppointmentData.postAddAppointmentCall(token,requestBody))
     }
 
 }

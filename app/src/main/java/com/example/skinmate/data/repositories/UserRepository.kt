@@ -32,6 +32,7 @@ class UserRepository private constructor(application: Application){
     val editCustomerDetails=MutableLiveData<List<generalResponse>>()
     val bookedAppointment=MutableLiveData<bookedAppointmentResponse>()
     val addInsurance = MutableLiveData<List<generalResponse>>()
+    val addAppointment=MutableLiveData<List<generalResponse>>()
 
 
     fun getServicesApiCall(otp : Int): MutableLiveData<List<generalResponse>> {
@@ -373,6 +374,24 @@ class UserRepository private constructor(application: Application){
             }
         })
         return bookedAppointment
+    }
+
+    fun postAddAppointmentCall(token:String,requesrBody: RequestBody):MutableLiveData<List<generalResponse>>{
+        val call=SecuredRetrofitClient.apiInterface.addAppointment(token,requesrBody)
+
+        call.enqueue(object  :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                addAppointment.postValue(response.body())
+            }
+        })
+        return  addAppointment
     }
 
     fun postAddInsuranceCall(token: String, customerId: String,  insuranceInformation:String): MutableLiveData<List<generalResponse>> {
