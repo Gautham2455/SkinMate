@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
@@ -23,7 +22,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
     private val viewModel by viewModels<HomeViewModel>()
 
     companion object {
-        var category:String?=null
+        var MainService:String?=null
+        var MainServiceId:String?=null
         fun newInstance() = HomeFragment()
     }
 
@@ -57,6 +57,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
         view.medical_card.setOnClickListener(this)
         view.skin_care_card.setOnClickListener(this)
         view.telehealth_video_card.setOnClickListener(this)
+        view.card_5.setOnClickListener(this)
 
 
         return view
@@ -66,11 +67,27 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         val id=p0!!.getId()
         when(id){
-            R.id.telehealth_video_card -> category="Telehealth Video"
-            R.id.medical_card -> category="Medical"
-            R.id.cosmetic_card -> category="Cosmetic Appointment"
-            R.id.skin_care_card -> category="Superficial Radiation Therapy"
-            R.id.card_5 -> category="Skin Care"
+            R.id.telehealth_video_card ->{
+                MainService="Telehealth Video"
+                MainServiceId="1"
+            }
+
+            R.id.medical_card ->{
+                MainService="Medical"
+                MainServiceId="2"
+            }
+            R.id.cosmetic_card ->{
+                MainService="Cosmetic Appointment"
+                MainServiceId="3"
+            }
+            R.id.skin_care_card ->{
+                MainService="Superficial Radiation Therapy"
+                MainServiceId="4"
+            }
+            R.id.card_5 -> {
+                MainService="Skin Care"
+                MainServiceId="5"
+            }
         }
         replace(R.id.fragment_container,ServicesFragment.newInstance())
 

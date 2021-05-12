@@ -231,7 +231,7 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object :Callback<List<familyMemberListItem>>{
             override fun onFailure(call: Call<List<familyMemberListItem>>, t: Throwable) {
-
+                    Log.v("T->",t.toString())
             }
 
             override fun onResponse(

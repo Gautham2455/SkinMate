@@ -13,7 +13,7 @@ data class FamilyMemberDetails(
     @SerializedName("emeregencyContactName")
     val emeregencyContactName: String,
     @SerializedName("emeregencyNumber")
-    val emeregencyNumber: Int,
+    val emeregencyNumber: String,
     @SerializedName("firstName")
     val firstName: String,
     @SerializedName("gender")
@@ -21,5 +21,11 @@ data class FamilyMemberDetails(
     @SerializedName("insuranceInformation")
     val insuranceInformation: String,
     @SerializedName("lastName")
-    val lastName: String
+    val lastName: String,
+    @SerializedName("familyProfileId")
+    val familyProfileId:Int,
+    @SerializedName("customerId")
+    val customerId:String,
+    @SerializedName("relationshipId")
+    val relationshipId:String
 )

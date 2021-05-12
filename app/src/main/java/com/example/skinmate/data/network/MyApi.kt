@@ -77,10 +77,10 @@ interface   MyApi {
     ): Call<List<generalResponse>>
 
 
-    @GET("subtype-of-service/list/1")
+    @GET("subtype-of-service/list/{serviceId}")
     fun getSubService(
         @Header("Authorization") token :String,
-        @Query("serviceId") serviceId:String
+        @Path("serviceId") serviceId:String
     ):Call<subServiceResponse>
 
     @GET("customer/family-member/list/")
