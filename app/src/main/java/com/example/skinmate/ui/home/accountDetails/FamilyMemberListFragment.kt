@@ -41,7 +41,6 @@ class FamilyMemberListFragment : BaseFragment() {
         setTitleWithBackButton("Family Members")
 
         val view:View = inflater?.inflate(R.layout.family_members_option, container, false)
-//        var familyResponse: familyMemberListItem?=null
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
             Context.MODE_PRIVATE)
@@ -50,11 +49,15 @@ class FamilyMemberListFragment : BaseFragment() {
 
 
         viewModel.getFamilyMembersList("Bearer $token",custId!!).observe(requireActivity()){
-                val familyAdapter = FamilyAdapter(it.get(0).responseInformation,requireContext())
+            val familyAdapter = FamilyAdapter(it.get(0).responseInformation,requireContext())
             val dl = view.findViewById<RecyclerView>(R.id.family_member_list)
-            dl.layoutManager = LinearLayoutManager(requireContext())
-            dl.setAdapter(familyAdapter)
-            Log.v("familyList",it.get(0).responseInformation.get(0).firstName)
+
+            if(it.get(0).responseInformation.size!=0){
+                dl.layoutManager = LinearLayoutManager(requireContext())
+                dl.setAdapter(familyAdapter)
+                Log.v("familyList",it.get(0).responseInformation.get(0).firstName)
+            }
+
         }
 
 
@@ -62,7 +65,6 @@ class FamilyMemberListFragment : BaseFragment() {
         fabBtn.setOnClickListener {
             replace(R.id.fragment_container,AddFamilyMemberFragment.newInstance())
         }
-
 
         return view
     }
