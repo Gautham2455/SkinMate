@@ -15,7 +15,7 @@ class ConfirmationFragment:BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view=inflater?.inflate(R.layout.appointment_confirmation,container,false)
+        val view:View=inflater?.inflate(R.layout.appointment_confirmation,container,false)
 
         val doneBtn=view.findViewById<Button>(R.id.done_btn)
 

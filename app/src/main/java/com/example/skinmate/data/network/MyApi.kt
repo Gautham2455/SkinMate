@@ -139,11 +139,16 @@ interface   MyApi {
         @Field("date") date:String
     ):Call<bookedAppointmentResponse>
 
-    @FormUrlEncoded
     @POST("customer/insurance/add")
     fun addInsurance(
         @Body requestBody: RequestBody,
         @Header("Authorization") token :String
+    ):Call<List<generalResponse>>
+
+    @POST("doctor/appointment/add")
+    fun addAppointment(
+        @Header("Authorization") token :String,
+        @Body requestBody: RequestBody
     ):Call<List<generalResponse>>
 
 }

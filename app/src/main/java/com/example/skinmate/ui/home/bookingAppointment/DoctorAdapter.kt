@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -30,11 +31,14 @@ class DoctorAdapter(
     override fun onBindViewHolder(holder: DoctorCardHolder, position: Int) {
         val doctor=doctorArray[position]
         holder.doctorDetails.setText("${doctor.firstName} ${doctor.lastName} ${doctor.designation}")
-            holder.doctorCard.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(view: View) {
-                    onClickPosition.getViewPosition(position)
-                }
-            })
+        holder.doctorCard.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View) {
+                onClickPosition.getViewPosition(position)
+            }
+        })
+        holder.doctorCard.setOnClickListener({
+            holder.done_mark.visibility=View.VISIBLE
+        })
 
     }
 
@@ -45,7 +49,7 @@ class DoctorAdapter(
     class DoctorCardHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         var doctorDetails=itemView.findViewById<TextView>(R.id.doctor_details)
         val doctorCard=itemView.findViewById<CardView>(R.id.doctor_card)
-
+        val done_mark=itemView.findViewById<ImageView>(R.id.ImageView_selected_gender_male)
 
     }
 }
