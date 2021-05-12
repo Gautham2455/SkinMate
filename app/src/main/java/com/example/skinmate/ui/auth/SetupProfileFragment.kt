@@ -176,12 +176,7 @@ class SetupProfileFragment : BaseFragment() {
             emergencyphonenumber=enterDetailsBinding.etEmergencyContactNumber.text.toString()
             bloodgroup_user=enterDetailsBinding.autocompleteBloodGrp.text.toString()
 
-            val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
-            val editor: SharedPreferences.Editor =  sharedPref!!.edit()
-            editor.putString(SetupProfileFragment.FIRSTNAME,firstname)
-            editor.putString(SetupProfileFragment.LASTNAME,lastname)
-            editor.apply()
-            editor.commit()
+
 
 
 
@@ -189,9 +184,14 @@ class SetupProfileFragment : BaseFragment() {
                 enterDetailsBinding.EmergencyNumberLayout.setError("Please Enter a valid Phone number")
             }
             else {
+                val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
+                val editor: SharedPreferences.Editor =  sharedPref!!.edit()
+                editor.putString(SetupProfileFragment.FIRSTNAME,firstname)
+                editor.putString(SetupProfileFragment.LASTNAME,lastname)
+                editor.apply()
+                editor.commit()
 
                 val jsonObject=JSONObject()
-
                 jsonObject.put("phoneNumber",sharedPref!!.getString(SignUpFragment.MOB_NO!!,"00"))
                 jsonObject.put("email", sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none"))
                 jsonObject.put("firstName",firstname)

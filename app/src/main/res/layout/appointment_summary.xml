@@ -220,6 +220,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/select_from_existing"
                     android:id="@+id/existing_insurance"
+                    style="@style/RadioButtonAccent"
                     android:layout_weight="0.5"
                     />
 
@@ -228,6 +229,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
+                    style="@style/RadioButtonAccent"
                     android:layout_toRightOf="@id/existing_insurance"
                     android:text="@string/new_insurance_details" />
             </RadioGroup>
@@ -255,6 +257,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_insurance_information"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginRight="@dimen/layout_magin"
+            app:hintEnabled="false"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -293,6 +296,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/comment_layout"
             style="@style/Input_layout_style"
+            app:hintEnabled="false"
             app:layout_constraintTop_toBottomOf="@id/tv_comments"
             >
 

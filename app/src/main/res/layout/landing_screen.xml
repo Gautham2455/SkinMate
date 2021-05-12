@@ -72,7 +72,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_telehealth_video"
                     app:layout_constraintTop_toBottomOf="@id/telehealth_video_img"
-                    android:text="@string/telehealth_video_visits"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="center"/>
@@ -114,7 +113,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_medical"
                     app:layout_constraintTop_toBottomOf="@id/medical_img"
-                    android:text="@string/medical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -164,7 +162,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_cosmetic"
                     app:layout_constraintTop_toBottomOf="@id/cosmetic_img"
-                    android:text="@string/cosmetic_text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="center"/>
@@ -206,7 +203,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_skin_care"
                     app:layout_constraintTop_toBottomOf="@id/skin_care_img"
-                    android:text="@string/medical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 

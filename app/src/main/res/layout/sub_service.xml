@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="@dimen/layout_magin"
         android:text="@string/selectionheadding"
         android:textSize="18dp"
         android:textStyle="bold"

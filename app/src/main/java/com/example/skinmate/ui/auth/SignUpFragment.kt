@@ -112,7 +112,7 @@ class SignUpFragment : BaseFragment() {
             editor.putString(USER_PASSWORD,PASSWORD!!)
             editor.commit()
             viewModel.postCheckDuplicateUser(EMAIL!!,PHONE_NO!!).observe(requireActivity()){
-                if(it.get(0).responseMessage == true)
+                if(it.get(0).responseMessage)
                     signUpBinding.confirmPasswordLayout.setError("User Email/Phone Number Already Exist")
                 else if(it.get(0).responseMessage ==  false && it.get(0).responseInformation == "1")
                     mobOtpBottomSheetfragment()
