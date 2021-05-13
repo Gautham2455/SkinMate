@@ -16,7 +16,6 @@ import com.example.skinmate.databinding.SubServiceBinding
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
-import kotlinx.android.synthetic.main.activity_home.*
 
 class ServicesFragment : BaseFragment(),View.OnClickListener{
 
@@ -32,10 +31,10 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
 
         subServiceBinding=DataBindingUtil.inflate(inflater,R.layout.sub_service,container,false)
 
-        setTitleWithBackButton(HomeFragment.category)
+        setTitleWithBackButton(HomeFragment.MainService)
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate", Context.MODE_PRIVATE)
         val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
-        viewModel.getSubService("Bearer $token","2").observe(requireActivity()){
+        viewModel.getSubService("Bearer $token",HomeFragment.MainServiceId!!).observe(requireActivity()){
             Log.v("Serice",it[0].responseInformation.x1)
             subServiceBinding.tvMedical.setText(it[0].responseInformation.x1.toString()!!)
             subServiceBinding.tvSuperficialCard.setText(it[0].responseInformation.x2.toString()!!)

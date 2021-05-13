@@ -9,17 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.data.responses.familyMemberListItem
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
-import com.google.gson.JsonObject
+import com.example.skinmate.utils.OnClickInterface
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
-class AppointmentSummary :BaseFragment(){
+class AppointmentSummary :BaseFragment(),OnClickInterface{
 
     private val viewModel by viewModels<HomeViewModel>()
 
@@ -37,13 +41,38 @@ class AppointmentSummary :BaseFragment(){
         val time_date=view.findViewById<TextView>(R.id.date_time)
         val insuranceInfo=view.findViewById<EditText>(R.id.et_insurance_information)
         val comments=view.findViewById<EditText>(R.id.et_comments)
-        service.setText(HomeFragment.category)
+        service.setText(HomeFragment.MainService)
         val payment=view.findViewById<RadioGroup>(R.id.payment)
+        val appointmentFor=view.findViewById<EditText>(R.id.appoint_for)
+        val confirmbtn=view.findViewById<Button>(R.id.confirmbtn)
+
+
         time_date.setText(ScheduleAppointmentFragment.appointmentDate)
 
 
+        appointmentFor.setOnClickListener(View.OnClickListener {
+            val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
+                Context.MODE_PRIVATE)
+            val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
+            val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
+            val FamilyBottomSheet=BottomSheetDialog(requireContext())
+            FamilyBottomSheet.setContentView(R.layout.bootomsheet_familylist)
 
-        val confirmbtn=view.findViewById<Button>(R.id.confirmbtn)
+            viewModel.getFamilyMembersList(token,custId!!).observe(requireActivity()){
+                familyList=it
+                if(!it.get(0).responseInformation.isEmpty()){
+                    val rv_names=FamilyBottomSheet.findViewById<RecyclerView>(R.id.rv_familyList)
+                    val namesAdapter=FamilyNamesAdapter(requireContext(),it.get(0).responseInformation)
+                    rv_names?.layoutManager= LinearLayoutManager(requireContext())
+                    rv_names?.setAdapter(namesAdapter)
+                }
+                Log.v("family",it.get(0).responseInformation[0].firstName)
+                FamilyBottomSheet.show()
+
+            }
+
+
+        })
 
         confirmbtn.setOnClickListener(View.OnClickListener {
 
@@ -81,6 +110,11 @@ class AppointmentSummary :BaseFragment(){
     }
 
     companion object{
+        var familyList:List<familyMemberListItem>?=null
         fun newInstance()=AppointmentSummary()
+    }
+
+    override fun getViewPosition(position: Int) {
+        TODO("Not yet implemented")
     }
 }

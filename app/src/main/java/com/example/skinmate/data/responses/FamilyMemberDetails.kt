@@ -22,8 +22,10 @@ data class FamilyMemberDetails(
     val insuranceInformation: String,
     @SerializedName("lastName")
     val lastName: String,
+    @SerializedName("familyProfileId")
+    val familyProfileId:Int,
     @SerializedName("customerId")
     val customerId:String,
-    @SerializedName("familyProfileId")
-    val familyProfileId:Int
+    @SerializedName("relationshipId")
+    val relationshipId:String
 )

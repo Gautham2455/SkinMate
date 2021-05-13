@@ -72,7 +72,6 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
                 if (it[0].responseInformation.isEmpty()) {
 
                 } else {
-
                     for (bookedSlots in it[0].responseInformation) {
                         if(MorningSlots.contains(bookedSlots)){
                             MorningSlots.remove(bookedSlots)
@@ -95,14 +94,10 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
 
         var date = caldendar.getDate();
         caldendar.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
-
             date = caldendar.getDate()
-            selectedDate="$year"+"/"+"$month"+"/"+"$dayOfMonth"
             appointmentDate="$year/$month/$dayOfMonth"
-
             Log.v("Date","$year/$month/$dayOfMonth")
-
-            viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!,selectedDate!! ).observe(
+            viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!,appointmentDate!! ).observe(
                 requireActivity()
             ){
                 appointmentinfo=it
@@ -138,7 +133,6 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
 
         val proocdBtn=view.findViewById<Button>(R.id.proceedBtn)
         proocdBtn.setOnClickListener {
-            //appointmentDate=selectedDate
             appointmentSlots.removeAt(0)
             Log.v("Slos", appointmentSlots.toString())
 
@@ -149,14 +143,19 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
     }
 
     override fun getViewPosition(position: Int) {
-        Log.v("Btn","mor $position.toString()")
-
-        appointmentSlots!!.add(MorningSlots.get(position).toString())
+        Log.v("Btn","mor $position")
+        if(appointmentSlots.contains(MorningSlots.get(position)))
+            appointmentSlots.remove(MorningSlots.get(position))
+        else
+            appointmentSlots!!.add(MorningSlots.get(position))
     }
 
     override fun getViewPosition_(position: Int) {
-        Log.v("Btn","aft $position.toString()")
-        appointmentSlots!!.add(AfternoonSlots.get(position).toString())
+        Log.v("Btn","aft $position")
+        if(appointmentSlots.contains(AfternoonSlots.get(position)))
+            appointmentSlots.remove(AfternoonSlots.get(position))
+        else
+            appointmentSlots!!.add(AfternoonSlots.get(position))
     }
 
     companion object{
