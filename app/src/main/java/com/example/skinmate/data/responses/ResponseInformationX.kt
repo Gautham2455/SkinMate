@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponseInformationX(
     @SerializedName("familyProfileId")
     val familyProfileId: String,
-    @SerializedName("fristName")
-    val fristName: String
+    @SerializedName("firstName")
+    val firstName: String
+
 )

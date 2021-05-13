@@ -83,10 +83,10 @@ interface   MyApi {
         @Query("serviceId") serviceId:String
     ):Call<subServiceResponse>
 
-    @GET("customer/family-member/list/")
+    @GET("customer/family-member/list/{familyProfileId}")
     fun famllyMember(
         @Header("Authorization") token :String,
-        @Field("familyProfileId") familyProfileId:String
+        @Path("familyProfileId") familyProfileId:String
     ):Call<familyMemberResponse>
 
     @FormUrlEncoded

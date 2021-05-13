@@ -19,6 +19,7 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.doctorListResponse
 import com.example.skinmate.data.responses.familyMemberList
 import com.example.skinmate.data.responses.familyMemberListItem
+import com.example.skinmate.data.responses.familyMemberResponse
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.bookingAppointment.DoctorAdapter
@@ -28,6 +29,8 @@ class FamilyMemberListFragment : BaseFragment() {
 
 
     private val viewModel by viewModels<HomeViewModel>()
+    var familyResponse : familyMemberResponse?=null
+    lateinit var familyAdapter : FamilyAdapter
 
     companion object{
         fun newInstance() = FamilyMemberListFragment()
@@ -51,7 +54,6 @@ class FamilyMemberListFragment : BaseFragment() {
         viewModel.getFamilyMembersList("Bearer $token",custId!!).observe(requireActivity()){
             val familyAdapter = FamilyAdapter(it.get(0).responseInformation,requireContext())
             val dl = view.findViewById<RecyclerView>(R.id.family_member_list)
-
             if(it.get(0).responseInformation.size!=0){
                 dl.layoutManager = LinearLayoutManager(requireContext())
                 dl.setAdapter(familyAdapter)
@@ -59,6 +61,7 @@ class FamilyMemberListFragment : BaseFragment() {
             }
 
         }
+
 
 
             val fabBtn =view.findViewById<View>(R.id.fab)

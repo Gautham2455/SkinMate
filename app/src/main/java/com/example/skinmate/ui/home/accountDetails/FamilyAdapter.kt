@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.FamilyMemberDetails
+import com.example.skinmate.data.responses.ResponseInformationXX
+import com.example.skinmate.data.responses.ResponseInformationXXX
 
 class FamilyAdapter(val familyArray:List<FamilyMemberDetails>, context: Context) :
     RecyclerView.Adapter<FamilyAdapter.FamilyCardHolder>() {
