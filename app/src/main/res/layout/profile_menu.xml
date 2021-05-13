@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,19 +43,19 @@
                     android:textSize="20sp"
                     android:text="Some Name"
                     android:textColor="@color/theme_color_dark"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/poppins_semibold"/>
 
                 <TextView
                     android:id="@+id/tv_edit_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/user_name"
-                    app:layout_constraintBottom_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/user_profile_img"
                     android:layout_marginLeft="@dimen/layout_magin"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="View / Edit Profile"
                     android:textColor="@color/theme_text"
-                    />
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/user_profile_img"
+                    app:layout_constraintTop_toBottomOf="@id/user_name" />
 
                 <ImageView
                     android:layout_width="20dp"
@@ -103,12 +102,13 @@
                     android:id="@+id/tv_family"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/family_icon"
                     android:layout_marginLeft="@dimen/layout_magin"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/family_members"
                     android:textColor="@color/theme_color_dark"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/family_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -154,12 +154,13 @@
                     android:id="@+id/tv_insurance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/insurance_icon"
                     android:layout_marginLeft="@dimen/layout_magin"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/add_insurance"
                     android:textColor="@color/theme_color_dark"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/insurance_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -208,16 +209,17 @@
                     android:layout_width="277dp"
                     android:layout_height="46dp"
                     android:layout_marginLeft="@dimen/layout_magin"
-                    android:text="@string/touchid_authentication"
-                    app:trackTint="@drawable/drawable_switch_track"
-                    app:thumbTint="@drawable/drawable_switch_tumb"
-                    android:switchMinWidth="56dp"
-                    android:minWidth="100dp"
+                    android:fontFamily="@font/poppins_medium"
                     android:maxHeight="10dp"
+                    android:minWidth="100dp"
+                    android:switchMinWidth="56dp"
+                    android:text="@string/touchid_authentication"
                     android:textColor="@color/theme_color_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/touch_id_icon"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:thumbTint="@drawable/drawable_switch_tumb"
+                    app:trackTint="@drawable/drawable_switch_track" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -252,12 +254,13 @@
                     android:id="@+id/tv_change_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/change_password_icon"
                     android:layout_marginLeft="@dimen/layout_magin"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/change_password"
                     android:textColor="@color/theme_color_dark"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/change_password_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -305,12 +308,13 @@
                     android:id="@+id/tv_privacy_policy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/privacy_policy_icon"
                     android:layout_marginLeft="@dimen/layout_magin"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="Privacy Policy"
                     android:textColor="@color/theme_color_dark"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/privacy_policy_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -356,12 +360,13 @@
                     android:id="@+id/tv_terms_condition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/terms_condition_icon"
                     android:layout_marginLeft="@dimen/layout_magin"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="@string/terms_and_condition"
                     android:textColor="@color/theme_color_dark"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/terms_condition_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -380,15 +385,15 @@
         </com.google.android.material.card.MaterialCardView>
 
         <Button
+            android:id="@+id/logout_btn"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:id="@+id/logout_btn"
-            android:backgroundTint="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/terms_condition_card"
             android:layout_marginTop="@dimen/layout_magin"
-            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/logout"
             android:textColor="@color/red"
-            android:text="@string/logout"/>
+            app:layout_constraintTop_toBottomOf="@id/terms_condition_card" />
 
 
 

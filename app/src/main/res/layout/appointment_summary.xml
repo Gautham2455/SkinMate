@@ -15,24 +15,26 @@
             android:id="@+id/tv_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/service"
             android:layout_margin="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/service"
             android:textColor="@color/theme_background_light"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/et_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medical"
             android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Medical"
             android:textColor="@color/theme_color_dark"
             android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_service"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_service" />
 
         <View
             android:id="@+id/divider1"
@@ -47,38 +49,41 @@
             android:id="@+id/tv_date_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/date_time"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/date_time"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/divider1"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/date_time"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_semibold"
             android:text="6 July 2020, 10:00 EST"
             android:textColor="@color/theme_color_dark"
-            android:layout_marginTop="10dp"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_date_time"
             app:layout_constraintBottom_toTopOf="@id/divider2"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_date_time" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/remaining_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="2 days 1hr"
             android:textColor="@color/theme_background_light"
-            android:layout_marginTop="10dp"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_date_time"
-            app:layout_constraintStart_toEndOf="@id/date_time" />
+            app:layout_constraintStart_toEndOf="@id/date_time"
+            app:layout_constraintTop_toBottomOf="@id/tv_date_time" />
 
         <View
             android:id="@+id/divider2"
@@ -93,8 +98,9 @@
             android:id="@+id/tv_appointment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/appointment_for"
             android:textColor="@color/theme_background_light"
             android:textSize="18sp"
@@ -113,14 +119,15 @@
             android:layout_marginRight="@dimen/layout_magin"
             app:layout_constraintTop_toBottomOf="@id/tv_appointment"
             >
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/appoint_for"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/appoint_for"
-                android:text="Self"
                 android:drawableRight="@drawable/arrow_down"
-                app:layout_constraintTop_toBottomOf="@id/appointment_spinner"
-                />
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Self"
+                app:layout_constraintTop_toBottomOf="@id/appointment_spinner" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,11 +136,12 @@
             android:id="@+id/tv_insurance_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginTop="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/insurance_details"
             android:textColor="@color/theme_color_dark"
             android:textSize="18sp"
-            android:layout_marginLeft="@dimen/layout_magin"
-            android:layout_marginTop="@dimen/layout_magin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appointment_spinner" />
 
@@ -141,13 +149,14 @@
             android:id="@+id/tv_insurance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/insurance"
             android:textSize="18sp"
-            android:layout_marginLeft="@dimen/layout_magin"
+            app:layout_constraintBottom_toTopOf="@id/ll_insurance1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_insurance_details"
-            app:layout_constraintBottom_toTopOf="@id/ll_insurance1"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_insurance_details" />
 
         <LinearLayout
             android:id="@+id/ll_insurance1"
@@ -163,21 +172,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/paying_self"
-                    android:theme="@style/RadioButtonAccent"
-                    android:id="@+id/self_pay"
-                    android:layout_weight="0.5"/>
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/self_pay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/pay_with_insurance"
-                    android:theme="@style/RadioButtonAccent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/paying_self"
+                    android:theme="@style/RadioButtonAccent" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/pay_insurance"
-                    android:layout_weight="0.5"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/pay_with_insurance"
+                    android:theme="@style/RadioButtonAccent" />
             </RadioGroup>
         </LinearLayout>
 
@@ -194,8 +206,9 @@
             android:id="@+id/tv_insurance2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layout_magin"
             android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginTop="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/insurance"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -215,38 +228,42 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
+
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select_from_existing"
                     android:id="@+id/existing_insurance"
                     style="@style/RadioButtonAccent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    />
+                    android:fontFamily="@font/poppins_semibold"
+                    android:theme="@style/RadioButtonAccent"
+                    android:text="@string/select_from_existing" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/add_insurance"
+                    style="@style/RadioButtonAccent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    style="@style/RadioButtonAccent"
                     android:layout_toRightOf="@id/existing_insurance"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:theme="@style/RadioButtonAccent"
                     android:text="@string/new_insurance_details" />
             </RadioGroup>
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_insurance_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_insurance_information"
-            android:text="@string/insurance_details"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/insurance_details"
+            android:textColor="@color/theme_background_light"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/theme_background_light"
-            app:layout_constraintTop_toBottomOf="@id/ll_insurance2"
-            />
+            app:layout_constraintTop_toBottomOf="@id/ll_insurance2" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -259,13 +276,14 @@
             android:layout_marginRight="@dimen/layout_magin"
             app:hintEnabled="false"
             >
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_insurance_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/et_insurance_information"
+                android:fontFamily="@font/poppins_semibold"
                 android:hint="@string/insurance_information"
-                app:layout_constraintTop_toBottomOf="@id/ed_insurance_info"
-                />
+                app:layout_constraintTop_toBottomOf="@id/ed_insurance_info" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -280,15 +298,16 @@
             app:layout_constraintTop_toBottomOf="@id/ed_insurance_info" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_comments"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginTop="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/comments_if_any"
             android:textSize="18sp"
-            android:layout_marginLeft="@dimen/layout_magin"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider4"
-            android:layout_marginTop="@dimen/layout_magin"/>
+            app:layout_constraintTop_toBottomOf="@id/divider4" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -301,37 +320,37 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_comments"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/layout_magin"
-                android:layout_marginRight="@dimen/layout_magin"
                 android:layout_marginTop="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:id="@+id/et_comments"
+                android:layout_marginRight="@dimen/layout_magin"
+                android:fontFamily="@font/poppins_semibold"
                 android:hint="@string/enter_comments"
                 android:lines="3"
-                app:layout_constraintTop_toBottomOf="@id/tv_comments"
-                />
+                app:layout_constraintTop_toBottomOf="@id/tv_comments" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirmbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/confirmbtn"
-            android:text="Comfirm"
-            android:background="@drawable/custom_button_fill"
-            android:layout_marginRight="@dimen/layout_magin"
             android:layout_marginLeft="@dimen/layout_magin"
             android:layout_marginTop="10dp"
-            app:strokeWidth="@dimen/stroke_width"
-            app:strokeColor="@color/theme_background_light"
+            android:layout_marginRight="@dimen/layout_magin"
+            android:background="@drawable/custom_button_fill"
             android:backgroundTint="@color/theme_button"
-            app:layout_constraintTop_toBottomOf="@id/comment_layout"
-            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Comfirm"
+            app:cornerRadius="25dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:cornerRadius="25dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comment_layout"
+            app:strokeColor="@color/theme_background_light"
+            app:strokeWidth="@dimen/stroke_width" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

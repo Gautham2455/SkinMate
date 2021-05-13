@@ -31,27 +31,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center_horizontal"
             android:text="@string/do_you_want_to_delete"
             android:textAlignment="center"
             android:textColor="@color/theme_text"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="Poppins SemiBold"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tv_member_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="100dp"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center_horizontal"
             android:textAlignment="center"
             android:textColor="@color/theme_text"
-            android:textSize="15sp"
-            android:fontFamily="Poppins Medium"/>
+            android:textSize="15sp" />
 
 
     </LinearLayout>
@@ -71,11 +70,12 @@
             android:layout_width="149dp"
             android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            app:cornerRadius="0dp"
-            android:text="@string/no"
             android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/no"
             app:backgroundTint="@color/theme_button"
-            android:layout_weight="1"/>
+            app:cornerRadius="0dp" />
 
 
         <com.google.android.material.button.MaterialButton
@@ -83,11 +83,12 @@
             style="@style/Buttoncardviewstyle"
             android:layout_width="149dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:text="@string/yes"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="30dp"
             android:layout_weight="1"
-            app:backgroundTint="@color/theme_button"/>
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/yes"
+            app:backgroundTint="@color/theme_button" />
 
     </LinearLayout>
 

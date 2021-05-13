@@ -8,16 +8,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:id="@+id/tv_members"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_members"
+        android:layout_margin="@dimen/layout_magin"
+        android:fontFamily="@font/poppins_semibold"
         android:text="@string/members"
         android:textColor="@color/theme_color_dark"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/layout_magin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/divider1"

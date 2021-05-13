@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:fontFamily="Poppins SemiBold"
+        android:fontFamily="@font/poppins_semibold"
         android:gravity="center_horizontal"
         android:text="@string/no_active_appointments"
         android:textColor="@color/theme_text"
@@ -35,14 +35,14 @@
         android:id="@+id/btn_retry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:layout_marginRight="20dp"
+        android:background="@drawable/custom_button_fill"
+        android:fontFamily="@font/poppins_bold"
         android:text="@string/schedule_appointment"
         app:backgroundTint="@color/theme_button"
         app:cornerRadius="25dp"
-        android:background="@drawable/custom_button_fill"
-        app:layout_constraintTop_toBottomOf="@id/tv_no_active_appointment" />
+        app:layout_constraintTop_toBottomOf="@id/tv_no_active_appointment"
+        tools:layout_editor_absoluteX="20dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

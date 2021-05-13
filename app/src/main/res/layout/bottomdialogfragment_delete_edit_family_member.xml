@@ -10,16 +10,16 @@
         android:id="@+id/tv_edit_family_member"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Family Member"
-        android:gravity="center_horizontal"
-        android:textSize="24sp"
-        android:fontFamily="Poppins SemiBold"
-        android:textColor="@color/theme_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="30dp"
         android:clickable="true"
-        android:focusable="true"/>
+        android:focusable="true"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center_horizontal"
+        android:text="Edit Family Member"
+        android:textColor="@color/theme_button"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/appointment_option_divider1"
@@ -33,14 +33,14 @@
         android:id="@+id/tv_delete_member"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Member"
-        android:gravity="center_horizontal"
-        android:fontFamily="Poppins SemiBold"
-        android:textSize="24sp"
-        android:textColor="@color/red"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center_horizontal"
+        android:text="Delete Member"
+        android:textColor="@color/red"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appointment_option_divider1"/>
+        app:layout_constraintTop_toBottomOf="@id/appointment_option_divider1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
