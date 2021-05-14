@@ -21,6 +21,7 @@ import com.example.skinmate.utils.OnClickInterface
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
 import org.json.JSONObject
 
 class AppointmentSummary :BaseFragment(),OnClickInterface{
@@ -62,7 +63,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
                 familyList=it
                 if(!it.get(0).responseInformation.isEmpty()){
                     val rv_names=FamilyBottomSheet.findViewById<RecyclerView>(R.id.rv_familyList)
-                    val namesAdapter=FamilyNamesAdapter(requireContext(),it.get(0).responseInformation)
+                    val namesAdapter=FamilyNamesAdapter(requireContext(),it.get(0).responseInformation,this)
                     rv_names?.layoutManager= LinearLayoutManager(requireContext())
                     rv_names?.setAdapter(namesAdapter)
                 }
@@ -80,18 +81,23 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
                 Context.MODE_PRIVATE)
             val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
             val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
-            val payment_type=view.findViewById<RadioButton>(payment.getCheckedRadioButtonId())
+            var payment_type:String="Self"
+
+            when(payment.getCheckedRadioButtonId()){
+                R.id.self_pay->payment_type="self"
+                R.id.pay_insurance->payment_type="insurance"
+            }
             val jsonObject= JSONObject()
+            val jsonarray=JSONArray(ScheduleAppointmentFragment.appointmentSlots)
             val time=JSONObject()
-            val aarray= arrayOf("10:00",":10:20")
-            time.put("time",aarray)
+            time.put("time",jsonarray)
             jsonObject.put("customerId",custId!!)
             jsonObject.put("doctorId",SlectDoctorFragment.doctorID)
             jsonObject.put("serviceId",ServicesFragment.subServiceId)
-            jsonObject.put("familyProfileId","0")
+            jsonObject.put("familyProfileId",familyProfileId)
             jsonObject.put("timeOfAppointment",time)
             jsonObject.put("dateOfAppointment",ScheduleAppointmentFragment.appointmentDate)
-            jsonObject.put("paymentType",payment_type.getText())
+            jsonObject.put("paymentType",payment_type)
             jsonObject.put("insuranceInformation",insuranceInfo.getText())
             jsonObject.put("comments",comments.getText())
             val jsonObjectString = jsonObject.toString()
@@ -99,7 +105,12 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
             viewModel.postAddAppointment(token,requestBody).observe(requireActivity()){
                 Log.v("Add",it.get(0).responseMessage.toString())
-                replace(R.id.fragment_container,ConfirmationFragment.newInstance())
+                if(it.get(0).responseMessage==true){
+                    replace(R.id.fragment_container,ConfirmationFragment.newInstance())
+                }
+                else{
+                    Toast.makeText(requireContext(),"Not scheduled",0).show()
+                }
             }
 
 
@@ -111,10 +122,11 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
 
     companion object{
         var familyList:List<familyMemberListItem>?=null
+        var familyProfileId:String?=null
         fun newInstance()=AppointmentSummary()
     }
 
     override fun getViewPosition(position: Int) {
-        TODO("Not yet implemented")
+        familyProfileId= familyList!!.get(0).responseInformation[position].familyProfileId.toString()
     }
 }

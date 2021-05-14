@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="50dp"/>
 
-        <view
+        <View
             android:id="@+id/divider1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/stroke_width"
@@ -69,7 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             />
 
-        <view
+        <View
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/stroke_width"
@@ -99,7 +99,7 @@
             android:textColor="@color/theme_color_dark"
             />
 
-        <view
+        <View
             android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/stroke_width"
