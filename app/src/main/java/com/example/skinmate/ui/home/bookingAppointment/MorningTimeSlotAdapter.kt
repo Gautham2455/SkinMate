@@ -22,12 +22,10 @@ class MorningTimeSlotAdapter(val slots:MutableList<String>, val context:Context,
     override fun onBindViewHolder(holder: ButtonViewHolder, position: Int) {
         val time=slots.get(position)
         holder.TimeSlots.setText(time)
-        holder.TimeSlots.setOnClickListener(View.OnClickListener {
-            holder.TimeSlots.setBackgroundColor(ContextCompat.getColor(context, R.color.theme_background_light))
-        })
         holder.TimeSlots.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 onClickPosition.getViewPosition(position)
+                holder.TimeSlots.setBackgroundColor(ContextCompat.getColor(context, R.color.theme_background_light))
             }
         })
 

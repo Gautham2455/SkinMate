@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -14,39 +15,43 @@
         android:layout_marginTop="80dp"/>
 
     <TextView
+        android:id="@+id/tv_medical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_medical"
+        android:layout_margin="@dimen/layout_magin"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="left"
         android:text="@string/medical"
         android:textColor="@color/theme_background_light"
-        app:layout_constraintTop_toBottomOf="@id/divider1"
-        android:layout_margin="@dimen/layout_magin"
-        app:layout_constraintBottom_toTopOf="@id/tv_medical_id"
         android:textSize="16sp"
-        android:gravity="left"/>
+        app:layout_constraintBottom_toTopOf="@id/tv_medical_id"
+        app:layout_constraintTop_toBottomOf="@id/divider1"
+        tools:layout_editor_absoluteX="20dp" />
 
     <TextView
+        android:id="@+id/tv_medical_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_medical_id"
+        android:layout_margin="@dimen/layout_magin"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="right"
         android:text="ID- 36546"
         android:textColor="@color/theme_background_light"
         android:textSize="16sp"
-        android:gravity="right"
-        android:layout_margin="@dimen/layout_magin"
-        app:layout_constraintTop_toBottomOf="@id/divider1" />
+        app:layout_constraintTop_toBottomOf="@id/divider1"
+        tools:layout_editor_absoluteX="20dp" />
 
     <TextView
+        android:id="@+id/doctor_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/doctor_info"
-        android:text="1Craig A. Mohney, MD FAAD, FASMS"
-        android:textSize="16sp"
-        android:textColor="@color/theme_color_dark"
         android:layout_margin="@dimen/layout_magin"
-        app:layout_constraintTop_toBottomOf="@id/tv_medical_id"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="1Craig A. Mohney, MD FAAD, FASMS"
+        android:textColor="@color/theme_color_dark"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_medical_id" />
 
     <view
         android:id="@+id/divider2"
@@ -62,22 +67,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_magin"
-        app:layout_constraintTop_toBottomOf="@id/divider2"
+        android:fontFamily="@font/poppins_semibold"
         android:text="10-jun-2021"
-        app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/theme_color_dark"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider2" />
 
     <TextView
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/time"
-        android:text="10:00 AM"
         android:layout_margin="@dimen/layout_magin"
-        app:layout_constraintTop_toBottomOf="@id/date"
-        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="10:00 AM"
         android:textColor="@color/theme_color_dark"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date" />
 
     <view
         android:id="@+id/divider3"
@@ -88,14 +94,16 @@
         android:layout_marginTop="@dimen/layout_magin"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancel_appointment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cancel_appointment"
-        android:text="@string/cancel_appointment"
-        android:background="@drawable/custom_button_fill"
-        app:layout_constraintTop_toBottomOf="@id/divider3"
         android:layout_margin="20dp"
+        android:background="@drawable/custom_button_fill"
+        android:backgroundTint="@color/theme_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/cancel_appointment"
         app:cornerRadius="@dimen/button_corner_radius"
-        android:backgroundTint="@color/theme_button"/>
+        app:layout_constraintTop_toBottomOf="@id/divider3"
+        tools:layout_editor_absoluteX="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

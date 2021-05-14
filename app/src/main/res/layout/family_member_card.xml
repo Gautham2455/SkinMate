@@ -24,13 +24,14 @@
                 android:id="@+id/family_member_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/family_member_image"
                 android:layout_margin="@dimen/layout_magin"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/poppins_semibold"
                 android:text="Some Text"
                 android:textColor="@color/theme_color_dark"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/family_member_image"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/img_family_member_menu"
