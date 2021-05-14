@@ -31,27 +31,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppins_semibold"
             android:gravity="center_horizontal"
             android:text="@string/invalid_otp"
             android:textAlignment="center"
             android:textColor="@color/theme_text"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="Poppins SemiBold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="70dp"
+            android:fontFamily="@font/poppins_medium"
             android:gravity="center_horizontal"
             android:text="@string/otp_validation_failed_please_retry"
             android:textAlignment="center"
             android:textColor="@color/theme_text"
-            android:textSize="18sp"
-            android:fontFamily="Poppins Medium"/>
+            android:textSize="18sp" />
 
 
     </LinearLayout>
@@ -61,17 +61,17 @@
         android:id="@+id/btn_retry"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:text="@string/retry"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/dialog_button_background"
-        android:backgroundTint="@color/theme_button"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/dialog_button_background"
+        android:backgroundTint="@color/theme_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/retry"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/ll"
+        app:layout_constraintBottom_toBottomOf="@id/ll"
         app:layout_constraintEnd_toEndOf="@id/ll"
-        app:layout_constraintBottom_toBottomOf="@id/ll"/>
+        app:layout_constraintStart_toStartOf="@id/ll" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

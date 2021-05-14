@@ -69,12 +69,12 @@ interface   MyApi {
         @Path("customerId") customerId:String
     ) :Call<List<familyMemberListItem>>
 
-    @FormUrlEncoded
-    @POST("customer/family-member/delete")
-    fun deleteFamilyMember(
-        @Header("Authorization") token :String,
-        @Field("familyProfileId") familyProfileId:String
-    ): Call<List<generalResponse>>
+//    @FormUrlEncoded
+//    @POST("customer/family-member/delete")
+//    fun deleteFamilyMember(
+//        @Header("Authorization") token :String,
+//        @Field("familyProfileId") familyProfileId:String
+//    ): Call<List<generalResponse>>
 
 
     @GET("subtype-of-service/list/{serviceId}")
@@ -83,10 +83,10 @@ interface   MyApi {
         @Path("serviceId") serviceId:String
     ):Call<subServiceResponse>
 
-    @GET("customer/family-member/list/")
+    @GET("customer/family-member/list/{familyProfileId}")
     fun famllyMember(
         @Header("Authorization") token :String,
-        @Field("familyProfileId") familyProfileId:String
+        @Path("familyProfileId") familyProfileId:String
     ):Call<familyMemberResponse>
 
     @FormUrlEncoded
@@ -185,8 +185,28 @@ interface   MyApi {
         @Header("Authorization") token:String,
         @Field("appointmentId") appointmentId:String,
         @Field("status") status:String
+
     ):Call<List<generalResponse>>
 
 
+    @PUT("customer/family-member/edit/{familyProfileId}")
+    fun putFamilyMemberEdit(
+        @Header("Authorization") token: String,
+        @Path("familyProfileId") familyProfileId:String,
+        @Body requestBody : RequestBody
+    ):Call<List<generalResponse>>
+
+
+    @DELETE("customer/family-member/delete/{familyProfileId}")
+    fun deleteMember(
+        @Header("Authorization") token: String,
+        @Path("familyProfileId") familyProfileId: String
+    ):Call<List<generalResponse>>
+
+    @GET("customer/family-profile/{familyProfileId}")
+    fun viewFamilyMember(
+        @Header("Authorization") token:String,
+        @Path("familyProfileId") familyProfileId: String
+    ) :Call<customerViewResponse>
 
 }

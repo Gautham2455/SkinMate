@@ -34,6 +34,7 @@
                 android:id="@+id/doctor_details"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
                 android:gravity="left"
                 android:text="Mary E. Jensen, MD FAAD, FASMS"
                 android:textColor="@color/theme_color_dark"

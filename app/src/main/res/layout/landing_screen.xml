@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.core.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,14 +22,15 @@
         android:id="@+id/tv_title"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/logo"
         android:layout_marginTop="@dimen/layout_magin"
-        android:text="@string/landing_screen_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/poppins_semibold"
         android:gravity="center"
+        android:text="@string/landing_screen_title"
         android:textColor="@color/theme_color_dark"
-        android:textSize="17sp"/>
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,13 +68,14 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tv_telehealth_video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_telehealth_video"
-                    app:layout_constraintTop_toBottomOf="@id/telehealth_video_img"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:gravity="center"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/telehealth_video_img" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -109,12 +110,13 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tv_medical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_medical"
-                    app:layout_constraintTop_toBottomOf="@id/medical_img"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@id/medical_img" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -158,13 +160,14 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tv_cosmetic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_cosmetic"
-                    app:layout_constraintTop_toBottomOf="@id/cosmetic_img"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:gravity="center"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cosmetic_img" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -199,12 +202,13 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tv_skin_care"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_skin_care"
-                    app:layout_constraintTop_toBottomOf="@id/skin_care_img"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@id/skin_care_img" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -248,14 +252,15 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tv_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_5"
-                    app:layout_constraintTop_toBottomOf="@id/img_5"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
                     android:text="@string/cosmetic_text"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:gravity="center"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_5" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

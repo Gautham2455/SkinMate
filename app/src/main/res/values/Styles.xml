@@ -119,7 +119,7 @@
     </style>
 
     <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
-        <item name="android:colorAccent">@color/theme_background_dark</item>
+        <item name="android:colorAccent">@color/theme_button</item>
     </style>
 
 </resources>

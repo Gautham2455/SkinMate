@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,17 +15,19 @@
         app:layout_constraintBottom_toTopOf="@id/proceed_btn"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/proceed_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/proceed_btn"
-        android:text="@string/proceed"
-        android:background="@drawable/custom_button_fill"
-        android:enabled="true"
         android:layout_margin="@dimen/layout_padding"
-        app:layout_constraintTop_toBottomOf="@id/doctor_list"
         android:layout_marginTop="30dp"
+        android:background="@drawable/custom_button_fill"
+        android:backgroundTint="@color/theme_button"
+        android:enabled="true"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/proceed"
         app:cornerRadius="@dimen/button_corner_radius"
-        android:backgroundTint="@color/theme_button"/>
+        app:layout_constraintTop_toBottomOf="@id/doctor_list"
+        tools:layout_editor_absoluteX="20dp" />
 
 
 

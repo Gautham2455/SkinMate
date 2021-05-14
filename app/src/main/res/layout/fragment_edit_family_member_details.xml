@@ -610,14 +610,14 @@
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_member"
+                android:id="@+id/btn_save_changes"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/custom_button_fill"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Add Member"
+                android:text="Save changes"
                 app:backgroundTint="@color/theme_button"
                 app:cornerRadius="25dp" />
         </LinearLayout>

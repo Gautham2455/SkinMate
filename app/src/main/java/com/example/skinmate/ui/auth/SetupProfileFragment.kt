@@ -190,7 +190,6 @@ class SetupProfileFragment : BaseFragment() {
                 editor.putString(SetupProfileFragment.LASTNAME,lastname)
                 editor.apply()
                 editor.commit()
-
                 val jsonObject=JSONObject()
                 jsonObject.put("phoneNumber",sharedPref!!.getString(SignUpFragment.MOB_NO!!,"00"))
                 jsonObject.put("email", sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none"))

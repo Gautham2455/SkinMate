@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
@@ -15,8 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:textColor="@color/theme_text"
-            android:text="@string/insurance_information"/>
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/insurance_information"
+            android:textColor="@color/theme_text" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/insurance_info"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -32,22 +32,25 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/insurance_information"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_insurance_information"
                 android:layout_marginTop="10dp"
-                android:textColorHint="@color/theme_background_light"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"/>
+                android:fontFamily="@font/poppins_semibold"
+                android:hint="@string/enter_insurance_information"
+                android:textColorHint="@color/theme_background_light" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_add_insurance"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="@string/add_insurance"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
             android:background="@drawable/custom_button_fill"
-            app:cornerRadius="50dp"
             android:backgroundTint="@color/theme_button"
-            android:layout_marginTop="56dp">
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/add_insurance"
+            app:cornerRadius="50dp">
 
         </com.google.android.material.button.MaterialButton>
     </LinearLayout>
