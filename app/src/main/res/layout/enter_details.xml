@@ -359,7 +359,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:fontFamily="@font/poppins_medium"
-                    android:gravity="right"
+                    android:gravity="left"
                     android:linksClickable="true"
                     android:text="@string/use_current_location"
                     android:textColor="#699CAF"
@@ -526,7 +526,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/below_i_agree"
+                    android:text="below,"
                     android:textColor="@color/theme_text"
                     android:textSize="16sp" />
 
@@ -545,7 +545,7 @@
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="center_horizontal"
-                    android:text="@string/to_skinmate_s"
+                    android:text="I agree to SkinMate's"
                     android:textColor="@color/theme_text"
                     android:textSize="16sp" />
 
@@ -558,23 +558,23 @@
                     android:textColor="@color/theme_text"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="@string/and"
-                    android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
 
                 <TextView
-                    android:id="@+id/tv_privacy"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="@string/privacy_policy"
+                    android:text= "and Privacy Policy"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
-
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"/>
 
             </LinearLayout>
 

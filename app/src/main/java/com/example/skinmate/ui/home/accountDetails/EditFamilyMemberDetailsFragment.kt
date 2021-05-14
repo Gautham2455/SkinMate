@@ -106,8 +106,9 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
         viewModel.getMemberView("Bearer $token",familyProfileId).observe(requireActivity()){
             if(it.get(0).responseMessage){
                 editFamilyMemberDetailsBinding.etFirstName.setText(it.get(0).responseInformation.get(0).firstName)
+                Log.v("Firstname",it.get(0).responseInformation.get(0).firstName)
                 editFamilyMemberDetailsBinding.etLastName.setText(it.get(0).responseInformation.get(0).lastName)
-                editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.get(0).dob.date)
+                editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.get(0).dob)
                 editFamilyMemberDetailsBinding.etEmergencyContactName.setText(it.get(0).responseInformation.get(0).emeregencyContactName)
                 editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.get(0).emeregencyNumber)
                 editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.get(0).address)
@@ -160,7 +161,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
                 val jsonObjectString = jsonObject.toString()
 
                 val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-                viewModel.putFamilyMemberEdidtDetails("Bearer $token",familyProfileId!!,requestBody).observe(requireActivity()){
+                viewModel.putFamilyMemberEdidtDetails("Bearer $token",familyProfileId,requestBody).observe(requireActivity()){
                     if(it.get(0).responseMessage==true)
                         Toast.makeText(requireContext(),"Changes Updated Successfully",Toast.LENGTH_LONG).show()
                 }

@@ -182,6 +182,8 @@
                 android:enabled="false"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/proceed"
+                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:backgroundTint="@color/theme_button"

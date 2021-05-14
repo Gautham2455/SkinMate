@@ -120,7 +120,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(deleteMemberData.deleteFamilyMemberCall(token,familyProfileId))
     }
 
-    fun getMemberView(token:String,familyProfileId:String):LiveData<customerViewResponse> = liveData(Dispatchers.IO) {
+    fun getMemberView(token:String,familyProfileId:String):LiveData<memberViewResponse> = liveData(Dispatchers.IO) {
         emitSource(memberViewData.getMemberViewCall(token,familyProfileId))
     }
 

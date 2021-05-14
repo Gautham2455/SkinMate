@@ -44,10 +44,10 @@ class AccountFragment : BaseFragment() {
 
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
-        val firstname=sharedPref!!.getString(SetupProfileFragment.FIRSTNAME,"none")
-        val lastname =sharedPref!!.getString(SetupProfileFragment.LASTNAME,"none")
-        profileMenuBinding.userName.setText(firstname +" " + lastname)
         profileMenuBinding.tvTouchId.setChecked(sharedPref!!.getBoolean(TOUCH_ID,false))
+
+
+        profileMenuBinding.userName.setText(SetupProfileFragment.FIRSTNAME +" " + SetupProfileFragment.LASTNAME)
 
         profileMenuBinding.profileInfoCard.setOnClickListener { replace(R.id.fragment_container,ViewOrEditProfileFragment.newInstance()) }
 
