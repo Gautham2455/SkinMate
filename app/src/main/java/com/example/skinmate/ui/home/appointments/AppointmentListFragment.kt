@@ -36,7 +36,7 @@ class AppointmentListFragment:BaseFragment() {
         viewModel.getAppointmentList(token, custId!!).observe(requireActivity()) {
             if (it[0].code == 200) {
                 if (it[0].responseInformation.isNullOrEmpty()) {
-                    replace(R.id.fragment_container, AppointmentFragment.newInstance(),false)
+                    replace(R.id.fragment_container, EmptyAppointmentFragment.newInstance(),false)
 
                 }
                 else{
