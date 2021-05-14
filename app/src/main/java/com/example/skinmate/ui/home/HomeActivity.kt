@@ -5,6 +5,7 @@ import com.example.skinmate.BaseActivity
 import com.example.skinmate.R
 import com.example.skinmate.ui.home.accountDetails.AccountFragment
 import com.example.skinmate.ui.home.appointments.AppointmentListFragment
+import com.example.skinmate.ui.home.appointments.EmptyAppointmentFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : BaseActivity() {
@@ -23,7 +24,7 @@ class HomeActivity : BaseActivity() {
             when(it.itemId){
                 R.id.navigation_home -> replace(R.id.fragment_container,HomeFragment.newInstance())
                 R.id.navigation_appointment -> replace(R.id.fragment_container,
-                    AppointmentListFragment.newInstance())
+                    EmptyAppointmentFragment.newInstance())
                 R.id.navigation_notification -> replace(R.id.fragment_container,NotificationFragment.newInstance())
                 R.id.navigation_account -> replace(R.id.fragment_container,
                     AccountFragment.newInstance())

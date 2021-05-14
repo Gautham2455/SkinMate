@@ -73,6 +73,12 @@ class ViewOrEditProfileFragment : BaseFragment() {
         viewModel.getCustomerDetails("Bearer $token",custId!!).observe(requireActivity()){
             Log.d("profile",it.get(0).responseInformation.get(0).firstName)
 
+            val editor: SharedPreferences.Editor =  sharedPref!!.edit()
+            editor.putString("UserFristName",it.get(0).responseInformation.get(0).firstName)
+            editor.putString("UserLastName",it.get(0).responseInformation.get(0).lastName)
+            editor.apply()
+            editor.commit()
+
             if(it.get(0).responseMessage){
                 viewEditProfileBinding.etFirstName.setText(it.get(0).responseInformation.get(0).firstName)
                 viewEditProfileBinding.etLastName.setText(it.get(0).responseInformation.get(0).lastName)

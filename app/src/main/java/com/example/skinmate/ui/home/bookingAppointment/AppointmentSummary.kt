@@ -46,7 +46,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
         val payment=view.findViewById<RadioGroup>(R.id.payment)
         val appointmentFor=view.findViewById<EditText>(R.id.appoint_for)
         val confirmbtn=view.findViewById<Button>(R.id.confirmbtn)
-
+        val FamilyBottomSheet=BottomSheetDialog(requireContext())
 
         time_date.setText(ScheduleAppointmentFragment.appointmentDate)
 
@@ -56,8 +56,15 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
                 Context.MODE_PRIVATE)
             val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
             val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
-            val FamilyBottomSheet=BottomSheetDialog(requireContext())
+
             FamilyBottomSheet.setContentView(R.layout.bootomsheet_familylist)
+
+            val add_Family=FamilyBottomSheet.findViewById<TextView>(R.id.tv_add_Family)
+            add_Family!!.setOnClickListener(View.OnClickListener {
+                FamilyBottomSheet.dismiss()
+
+            })
+
 
             viewModel.getFamilyMembersList(token,custId!!).observe(requireActivity()){
                 familyList=it
@@ -66,10 +73,12 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
                     val namesAdapter=FamilyNamesAdapter(requireContext(),it.get(0).responseInformation,this)
                     rv_names?.layoutManager= LinearLayoutManager(requireContext())
                     rv_names?.setAdapter(namesAdapter)
+                    rv_names!!.setOnClickListener(View.OnClickListener {
+                        FamilyBottomSheet.dismiss()
+                    })
                 }
                 Log.v("family",it.get(0).responseInformation[0].firstName)
                 FamilyBottomSheet.show()
-
             }
 
 

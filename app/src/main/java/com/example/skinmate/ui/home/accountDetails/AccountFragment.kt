@@ -47,7 +47,7 @@ class AccountFragment : BaseFragment() {
         profileMenuBinding.tvTouchId.setChecked(sharedPref!!.getBoolean(TOUCH_ID,false))
 
 
-        profileMenuBinding.userName.setText(SetupProfileFragment.FIRSTNAME +" " + SetupProfileFragment.LASTNAME)
+        profileMenuBinding.userName.setText(sharedPref.getString("UserFristName","Null")+" " + sharedPref.getString("UserLastName","Null"))
 
         profileMenuBinding.profileInfoCard.setOnClickListener { replace(R.id.fragment_container,ViewOrEditProfileFragment.newInstance()) }
 
