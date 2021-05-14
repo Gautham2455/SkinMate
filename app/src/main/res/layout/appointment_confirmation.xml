@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/comfirmation_img" />
 
-        <view
+        <View
             android:id="@+id/divider1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/stroke_width"
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_medical_id" />
 
-        <view
+        <View
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="@dimen/stroke_width"
@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date" />
 
-        <view
+        <View
             android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="@dimen/stroke_width"

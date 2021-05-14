@@ -36,9 +36,20 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
         val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
         viewModel.getSubService("Bearer $token",HomeFragment.MainServiceId!!).observe(requireActivity()){
             Log.v("Serice",it[0].responseInformation.x1)
-            subServiceBinding.tvMedical.setText(it[0].responseInformation.x1.toString()!!)
-            subServiceBinding.tvSuperficialCard.setText(it[0].responseInformation.x2.toString()!!)
-            subServiceBinding.tvMedical2.setText(it[0].responseInformation.x3.toString())
+            if(it[0].responseInformation==null){
+
+            }
+            else {
+                if (it[0].responseInformation.x3.isNullOrEmpty()) {
+                    subServiceBinding.card3.visibility = View.GONE
+                    subServiceBinding.tvMedical.setText(it[0].responseInformation.x1.toString()!!)
+                    subServiceBinding.tvSuperficialCard.setText(it[0].responseInformation.x2.toString()!!)
+                }else {
+                    subServiceBinding.tvMedical.setText(it[0].responseInformation.x1.toString()!!)
+                    subServiceBinding.tvSuperficialCard.setText(it[0].responseInformation.x2.toString()!!)
+                    subServiceBinding.tvMedical2.setText(it[0].responseInformation.x3.toString())
+                }
+            }
         }
 
 

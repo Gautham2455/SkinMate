@@ -45,6 +45,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
             Context.MODE_PRIVATE)
         val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
         viewModel.getMAinServices(token).observe(requireActivity()){
+
              card1.setText(it[0].responseInformation[0].serviceType)
             card2.setText(it[0].responseInformation[1].serviceType)
             card3.setText(it[0].responseInformation[2].serviceType)

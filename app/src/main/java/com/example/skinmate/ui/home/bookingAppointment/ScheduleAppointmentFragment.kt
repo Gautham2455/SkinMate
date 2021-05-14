@@ -47,7 +47,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             ScheduleAppointmentFragment.appointmentDate =
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
         val caldendar= view.findViewById<CalendarView>(R.id.date_picker_actions)

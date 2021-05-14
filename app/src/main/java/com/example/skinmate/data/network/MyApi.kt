@@ -172,6 +172,23 @@ interface   MyApi {
         @Header("Authorization") token:String
     ):Call<MainServiceResponse>
 
+    @FormUrlEncoded
+    @POST("appointments/list")
+    fun ListOfAppointment(
+        @Header("Authorization") token:String,
+        @Field("customerId") customerId: String
+    ):Call<AppointmentList>
+
+    @FormUrlEncoded
+    @POST("appointment/status/edit")
+    fun appointmentStatus(
+        @Header("Authorization") token:String,
+        @Field("appointmentId") appointmentId:String,
+        @Field("status") status:String
+
+    ):Call<List<generalResponse>>
+
+
     @PUT("customer/family-member/edit/{familyProfileId}")
     fun putFamilyMemberEdit(
         @Header("Authorization") token: String,
