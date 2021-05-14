@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/round_corners_layout">
+    android:background="@drawable/round_corners_layout"
+    style="@style/CustomBottomSheetDialog">
 
     <TextView
         android:id="@+id/tv_edit_family_member"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit Family Member"
-        android:drawableStart="@drawable/ic_baseline_edit"
         android:gravity="center_horizontal"
         android:textSize="24sp"
         android:fontFamily="Poppins SemiBold"
@@ -34,13 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete Member"
-        android:drawableStart="@drawable/ic_baseline_delete"
         android:gravity="center_horizontal"
         android:fontFamily="Poppins SemiBold"
         android:textSize="24sp"
         android:textColor="@color/red"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appointment_option_divider1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

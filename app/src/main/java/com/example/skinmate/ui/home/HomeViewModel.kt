@@ -26,6 +26,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val registerIData=UserRepository.getInstance(application)
     private val emailOtpData=UserRepository.getInstance(application)
     private val mainServiceData=UserRepository.getInstance(application)
+    private val editFamilyMemberDetailsData = UserRepository.getInstance(application)
+    private val deleteMemberData = UserRepository.getInstance(application)
+    private val memberViewData = UserRepository.getInstance(application)
 
     fun getFamilyMembersList(token:String,customerid:String):LiveData<List<familyMemberListItem>> = liveData(Dispatchers.IO) {
         emitSource(familyMemberListData.getFamilyMemberListCall(token,customerid))
@@ -39,7 +42,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(subServiceData.getSubServiceCall(token,serviceId))
     }
 
-    fun postDeleteFamilyMember(token:String,familyProfileId:String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
+    fun postDeleteFamilyMember(token:String,familyProfileId: String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
         emitSource(deletedFamilyMember.deleteFamilyMemberCall(token,familyProfileId))
     }
 
@@ -93,4 +96,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         emitSource(mainServiceData.getMainService(token))
     }
 
+    fun putFamilyMemberEdidtDetails(token: String,familyProfileId: String,requestBody: RequestBody):LiveData<List<generalResponse>> = liveData(Dispatchers.IO) {
+        emitSource(editFamilyMemberDetailsData.editFamilyMemberDetailsCall(token, familyProfileId,requestBody))
+    }
+
+    fun deleteMember(token: String,familyProfileId: String):LiveData<List<generalResponse>> = liveData(Dispatchers.IO){
+        emitSource(deleteMemberData.deleteFamilyMemberCall(token,familyProfileId))
+    }
+
+    fun getMemberView(token:String,familyProfileId:String):LiveData<customerViewResponse> = liveData(Dispatchers.IO) {
+        emitSource(memberViewData.getMemberViewCall(token,familyProfileId))
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.skinmate.ui.home.accountDetails
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.FamilyMemberDetails
-import com.example.skinmate.data.responses.ResponseInformationXX
-import com.example.skinmate.data.responses.ResponseInformationXXX
+import com.example.skinmate.utils.OnClickInterface
+import de.hdodenhof.circleimageview.CircleImageView
+import java.util.*
 
-class FamilyAdapter(val familyArray:List<FamilyMemberDetails>, context: Context) :
+class FamilyAdapter(val familyArray:List<FamilyMemberDetails>, context: Context,val onClickPosition: OnClickInterface) :
     RecyclerView.Adapter<FamilyAdapter.FamilyCardHolder>() {
 
 
@@ -27,6 +29,14 @@ class FamilyAdapter(val familyArray:List<FamilyMemberDetails>, context: Context)
     override fun onBindViewHolder(holder: FamilyCardHolder, position: Int) {
         val familyMember = familyArray[position]
         holder.familyMemberName.setText("${familyMember.firstName} ${familyMember.lastName}")
+        val rnd = Random()
+        val currentColor: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+        holder.familyMemberImg.setCircleBackgroundColor(currentColor)
+        holder.familyMemberMenu.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View) {
+                onClickPosition.getViewPosition(position)
+            }
+        })
     }
 
     override fun getItemCount(): Int {
@@ -36,5 +46,6 @@ class FamilyAdapter(val familyArray:List<FamilyMemberDetails>, context: Context)
     class FamilyCardHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var familyMemberName = itemView.findViewById<TextView>(R.id.family_member_name)
         var familyMemberMenu = itemView.findViewById<ImageView>(R.id.img_family_member_menu)
+        var familyMemberImg = itemView.findViewById<CircleImageView>(R.id.family_member_image)
     }
 }
