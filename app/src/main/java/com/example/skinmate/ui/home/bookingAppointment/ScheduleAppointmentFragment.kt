@@ -160,7 +160,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
 
     companion object{
         var appointmentDate:String?=null
-        var appointmentSlots= mutableListOf<String>("!0:00")
+        var appointmentSlots= mutableListOf<String>("none")
         var appointmentinfo:bookedAppointmentResponse?=null
         fun newInstance()=ScheduleAppointmentFragment()
         var MorningSlots= mutableListOf<String>(

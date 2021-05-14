@@ -3,11 +3,11 @@ package com.example.skinmate.data.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseInformationXXXXX(
+data class ResponseInformationXXXXXX(
     @SerializedName("appointmentId")
     val appointmentId: Int,
     @SerializedName("dateOfAppointment")
-    val dateOfAppointment: DateOfAppointment,
+    val dateOfAppointment: DateOfAppointmentX,
     @SerializedName("designation")
     val designation: String,
     @SerializedName("familyFirstName")
@@ -25,5 +25,5 @@ data class ResponseInformationXXXXX(
     @SerializedName("status")
     val status: String,
     @SerializedName("timeOfAppointment")
-    val timeOfAppointment: TimeOfAppointment
+    val timeOfAppointment: TimeOfAppointmentX
 )

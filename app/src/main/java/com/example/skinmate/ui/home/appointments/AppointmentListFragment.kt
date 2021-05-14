@@ -3,6 +3,7 @@ package com.example.skinmate.ui.home.appointments
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ class AppointmentListFragment:BaseFragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.appointment_list, container, false)
-        setTitle("My Appointments")
+        setTitleWithBackButton("My Appointments")
         val sharedPref: SharedPreferences = requireActivity()!!.getSharedPreferences(
             "SkinMate",
             Context.MODE_PRIVATE
@@ -37,16 +38,14 @@ class AppointmentListFragment:BaseFragment() {
             if (it[0].code == 200) {
                 if (it[0].responseInformation.isNullOrEmpty()) {
                     replace(R.id.fragment_container, EmptyAppointmentFragment.newInstance(),false)
-
                 }
                 else{
                     viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){
-
+                        Log.v("Appim",it[0].responseInformation.toString())
                         val appointmentadapter=AppointmentAdapter(it[0].responseInformation)
                         val rv_appointment=view.findViewById<RecyclerView>(R.id.rv_appointment_list)
                         rv_appointment.layoutManager= LinearLayoutManager(requireContext())
                         rv_appointment.setAdapter(appointmentadapter)
-                        //return view
                     }
 
                 }
@@ -54,11 +53,6 @@ class AppointmentListFragment:BaseFragment() {
 
         }
         return view
-
-
-
-
-
 
     }
     companion object{

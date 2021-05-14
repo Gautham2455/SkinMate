@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
-import com.example.skinmate.data.responses.ResponseInformationXXXXX
+import com.example.skinmate.data.responses.ResponseInformationXXXXXX
 
-class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXX>) : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
+class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>) : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppointmentHolder {
         val itemView=LayoutInflater.from(parent.context)
@@ -18,11 +18,15 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXX>) : R
 
     override fun onBindViewHolder(holder: AppointmentHolder, position: Int) {
         val appointment=apoointmentList.get(position)
-        holder.patient_name.setText(appointment.firstName+" "+appointment.lastName)
+        if(appointment.familyFirstName.isNullOrEmpty())
+            holder.patient_name.setText("Self")
+        else
+            holder.patient_name.setText(appointment.familyFirstName+" "+appointment.familyLastName)
         holder.doctor.setText(appointment.firstName+" "+appointment.designation)
         holder.appointment_date.setText(appointment.dateOfAppointment.date.subSequence(0,9))
         holder.appointment_time.setText(appointment.timeOfAppointment.time[0])
         holder.patient_id.setText(appointment.appointmentId)
+        holder.dermatology_service.setText(appointment.serviceType)
     }
 
     override fun getItemCount(): Int {

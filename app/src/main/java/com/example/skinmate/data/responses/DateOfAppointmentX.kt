@@ -3,7 +3,7 @@ package com.example.skinmate.data.responses
 
 import com.google.gson.annotations.SerializedName
 
-data class DateOfAppointment(
+data class DateOfAppointmentX(
     @SerializedName("date")
     val date: String,
     @SerializedName("timezone")

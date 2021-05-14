@@ -7,7 +7,7 @@ data class AppointmentListItem(
     @SerializedName("Code")
     val code: Int,
     @SerializedName("responseInformation")
-    val responseInformation: List<ResponseInformationXXXXX>,
+    val responseInformation: List<ResponseInformationXXXXXX>,
     @SerializedName("responseMessage")
     val responseMessage: Boolean
 )

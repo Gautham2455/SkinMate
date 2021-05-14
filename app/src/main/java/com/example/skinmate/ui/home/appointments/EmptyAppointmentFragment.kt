@@ -22,7 +22,7 @@ class EmptyAppointmentFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setTitle("My Appointments")
+        setTitleWithBackButton("My Appointments")
 
 
         val view = inflater.inflate(R.layout.fragment_appointment, container, false)
