@@ -25,5 +25,5 @@ data class ResponseInformationXX(
     @SerializedName("lastName")
     val lastName: String,
     @SerializedName("phoneNumber")
-    val phoneNumber: String
+    val phoneNumber: String,
 )

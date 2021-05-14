@@ -70,8 +70,8 @@ class SetupProfileFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SetupProfileFragment()
-        const val FIRSTNAME:String="firstname"
-        const val LASTNAME:String="lastname"
+         var FIRSTNAME:String?=null
+         var LASTNAME:String?=null
     }
 
     @SuppressLint("ResourceType")
@@ -169,7 +169,9 @@ class SetupProfileFragment : BaseFragment() {
 
         enterDetailsBinding.btnCreateMyAcnt.setOnClickListener {
             firstname=enterDetailsBinding.etFirstName.text.toString()
+            FIRSTNAME=firstname
             lastname=enterDetailsBinding.etLastName.text.toString()
+            LASTNAME=lastname
             mailingaddress=enterDetailsBinding.etMailingAddress.text.toString()
             insuranceinfo=enterDetailsBinding.etInsuranceInfo.text.toString()
             emergencycontactname=enterDetailsBinding.etEmergencyContactName.text.toString()
@@ -185,11 +187,6 @@ class SetupProfileFragment : BaseFragment() {
             }
             else {
                 val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
-                val editor: SharedPreferences.Editor =  sharedPref!!.edit()
-                editor.putString(SetupProfileFragment.FIRSTNAME,firstname)
-                editor.putString(SetupProfileFragment.LASTNAME,lastname)
-                editor.apply()
-                editor.commit()
                 val jsonObject=JSONObject()
                 jsonObject.put("phoneNumber",sharedPref!!.getString(SignUpFragment.MOB_NO!!,"00"))
                 jsonObject.put("email", sharedPref!!.getString(SignUpFragment.EMAIL_ID!!,"none"))

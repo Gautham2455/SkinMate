@@ -38,7 +38,7 @@ class UserRepository private constructor(application: Application){
     val mainService=MutableLiveData<MainServiceResponse>()
     val editFamilyMeberDetails = MutableLiveData<List<generalResponse>>()
     val deleteMember = MutableLiveData<List<generalResponse>>()
-    val familyMemberView = MutableLiveData<customerViewResponse>()
+    val familyMemberView = MutableLiveData<memberViewResponse>()
 
 
     fun getServicesApiCall(otp : Int,mobileNumber :String): MutableLiveData<List<generalResponse>> {
@@ -532,17 +532,17 @@ class UserRepository private constructor(application: Application){
         return deleteMember
     }
 
-    fun getMemberViewCall(token:String,familyProfileId:String):MutableLiveData<customerViewResponse>{
-        val call =SecuredRetrofitClient.apiInterface.customerDetails(token,familyProfileId)
+    fun getMemberViewCall(token:String,familyProfileId:String):MutableLiveData<memberViewResponse>{
+        val call =SecuredRetrofitClient.apiInterface.viewFamilyMember(token,familyProfileId)
 
-        call.enqueue(object :Callback<customerViewResponse>{
-            override fun onFailure(call: Call<customerViewResponse>, t: Throwable) {
+        call.enqueue(object :Callback<memberViewResponse>{
+            override fun onFailure(call: Call<memberViewResponse>, t: Throwable) {
 
             }
 
             override fun onResponse(
-                call: Call<customerViewResponse>,
-                response: Response<customerViewResponse>
+                call: Call<memberViewResponse>,
+                response: Response<memberViewResponse>
             ) {
                 familyMemberView.postValue(response.body())
             }

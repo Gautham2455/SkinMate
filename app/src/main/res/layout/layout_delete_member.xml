@@ -43,9 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="10dp"
+            android:text="Some name?"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center_horizontal"
             android:textAlignment="center"
@@ -55,41 +56,38 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@id/ll"
-        app:layout_constraintEnd_toEndOf="@id/ll"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_No"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/theme_button"
+        android:background="@drawable/dialog_no_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="No"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="@id/ll"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        app:layout_constraintStart_toStartOf="@id/ll" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_No"
-            android:layout_width="149dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/no"
-            app:backgroundTint="@color/theme_button"
-            app:cornerRadius="0dp" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_yes"
-            style="@style/Buttoncardviewstyle"
-            android:layout_width="149dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/yes"
-            app:backgroundTint="@color/theme_button" />
-
-    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_yes"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/dialog_button_background"
+        android:backgroundTint="@color/theme_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/yes"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/ll"
+        app:layout_constraintEnd_toEndOf="@id/ll"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

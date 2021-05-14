@@ -190,6 +190,6 @@ interface   MyApi {
     fun viewFamilyMember(
         @Header("Authorization") token:String,
         @Path("familyProfileId") familyProfileId: String
-    ) :Call<customerViewResponse>
+    ) :Call<memberViewResponse>
 
 }
