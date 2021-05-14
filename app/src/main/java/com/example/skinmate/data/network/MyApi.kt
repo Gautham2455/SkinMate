@@ -186,7 +186,7 @@ interface   MyApi {
         @Path("familyProfileId") familyProfileId: String
     ):Call<List<generalResponse>>
 
-    @GET("customer/family-profile/{familyProfileId}")
+    @GET("customer/family-profile/view/{familyProfileId}")
     fun viewFamilyMember(
         @Header("Authorization") token:String,
         @Path("familyProfileId") familyProfileId: String
