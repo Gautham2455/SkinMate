@@ -34,19 +34,22 @@ class ConfirmationFragment:BaseFragment() {
             Context.MODE_PRIVATE)
         val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
         val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
+
+        val doctor_info=view.findViewById<TextView>(R.id.doctor_info)
+        val tv_medical_id=view.findViewById<TextView>(R.id.tv_medical_id)
+        val date=view.findViewById<TextView>(R.id.date)
+        val time=view.findViewById<TextView>(R.id.time)
+
+        tv_medical_id.setText("ID - "+SlectDoctorFragment.doctorID)
+        date.setText(ScheduleAppointmentFragment.appointmentDate!!.subSequence(0,9))
+        time.setText(ScheduleAppointmentFragment.appointmentSlots[0])
+
         viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){appointmentList->
             val latindex=appointmentList[0].responseInformation.size-1
             lastIntex=latindex
             appointments=appointmentList
             Log.v("Con",latindex.toString())
-            val doctor_info=view.findViewById<TextView>(R.id.doctor_info)
-            val tv_medical_id=view.findViewById<TextView>(R.id.tv_medical_id)
-            val date=view.findViewById<TextView>(R.id.date)
-            val time=view.findViewById<TextView>(R.id.time)
-            doctor_info.setText(appointmentList[0].responseInformation[latindex].familyFirstName+" "+appointmentList[0].responseInformation[latindex].lastName+" "+appointmentList[0].responseInformation[latindex].designation)
-            tv_medical_id.setText("ID - "+appointmentList[0].responseInformation[latindex].appointmentId)
-            date.setText(appointmentList[0].responseInformation[latindex].dateOfAppointment.date.subSequence(0,7))
-            time.setText(appointmentList[0].responseInformation[latindex].timeOfAppointment.time[0])
+
 
             viewModel.getAppointmentStatus(token,appointmentList[0].responseInformation[latindex].appointmentId.toString(),"Accepted").observe(requireActivity()){
                 Log.v("ststus",it.toString())

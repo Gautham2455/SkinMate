@@ -113,7 +113,7 @@ class FamilyMemberListFragment : BaseFragment(),OnClickInterface {
         dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
         val familyMemberName = dialog.findViewById<TextView>(R.id.tv_member_name)
-        familyMemberName.setText(firstName + " " + lastName)
+        familyMemberName.setText(firstName + " " + lastName + "?")
         val id=familyProfileId.toString()
         val yesBtn = dialog.findViewById(R.id.btn_yes) as Button
         val noBtn = dialog.findViewById<Button>(R.id.btn_No)

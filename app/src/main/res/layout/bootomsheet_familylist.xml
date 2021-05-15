@@ -6,7 +6,8 @@
 
     style="@style/CustomBottomSheetDialog"
     android:background="@drawable/round_corners_layout"
-    android:gravity="center">
+    android:gravity="center"
+    android:id="@+id/familyDialog">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_familyList"
@@ -25,8 +26,13 @@
         android:gravity="center"
         android:text="@string/add_a_new_family_member"
         android:textColor="@color/theme_button"
+        android:layout_marginBottom="@dimen/layout_magin"
         app:layout_constraintTop_toBottomOf="@id/rv_familyList" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
 
+        app:layout_constraintTop_toBottomOf="@id/tv_add_Family"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
