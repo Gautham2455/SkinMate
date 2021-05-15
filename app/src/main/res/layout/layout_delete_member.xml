@@ -58,10 +58,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_No"
-        android:layout_width="130dp"
+        android:layout_width="149dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/theme_button"
         android:background="@drawable/dialog_no_button"
         android:fontFamily="@font/poppins_bold"
@@ -75,10 +73,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_yes"
-        android:layout_width="130dp"
+        android:layout_width="149dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:background="@drawable/dialog_button_background"
         android:backgroundTint="@color/theme_button"
         android:fontFamily="@font/poppins_bold"
@@ -87,6 +83,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/ll"
+        app:layout_constraintStart_toEndOf="@id/btn_No"
         app:layout_constraintEnd_toEndOf="@id/ll"
         />
 

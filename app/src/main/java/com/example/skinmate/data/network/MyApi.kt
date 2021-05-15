@@ -83,7 +83,7 @@ interface   MyApi {
         @Path("serviceId") serviceId:String
     ):Call<subServiceResponse>
 
-    @GET("customer/family-member/list/{familyProfileId}")
+    @GET("customer/family-profile/view/{familyProfileId}")
     fun famllyMember(
         @Header("Authorization") token :String,
         @Path("familyProfileId") familyProfileId:String

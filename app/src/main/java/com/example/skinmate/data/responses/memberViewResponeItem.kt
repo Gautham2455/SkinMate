@@ -5,8 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class memberViewResponeItem(
     @SerializedName("Code")
     val code: Int,
-    @SerializedName("responseInformation")
-    val responseInformation: List<ResponseInformationXY>,
     @SerializedName("responseMessage")
-    val responseMessage: Boolean
+    val responseMessage: Boolean,
+    @SerializedName("responseInformation")
+    val responseInformation: List<ResponseInformationXY>
+
 )
