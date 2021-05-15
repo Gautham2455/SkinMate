@@ -118,8 +118,16 @@
         <item name="colorAccent">@color/theme_button</item>
     </style>
 
-    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
-        <item name="android:colorAccent">@color/theme_button</item>
+    <style name="MyDatePickerDialogTheme" parent="@style/ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/theme_button</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay_card_custom_corners_tr_bl" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
     </style>
 
 </resources>

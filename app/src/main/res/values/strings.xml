@@ -196,5 +196,18 @@
         <item>05:50</item>
     </string-array>
 
->>>>>>> test
+    <string name="checkin_completed">CheckIn Completed</string>
+    <string name="you_have_reached">You have reached</string>
+    <string name="please_wait_for_your_turn_to_walk_up_to_the_waiting_room">Please wait for your turn to walk-up to the waiting-room!</string>
+    <string name="appointment_summary">Appointment Summary</string>
+    <string name="self">Self</string>
+    <string name="ipl_laser_treatment">IPL Laser Treatment</string>
+    <string name="id_9285473">ID - 9285473</string>
+    <string name="doctor">Doctor</string>
+    <string name="dr_andrew_williams_md_faad_fasms">Dr. Andrew Williams MD FAAD, FASMS</string>
+    <string name="_15_jun_2020">15 - Jun - 2020</string>
+    <string name="_3_00_pm">3:00 PM</string>
+    <string name="in_the_interim_you_can_complete_checkin">In the interim you can complete Checkin</string>
+    <string name="check_in">CHECK IN</string>
+
 </resources>
