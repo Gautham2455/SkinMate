@@ -44,10 +44,16 @@ class AccountFragment : BaseFragment() {
 
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
+        val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
+        val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
         profileMenuBinding.tvTouchId.setChecked(sharedPref!!.getBoolean(TOUCH_ID,false))
 
+        viewModel.getCustomerDetails("Bearer $token",custId!!).observe(requireActivity()){
+            if(it.get(0).responseMessage)
+                profileMenuBinding.userName.setText(it.get(0).responseInformation.get(0).firstName +" " + it.get(0).responseInformation.get(0).lastName)
+            Log.v("name",it.get(0).responseInformation.get(0).firstName +" " + it.get(0).responseInformation.get(0).lastName)
+        }
 
-        profileMenuBinding.userName.setText(sharedPref.getString("UserFristName","Null")+" " + sharedPref.getString("UserLastName","Null"))
 
         profileMenuBinding.profileInfoCard.setOnClickListener { replace(R.id.fragment_container,ViewOrEditProfileFragment.newInstance()) }
 

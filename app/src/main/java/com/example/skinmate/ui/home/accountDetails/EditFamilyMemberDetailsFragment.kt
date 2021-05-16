@@ -103,28 +103,29 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
         editFamilyMemberDetailsBinding.etDob.setEnabled(false)
 
 
-        viewModel.getMemberView("Bearer $token",familyProfileId).observe(requireActivity()){
-            if(it.get(0).responseMessage){
-                editFamilyMemberDetailsBinding.etFirstName.setText(it.get(0).responseInformation.get(0).firstName)
-                Log.v("Firstname",it.get(0).responseInformation.get(0).firstName)
-                editFamilyMemberDetailsBinding.etLastName.setText(it.get(0).responseInformation.get(0).lastName)
-                editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.get(0).dob)
-                editFamilyMemberDetailsBinding.etEmergencyContactName.setText(it.get(0).responseInformation.get(0).emeregencyContactName)
-                editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.get(0).emeregencyNumber)
-                editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.get(0).address)
-                editFamilyMemberDetailsBinding.etInsuranceInfo.setText(it.get(0).responseInformation.get(0).insuranceInformation)
-                if (it[0].responseInformation.get(0).gender == 1){
-                    editFamilyMemberDetailsBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
-                    editFamilyMemberDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
-                } else if (it[0].responseInformation.get(0).gender== 2){
-                    editFamilyMemberDetailsBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
-                    editFamilyMemberDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
-                } else {
-                    editFamilyMemberDetailsBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
-                    editFamilyMemberDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
-                }
-            }
-        }
+      viewModel.getFamilyMember("Bearer $token",familyProfileId).observe(requireActivity()){
+          Log.v("Edit",it.get(0).responseMessage.toString())
+          if(it.get(0).responseMessage){
+              editFamilyMemberDetailsBinding.etFirstName.setText(it.get(0).responseInformation.get(0).firstName)
+              Log.v("Firstname",it.get(0).responseInformation.get(0).firstName)
+              editFamilyMemberDetailsBinding.etLastName.setText(it.get(0).responseInformation.get(0).lastName)
+              editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.get(0).dob)
+              editFamilyMemberDetailsBinding.etEmergencyContactName.setText(it.get(0).responseInformation.get(0).emeregencyContactName)
+              editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.get(0).emeregencyNumber)
+              editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.get(0).address)
+              editFamilyMemberDetailsBinding.etInsuranceInfo.setText(it.get(0).responseInformation.get(0).insuranceInformation)
+              if (it[0].responseInformation.get(0).gender == 1){
+                  editFamilyMemberDetailsBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                  editFamilyMemberDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
+              } else if (it[0].responseInformation.get(0).gender== 2){
+                  editFamilyMemberDetailsBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                  editFamilyMemberDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
+              } else {
+                  editFamilyMemberDetailsBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                  editFamilyMemberDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
+              }
+          }
+      }
 
 
 
@@ -162,8 +163,14 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
 
                 val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
                 viewModel.putFamilyMemberEdidtDetails("Bearer $token",familyProfileId,requestBody).observe(requireActivity()){
-                    if(it.get(0).responseMessage==true)
-                        Toast.makeText(requireContext(),"Changes Updated Successfully",Toast.LENGTH_LONG).show()
+                    if(it.get(0).responseMessage==true) {
+                        replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                        Toast.makeText(
+                            requireContext(),
+                            "Changes Updated Successfully",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         }

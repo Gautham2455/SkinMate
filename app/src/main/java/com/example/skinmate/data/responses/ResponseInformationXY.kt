@@ -18,15 +18,15 @@ data class ResponseInformationXY (
     val gender: Int,
     @SerializedName("dob")
     val dob: String,
-    @SerializedName("address")
-    val address: String,
     @SerializedName("bloodGroup")
     val bloodGroup: String,
-    @SerializedName("emeregencyContactName")
-    val emeregencyContactName: String,
+    @SerializedName("address")
+    val address: String,
     @SerializedName("emeregencyNumber")
     val emeregencyNumber: String,
     @SerializedName("insuranceInformation")
-    val insuranceInformation: String
+    val insuranceInformation: String,
+    @SerializedName("emeregencyContactName")
+    val emeregencyContactName: String
 
 )

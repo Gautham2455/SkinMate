@@ -31,6 +31,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class ForgotPasswordFragment : BaseFragment() {
     private lateinit var forgotPasswordBinding: ForgotPasswordBinding
     var EMAIL :String?=null
+    var phone_mail:String?=null
     private val viewModel by viewModels<AuthViewModel>()
     val inputValidation=InputValidation()
 
@@ -51,17 +52,17 @@ class ForgotPasswordFragment : BaseFragment() {
         forgotPasswordBinding.btnForgotPw.setOnClickListener(){
 
 
-            val phone_mail : String = forgotPasswordBinding.etForgotpw.text.toString()
+            phone_mail  = forgotPasswordBinding.etForgotpw.text.toString()
             val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor=sharedPref!!.edit()
             editor.putString(EMAIL,phone_mail!!)
             editor.commit()
 
 
-            if (inputValidation.isPhoneValid(phone_mail)){
+            if (inputValidation.isPhoneValid(phone_mail!!)){
                 mobOtpBottomSheetfragment()
             }
-            else if (inputValidation.isemailValid(phone_mail)){
+            else if (inputValidation.isemailValid(phone_mail!!)){
                 viewModel.postRegisterEmail(forgotPasswordBinding.etForgotpw.text.toString()).observe(requireActivity()){
                         otpResponse -> emailRegister(otpResponse.get(0).responseMessage)
                     Toast.makeText(requireActivity(),otpResponse.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
@@ -112,7 +113,7 @@ class ForgotPasswordFragment : BaseFragment() {
     private fun mobOtpVerify(otpnumber: Int) {
 
         //call api to verfify otp sent to mob
-        viewModel.getUser(otpnumber,"dsd").observe(requireActivity()) { otpResponse ->
+        viewModel.getUser(otpnumber,phone_mail!!).observe(requireActivity()) { otpResponse ->
             Toast.makeText(
                 requireActivity(),
                 otpResponse.get(0).responseInformation.toString(),
