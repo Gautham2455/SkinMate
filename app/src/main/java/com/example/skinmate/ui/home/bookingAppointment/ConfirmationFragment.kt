@@ -17,6 +17,7 @@ import com.example.skinmate.data.responses.AppointmentList
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.ui.home.appointments.AppointmentListFragment
 
 class ConfirmationFragment:BaseFragment() {
 
@@ -57,7 +58,7 @@ class ConfirmationFragment:BaseFragment() {
         }
 
         doneBtn.setOnClickListener(View.OnClickListener {
-            replace(R.id.fragment_container,HomeFragment.newInstance(),false)
+            replace(R.id.fragment_container,AppointmentListFragment.newInstance(),false)
         })
 
         return view
