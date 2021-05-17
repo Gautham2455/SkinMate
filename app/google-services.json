@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "563071381885",
+    "project_id": "skinmate-ea53f",
+    "storage_bucket": "skinmate-ea53f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563071381885:android:f4abc2e1cbf5e9752cdc14",
+        "android_client_info": {
+          "package_name": "com.example.skinmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563071381885-h23ldio8l9gpjm7oqiv94bsjqe35jgje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.skinmate",
+            "certificate_hash": "9563cc226d7f210729fd472e3e1530cbebb0d885"
+          }
+        },
+        {
+          "client_id": "563071381885-0djacu2onqb327gpi5h0vo43tjmeibsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFkP-P2JnlGsIOtAL1R5hCumi9m8IiZs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563071381885-0djacu2onqb327gpi5h0vo43tjmeibsv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

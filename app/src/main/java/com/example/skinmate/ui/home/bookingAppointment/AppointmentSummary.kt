@@ -23,10 +23,14 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
 import org.json.JSONObject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class AppointmentSummary :BaseFragment(),OnClickInterface{
 
     private val viewModel by viewModels<HomeViewModel>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +38,12 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
         savedInstanceState: Bundle?
     ): View? {
         val view=inflater?.inflate(R.layout.appointment_summary,container,false)
+        FamilyBottomSheet=BottomSheetDialog(requireContext())
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            AppointmentSummary.appointmentDate =
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        }
 
 
         setTitleWithBackButton("Summary")
@@ -44,14 +54,14 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
         val comments=view.findViewById<EditText>(R.id.et_comments)
         service.setText(HomeFragment.MainService)
         val payment=view.findViewById<RadioGroup>(R.id.payment)
-        val appointmentFor=view.findViewById<EditText>(R.id.appoint_for)
+        appointmentFor=view.findViewById<EditText>(R.id.appoint_for)
         val confirmbtn=view.findViewById<Button>(R.id.confirmbtn)
-        val FamilyBottomSheet=BottomSheetDialog(requireContext())
+
 
         time_date.setText(ScheduleAppointmentFragment.appointmentDate)
 
 
-        appointmentFor.setOnClickListener(View.OnClickListener {
+        appointmentFor?.setOnClickListener(View.OnClickListener {
             val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
                 Context.MODE_PRIVATE)
             val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
@@ -59,17 +69,11 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
 
             FamilyBottomSheet.setContentView(R.layout.bootomsheet_familylist)
 
-            val add_Family=FamilyBottomSheet.findViewById<TextView>(R.id.tv_add_Family)
-            add_Family!!.setOnClickListener(View.OnClickListener {
-                FamilyBottomSheet.dismiss()
-
-            })
-
-
+            val rv_names=FamilyBottomSheet.findViewById<RecyclerView>(R.id.rv_familyList)
             viewModel.getFamilyMembersList(token,custId!!).observe(requireActivity()){
                 familyList=it
                 if(!it.get(0).responseInformation.isEmpty()){
-                    val rv_names=FamilyBottomSheet.findViewById<RecyclerView>(R.id.rv_familyList)
+
                     val namesAdapter=FamilyNamesAdapter(requireContext(),it.get(0).responseInformation,this)
                     rv_names?.layoutManager= LinearLayoutManager(requireContext())
                     rv_names?.setAdapter(namesAdapter)
@@ -80,9 +84,16 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
                 Log.v("family",it.get(0).responseInformation[0].firstName)
                 FamilyBottomSheet.show()
             }
+            val add_Family=FamilyBottomSheet.findViewById<TextView>(R.id.tv_add_Family)
+            add_Family?.setOnClickListener(View.OnClickListener {
+                replace(R.id.fragment_container,AddMemberFragment.newInstance(),false)
+                FamilyBottomSheet.dismiss()
 
+            })
 
         })
+
+
 
         confirmbtn.setOnClickListener(View.OnClickListener {
 
@@ -122,8 +133,6 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
                 }
             }
 
-
-
         })
 
         return view
@@ -133,9 +142,16 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
         var familyList:List<familyMemberListItem>?=null
         var familyProfileId:String?=null
         fun newInstance()=AppointmentSummary()
+        lateinit var FamilyBottomSheet:BottomSheetDialog
+        var famlilyName:String?=null
+        var appointmentFor:EditText?=null
+        var appointmentDate:String?=null
+        var appointmentTime:TimeZone?=null
     }
 
     override fun getViewPosition(position: Int) {
         familyProfileId= familyList!!.get(0).responseInformation[position].familyProfileId.toString()
+        appointmentFor?.setText(familyList!!.get(0).responseInformation[position].firstName+ " "+familyList!!.get(0).responseInformation[position].lastName)
+        FamilyBottomSheet.dismiss()
     }
 }

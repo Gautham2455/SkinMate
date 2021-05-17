@@ -103,7 +103,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun getAppointmentList(token: String,customerId: String):LiveData<AppointmentList> = liveData(Dispatchers.IO) {
-        appointListData.appointmentListCall(token, customerId)
+        emitSource( appointListData.appointmentListCall(token, customerId))
     }
 
     fun getAppointmentStatus(token: String,appointmentId:String,status:String): LiveData<List<generalResponse>> =
