@@ -209,4 +209,10 @@ interface   MyApi {
         @Path("familyProfileId") familyProfileId: String
     ) :Call<memberViewResponse>
 
+    @PUT("appointment/reschedule")
+    fun RescheduleAppointment(
+        @Header("Authorization") token: String,
+        @Body requestBody: RequestBody
+    ):Call<List<generalResponse>>
+
 }

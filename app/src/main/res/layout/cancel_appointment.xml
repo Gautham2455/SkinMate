@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/stroke_width"
         android:background="@color/theme_background_light"
-        app:layout_constraintBottom_toTopOf="@id/tv_medical"
-        android:layout_marginTop="80dp"/>
+        app:layout_constraintBottom_toTopOf="@id/tv_service"
+        android:layout_marginTop="20dp"/>
 
     <TextView
-        android:id="@+id/tv_medical"
+        android:id="@+id/tv_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_magin"
@@ -24,12 +24,12 @@
         android:text="@string/medical"
         android:textColor="@color/theme_background_light"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_medical_id"
+        app:layout_constraintBottom_toTopOf="@id/tv_appointment_id"
         app:layout_constraintTop_toBottomOf="@id/divider1"
         tools:layout_editor_absoluteX="20dp" />
 
     <TextView
-        android:id="@+id/tv_medical_id"
+        android:id="@+id/tv_appointment_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_magin"
@@ -51,7 +51,7 @@
         android:textColor="@color/theme_color_dark"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_medical_id" />
+        app:layout_constraintTop_toBottomOf="@id/tv_appointment_id" />
 
     <view
         android:id="@+id/divider2"

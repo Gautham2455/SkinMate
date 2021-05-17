@@ -25,5 +25,7 @@ data class ResponseInformationXXXXXX(
     @SerializedName("status")
     val status: String,
     @SerializedName("timeOfAppointment")
-    val timeOfAppointment: TimeOfAppointmentX
+    val timeOfAppointment: TimeOfAppointmentX,
+    @SerializedName("doctorId")
+    val doctorId:Int
 )
