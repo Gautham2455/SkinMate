@@ -51,7 +51,6 @@ class ConfirmationFragment:BaseFragment() {
             appointments=appointmentList
             Log.v("Con",latindex.toString())
 
-
             viewModel.getAppointmentStatus(token,appointmentList[0].responseInformation[latindex].appointmentId.toString(),"Accepted").observe(requireActivity()){
                 Log.v("ststus",it.toString())
             }

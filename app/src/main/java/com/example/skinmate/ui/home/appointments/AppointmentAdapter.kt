@@ -24,8 +24,8 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>) : 
             holder.patient_name.setText(appointment.familyFirstName+" "+appointment.familyLastName)
         holder.doctor.setText(appointment.firstName+" "+appointment.designation)
         holder.appointment_date.setText(appointment.dateOfAppointment.date.subSequence(0,9))
-        holder.appointment_time.setText(appointment.timeOfAppointment.time[0])
-        holder.patient_id.setText(appointment.appointmentId)
+        holder.appointment_time.setText(appointment.timeOfAppointment.time[0].toString())
+        holder.patient_id.setText(appointment.appointmentId.toString())
         holder.dermatology_service.setText(appointment.serviceType)
     }
 
