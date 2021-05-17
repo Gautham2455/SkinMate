@@ -106,24 +106,25 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
       viewModel.getFamilyMember("Bearer $token",familyProfileId).observe(requireActivity()){
           Log.v("Edit",it.get(0).responseMessage.toString())
           if(it.get(0).responseMessage){
-              editFamilyMemberDetailsBinding.etFirstName.setText(it.get(0).responseInformation.get(0).firstName)
-              Log.v("Firstname",it.get(0).responseInformation.get(0).firstName)
-              editFamilyMemberDetailsBinding.etLastName.setText(it.get(0).responseInformation.get(0).lastName)
-              editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.get(0).dob)
-              editFamilyMemberDetailsBinding.etEmergencyContactName.setText(it.get(0).responseInformation.get(0).emeregencyContactName)
-              editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.get(0).emeregencyNumber)
-              editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.get(0).address)
-              editFamilyMemberDetailsBinding.etInsuranceInfo.setText(it.get(0).responseInformation.get(0).insuranceInformation)
-              if (it[0].responseInformation.get(0).gender == 1){
+              editFamilyMemberDetailsBinding.etFirstName.setText(it.get(0).responseInformation.firstName)
+              Log.v("Firstname",it.get(0).responseInformation.firstName)
+              editFamilyMemberDetailsBinding.etLastName.setText(it.get(0).responseInformation.lastName)
+              editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.dob)
+              editFamilyMemberDetailsBinding.etEmergencyContactName.setText(it.get(0).responseInformation.emeregencyContactName)
+              editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.emeregencyNumber)
+              editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.address)
+              editFamilyMemberDetailsBinding.etInsuranceInfo.setText(it.get(0).responseInformation.insuranceInformation)
+              if (it[0].responseInformation.gender == 1){
                   editFamilyMemberDetailsBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
                   editFamilyMemberDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
-              } else if (it[0].responseInformation.get(0).gender== 2){
+              } else if (it[0].responseInformation.gender== 2){
                   editFamilyMemberDetailsBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
                   editFamilyMemberDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
               } else {
                   editFamilyMemberDetailsBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
                   editFamilyMemberDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
               }
+
 
           }
       }

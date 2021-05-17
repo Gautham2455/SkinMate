@@ -7,7 +7,7 @@ data class familyMemberResponseItem(
     @SerializedName("Code")
     val code: Int,
     @SerializedName("responseInformation")
-    val responseInformation: List<ResponseInformationX>,
+    val responseInformation: ResponseInformationX,
     @SerializedName("responseMessage")
     val responseMessage: Boolean
 )

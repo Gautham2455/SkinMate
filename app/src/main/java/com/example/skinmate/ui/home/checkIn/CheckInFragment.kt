@@ -18,6 +18,7 @@ class CheckInFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setTitleWithBackButton("Check In")
         val view:View = inflater?.inflate(R.layout.checkin_screen_2, container, false)
 
         return view
