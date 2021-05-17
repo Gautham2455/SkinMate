@@ -14,6 +14,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class AppointmentListFragment:BaseFragment() {
 
@@ -26,6 +27,7 @@ class AppointmentListFragment:BaseFragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.appointment_list, container, false)
+        val BottomDialog= BottomSheetDialog(requireContext())
         setTitleWithBackButton("My Appointments")
         val sharedPref: SharedPreferences = requireActivity()!!.getSharedPreferences(
             "SkinMate",
@@ -48,11 +50,11 @@ class AppointmentListFragment:BaseFragment() {
                     val rv_appointment=view.findViewById<RecyclerView>(R.id.rv_appointment_list)
                     rv_appointment.layoutManager= LinearLayoutManager(requireContext())
                     rv_appointment.setAdapter(appointmentadapter)
-
                 }
             }
 
         }
+
         return view
 
     }
