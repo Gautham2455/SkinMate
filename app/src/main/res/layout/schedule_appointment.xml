@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/layout_padding">
+        >
 
         <TextView
             android:id="@+id/dateTitle"
@@ -18,17 +18,21 @@
             android:text="@string/select_date_heading"
             android:textColor="@color/theme_color_dark"
             android:textSize="18sp"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin"
             app:layout_constraintTop_toBottomOf="@id/dateTitle"
             android:background="@android:color/darker_gray"/>
 
         <CalendarView
-                android:id="@+id/date_picker_actions"
+            android:id="@+id/date_picker_actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/dateTitle"
@@ -50,6 +54,8 @@
             android:text="@string/avalible_time_slot"
             android:textColor="@color/theme_text"
             android:textSize="18sp"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin"
             app:layout_constraintTop_toBottomOf="@id/date_picker_actions"
             tools:layout_editor_absoluteX="20dp" />
 
@@ -58,7 +64,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/timeTitle"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin">
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,13 +93,17 @@
             android:id="@+id/morning_slots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin"
             app:layout_constraintTop_toBottomOf="@id/morning_time"/>
         <LinearLayout
             android:id="@+id/after_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/morning_slots"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin">
 
             <TextView
                 android:layout_width="match_parent"
@@ -110,12 +122,16 @@
                 android:gravity="right"
                 android:text="@string/time_zone_est"
                 android:textColor="@color/theme_color_dark"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginLeft="@dimen/layout_magin"
+                android:layout_marginRight="@dimen/layout_magin"/>
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/afternoon_slots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin"
             app:layout_constraintTop_toBottomOf="@id/after_time"/>
 
         <com.google.android.material.button.MaterialButton
@@ -129,6 +145,8 @@
             android:text="@string/proceed"
             app:cornerRadius="@dimen/button_corner_radius"
             app:layout_constraintTop_toBottomOf="@id/afternoon_slots"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin"
             tools:layout_editor_absoluteX="20dp" />
 
 
