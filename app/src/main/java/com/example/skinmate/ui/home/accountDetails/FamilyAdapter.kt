@@ -29,9 +29,6 @@ class FamilyAdapter(val familyArray:List<FamilyMemberDetails>, context: Context,
     override fun onBindViewHolder(holder: FamilyCardHolder, position: Int) {
         val familyMember = familyArray[position]
         holder.familyMemberName.setText("${familyMember.firstName} ${familyMember.lastName}")
-        val rnd = Random()
-        val currentColor: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-        holder.familyMemberImg.setCircleBackgroundColor(currentColor)
         holder.familyMemberMenu.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 onClickPosition.getViewPosition(position)
