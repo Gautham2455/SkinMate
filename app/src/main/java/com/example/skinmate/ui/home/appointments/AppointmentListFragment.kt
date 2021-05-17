@@ -35,18 +35,19 @@ class AppointmentListFragment:BaseFragment() {
         val token = "Bearer " + sharedPref!!.getString(SignInFragment.TOKEN, "none")
 
         viewModel.getAppointmentList(token, custId!!).observe(requireActivity()) {
+            Log.v("MAin",it[0].toString())
+            Log.v("MAin","aaaa")
             if (it[0].code == 200) {
+                Log.v("MAin",it[0].toString())
                 if (it[0].responseInformation.isNullOrEmpty()) {
                     replace(R.id.fragment_container, EmptyAppointmentFragment.newInstance(),false)
                 }
                 else{
-                    viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){
-                        Log.v("Appim",it[0].responseInformation.toString())
-                        val appointmentadapter=AppointmentAdapter(it[0].responseInformation)
-                        val rv_appointment=view.findViewById<RecyclerView>(R.id.rv_appointment_list)
-                        rv_appointment.layoutManager= LinearLayoutManager(requireContext())
-                        rv_appointment.setAdapter(appointmentadapter)
-                    }
+                    Log.v("Appim",it[0].responseInformation.toString())
+                    val appointmentadapter=AppointmentAdapter(it[0].responseInformation)
+                    val rv_appointment=view.findViewById<RecyclerView>(R.id.rv_appointment_list)
+                    rv_appointment.layoutManager= LinearLayoutManager(requireContext())
+                    rv_appointment.setAdapter(appointmentadapter)
 
                 }
             }

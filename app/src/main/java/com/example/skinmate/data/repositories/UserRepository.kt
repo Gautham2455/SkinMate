@@ -505,6 +505,7 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object :Callback<AppointmentList>{
             override fun onFailure(call: Call<AppointmentList>, t: Throwable) {
+                Log.v("List A","ERror")
 
             }
 
@@ -513,6 +514,7 @@ class UserRepository private constructor(application: Application){
                 response: Response<AppointmentList>
             ) {
                 appointmentList.postValue(response.body())
+                Log.v("List A",response.body().toString())
             }
         })
         return  appointmentList

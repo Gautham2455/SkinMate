@@ -24,7 +24,7 @@ class HomeActivity : BaseActivity() {
             when(it.itemId){
                 R.id.navigation_home -> replace(R.id.fragment_container,HomeFragment.newInstance())
                 R.id.navigation_appointment -> replace(R.id.fragment_container,
-                    EmptyAppointmentFragment.newInstance())
+                    AppointmentListFragment.newInstance())
                 R.id.navigation_notification -> replace(R.id.fragment_container,NotificationFragment.newInstance())
                 R.id.navigation_account -> replace(R.id.fragment_container,
                     AccountFragment.newInstance())
