@@ -3,12 +3,14 @@ package com.example.skinmate.ui.home.appointments
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.ResponseInformationXXXXXX
+import com.example.skinmate.utils.OnClickInterface
 
-class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>) : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
+class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,val onClickPosition: OnClickInterface) : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppointmentHolder {
         val itemView=LayoutInflater.from(parent.context)
@@ -27,6 +29,12 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>) : 
         holder.appointment_time.setText(appointment.timeOfAppointment.time[0].toString())
         holder.patient_id.setText(appointment.appointmentId.toString())
         holder.dermatology_service.setText(appointment.serviceType)
+        holder.checkinBtn.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View) {
+                onClickPosition.getViewPosition(position)
+            }
+        })
+
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +50,7 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>) : 
         val appointment_date=itemView.findViewById<TextView>(R.id.tv_appointment_date)
         val appointment_time=itemView.findViewById<TextView>(R.id.tv_appointment_time)
         val patient_id=itemView.findViewById<TextView>(R.id.tv_patient_id)
+        val checkinBtn=itemView.findViewById<Button>(R.id.btn_checkin)
 
 
 

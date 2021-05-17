@@ -261,6 +261,7 @@ class UserRepository private constructor(application: Application){
 
         call.enqueue(object :Callback<familyMemberResponse>{
             override fun onFailure(call: Call<familyMemberResponse>, t: Throwable) {
+                Log.v("Family member","Error")
 
             }
 
