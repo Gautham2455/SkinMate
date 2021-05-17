@@ -1,12 +1,18 @@
 package com.example.skinmate.ui.home
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import com.example.skinmate.BaseActivity
 import com.example.skinmate.R
 import com.example.skinmate.ui.home.accountDetails.AccountFragment
-import com.example.skinmate.ui.home.appointments.AppointmentListFragment
 import com.example.skinmate.ui.home.appointments.EmptyAppointmentFragment
+import com.example.skinmate.ui.home.checkIn.CheckInFragment
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 
 class HomeActivity : BaseActivity() {
 
@@ -31,6 +37,32 @@ class HomeActivity : BaseActivity() {
             }
             true
         }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "Notification",
+                "Notification",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            val manager =
+                getSystemService(NotificationManager::class.java)
+            manager.createNotificationChannel(channel)
+        }
+
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(
+                        "Instance",
+                        "getInstanceId failed",
+                        task.exception
+                    )
+                    return@OnCompleteListener
+                }
+                val token = task.result
+                Log.d("Instance", token!!)
+            })
 
     }
 

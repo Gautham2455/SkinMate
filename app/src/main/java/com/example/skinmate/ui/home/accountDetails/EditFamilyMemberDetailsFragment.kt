@@ -124,6 +124,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
                   editFamilyMemberDetailsBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
                   editFamilyMemberDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
               }
+
           }
       }
 
