@@ -43,7 +43,7 @@
             android:layout_weight="0.5"
             android:layout_margin="5dp"
             style="@style/cardviewstyle"
-            app:strokeColor="@color/thene_color_light"
+            app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,7 +82,7 @@
             android:layout_weight="0.5"
             android:layout_margin="5dp"
             style="@style/cardviewstyle2"
-            app:strokeColor="@color/thene_color_light"
+            app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -129,7 +129,7 @@
             android:layout_weight="0.5"
             android:layout_margin="5dp"
             style="@style/cardviewstyle"
-            app:strokeColor="@color/thene_color_light"
+            app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -168,7 +168,7 @@
             android:layout_weight="0.5"
             android:layout_margin="5dp"
             style="@style/cardviewstyle2"
-            app:strokeColor="@color/thene_color_light"
+            app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -210,8 +210,6 @@
         android:backgroundTint="@color/theme_button"
         android:text="Confirm"
         app:cornerRadius="@dimen/button_corner_radius"/>
-
-
 
 
 

@@ -20,6 +20,7 @@ import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.bookingAppointment.ScheduleAppointmentFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.skinmate.ui.home.checkIn.CheckInFragment
 import com.example.skinmate.utils.OnClickInterface
 import com.example.skinmate.utils.OnClickInterface_
 
@@ -45,6 +46,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
         val token = "Bearer " + sharedPref!!.getString(SignInFragment.TOKEN, "none")
 
         viewModel.getAppointmentList(token, custId!!).observe(requireActivity()) {
+
             appointmentList=it
             if (it[0].code == 200) {
                 Log.v("MAin",it[0].toString())
@@ -69,10 +71,12 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
         fun newInstance()=AppointmentListFragment()
         var appointmentList:AppointmentList?=null
         var appointment:ResponseInformationXXXXXX?=null
+
+
     }
 
     override fun getViewPosition(position: Int) {
-
+        replace(R.id.fragment_container,CheckInFragment.newInstance())
 
     }
 
