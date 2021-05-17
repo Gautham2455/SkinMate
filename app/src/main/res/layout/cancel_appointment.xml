@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <view
+    <View
         android:id="@+id/divider1"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_appointment_id" />
 
-    <view
+    <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/stroke_width"
@@ -85,7 +85,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date" />
 
-    <view
+    <View
         android:id="@+id/divider3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/stroke_width"

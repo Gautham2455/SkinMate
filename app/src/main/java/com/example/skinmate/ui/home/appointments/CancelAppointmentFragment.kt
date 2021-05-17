@@ -35,7 +35,7 @@ class CancelAppointmentFragment:BaseFragment() {
         service.setText(AppointmentListFragment.appointment?.serviceType)
         appointment_id.setText("ID - "+AppointmentListFragment.appointment?.appointmentId.toString())
         doctor_info.setText(AppointmentListFragment.appointment?.firstName+" "+AppointmentListFragment.appointment?.lastName+", "+AppointmentListFragment.appointment?.designation)
-        date.setText(AppointmentListFragment.appointment?.dateOfAppointment?.date)
+        date.setText(AppointmentListFragment.appointment?.dateOfAppointment?.date?.subSequence(0,10))
         time.setText(AppointmentListFragment.appointment?.timeOfAppointment?.time!![0])
 
         cancel_appointment.setOnClickListener({

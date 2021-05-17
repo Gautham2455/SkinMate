@@ -141,7 +141,6 @@ class RescheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInt
         proocdBtn.setOnClickListener {
             appointmentSlots.removeAt(0)
             Log.v("Slos", appointmentSlots.toString())
-
             replace(R.id.fragment_container, RescheduleConfirmationFragment.newInstance())
         }
 

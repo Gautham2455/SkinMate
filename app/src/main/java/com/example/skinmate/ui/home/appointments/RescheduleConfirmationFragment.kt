@@ -38,8 +38,10 @@ class RescheduleConfirmationFragment:BaseFragment() {
 
 
         service.setText(AppointmentListFragment.appointment!!.serviceType!!)
-        existing_date.setText(AppointmentListFragment.appointment?.dateOfAppointment?.date+", "+AppointmentListFragment.appointment?.timeOfAppointment!!.time[0]+" EST")
-        new_date.setText(RescheduleAppointmentFragment.appointmentDate+", " +RescheduleAppointmentFragment.appointmentSlots[0]+" EST")
+        var app_old_date=AppointmentListFragment.appointment?.dateOfAppointment?.date+", "+AppointmentListFragment.appointment?.timeOfAppointment!!.time.firstOrNull()+" EST"
+        existing_date.setText(app_old_date.toString())
+        var app_new_date=RescheduleAppointmentFragment.appointmentDate+", " +RescheduleAppointmentFragment.appointmentSlots[0]+" EST"
+        new_date.setText(app_new_date)
 
         rescheduleBtn.setOnClickListener({
             val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences(
