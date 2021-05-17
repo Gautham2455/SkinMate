@@ -8,6 +8,7 @@ import android.util.Log
 import com.example.skinmate.BaseActivity
 import com.example.skinmate.R
 import com.example.skinmate.ui.home.accountDetails.AccountFragment
+import com.example.skinmate.ui.home.appointments.AppointmentListFragment
 import com.example.skinmate.ui.home.appointments.EmptyAppointmentFragment
 import com.example.skinmate.ui.home.checkIn.CheckInFragment
 import com.google.android.gms.tasks.OnCompleteListener

@@ -8,14 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.utils.OnClickInterface
 
-class AppointmentListFragment:BaseFragment() {
+class AppointmentListFragment:BaseFragment(), OnClickInterface {
 
     private val viewModel by viewModels<HomeViewModel>()
 
@@ -44,7 +46,7 @@ class AppointmentListFragment:BaseFragment() {
                 }
                 else{
                     Log.v("Appim",it[0].responseInformation.toString())
-                    val appointmentadapter=AppointmentAdapter(it[0].responseInformation)
+                    val appointmentadapter=AppointmentAdapter(it[0].responseInformation,this)
                     val rv_appointment=view.findViewById<RecyclerView>(R.id.rv_appointment_list)
                     rv_appointment.layoutManager= LinearLayoutManager(requireContext())
                     rv_appointment.setAdapter(appointmentadapter)
@@ -58,5 +60,10 @@ class AppointmentListFragment:BaseFragment() {
     }
     companion object{
         fun newInstance()=AppointmentListFragment()
+    }
+
+    override fun getViewPosition(position: Int) {
+
+
     }
 }
