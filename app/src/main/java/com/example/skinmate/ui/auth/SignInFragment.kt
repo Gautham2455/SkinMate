@@ -117,18 +117,17 @@ class SignInFragment : BaseFragment() {
             .setTitle("Finger Print Authentication")
             .setSubtitle("Login using fingerprint")
             .setNegativeButtonText("Use App password").build()
-
-        signInBinding.touchId.setOnClickListener{
-
-            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-
-            val touchIdEnabled = sharedPref!!.getBoolean(AccountFragment.TOUCH_ID,false)
-            if(touchIdEnabled)
+        val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
+        val touchIdEnabled = sharedPref!!.getString(AccountFragment.TOUCH_ID,"none")
+        Log.d("touchidenabled", touchIdEnabled.toString())
+        if(touchIdEnabled.toString()=="true") {
+            signInBinding.touchId.setImageResource(R.drawable.finger_print)
+            signInBinding.touchId.setOnClickListener{
                 biometricPrompt.authenticate(promptInfo)
-            else
-                Toast.makeText(requireContext(),"Touch ID Authentication is not Enabled ",Toast.LENGTH_SHORT).show()
-
+            }
         }
+        else
+            Toast.makeText(requireContext(),"Touch ID Authentication is not Enabled ",Toast.LENGTH_SHORT).show()
 
         signInBinding.etPhoneEmail.addTextChangedListener(textWatcher)
         signInBinding.etPassword.addTextChangedListener(textWatcher)

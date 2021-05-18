@@ -31,7 +31,8 @@ class AccountFragment : BaseFragment() {
     companion object {
         fun newInstance() =
             AccountFragment()
-        const val TOUCH_ID:String="touch_id"
+        var touch_id: Boolean=false
+        var TOUCH_ID:String=" "
     }
 
     override fun onCreateView(
@@ -46,7 +47,8 @@ class AccountFragment : BaseFragment() {
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
         val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
         val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
-        profileMenuBinding.tvTouchId.setChecked(sharedPref!!.getBoolean(TOUCH_ID,false))
+        touch_id = sharedPref!!.getString(TOUCH_ID,"none").toBoolean()
+        profileMenuBinding.tvTouchId.setChecked(touch_id)
 
         viewModel.getCustomerDetails("Bearer $token",custId!!).observe(requireActivity()){
             if(it.get(0).responseMessage)
@@ -65,16 +67,23 @@ class AccountFragment : BaseFragment() {
         profileMenuBinding.changePasswordCard.setOnClickListener { replace(R.id.fragment_container,ChangePwdFragment.newInstance()) }
 
         profileMenuBinding.tvTouchId.setOnCheckedChangeListener { buttonView, isChecked ->
-
+            val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPref!!.edit()
             if(isChecked) {
-                editor.putBoolean(TOUCH_ID, isChecked)
+
+                editor.putString(TOUCH_ID, "true")
+                editor.apply()
                 editor.commit()
+                Log.d("touchid2", TOUCH_ID)
             }
             if(!isChecked){
-                editor.putBoolean(TOUCH_ID, isChecked)
+
+                editor.putString(TOUCH_ID, "false")
+                editor.apply()
                 editor.commit()
             }
+
+
         }
 
         profileMenuBinding.logoutBtn.setOnClickListener {
