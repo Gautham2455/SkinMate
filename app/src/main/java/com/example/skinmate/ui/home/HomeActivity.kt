@@ -9,6 +9,8 @@ import com.example.skinmate.BaseActivity
 import com.example.skinmate.R
 import com.example.skinmate.ui.home.accountDetails.AccountFragment
 import com.example.skinmate.ui.home.appointments.AppointmentListFragment
+import com.example.skinmate.ui.home.appointments.EmptyAppointmentFragment
+import com.example.skinmate.ui.home.checkIn.CheckInFragment
 import com.example.skinmate.ui.home.notification.NotificationFragment
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView

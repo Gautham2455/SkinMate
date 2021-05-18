@@ -20,7 +20,6 @@ class MessageService : FirebaseMessagingService() {
             remoteMessage.notification!!.body)
     }
 
-
     override fun onNewToken(s: String) {
         Log.d("Token", "Refreshed token: $s")
     }

@@ -5,11 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
 
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_service"
@@ -124,12 +123,10 @@
                 android:id="@+id/appoint_for"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:focusableInTouchMode="true"
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:text="Self"
-
                 android:drawableRight="@drawable/arrow_down"
                 android:fontFamily="@font/poppins_semibold"
                 app:layout_constraintTop_toBottomOf="@id/appointment_spinner" />
