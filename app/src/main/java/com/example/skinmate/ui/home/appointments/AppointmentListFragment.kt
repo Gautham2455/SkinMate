@@ -1,5 +1,6 @@
 package com.example.skinmate.ui.home.appointments
 
+import android.R.attr.button
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -18,14 +19,11 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.AppointmentList
 import com.example.skinmate.data.responses.ResponseInformationXXXXXX
 import com.example.skinmate.ui.auth.SignInFragment
-import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
-import com.example.skinmate.ui.home.bookingAppointment.ScheduleAppointmentFragment
 import com.example.skinmate.ui.home.checkIn.CheckInActivity
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.example.skinmate.ui.home.checkIn.CheckInFragment
 import com.example.skinmate.utils.OnClickInterface
 import com.example.skinmate.utils.OnClickInterface_
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_ {
@@ -101,7 +99,6 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
             replace(R.id.fragment_container,RescheduleAppointmentFragment.newInstance())
         })
 
-
-
     }
+
 }
