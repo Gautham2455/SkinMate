@@ -69,6 +69,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface {
     }
 
     override fun getViewPosition(position: Int) {
+        appointment = appointmentList!![0].responseInformation[position]
         replace(R.id.fragment_container,CheckInFragment.newInstance())
 
     }
