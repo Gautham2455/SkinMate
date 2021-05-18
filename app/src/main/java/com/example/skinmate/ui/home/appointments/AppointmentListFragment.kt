@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.data.responses.AppointmentList
+import com.example.skinmate.data.responses.ResponseInformationXXXXXX
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.ui.home.checkIn.CheckInFragment
 import com.example.skinmate.utils.OnClickInterface
 
 class AppointmentListFragment:BaseFragment(), OnClickInterface {
@@ -39,6 +42,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface {
         viewModel.getAppointmentList(token, custId!!).observe(requireActivity()) {
             Log.v("MAin",it[0].toString())
             Log.v("MAin","aaaa")
+            appointmentList=it
             if (it[0].code == 200) {
                 Log.v("MAin",it[0].toString())
                 if (it[0].responseInformation.isNullOrEmpty()) {
@@ -60,10 +64,12 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface {
     }
     companion object{
         fun newInstance()=AppointmentListFragment()
+        var appointmentList: AppointmentList?=null
+        var appointment: ResponseInformationXXXXXX?=null
     }
 
     override fun getViewPosition(position: Int) {
-
+        replace(R.id.fragment_container,CheckInFragment.newInstance())
 
     }
 }

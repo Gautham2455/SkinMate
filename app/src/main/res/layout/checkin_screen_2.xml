@@ -110,8 +110,8 @@
                 android:textSize="12sp" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="60dp"
                 android:src="@drawable/ic_baseline_circle_24" />
@@ -236,7 +236,6 @@
             android:id="@+id/proceed_btn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="20dp"
