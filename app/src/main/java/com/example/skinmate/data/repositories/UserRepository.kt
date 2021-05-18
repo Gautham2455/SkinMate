@@ -36,13 +36,13 @@ class UserRepository private constructor(application: Application){
     val regiusterID=MutableLiveData<List<generalResponse>>()
     val verifyEmailOtp=MutableLiveData<List<generalResponse>>()
     val mainService=MutableLiveData<MainServiceResponse>()
-
     val appointmentList=MutableLiveData<AppointmentList>()
     val appointmentStatus=MutableLiveData<List<generalResponse>>()
-
     val editFamilyMeberDetails = MutableLiveData<List<generalResponse>>()
     val deleteMember = MutableLiveData<List<generalResponse>>()
     val familyMemberView = MutableLiveData<memberViewResponse>()
+    val rescheduleAppointment=MutableLiveData<List<generalResponse>>()
+    val notification=MutableLiveData<List<notificationResponse>>()
 
 
 
@@ -595,6 +595,45 @@ class UserRepository private constructor(application: Application){
         return  familyMemberView
     }
 
+
+
+    fun putReschheduleCall(token: String,requesrBody: RequestBody):MutableLiveData<List<generalResponse>>{
+        val call=SecuredRetrofitClient.apiInterface.RescheduleAppointment(token,requesrBody)
+
+        call.enqueue(object :Callback<List<generalResponse>>{
+            override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<generalResponse>>,
+                response: Response<List<generalResponse>>
+            ) {
+                rescheduleAppointment.postValue(response.body())
+            }
+        })
+        return rescheduleAppointment
+
+    }
+
+    fun getNotificationCall(token: String,customerId: String):MutableLiveData<List<notificationResponse>> {
+        val call = SecuredRetrofitClient.apiInterface.getNotification(token, customerId)
+
+        call.enqueue(object : Callback<List<notificationResponse>>{
+            override fun onFailure(call: Call<List<notificationResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<notificationResponse>>,
+                response: Response<List<notificationResponse>>
+            ) {
+                notification.postValue(response.body())
+            }
+
+        })
+        return notification
+    }
 
 
     companion object {

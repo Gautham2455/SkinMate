@@ -210,5 +210,6 @@
     <string name="in_the_interim_you_can_complete_checkin">In the interim you can complete Checkin</string>
     <string name="check_in">CHECK IN</string>
     <string name="call">Call</string>
+    <string name="please_call_us">Please call us!</string>
 
 </resources>

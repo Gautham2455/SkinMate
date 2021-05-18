@@ -14,6 +14,19 @@
         <item name="backgroundColor">#B2BFB8</item>
     </style>
 
+    <style name="checkinStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_checkin
+        </item>
+    </style>
+    <style name="ShapeAppearanceOverlay_card_checkin" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="backgroundColor">#B2BFB8</item>
+    </style>
+
 
     <style name="Buttoncardviewstyle" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">

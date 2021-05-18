@@ -39,7 +39,7 @@
                 android:gravity="left"
                 android:text="Self"
                 android:textColor="@color/theme_text"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,13 +47,13 @@
                 android:id="@+id/tv_hyphen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="30dp"
                 android:layout_toRightOf="@id/tv_patient_name"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="-"
                 android:textColor="@color/theme_text"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@id/tv_patient_name"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,15 +61,14 @@
                 android:id="@+id/tv_dermatology_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Telehealth video visit"
                 android:textColor="@color/theme_text"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@id/tv_hyphen"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <ImageView
                 android:id="@+id/img_appointment_menu"

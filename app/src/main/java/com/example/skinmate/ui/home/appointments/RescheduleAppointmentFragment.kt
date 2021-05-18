@@ -1,4 +1,4 @@
-package com.example.skinmate.ui.home.bookingAppointment
+package com.example.skinmate.ui.home.appointments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -23,6 +23,10 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.bookedAppointmentResponse
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.ui.home.bookingAppointment.AfternoonTimeSlotAdapter
+import com.example.skinmate.ui.home.bookingAppointment.ConfirmationFragment
+import com.example.skinmate.ui.home.bookingAppointment.MorningTimeSlotAdapter
+import com.example.skinmate.ui.home.bookingAppointment.SlectDoctorFragment
 import com.example.skinmate.utils.OnClickInterface
 import com.example.skinmate.utils.OnClickInterface_
 import kotlinx.android.synthetic.main.schedule_appointment.*
@@ -30,7 +34,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInterface_ {
+class RescheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInterface_ {
 
     private val viewModel by viewModels<HomeViewModel>()
 
@@ -44,10 +48,10 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
     ): View? {
 
         val view=inflater?.inflate(R.layout.schedule_appointment, container, false)
-        setTitleWithBackButton("Setect Date and Time")
+        setTitleWithBackButton("Reschedule")
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            ScheduleAppointmentFragment.appointmentDate =
+            RescheduleAppointmentFragment.appointmentDate =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         }
 
@@ -120,9 +124,10 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
                 }else   {
 
                 }
-                val morningSlots_adapter=MorningTimeSlotAdapter(MorningSlots,requireContext(),this)
+                val morningSlots_adapter= MorningTimeSlotAdapter(MorningSlots,requireContext(),this)
                 rv_morningSlots.layoutManager = GridLayoutManager(context, 3)
-                val afternoonSlots_adapter=AfternoonTimeSlotAdapter(AfternoonSlots,requireContext(),this)
+                val afternoonSlots_adapter=
+                    AfternoonTimeSlotAdapter(AfternoonSlots,requireContext(),this)
                 rv_morningSlots.setAdapter(morningSlots_adapter)
                 rv_afternoonSlots.layoutManager = GridLayoutManager(context, 3)
                 rv_afternoonSlots.setAdapter(afternoonSlots_adapter)
@@ -136,8 +141,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
         proocdBtn.setOnClickListener {
             appointmentSlots.removeAt(0)
             Log.v("Slos", appointmentSlots.toString())
-
-            replace(R.id.fragment_container, AppointmentSummary.newInstance())
+            replace(R.id.fragment_container, RescheduleConfirmationFragment.newInstance())
         }
 
         return view
@@ -163,7 +167,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
         var appointmentDate:String?=null
         var appointmentSlots= mutableListOf<String>("none")
         var appointmentinfo:bookedAppointmentResponse?=null
-        fun newInstance()=ScheduleAppointmentFragment()
+        fun newInstance()=RescheduleAppointmentFragment()
         var MorningSlots= mutableListOf<String>(
             "09:00",
             "09:10",

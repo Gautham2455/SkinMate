@@ -11,6 +11,7 @@ import com.example.skinmate.ui.home.accountDetails.AccountFragment
 import com.example.skinmate.ui.home.appointments.AppointmentListFragment
 import com.example.skinmate.ui.home.appointments.EmptyAppointmentFragment
 import com.example.skinmate.ui.home.checkIn.CheckInFragment
+import com.example.skinmate.ui.home.notification.NotificationFragment
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
@@ -32,7 +33,8 @@ class HomeActivity : BaseActivity() {
                 R.id.navigation_home -> replace(R.id.fragment_container,HomeFragment.newInstance())
                 R.id.navigation_appointment -> replace(R.id.fragment_container,
                     AppointmentListFragment.newInstance())
-                R.id.navigation_notification -> replace(R.id.fragment_container,NotificationFragment.newInstance())
+                R.id.navigation_notification -> replace(R.id.fragment_container,
+                    NotificationFragment.newInstance())
                 R.id.navigation_account -> replace(R.id.fragment_container,
                     AccountFragment.newInstance())
             }

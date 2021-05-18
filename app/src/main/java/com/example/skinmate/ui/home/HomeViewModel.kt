@@ -26,13 +26,13 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val registerIData=UserRepository.getInstance(application)
     private val emailOtpData=UserRepository.getInstance(application)
     private val mainServiceData=UserRepository.getInstance(application)
-
     private val appointListData=UserRepository.getInstance(application)
     private val appointmentSatusData=UserRepository.getInstance(application)
-
     private val editFamilyMemberDetailsData = UserRepository.getInstance(application)
     private val deleteMemberData = UserRepository.getInstance(application)
     private val memberViewData = UserRepository.getInstance(application)
+    private val rescheduleData=UserRepository.getInstance(application)
+    private val notificationData=UserRepository.getInstance(application)
 
 
     fun getFamilyMembersList(token:String,customerid:String):LiveData<List<familyMemberListItem>> = liveData(Dispatchers.IO) {
@@ -122,6 +122,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getMemberView(token:String,familyProfileId:String):LiveData<memberViewResponse> = liveData(Dispatchers.IO) {
         emitSource(memberViewData.getMemberViewCall(token,familyProfileId))
+    }
+
+    fun putReschedule(token: String,requestBody: RequestBody):LiveData<List<generalResponse>> =
+    liveData(Dispatchers.IO) {
+            emitSource(rescheduleData.putReschheduleCall(token,requestBody))
+        }
+
+    fun getNotification(token: String,customerId: String):LiveData<List<notificationResponse>> = liveData(Dispatchers.IO){
+        emitSource(notificationData.getNotificationCall(token,customerId))
     }
 
 }

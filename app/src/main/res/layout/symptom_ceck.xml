@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/symptom_check_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@mipmap/symptom_check_img"
+        android:layout_margin="@dimen/layout_magin"/>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_symptom_check"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/symptom_check_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/layout_padding"
+        android:text="@string/symptom_check_instruction"
+        android:textColor="@color/theme_color_dark"
+        android:textStyle="bold"
+        android:textSize="18sp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/symptom_row1"
+        app:layout_constraintTop_toBottomOf="@id/tv_symptom_check"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cough_card"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp"
+            style="@style/cardviewstyle"
+            app:strokeColor="@color/theme_background_light"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/cough_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/cough_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/ImageView_selected_cough"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/done_mark"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/cough_img"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_cough"
+                    app:layout_constraintTop_toBottomOf="@id/cough_img"
+                    android:text="@string/cough"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fever_card"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp"
+            style="@style/cardviewstyle2"
+            app:strokeColor="@color/theme_background_light"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/fever_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/fever_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/ImageView_selected_fever"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/done_mark"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/fever_img"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_medical"
+                    app:layout_constraintTop_toBottomOf="@id/fever_img"
+                    android:text="@string/fever"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/symptom_row2"
+        app:layout_constraintTop_toBottomOf="@id/symptom_row1"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cold_card"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp"
+            style="@style/cardviewstyle"
+            app:strokeColor="@color/theme_background_light"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/cold_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/cold_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/ImageView_selected_cold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/done_mark"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/cold_img"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_cold"
+                    app:layout_constraintTop_toBottomOf="@id/cold_img"
+                    android:text="@string/cold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/no_symptom_card"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp"
+            style="@style/cardviewstyle2"
+            app:strokeColor="@color/theme_background_light"
+            app:strokeWidth="1dp"
+            android:clickable="true"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/no_symptom_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@mipmap/no_symptom_img"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/ImageView_selected_none"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/done_mark"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/no_symptom_img"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_no_symptom"
+                    app:layout_constraintTop_toBottomOf="@id/no_symptom_img"
+                    android:text="None Of The Above"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirmBtn"
+        app:layout_constraintTop_toBottomOf="@id/symptom_row2"
+        android:layout_margin="@dimen/layout_magin"
+        android:backgroundTint="@color/theme_button"
+        android:text="Confirm"
+        app:cornerRadius="@dimen/button_corner_radius"
+        android:background="@drawable/custom_button_fill"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
