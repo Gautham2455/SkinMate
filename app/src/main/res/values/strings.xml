@@ -209,5 +209,6 @@
     <string name="_3_00_pm">3:00 PM</string>
     <string name="in_the_interim_you_can_complete_checkin">In the interim you can complete Checkin</string>
     <string name="check_in">CHECK IN</string>
+    <string name="call">Call</string>
 
 </resources>
