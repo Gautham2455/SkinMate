@@ -18,11 +18,13 @@ import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.OnClickInterface
+import com.example.skinmate.utils.RemainingTime
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -43,7 +45,17 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             AppointmentSummary.appointmentDate =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            AppointmentSummary.currentDAteTime =
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm"))
         }
+        val r: RemainingTime = RemainingTime()
+        val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd hh:mm")
+        Log.v("family",currentDAteTime.toString())
+        Log.v("family","${ScheduleAppointmentFragment.appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.first()}")
+        val date1: Date = simpleDateFormat.parse(currentDAteTime.toString())
+        val date2: Date = simpleDateFormat.parse("${ScheduleAppointmentFragment.r_appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.first()}")
+        val s=r.printDifference(date1, date2)
+        Log.v("datee",s)
 
 
         setTitleWithBackButton("Summary")
@@ -56,7 +68,9 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
         val payment=view.findViewById<RadioGroup>(R.id.payment)
         appointmentFor=view.findViewById<EditText>(R.id.appoint_for)
         val confirmbtn=view.findViewById<Button>(R.id.confirmbtn)
+        val remaining_time=view.findViewById<TextView>(R.id.remaining_time)
 
+        remaining_time.setText(s)
 
         time_date.setText(ScheduleAppointmentFragment.appointmentDate)
 
@@ -147,6 +161,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
         var appointmentFor:EditText?=null
         var appointmentDate:String?=null
         var appointmentTime:TimeZone?=null
+        var currentDAteTime:String?=null
     }
 
     override fun getViewPosition(position: Int) {

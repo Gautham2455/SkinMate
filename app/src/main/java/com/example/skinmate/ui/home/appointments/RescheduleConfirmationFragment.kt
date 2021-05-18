@@ -38,8 +38,8 @@ class RescheduleConfirmationFragment:BaseFragment() {
 
 
         service.setText(AppointmentListFragment.appointment!!.serviceType!!)
-        var app_old_date=AppointmentListFragment.appointment?.dateOfAppointment?.date+", "+AppointmentListFragment.appointment?.timeOfAppointment!!.time.firstOrNull()+" EST"
-        existing_date.setText(app_old_date.toString())
+        var app_old_date=AppointmentListFragment.appointment?.dateOfAppointment?.date?.subSequence(0,10).toString()+", "+AppointmentListFragment.appointment?.timeOfAppointment!!.time.firstOrNull()+" EST"
+        existing_date.setText(app_old_date)
         var app_new_date=RescheduleAppointmentFragment.appointmentDate+", " +RescheduleAppointmentFragment.appointmentSlots[0]+" EST"
         new_date.setText(app_new_date)
 

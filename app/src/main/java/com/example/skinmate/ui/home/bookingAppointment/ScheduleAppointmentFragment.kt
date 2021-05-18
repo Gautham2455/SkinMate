@@ -49,6 +49,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             ScheduleAppointmentFragment.appointmentDate =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+            r_appointmentDate=LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
         }
 
         val caldendar= view.findViewById<CalendarView>(R.id.date_picker_actions)
@@ -96,6 +97,8 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
         var date = caldendar.getDate();
         caldendar.setOnDateChangeListener(OnDateChangeListener { view, year, month, dayOfMonth ->
             date = caldendar.getDate()
+            val month=month+1
+            r_appointmentDate="$year/$month/$dayOfMonth"
             appointmentDate="$year/$month/$dayOfMonth"
             Log.v("Date","$year/$month/$dayOfMonth")
             viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!,appointmentDate!! ).observe(
@@ -161,6 +164,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
 
     companion object{
         var appointmentDate:String?=null
+        var r_appointmentDate:String?=null
         var appointmentSlots= mutableListOf<String>("none")
         var appointmentinfo:bookedAppointmentResponse?=null
         fun newInstance()=ScheduleAppointmentFragment()
