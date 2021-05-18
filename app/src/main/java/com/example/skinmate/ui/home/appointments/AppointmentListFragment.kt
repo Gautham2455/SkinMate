@@ -98,7 +98,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
         })
         Reschedule?.setOnClickListener({
             BottomDialog.dismiss()
-            replace(R.id.fragment_container,ScheduleAppointmentFragment.newInstance())
+            replace(R.id.fragment_container,RescheduleAppointmentFragment.newInstance())
         })
 
 

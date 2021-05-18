@@ -1,4 +1,4 @@
-package com.example.skinmate.ui.home.bookingAppointment
+package com.example.skinmate.ui.home.appointments
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -41,20 +41,20 @@ class ConfirmationFragment:BaseFragment() {
         val date=view.findViewById<TextView>(R.id.date)
         val time=view.findViewById<TextView>(R.id.time)
 
-        tv_medical_id.setText("ID - "+SlectDoctorFragment.doctorID)
-        date.setText(ScheduleAppointmentFragment.appointmentDate!!.subSequence(0,9))
-        time.setText(ScheduleAppointmentFragment.appointmentSlots[0])
+        tv_medical_id.setText("ID - "+AppointmentListFragment.appointment!!.doctorId)
+        date.setText(RescheduleAppointmentFragment.appointmentDate!!)
+        time.setText(RescheduleAppointmentFragment.appointmentSlots[0])
 
-        viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){appointmentList->
+        /*viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){appointmentList->
             val latindex=appointmentList[0].responseInformation.size-1
             lastIntex=latindex
             appointments=appointmentList
             Log.v("Con",latindex.toString())
 
-            viewModel.getAppointmentStatus(token,appointmentList[0].responseInformation.lastOrNull()?.appointmentId.toString(),"Accepted").observe(requireActivity()){
+            viewModel.getAppointmentStatus(token,appointmentList[0].responseInformation[latindex].appointmentId.toString(),"Accepted").observe(requireActivity()){
                 Log.v("ststus",it.toString())
             }
-        }
+        }*/
 
         doneBtn.setOnClickListener(View.OnClickListener {
             replace(R.id.fragment_container,AppointmentListFragment.newInstance(),false)

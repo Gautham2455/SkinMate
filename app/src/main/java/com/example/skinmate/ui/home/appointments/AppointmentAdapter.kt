@@ -30,8 +30,8 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         else
             holder.patient_name.setText(appointment.familyFirstName+" "+appointment.familyLastName)
         holder.doctor.setText(appointment.firstName+" "+appointment.designation)
-        holder.appointment_date.setText(appointment.dateOfAppointment.date.subSequence(0,9))
-        holder.appointment_time.setText(appointment.timeOfAppointment.time[0].toString())
+        holder.appointment_date.setText(appointment.dateOfAppointment.date.subSequence(0,10))
+        holder.appointment_time.setText(appointment.timeOfAppointment.time.firstOrNull())
         holder.patient_id.setText(appointment.appointmentId.toString())
         holder.dermatology_service.setText(appointment.serviceType)
         holder.checkinBtn.setOnClickListener(object : View.OnClickListener {

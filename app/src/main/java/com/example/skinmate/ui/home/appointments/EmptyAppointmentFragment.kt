@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.viewModels
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
 
 class EmptyAppointmentFragment : BaseFragment() {
@@ -26,6 +28,11 @@ class EmptyAppointmentFragment : BaseFragment() {
 
 
         val view = inflater.inflate(R.layout.fragment_appointment, container, false)
+
+        val schedule_appointment=view.findViewById<Button>(R.id.schedule_appointment)
+        schedule_appointment.setOnClickListener({
+            replace(R.id.fragment_container,HomeFragment.newInstance())
+        })
 
 
 
