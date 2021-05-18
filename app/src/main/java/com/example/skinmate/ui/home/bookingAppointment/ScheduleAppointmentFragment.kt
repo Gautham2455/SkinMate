@@ -44,6 +44,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
     ): View? {
 
         val view=inflater?.inflate(R.layout.schedule_appointment, container, false)
+        setTitleWithBackButton("Setect Date and Time")
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             ScheduleAppointmentFragment.appointmentDate =
