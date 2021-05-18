@@ -50,18 +50,18 @@
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintTop_toTopOf="parent"/>
 
-       <TextView
-           android:id="@+id/tv_notification_time"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="20dp"
-           android:layout_marginStart="5dp"
-           android:fontFamily="@font/poppins_semibold"
-           android:textColor="@color/theme_text"
-           android:textSize="10dp"
-           android:text="1 hour ago"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
+<!--       <TextView-->
+<!--           android:id="@+id/tv_notification_time"-->
+<!--           android:layout_width="wrap_content"-->
+<!--           android:layout_height="wrap_content"-->
+<!--           android:layout_marginTop="20dp"-->
+<!--           android:layout_marginStart="5dp"-->
+<!--           android:fontFamily="@font/poppins_semibold"-->
+<!--           android:textColor="@color/theme_text"-->
+<!--           android:textSize="10dp"-->
+<!--           android:text="1 hour ago"-->
+<!--           app:layout_constraintEnd_toEndOf="parent"-->
+<!--           app:layout_constraintTop_toTopOf="parent" />-->
 
    </androidx.constraintlayout.widget.ConstraintLayout>
 

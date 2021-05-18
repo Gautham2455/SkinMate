@@ -33,7 +33,10 @@ class CheckInFragment : BaseFragment() {
         id.setText(AppointmentListFragment.appointment!!.appointmentId.toString())
 
         val name = view.findViewById<TextView>(R.id.patient_name)
-        name.setText(AppointmentListFragment.appointment!!.familyFirstName + " " + AppointmentListFragment.appointment!!.familyLastName)
+        if(AppointmentListFragment.appointment!!.familyFirstName.isNullOrEmpty())
+            name.setText("Self")
+        else
+            name.setText(AppointmentListFragment.appointment!!.familyFirstName + " " + AppointmentListFragment.appointment!!.familyLastName)
 
         val doc = view.findViewById<TextView>(R.id.tv_doctor_name)
         doc.setText(AppointmentListFragment.appointment!!.firstName + " " + AppointmentListFragment.appointment!!.lastName + " " + AppointmentListFragment.appointment!!.designation)

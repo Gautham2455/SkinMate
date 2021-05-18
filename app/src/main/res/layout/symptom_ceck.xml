@@ -47,6 +47,7 @@
             style="@style/cardviewstyle"
             app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
+            android:clickable="true"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -98,6 +99,7 @@
             style="@style/cardviewstyle2"
             app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
+            android:clickable="true"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -154,6 +156,7 @@
             style="@style/cardviewstyle"
             app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
+            android:clickable="true"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -202,6 +205,7 @@
             style="@style/cardviewstyle2"
             app:strokeColor="@color/theme_background_light"
             app:strokeWidth="1dp"
+            android:clickable="true"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

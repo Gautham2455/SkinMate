@@ -42,6 +42,7 @@ class UserRepository private constructor(application: Application){
     val deleteMember = MutableLiveData<List<generalResponse>>()
     val familyMemberView = MutableLiveData<memberViewResponse>()
     val rescheduleAppointment=MutableLiveData<List<generalResponse>>()
+    val notification=MutableLiveData<List<notificationResponse>>()
 
 
 
@@ -615,6 +616,24 @@ class UserRepository private constructor(application: Application){
 
     }
 
+    fun getNotificationCall(token: String,customerId: String):MutableLiveData<List<notificationResponse>> {
+        val call = SecuredRetrofitClient.apiInterface.getNotification(token, customerId)
+
+        call.enqueue(object : Callback<List<notificationResponse>>{
+            override fun onFailure(call: Call<List<notificationResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<notificationResponse>>,
+                response: Response<List<notificationResponse>>
+            ) {
+                notification.postValue(response.body())
+            }
+
+        })
+        return notification
+    }
 
 
     companion object {

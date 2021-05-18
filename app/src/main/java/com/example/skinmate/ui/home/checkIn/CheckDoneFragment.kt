@@ -1,6 +1,7 @@
 package com.example.skinmate.ui.home.checkIn
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -15,6 +16,7 @@ import androidx.cardview.widget.CardView
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.ui.auth.SetupProfileFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.appointments.AppointmentListFragment
 
@@ -40,7 +42,10 @@ class CheckDoneFragment : BaseFragment() {
 
 
         val name = view.findViewById<TextView>(R.id.patient_name)
-        name.setText(AppointmentListFragment.appointment!!.familyFirstName + " " + AppointmentListFragment.appointment!!.familyLastName)
+        if(AppointmentListFragment.appointment!!.familyFirstName.isNullOrEmpty())
+            name.setText("Self")
+        else
+            name.setText(AppointmentListFragment.appointment!!.familyFirstName + " " + AppointmentListFragment.appointment!!.familyLastName)
 
         val doc = view.findViewById<TextView>(R.id.tv_doctor_name)
         doc.setText(AppointmentListFragment.appointment!!.firstName + " " + AppointmentListFragment.appointment!!.lastName + " " + AppointmentListFragment.appointment!!.designation)
@@ -63,7 +68,8 @@ class CheckDoneFragment : BaseFragment() {
 
         val checkInBtn = view.findViewById<CardView>(R.id.checkin_complete)
         checkInBtn.setOnClickListener {
-            replace(R.id.fragment_container, HomeFragment.newInstance())
+            activity?.finish()
+            startActivity(Intent(requireActivity(), HomeActivity::class.java))
         }
 
 

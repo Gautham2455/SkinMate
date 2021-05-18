@@ -1,9 +1,11 @@
 package com.example.skinmate.ui.home.checkIn
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SymptomCeckBinding
+import com.example.skinmate.ui.home.HomeActivity
 
 class SymptomCheckFragment : BaseFragment() {
 
@@ -45,6 +48,7 @@ class SymptomCheckFragment : BaseFragment() {
                 binding.coughCard.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
 
                selected = binding.tvCough.toString()
+                Log.v("sym", selected.toString())
 
             }
             else {
@@ -112,7 +116,21 @@ class SymptomCheckFragment : BaseFragment() {
         }
 
         binding.confirmBtn.setOnClickListener {
-                replace(R.id.fragment_container,CheckDoneFragment.newInstance())}
+            if(selected=="none")
+                replace(R.id.fragment_container,CheckDoneFragment.newInstance())
+            else{
+                val dialog = Dialog(requireContext())
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.dialog_call_us)
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.show()
+                val OkayBtn = dialog.findViewById(R.id.btn_call) as Button
+                OkayBtn.setOnClickListener {
+                    dialog.dismiss()
+                    startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                }
+            }
+        }
 
 
         return binding.root

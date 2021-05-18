@@ -215,4 +215,10 @@ interface   MyApi {
         @Body requestBody: RequestBody
     ):Call<List<generalResponse>>
 
+    @GET("customer/notification/list/{customerId}")
+    fun getNotification(
+        @Header("Authorization") token:String,
+        @Path("customerId") customerId:String
+    ):Call<List<notificationResponse>>
+
 }

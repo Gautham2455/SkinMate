@@ -99,6 +99,7 @@
                 android:textSize="13sp" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/patient_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="250dp"
@@ -243,7 +244,7 @@
             android:id="@+id/checkin_complete"
             android:layout_width="match_parent"
             android:layout_height="158dp"
-            app:shapeAppearance="@style/ShapeAppearanceOverlay_card_custom_corners"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay_card_checkin"
             app:cardBackgroundColor="#59746B"
             android:layout_marginTop="30dp"
             android:clickable="true">

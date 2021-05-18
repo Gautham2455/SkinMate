@@ -32,6 +32,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val deleteMemberData = UserRepository.getInstance(application)
     private val memberViewData = UserRepository.getInstance(application)
     private val rescheduleData=UserRepository.getInstance(application)
+    private val notificationData=UserRepository.getInstance(application)
 
 
     fun getFamilyMembersList(token:String,customerid:String):LiveData<List<familyMemberListItem>> = liveData(Dispatchers.IO) {
@@ -127,5 +128,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     liveData(Dispatchers.IO) {
             emitSource(rescheduleData.putReschheduleCall(token,requestBody))
         }
+
+    fun getNotification(token: String,customerId: String):LiveData<List<notificationResponse>> = liveData(Dispatchers.IO){
+        emitSource(notificationData.getNotificationCall(token,customerId))
+    }
 
 }
