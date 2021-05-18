@@ -9,7 +9,7 @@ data class ResponseInformationXX(
     @SerializedName("bloodGroup")
     val bloodGroup: String,
     @SerializedName("dob")
-    val dob: Dob,
+    val dob: String,
     @SerializedName("email")
     val email: String,
     @SerializedName("emeregencyContactName")

@@ -82,7 +82,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
             if(it.get(0).responseMessage){
                 viewEditProfileBinding.etFirstName.setText(it.get(0).responseInformation.get(0).firstName)
                 viewEditProfileBinding.etLastName.setText(it.get(0).responseInformation.get(0).lastName)
-                viewEditProfileBinding.etDob.setText(it.get(0).responseInformation.get(0).dob.date)
+                viewEditProfileBinding.etDob.setText(it.get(0).responseInformation.get(0).dob)
                 viewEditProfileBinding.etEmergencyContactName.setText(it.get(0).responseInformation.get(0).emeregencyContactName)
                 viewEditProfileBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.get(0).emeregencyNumber)
                 viewEditProfileBinding.etMailingAddress.setText(it.get(0).responseInformation.get(0).address)

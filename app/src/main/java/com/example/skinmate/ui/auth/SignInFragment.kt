@@ -126,8 +126,6 @@ class SignInFragment : BaseFragment() {
                 biometricPrompt.authenticate(promptInfo)
             }
         }
-        else
-            Toast.makeText(requireContext(),"Touch ID Authentication is not Enabled ",Toast.LENGTH_SHORT).show()
 
         signInBinding.etPhoneEmail.addTextChangedListener(textWatcher)
         signInBinding.etPassword.addTextChangedListener(textWatcher)
