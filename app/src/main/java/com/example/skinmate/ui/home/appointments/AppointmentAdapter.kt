@@ -1,5 +1,6 @@
 package com.example.skinmate.ui.home.appointments
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,9 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.ResponseInformationXXXXXX
 import com.example.skinmate.utils.OnClickInterface
 import com.example.skinmate.utils.OnClickInterface_
+import java.sql.Time
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
                          val onClickPosition: OnClickInterface,val onClickPosition_: OnClickInterface_
@@ -34,6 +38,7 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         holder.appointment_time.setText(appointment.timeOfAppointment.time.firstOrNull())
         holder.patient_id.setText(appointment.appointmentId.toString())
         holder.dermatology_service.setText(appointment.serviceType)
+        holder.checkinBtn.setEnabled(btnEnable(appointment.timeOfAppointment.time.firstOrNull()))
         holder.checkinBtn.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 onClickPosition.getViewPosition(position)
@@ -45,6 +50,42 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
             }
         })
 
+    }
+
+    private fun btnEnable(appointmentTime: String?) : Boolean{
+
+        var btn : Boolean = false
+        val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+        val start = Time(currentTime.subSequence(0,2).toString().toInt(), currentTime.subSequence(3,5).toString().toInt(), 0)
+        val stop = Time(appointmentTime!!.subSequence(0,2).toString().toInt(), appointmentTime!!.subSequence(3,5).toString().toInt(), 0)
+        val diff: Time
+        diff = difference(start, stop)
+        val min = diff.toString().subSequence(3,5).toString().toInt()
+        val hr = diff.toString().subSequence(0,2).toString().toInt()
+        Log.v("time",diff.toString())
+        if(hr == 23 && min >= 45)
+            btn =  true
+        return btn
+    }
+
+    fun difference(start: Time, stop: Time): Time {
+        val diff = Time(0, 0, 0)
+
+        if (stop.seconds > start.seconds) {
+            --start.minutes
+            start.seconds += 60
+        }
+
+        diff.seconds = start.seconds - stop.seconds
+        if (stop.minutes > start.minutes) {
+            --start.hours
+            start.minutes += 60
+        }
+
+        diff.minutes = start.minutes - stop.minutes
+        diff.hours = start.hours - stop.hours
+
+        return diff
     }
 
     override fun getItemCount(): Int {
@@ -65,4 +106,8 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
 
 
     }
+
+
+
+
 }

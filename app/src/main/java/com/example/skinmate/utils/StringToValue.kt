@@ -33,5 +33,23 @@ class StringToValue {
         return genderId
     }
 
+    fun relationIdToType(id :String): String?{
+
+        var relationType : String?=null
+        when(id){
+            "1" -> relationType="father"
+            "2" -> relationType="mother"
+            "3" -> relationType="brother"
+            "4" -> relationType="sister"
+            "5" -> relationType="children"
+            "6" -> relationType="wife"
+            "7" -> relationType="grand father"
+            "8" -> relationType="grand mother"
+            "9" -> relationType="husband"
+        }
+        return relationType
+
+    }
+
 
 }

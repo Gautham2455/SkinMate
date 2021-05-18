@@ -17,6 +17,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="@string/insurance_information"
             android:textColor="@color/theme_text" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/insurance_info"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
