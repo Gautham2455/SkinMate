@@ -114,6 +114,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
               editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.emeregencyNumber)
               editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.address)
               editFamilyMemberDetailsBinding.etInsuranceInfo.setText(it.get(0).responseInformation.insuranceInformation)
+              editFamilyMemberDetailsBinding.etRelationshipType.setText(stringTovalue.relationIdToType(it.get(0).responseInformation.relationshipId))
               if (it[0].responseInformation.gender == 1){
                   editFamilyMemberDetailsBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
                   editFamilyMemberDetailsBinding.ImageViewSelectedGenderMale.isVisible=true

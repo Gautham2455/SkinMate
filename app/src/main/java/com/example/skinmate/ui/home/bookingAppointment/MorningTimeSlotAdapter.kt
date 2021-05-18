@@ -25,7 +25,14 @@ class MorningTimeSlotAdapter(val slots:MutableList<String>, val context:Context,
         holder.TimeSlots.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 onClickPosition.getViewPosition(position)
-                holder.TimeSlots.setBackgroundColor(ContextCompat.getColor(context, R.color.theme_background_light))
+                if(holder.flag==false) {
+                    holder.TimeSlots.setBackgroundColor(ContextCompat.getColor(context, R.color.theme_background_light))
+                    holder.flag=true
+                }
+                else{
+                    holder.TimeSlots.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+                    holder.flag=false
+                }
             }
         })
 
@@ -37,6 +44,7 @@ class MorningTimeSlotAdapter(val slots:MutableList<String>, val context:Context,
 
     class ButtonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var TimeSlots=itemView.findViewById<Button>(R.id.time_btn)
+        var flag:Boolean=false
 
     }
 }

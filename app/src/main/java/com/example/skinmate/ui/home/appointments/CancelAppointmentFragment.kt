@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.AppointmentList
@@ -24,6 +25,7 @@ class CancelAppointmentFragment:BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setTitleWithBackButton("Cancel Appointment")
         val view=inflater?.inflate(R.layout.cancel_appointment,container,false)
         val service=view.findViewById<TextView>(R.id.tv_service)
         val appointment_id=view.findViewById<TextView>(R.id.tv_appointment_id)

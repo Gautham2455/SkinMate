@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.ui.auth.SignInFragment
