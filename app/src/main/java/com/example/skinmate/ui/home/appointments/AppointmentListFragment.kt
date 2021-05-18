@@ -1,6 +1,7 @@
 package com.example.skinmate.ui.home.appointments
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -17,8 +18,10 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.AppointmentList
 import com.example.skinmate.data.responses.ResponseInformationXXXXXX
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.bookingAppointment.ScheduleAppointmentFragment
+import com.example.skinmate.ui.home.checkIn.CheckInActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.example.skinmate.ui.home.checkIn.CheckInFragment
 import com.example.skinmate.utils.OnClickInterface
@@ -77,7 +80,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
 
     override fun getViewPosition(position: Int) {
         appointment = appointmentList!![0].responseInformation[position]
-        replace(R.id.fragment_container,CheckInFragment.newInstance())
+        startActivity(Intent(requireActivity(), CheckInActivity::class.java))
 
     }
 

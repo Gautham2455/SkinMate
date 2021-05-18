@@ -13,7 +13,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="370dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="50dp"
             android:layout_height="99dp"
             app:shapeAppearance="@style/ShapeAppearanceOverlay_card_custom_corners_tr_bl"
             android:id="@+id/reached_layout"
@@ -136,6 +136,10 @@
                 android:layout_marginTop="80dp"
                 tools:ignore="ContentDescription" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_ID"
                 android:layout_width="wrap_content"
@@ -147,6 +151,17 @@
                 android:textColor="@color/theme_background_light"
                 android:textSize="13sp" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_ID_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="75dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="123456"
+                android:textColor="@color/theme_background_light"
+                android:textSize="13sp" />
+            </LinearLayout>
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -225,11 +240,13 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/checkin_complete"
             android:layout_width="match_parent"
             android:layout_height="158dp"
             app:shapeAppearance="@style/ShapeAppearanceOverlay_card_custom_corners"
             app:cardBackgroundColor="#59746B"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:clickable="true">
 
             <ImageView
                 android:layout_width="45dp"
