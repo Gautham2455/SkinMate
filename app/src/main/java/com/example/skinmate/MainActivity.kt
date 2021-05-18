@@ -17,14 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val r:RemainingTime=RemainingTime()
-        val simpleDateFormat = SimpleDateFormat("yyyy/M/dd hh:mm")
-        val date1: Date = simpleDateFormat.parse("2013/10/10 11:30")
-        val date2: Date = simpleDateFormat.parse("2013/10/10 20:35")
-        val s=r.printDifference(date1, date2)
-
-        Log.v("datee",s)
-
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
