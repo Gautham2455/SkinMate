@@ -2,6 +2,8 @@ package com.example.skinmate.ui.home
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +11,8 @@ import com.example.skinmate.BaseActivity
 import com.example.skinmate.R
 import com.example.skinmate.ui.home.accountDetails.AccountFragment
 import com.example.skinmate.ui.home.appointments.AppointmentListFragment
-import com.example.skinmate.ui.home.appointments.EmptyAppointmentFragment
-import com.example.skinmate.ui.home.checkIn.CheckInFragment
 import com.example.skinmate.ui.home.notification.NotificationFragment
+import com.example.skinmate.utils.NetworkConnection
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
@@ -28,15 +29,24 @@ class HomeActivity : BaseActivity() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.selectedItemId = R.id.navigation_home
 
+        val networkConnection: NetworkConnection=NetworkConnection()
+        registerReceiver(networkConnection, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.navigation_home -> replace(R.id.fragment_container,HomeFragment.newInstance())
-                R.id.navigation_appointment -> replace(R.id.fragment_container,
-                    AppointmentListFragment.newInstance())
-                R.id.navigation_notification -> replace(R.id.fragment_container,
-                    NotificationFragment.newInstance())
-                R.id.navigation_account -> replace(R.id.fragment_container,
-                    AccountFragment.newInstance())
+                R.id.navigation_home -> replace(R.id.fragment_container, HomeFragment.newInstance())
+                R.id.navigation_appointment -> replace(
+                    R.id.fragment_container,
+                    AppointmentListFragment.newInstance()
+                )
+                R.id.navigation_notification -> replace(
+                    R.id.fragment_container,
+                    NotificationFragment.newInstance()
+                )
+                R.id.navigation_account -> replace(
+                    R.id.fragment_container,
+                    AccountFragment.newInstance()
+                )
             }
             true
         }
