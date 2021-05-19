@@ -99,10 +99,14 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
                 FamilyBottomSheet.show()
             }
             val add_Family=FamilyBottomSheet.findViewById<TextView>(R.id.tv_add_Family)
-            add_Family?.setOnClickListener(View.OnClickListener {
-                replace(R.id.fragment_container,AddMemberFragment.newInstance(),false)
+            val self=FamilyBottomSheet.findViewById<TextView>(R.id.self)
+            self!!.setOnClickListener({
                 FamilyBottomSheet.dismiss()
-
+                appointmentFor?.setText("Self")
+            })
+            add_Family?.setOnClickListener(View.OnClickListener {
+                FamilyBottomSheet.dismiss()
+                replace(R.id.fragment_container,AddMemberFragment.newInstance(),false)
             })
 
         })
@@ -165,8 +169,8 @@ class AppointmentSummary :BaseFragment(),OnClickInterface{
     }
 
     override fun getViewPosition(position: Int) {
+        FamilyBottomSheet.dismiss()
         familyProfileId= familyList!!.get(0).responseInformation[position].familyProfileId.toString()
         appointmentFor?.setText(familyList!!.get(0).responseInformation[position].firstName+ " "+familyList!!.get(0).responseInformation[position].lastName)
-        FamilyBottomSheet.dismiss()
     }
 }
