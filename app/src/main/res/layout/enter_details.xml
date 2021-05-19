@@ -334,13 +334,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="1"
@@ -348,25 +350,28 @@
                     android:gravity="left"
                     android:text="@string/mailing_address"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="MissingConstraints" />
 
                 <TextView
                     android:id="@+id/tv_current_location"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
                     android:fontFamily="@font/poppins_medium"
-                    android:gravity="left"
+                    android:gravity="right"
                     android:linksClickable="true"
                     android:text="@string/use_current_location"
                     android:textColor="#699CAF"
                     android:textSize="16sp"
-                    app:drawableLeftCompat="@drawable/current_location" />
+                    app:drawableLeftCompat="@drawable/current_location"
+                   app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="MissingConstraints" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"

@@ -109,6 +109,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
 
             viewModel.postEditCustomer("Bearer $token",custId!!,mailingaddress!!,email!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(requireActivity()){
                 if(it.get(0).Code == 200) {
+                    replace(R.id.fragment_container,AccountFragment.newInstance())
                     Toast.makeText(requireContext(),"Changes updated",Toast.LENGTH_LONG).show()
                 }
             }
