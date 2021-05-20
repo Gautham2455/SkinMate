@@ -62,24 +62,6 @@ class FamilyMemberListFragment : BaseFragment(),OnClickInterface {
 
         HomeActivity.bottomNavigationView.visibility = View.GONE
 
-        val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
-            Context.MODE_PRIVATE)
-        val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
-        token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
-
-
-        viewModel.getFamilyMembersList("Bearer $token",custId!!).observe(requireActivity()){
-            familyResponse = it
-            val familyAdapter = FamilyAdapter(it.get(0).responseInformation,requireContext(),this)
-            val dl = view.findViewById<RecyclerView>(R.id.family_member_list)
-            if(it.get(0).responseInformation.size!=0){
-                dl.layoutManager = LinearLayoutManager(requireContext())
-                dl.setAdapter(familyAdapter)
-                Log.v("familyList",it.get(0).responseInformation.get(0).firstName)
-            }
-
-        }
-
 
 
             val fabBtn =view.findViewById<View>(R.id.fab)
@@ -90,39 +72,62 @@ class FamilyMemberListFragment : BaseFragment(),OnClickInterface {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
+            Context.MODE_PRIVATE)
+        val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
+        token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
+
+        viewModel.getFamilyMembersList("Bearer $token",custId!!).observe(this){
+            familyResponse = it
+            val familyAdapter =
+                context?.let { it1 -> FamilyAdapter(it.get(0).responseInformation, it1,this) }
+            val dl = view.findViewById<RecyclerView>(R.id.family_member_list)
+            if(it.get(0).responseInformation.size!=0){
+                dl.layoutManager = LinearLayoutManager(context)
+                dl.setAdapter(familyAdapter)
+                Log.v("familyList",it.get(0).responseInformation.get(0).firstName)
+            }
+
+        }
+
+    }
+
     override fun getViewPosition(position: Int) {
-        val bottomSheetDialog = BottomSheetDialog(requireContext())
-        bottomSheetDialog.setContentView(R.layout.bottomdialogfragment_delete_edit_family_member)
-        bottomSheetDialog.show()
-        val editMemberDetails = bottomSheetDialog.findViewById<TextView>(R.id.tv_edit_family_member)
+        val bottomSheetDialog = context?.let { BottomSheetDialog(it) }
+        bottomSheetDialog?.setContentView(R.layout.bottomdialogfragment_delete_edit_family_member)
+        bottomSheetDialog?.show()
+        val editMemberDetails = bottomSheetDialog?.findViewById<TextView>(R.id.tv_edit_family_member)
         familyProfileId = familyResponse!!.get(0).responseInformation.get(position).familyProfileId
         firstName =  familyResponse!!.get(0).responseInformation.get(position).firstName
         lastName =  familyResponse!!.get(0).responseInformation.get(position).lastName
         Log.v("ID", familyProfileId.toString())
         editMemberDetails!!.setOnClickListener {
-            bottomSheetDialog.dismiss()
+            bottomSheetDialog?.dismiss()
             replace(R.id.fragment_container,EditFamilyMemberDetailsFragment.newInstance()) }
-        val deleteMember = bottomSheetDialog.findViewById<TextView>(R.id.tv_delete_member)
+        val deleteMember = bottomSheetDialog?.findViewById<TextView>(R.id.tv_delete_member)
         deleteMember!!.setOnClickListener {
-            bottomSheetDialog.dismiss()
+            bottomSheetDialog?.dismiss()
             openDialog(firstName!!, lastName!!, familyProfileId!!) }
 
     }
 
     private fun openDialog(firstName:String,lastName:String,familyProfileId:Int) {
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.layout_delete_member)
-        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-        val familyMemberName = dialog.findViewById<TextView>(R.id.tv_member_name)
-        familyMemberName.setText(firstName + " " + lastName + "?")
+        val dialog = context?.let { Dialog(it) }
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.setContentView(R.layout.layout_delete_member)
+        dialog?.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.show()
+        val familyMemberName = dialog?.findViewById<TextView>(R.id.tv_member_name)
+        familyMemberName?.setText(firstName + " " + lastName + "?")
         val id=familyProfileId.toString()
-        val yesBtn = dialog.findViewById(R.id.btn_yes) as Button
-        val noBtn = dialog.findViewById<Button>(R.id.btn_No)
-        noBtn.setOnClickListener { dialog.dismiss() }
+        val yesBtn = dialog?.findViewById(R.id.btn_yes) as Button
+        val noBtn = dialog?.findViewById<Button>(R.id.btn_No)
+        noBtn.setOnClickListener { dialog?.dismiss() }
         yesBtn.setOnClickListener {
-            dialog.dismiss()
+            dialog?.dismiss()
             deleteMember(id) }
     }
 

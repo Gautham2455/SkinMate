@@ -51,7 +51,7 @@ class ChangePwdFragment : BaseFragment() {
             val old_pwd = changePasswordBinding.etCurrentPassword.text.toString()
             val new_pwd = changePasswordBinding.etNewPassword.text.toString()
             Log.v("CAhange Password",custId.toString())
-            viewModel.postChangePassword("Bearer $token",custId!!,old_pwd,new_pwd).observe(requireActivity()){ pwdResponse ->
+            viewModel.postChangePassword("Bearer $token",custId!!,old_pwd,new_pwd).observe(this){ pwdResponse ->
                 onSuccesfullChangePwd(pwdResponse.get(0).responseMessage)
             }
         }
@@ -68,7 +68,7 @@ class ChangePwdFragment : BaseFragment() {
             add(R.id.fragment_container, SuccessMessageFragment.newInstance())
         }
         else{
-            Toast.makeText(requireContext(),"Incorrect Old Password", Toast.LENGTH_LONG).show()
+            Toast.makeText(context,"Incorrect Old Password", Toast.LENGTH_LONG).show()
         }
     }
 
