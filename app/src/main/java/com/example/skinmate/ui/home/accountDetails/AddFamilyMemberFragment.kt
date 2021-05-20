@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -29,9 +30,11 @@ import com.example.skinmate.databinding.FragmentAddFamilyMemberSetupProfileBindi
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
+import com.example.skinmate.ui.home.bookingAppointment.AppointmentSummary
 import com.example.skinmate.utils.StringToValue
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -84,7 +87,7 @@ class AddFamilyMemberFragment : BaseFragment() {
 
         var bloodgroups=resources.getStringArray(R.array.Bloodgroup)
         var arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdown_menu,bloodgroups)
-        addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
+//        addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         addFamilyMemberSetupProfileBinding.etEmergencyContactNumber.addTextChangedListener(textWatcher)
 
@@ -155,6 +158,45 @@ class AddFamilyMemberFragment : BaseFragment() {
             addFamilyMemberSetupProfileBinding.etMailingAddress.setText(getLastLocation())
 
         }}
+
+        addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setOnClickListener {
+            val bloodgrpBottomsheet = BottomSheetDialog(requireContext())
+            bloodgrpBottomsheet.setContentView(R.layout.bottom_dialog_blood_group)
+            bloodgrpBottomsheet.show()
+            val Opos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_o_positive)
+            val Oneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_o_negative)
+            val Apos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_a_positive)
+            val Aneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_a_negative)
+            val Bpos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_b_positive)
+            val Bneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_b_negative)
+            val ABpos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_ab_positive)
+            val ABneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_ab_negative)
+            Opos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Opos!!.getText()) }
+            Oneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Oneg!!.getText()) }
+            Apos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Apos!!.getText()) }
+            Aneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Aneg!!.getText()) }
+            Bpos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Bpos!!.getText()) }
+            Bneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Bneg!!.getText()) }
+            ABpos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(ABpos!!.getText()) }
+            ABneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(ABneg!!.getText()) }
+
+        }
 
         addFamilyMemberSetupProfileBinding.btnAddMember.setOnClickListener {
             firstname=addFamilyMemberSetupProfileBinding.etFirstName.text.toString()
