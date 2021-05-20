@@ -127,6 +127,7 @@
                 android:cursorVisible="false"
                 android:focusable="false"
                 android:text="Self"
+                android:maxLength="20"
                 android:drawableRight="@drawable/arrow_down"
                 android:fontFamily="@font/poppins_semibold"
                 app:layout_constraintTop_toBottomOf="@id/appointment_spinner" />
@@ -289,6 +290,7 @@
                 android:focusableInTouchMode="true"
                 android:cursorVisible="false"
                 android:focusable="false"
+                android:maxLength="20"
                 android:drawableRight="@drawable/arrow_down"
                 app:layout_constraintTop_toBottomOf="@id/ed_insurance_info" />
 
@@ -313,6 +315,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:hint="@string/new_insurance_information"
                 app:layout_constraintTop_toBottomOf="@id/ed_insurance_info"
+                android:maxLength="20"
                 android:visibility="gone"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -360,6 +363,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:hint="@string/enter_comments"
                 android:lines="3"
+                android:maxLength="200"
                 app:layout_constraintTop_toBottomOf="@id/tv_comments" />
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -82,7 +82,8 @@
                     android:inputType="number"
                     android:maxLines="1"
                     android:textColor="@color/theme_text"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:maxLength="6"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout

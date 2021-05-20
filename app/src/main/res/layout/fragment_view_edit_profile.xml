@@ -26,7 +26,8 @@
                 android:gravity="left"
                 android:text="@string/first_name"
                 android:textColor="@color/theme_text"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:maxLength="15"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -77,7 +78,8 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:hint="@string/enter_last_name"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:maxLength="15"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -295,7 +297,8 @@
                     android:hint="@string/select_date_of_birth"
                     android:inputType="none"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:maxLength="10"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -423,7 +426,8 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:hint="@string/insurance_information"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:maxLength="15"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -454,7 +458,8 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:hint="@string/enter_emergecny_contact_name"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:maxLength="30"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -487,7 +492,8 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:hint="@string/enter_emergency_contact_number"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:maxLength="10"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

@@ -39,6 +39,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:hint="@string/enter_insurance_information"
+                android:maxLength="20"
                 android:textColorHint="@color/theme_background_light" />
         </com.google.android.material.textfield.TextInputLayout>
 
