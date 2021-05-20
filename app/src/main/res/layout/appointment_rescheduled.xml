@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:id="@+id/comfirmation_img"
+            android:src="@drawable/confirmation_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/confirmation_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/appointment_rescheduled"
+            android:textColor="@color/theme_color_dark"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/comfirmation_img" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/stroke_width"
+            android:background="@color/theme_background_light"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_msg"
+            android:layout_marginTop="50dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_medical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="left"
+            android:text="@string/medical"
+            android:textColor="@color/theme_background_light"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <TextView
+            android:id="@+id/tv_medical_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="right"
+            android:text="ID- 36546"
+            android:textColor="@color/theme_background_light"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <TextView
+            android:id="@+id/doctor_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="1Craig A. Mohney, MD FAAD, FASMS"
+            android:textColor="@color/theme_color_dark"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_medical_id" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/stroke_width"
+            android:background="@color/theme_background_light"
+            app:layout_constraintTop_toBottomOf="@id/doctor_info"
+            android:layout_margin="@dimen/layout_magin"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="10-jun-2021"
+            android:textColor="@color/theme_color_dark"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_magin"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="10:00 AM"
+            android:textColor="@color/theme_color_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/stroke_width"
+            android:background="@color/theme_background_light"
+            app:layout_constraintTop_toBottomOf="@id/time"
+            android:layout_margin="@dimen/layout_magin"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/done_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/layout_magin"
+            android:background="@drawable/custom_button_fill"
+            android:backgroundTint="@color/theme_button"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/done"
+            app:cornerRadius="@dimen/button_corner_radius"
+            app:layout_constraintTop_toBottomOf="@id/divider3"
+            tools:layout_editor_absoluteX="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+

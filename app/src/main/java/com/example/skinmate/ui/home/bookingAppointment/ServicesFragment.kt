@@ -14,6 +14,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.SubServiceBinding
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
 
@@ -30,7 +31,7 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
     ): View? {
 
         subServiceBinding=DataBindingUtil.inflate(inflater,R.layout.sub_service,container,false)
-
+        HomeActivity.bottomNavigationView.visibility = View.GONE
         setTitleWithBackButton(HomeFragment.MainService)
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate", Context.MODE_PRIVATE)
         val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")

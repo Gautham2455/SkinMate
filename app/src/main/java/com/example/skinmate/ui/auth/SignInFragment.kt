@@ -128,7 +128,8 @@ class SignInFragment : BaseFragment() {
         }
 
         signInBinding.etPhoneEmail.addTextChangedListener(textWatcher)
-        signInBinding.etPassword.addTextChangedListener(textWatcher)
+        signInBinding.etPassword.addTextChangedListener(textWatcher_pass)
+        //signInBinding.btnSignin.addTextChangedListener(textWatcher_btn)
 
         signInBinding.tvForgotPassword.setOnClickListener {
 
@@ -153,10 +154,26 @@ class SignInFragment : BaseFragment() {
             val pass: String = signInBinding.etPassword.text.toString()
 
             signInBinding.textinputPhoneEmail.error = if (inputValidation.isPhoneValid(phone_mail) || inputValidation.isemailValid(phone_mail)) null else "Please enter valid Phone/Email"
+            signInBinding.btnSignin.isEnabled = !phone_mail.isEmpty() && !pass.isEmpty()
+        }
+    }
+
+    private val textWatcher_pass = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_mail : String = signInBinding.etPhoneEmail.text.toString()
+            val pass: String = signInBinding.etPassword.text.toString()
+
             signInBinding.textinputPassword.error = if (inputValidation.passwordValid(pass)) null else "Must be mininmum 4 Characters"
             signInBinding.btnSignin.isEnabled = !phone_mail.isEmpty() && !pass.isEmpty()
         }
-
     }
-
 }

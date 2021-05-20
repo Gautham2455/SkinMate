@@ -14,6 +14,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.AddInsuranceBinding
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -36,6 +37,8 @@ class AddInsuranceFragment : BaseFragment() {
     ): View? {
         setTitleWithBackButton("Add Insurance")
         addInsuranceBinding = DataBindingUtil.inflate(inflater, R.layout.add_insurance,container,false)
+
+        HomeActivity.bottomNavigationView.visibility = View.GONE
 
         addInsuranceBinding.btnAddInsurance.setOnClickListener {
 

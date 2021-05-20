@@ -6,7 +6,7 @@ data class notificationResponse (
     @SerializedName("Code")
     val code: Int,
     @SerializedName("responseInformation")
-    val responseInformation:ArrayList<String>,
+    val responseInformation:List<NotificationDetails>,
     @SerializedName("responseMessage")
     val responseMessage: Boolean
 )

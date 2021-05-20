@@ -211,6 +211,8 @@
     <string name="check_in">CHECK IN</string>
     <string name="call">Call</string>
     <string name="please_call_us">Please call us!</string>
+    <string name="appointment_rescheduled">Appointment Rescheduled</string>
     <string name="new_insurance_information">Enter New Insurance Information</string>
+
 
 </resources>

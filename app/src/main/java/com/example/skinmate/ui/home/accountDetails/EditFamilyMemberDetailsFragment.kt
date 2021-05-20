@@ -29,6 +29,7 @@ import com.example.skinmate.databinding.FragmentEditFamilyMemberDetailsBinding
 import com.example.skinmate.ui.auth.AuthViewModel
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.SignUpFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.StringToValue
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -77,6 +78,8 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
             container,
             false
         )
+        
+        HomeActivity.bottomNavigationView.visibility=View.GONE
 
         val inputval= InputValidation()
         val c= Calendar.getInstance()

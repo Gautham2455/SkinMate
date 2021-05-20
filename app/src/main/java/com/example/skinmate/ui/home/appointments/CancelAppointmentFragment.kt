@@ -14,6 +14,7 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.AppointmentList
 import com.example.skinmate.data.responses.ResponseInformationXXXXXX
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -30,6 +31,7 @@ class CancelAppointmentFragment:BaseFragment() {
     ): View? {
         setTitleWithBackButton("Cancel Appointment")
         val view=inflater?.inflate(R.layout.cancel_appointment,container,false)
+        HomeActivity.bottomNavigationView.visibility = View.GONE
         val service=view.findViewById<TextView>(R.id.tv_service)
         val appointment_id=view.findViewById<TextView>(R.id.tv_appointment_id)
         val doctor_info=view.findViewById<TextView>(R.id.doctor_info)
@@ -47,6 +49,7 @@ class CancelAppointmentFragment:BaseFragment() {
             val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
                 Context.MODE_PRIVATE)
             val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
+
             val jsonobject= JSONObject()
             jsonobject.put("appointmentId",AppointmentListFragment.appointment?.appointmentId.toString())
             jsonobject.put("status","Cancled")
@@ -54,6 +57,7 @@ class CancelAppointmentFragment:BaseFragment() {
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
             viewModel.getAppointmentStatus(token,requestBody).observe(requireActivity()){
+
                 if(it[0].Code==200)
                     replace(R.id.fragment_container,AppointmentListFragment.newInstance())
                 else{

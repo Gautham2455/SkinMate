@@ -16,6 +16,7 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.InsuranceList
 import com.example.skinmate.data.responses.familyMemberListItem
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.OnClickInterface
@@ -42,6 +43,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
         savedInstanceState: Bundle?
     ): View? {
         val view=inflater?.inflate(R.layout.appointment_summary,container,false)
+        HomeActivity.bottomNavigationView.visibility = View.GONE
         FamilyBottomSheet=BottomSheetDialog(requireContext())
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
