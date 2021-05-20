@@ -1,5 +1,7 @@
 package com.example.skinmate.ui.home.appointments
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.ResponseInformationXXXXXX
@@ -27,6 +30,7 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         return AppointmentHolder(itemView)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: AppointmentHolder, position: Int) {
         val appointment=apoointmentList.get(position)
         if(appointment.familyFirstName.isNullOrEmpty())
@@ -39,6 +43,8 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         holder.patient_id.setText(appointment.appointmentId.toString())
         holder.dermatology_service.setText(appointment.serviceType)
         holder.checkinBtn.setEnabled(btnEnable(appointment.timeOfAppointment.time.firstOrNull()))
+        if(btnEnable(appointment.timeOfAppointment.time.firstOrNull()))
+            holder.checkinBtn.setBackgroundColor(R.color.theme_button)
         holder.checkinBtn.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 onClickPosition.getViewPosition(position)
@@ -56,15 +62,18 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
 
         var btn : Boolean = false
         val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
-        val start = Time(currentTime.subSequence(0,2).toString().toInt(), currentTime.subSequence(3,5).toString().toInt(), 0)
+        val start = Time(currentTime!!.subSequence(0,2).toString().toInt(), currentTime.subSequence(3,5).toString().toInt(), 0)
+        Log.d("current Time",start.toString())
         val stop = Time(appointmentTime!!.subSequence(0,2).toString().toInt(), appointmentTime!!.subSequence(3,5).toString().toInt(), 0)
         val diff: Time
         diff = difference(start, stop)
         val min = diff.toString().subSequence(3,5).toString().toInt()
         val hr = diff.toString().subSequence(0,2).toString().toInt()
-        Log.v("time",diff.toString())
-        if(hr == 11 && min >= 45)
-            btn =  true
+        Log.v("Differ time",diff.toString())
+        if(hr == 0){
+            if(min == 0 || min >=45)
+                btn =  true
+        }
         return btn
     }
 
