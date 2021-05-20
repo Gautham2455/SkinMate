@@ -41,6 +41,21 @@ class SlectDoctorFragment :BaseFragment(),OnClickInterface{
         setTitleWithBackButton("Select Doctor")
 
 
+
+
+
+
+
+        val proocdBtn=view.findViewById<Button>(R.id.proceed_btn)
+        proocdBtn.setOnClickListener {
+            replace(R.id.fragment_container,ScheduleAppointmentFragment.newInstance())
+        }
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate", Context.MODE_PRIVATE)
         val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
         viewModel.getDoctorList(token,ServicesFragment.subServiceId!!).observe(requireActivity()){
@@ -54,16 +69,6 @@ class SlectDoctorFragment :BaseFragment(),OnClickInterface{
             Log.v("Doctor",it[0].responseInformation[0].firstName)
 
         }
-
-
-
-
-        val proocdBtn=view.findViewById<Button>(R.id.proceed_btn)
-        proocdBtn.setOnClickListener {
-            replace(R.id.fragment_container,ScheduleAppointmentFragment.newInstance())
-        }
-
-        return view
     }
 
     companion object{
