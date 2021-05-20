@@ -18,6 +18,7 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.doctorListResponse
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.SignUpFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.OnClickInterface
 import kotlinx.android.synthetic.main.select_doctor.view.*
@@ -36,7 +37,7 @@ class SlectDoctorFragment :BaseFragment(),OnClickInterface{
     ): View? {
 
         val view:View = inflater?.inflate(R.layout.select_doctor, container, false)
-
+        HomeActivity.bottomNavigationView.visibility = View.GONE
         setTitleWithBackButton("Select Doctor")
 
 

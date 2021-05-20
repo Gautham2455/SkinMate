@@ -39,6 +39,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
         hideToolbar()
 
         val view=inflater?.inflate(R.layout.landing_screen,container,false)
+        HomeActivity.bottomNavigationView.visibility = View.VISIBLE
 
         val card1=view.findViewById<TextView>(R.id.tv_telehealth_video)
         val card2=view.findViewById<TextView>(R.id.tv_medical)
@@ -94,7 +95,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
                 MainServiceId="5"
             }
         }
-        startActivity(Intent(requireActivity(), BookingActivity::class.java))
+        replace(R.id.fragment_container,ServicesFragment.newInstance())
 
     }
 

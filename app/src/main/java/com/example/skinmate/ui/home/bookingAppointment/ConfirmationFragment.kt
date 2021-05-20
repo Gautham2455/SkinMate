@@ -11,10 +11,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.AppointmentList
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.appointments.AppointmentListFragment
@@ -32,7 +34,7 @@ class ConfirmationFragment:BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view:View=inflater?.inflate(R.layout.appointment_confirmation,container,false)
-
+        HomeActivity.bottomNavigationView.visibility = View.GONE
         val doneBtn=view.findViewById<Button>(R.id.done_btn)
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
             Context.MODE_PRIVATE)
