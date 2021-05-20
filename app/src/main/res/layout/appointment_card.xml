@@ -189,7 +189,7 @@
                     android:enabled="false"
                     android:textColor="@color/white"
                     android:textSize="15sp"
-                    app:backgroundTint="@color/theme_button"/>
+                    app:backgroundTint="@color/theme_background_light"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
