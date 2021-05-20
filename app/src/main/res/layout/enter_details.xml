@@ -297,7 +297,10 @@
                     android:hint="@string/select_date_of_birth"
                     android:inputType="none"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -331,7 +334,11 @@
                 android:hint="@string/select_blood_group"
                 android:inputType="none"
                 android:textColor="@color/theme_text"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:focusableInTouchMode="true"
+                android:cursorVisible="false"
+                android:focusable="false"
+                />
             </com.google.android.material.textfield.TextInputLayout>
 
 

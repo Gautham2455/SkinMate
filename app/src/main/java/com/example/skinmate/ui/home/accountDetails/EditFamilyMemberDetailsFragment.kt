@@ -104,6 +104,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
         editFamilyMemberDetailsBinding.cardOther.setClickable(false)
         editFamilyMemberDetailsBinding.autocompleteBloodGrp.setEnabled(false)
         editFamilyMemberDetailsBinding.etDob.setEnabled(false)
+        editFamilyMemberDetailsBinding.etRelationshipType.setEnabled(false)
 
 
       viewModel.getFamilyMember("Bearer $token",familyProfileId).observe(requireActivity()){
