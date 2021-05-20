@@ -83,7 +83,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
         )
         val custId = sharedPref!!.getString(SignInFragment.CUSTOMER_ID, "none")
         val token = "Bearer " + sharedPref!!.getString(SignInFragment.TOKEN, "none")
-        viewModel.getAppointmentList(token, custId!!).observe(requireActivity()) {
+        viewModel.getAppointmentList(token, custId!!).observe(this) {
 
             appointmentList=it
             if (it[0].code == 200) {

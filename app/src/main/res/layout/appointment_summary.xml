@@ -378,7 +378,7 @@
             android:background="@drawable/custom_button_fill"
             android:backgroundTint="@color/theme_button"
             android:fontFamily="@font/poppins_bold"
-            android:text="Comfirm"
+            android:text="Confirm"
             app:cornerRadius="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
