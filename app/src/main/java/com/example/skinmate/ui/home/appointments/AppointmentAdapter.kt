@@ -104,10 +104,6 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         val checkinBtn=itemView.findViewById<Button>(R.id.btn_checkin)
         val options=itemView.findViewById<ImageView>(R.id.img_appointment_menu)
 
-
     }
-
-
-
 
 }
