@@ -140,7 +140,8 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
                 val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
                 viewModel.putFamilyMemberEdidtDetails("Bearer $token",familyProfileId,requestBody).observe(this){
                     if(it.get(0).responseMessage==true) {
-                        replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                        //replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                        fragmentManager?.popBackStack()
                         Toast.makeText(
                             context,
                             "Changes Updated Successfully",

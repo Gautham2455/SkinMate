@@ -271,8 +271,11 @@ class AddFamilyMemberFragment : BaseFragment() {
                 viewModel.postAddFamilyMember("Bearer $token",custId!!,relationshipid!!,firstname!!,lastname!!,genderId!!,dateofbirth!!
                 ,bloodgroup_user!!,mailingaddress!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(this){
 
-                    if(it.get(0).Code == 200)
-                        replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                    if(it.get(0).Code == 200){
+                        //replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                        fragmentManager?.popBackStack()
+                    }
+
 
                     else
                         Toast.makeText(context,"Unsuccessfull",Toast.LENGTH_LONG).show()

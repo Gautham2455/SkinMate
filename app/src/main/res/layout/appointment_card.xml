@@ -186,7 +186,6 @@
                     android:background="@drawable/custom_button_fill"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/check_in"
-                    android:enabled="false"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:backgroundTint="@color/theme_button"/>
