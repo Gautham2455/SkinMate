@@ -33,6 +33,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val memberViewData = UserRepository.getInstance(application)
     private val rescheduleData=UserRepository.getInstance(application)
     private val notificationData=UserRepository.getInstance(application)
+    private val insuranceListData=UserRepository.getInstance(application)
 
 
     fun getFamilyMembersList(token:String,customerid:String):LiveData<List<familyMemberListItem>> = liveData(Dispatchers.IO) {
@@ -106,9 +107,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         emitSource( appointListData.appointmentListCall(token, customerId))
     }
 
-    fun getAppointmentStatus(token: String,appointmentId:String,status:String): LiveData<List<generalResponse>> =
+    fun getAppointmentStatus(token: String,requestBody : RequestBody): LiveData<List<generalResponse>> =
         liveData {
-            emitSource(appointmentSatusData.AppointStatusCAll(token, appointmentId, status))
+            emitSource(appointmentSatusData.AppointStatusCAll(token, requestBody))
         }
 
 
@@ -131,6 +132,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getNotification(token: String,customerId: String):LiveData<List<notificationResponse>> = liveData(Dispatchers.IO){
         emitSource(notificationData.getNotificationCall(token,customerId))
+    }
+
+    fun getInsuranceList(token: String,customerId: String):LiveData<InsuranceList> = liveData (Dispatchers.IO){
+        emitSource(insuranceListData.InsuranceListCall(token, customerId))
     }
 
 }

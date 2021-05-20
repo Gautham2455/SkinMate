@@ -18,6 +18,9 @@ import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.home.HomeFragment
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.appointments.AppointmentListFragment
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 
 class ConfirmationFragment:BaseFragment() {
 
@@ -42,21 +45,28 @@ class ConfirmationFragment:BaseFragment() {
         val time=view.findViewById<TextView>(R.id.time)
 
         tv_medical_id.setText("ID - "+SlectDoctorFragment.doctorID)
-        date.setText(ScheduleAppointmentFragment.appointmentDate!!.subSequence(0,9))
+        date.setText(ScheduleAppointmentFragment.appointmentDate!!.subSequence(0,10))
         time.setText(ScheduleAppointmentFragment.appointmentSlots[0])
 
-        viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){appointmentList->
-            val latindex=appointmentList[0].responseInformation.size-1
-            lastIntex=latindex
-            appointments=appointmentList
-            Log.v("Con",latindex.toString())
-
-            viewModel.getAppointmentStatus(token,appointmentList[0].responseInformation.lastOrNull()?.appointmentId.toString(),"Accepted").observe(requireActivity()){
-                Log.v("ststus",it.toString())
-            }
-        }
 
         doneBtn.setOnClickListener(View.OnClickListener {
+
+
+            viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){appointmentList->
+                val latindex=appointmentList[0].responseInformation.size-1
+                lastIntex=latindex
+                appointments=appointmentList
+                Log.v("Con",latindex.toString())
+                val jsonobject=JSONObject()
+                jsonobject.put("appointmentId",appointmentList[0].responseInformation.lastOrNull()?.appointmentId.toString())
+                jsonobject.put("status","Accepted")
+                val jsonObjectString = jsonobject.toString()
+
+                val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+                viewModel.getAppointmentStatus(token,requestBody).observe(requireActivity()){
+                    Log.v("ststus",it.toString())
+                }
+            }
             replace(R.id.fragment_container,AppointmentListFragment.newInstance(),false)
         })
 
