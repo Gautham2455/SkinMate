@@ -29,8 +29,11 @@ class ConfirmationFragment:BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view:View=inflater?.inflate(R.layout.appointment_confirmation,container,false)
+
+        val view:View=inflater?.inflate(R.layout.appointment_rescheduled,container,false)
+
         HomeActivity.bottomNavigationView.visibility = View.GONE
+
 
         val doneBtn=view.findViewById<Button>(R.id.done_btn)
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",

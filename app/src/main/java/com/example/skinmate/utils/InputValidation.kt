@@ -9,7 +9,6 @@ class InputValidation {
 
 
     fun isemailValid(email : String) : Boolean{
-//        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val valid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         if (valid)
             return true
@@ -17,7 +16,6 @@ class InputValidation {
     }
 
     fun isPhoneValid(mob_no : String) : Boolean{
-        //return android.util.Patterns.PHONE.matcher(mob_no).matches()
         if (mob_no.length==10)
             return true
         return false
@@ -25,7 +23,7 @@ class InputValidation {
     }
 
     fun passwordValid(password : String) : Boolean{
-        if(password.length>=4)
+        if(password.length>=4 && password.length<=12)
             return true
         return false
     }

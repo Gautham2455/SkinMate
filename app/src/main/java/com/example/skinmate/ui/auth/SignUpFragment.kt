@@ -55,46 +55,10 @@ class SignUpFragment : BaseFragment() {
         setTitleWithBackButton("Sign Up")
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.sign_up, container, false)
 
-
-
-        val textWatcher = object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val phone_no: String = signUpBinding.phoneEt.text.toString()
-                val mail: String = signUpBinding.eidEmail.text.toString()
-                val pass: String = signUpBinding.setPasswordEt.text.toString()
-                val confirmpwd: String = signUpBinding.confirmPasswordEt.text.toString()
-
-                signUpBinding.phoneLayout.error =
-                    if (inputValidation.isPhoneValid(phone_no)) null else "Enter Valid Phone Number"
-                signUpBinding.eidLayout.error =
-                    if (inputValidation.isemailValid(mail)) null else "Enter Valid Email"
-                signUpBinding.setPasswordLayout.error =
-                    if (inputValidation.passwordValid(pass)) null else "Must be minimum 4 Characters"
-                signUpBinding.confirmPasswordLayout.error = if (inputValidation.isPasswordEqual(
-                        pass,
-                        confirmpwd
-                    )
-                ) null else "Password does not match"
-
-                signUpBinding.proceedBtn.isEnabled =
-                    !phone_no.isEmpty() && !mail.isEmpty() && !pass.isEmpty() && !confirmpwd.isEmpty()
-
-            }
-
-        }
-
         signUpBinding.phoneEt.addTextChangedListener(textWatcher)
-        signUpBinding.eidEmail.addTextChangedListener(textWatcher)
-        signUpBinding.setPasswordEt.addTextChangedListener(textWatcher)
-        signUpBinding.confirmPasswordEt.addTextChangedListener(textWatcher)
+        signUpBinding.eidEmail.addTextChangedListener(textWatcher_mail)
+        signUpBinding.setPasswordEt.addTextChangedListener(textWatcher_pass)
+        signUpBinding.confirmPasswordEt.addTextChangedListener(textWatcher_conpwd)
 
         signUpBinding.signInTv.setOnClickListener {
             replace(R.id.fragment_container, SignInFragment.newInstance())
@@ -205,6 +169,105 @@ class SignUpFragment : BaseFragment() {
         }.start()
     }
 
+    val textWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_no: String = signUpBinding.phoneEt.text.toString()
+            val mail: String = signUpBinding.eidEmail.text.toString()
+            val pass: String = signUpBinding.setPasswordEt.text.toString()
+            val confirmpwd: String = signUpBinding.confirmPasswordEt.text.toString()
+
+            signUpBinding.phoneLayout.error =
+                if (inputValidation.isPhoneValid(phone_no)) null else "Enter Valid Phone Number"
+            signUpBinding.proceedBtn.isEnabled =
+                !phone_no.isEmpty() && !mail.isEmpty() && !pass.isEmpty() && !confirmpwd.isEmpty()
+
+        }
+
+    }
+
+    val textWatcher_mail = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_no: String = signUpBinding.phoneEt.text.toString()
+            val mail: String = signUpBinding.eidEmail.text.toString()
+            val pass: String = signUpBinding.setPasswordEt.text.toString()
+            val confirmpwd: String = signUpBinding.confirmPasswordEt.text.toString()
+
+            signUpBinding.eidLayout.error =
+                if (inputValidation.isemailValid(mail)) null else "Enter Valid Email"
+            signUpBinding.proceedBtn.isEnabled =
+                !phone_no.isEmpty() && !mail.isEmpty() && !pass.isEmpty() && !confirmpwd.isEmpty()
+
+        }
+
+    }
+
+    val textWatcher_pass = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_no: String = signUpBinding.phoneEt.text.toString()
+            val mail: String = signUpBinding.eidEmail.text.toString()
+            val pass: String = signUpBinding.setPasswordEt.text.toString()
+            val confirmpwd: String = signUpBinding.confirmPasswordEt.text.toString()
+
+            signUpBinding.setPasswordLayout.error =
+                if (inputValidation.passwordValid(pass)) null else "Must be minimum 4 Characters"
+            signUpBinding.proceedBtn.isEnabled =
+                !phone_no.isEmpty() && !mail.isEmpty() && !pass.isEmpty() && !confirmpwd.isEmpty()
+
+        }
+
+    }
+
+    val textWatcher_conpwd = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val phone_no: String = signUpBinding.phoneEt.text.toString()
+            val mail: String = signUpBinding.eidEmail.text.toString()
+            val pass: String = signUpBinding.setPasswordEt.text.toString()
+            val confirmpwd: String = signUpBinding.confirmPasswordEt.text.toString()
+
+            signUpBinding.confirmPasswordLayout.error = if (inputValidation.isPasswordEqual(
+                    pass,
+                    confirmpwd
+                )
+            ) null else "Password does not match"
+
+            signUpBinding.proceedBtn.isEnabled =
+                !phone_no.isEmpty() && !mail.isEmpty() && !pass.isEmpty() && !confirmpwd.isEmpty()
+
+        }
+
+    }
 
 }
 
