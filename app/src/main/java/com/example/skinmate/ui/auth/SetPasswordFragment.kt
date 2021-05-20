@@ -52,7 +52,7 @@ class SetPasswordFragment: BaseFragment() {
         }
 
         setPasswordBinding.etNewPassword.addTextChangedListener(textWatcher)
-        setPasswordBinding.etConfirmPassword.addTextChangedListener(textWatcher)
+        setPasswordBinding.etConfirmPassword.addTextChangedListener(textWatcher_conpwd)
 
         return setPasswordBinding.root
     }
@@ -82,6 +82,24 @@ class SetPasswordFragment: BaseFragment() {
             val con_pwd: String = setPasswordBinding.etConfirmPassword.text.toString()
 
             setPasswordBinding.textinputNewpassword.error= if (inputValidation.passwordValid(new_pwd)) null else "Must be minimum 4 characters"
+            setPasswordBinding.btnSetPwd.isEnabled= !new_pwd.isEmpty() && !con_pwd.isEmpty()
+        }
+
+    }
+
+    private val textWatcher_conpwd= object :TextWatcher{
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            val new_pwd: String = setPasswordBinding.etNewPassword.text.toString()
+            val con_pwd: String = setPasswordBinding.etConfirmPassword.text.toString()
+
             setPasswordBinding.textinputConfirmpassword.error= if (inputValidation.isPasswordEqual(new_pwd,con_pwd)) null else "Password does not match"
             setPasswordBinding.btnSetPwd.isEnabled= !new_pwd.isEmpty() && !con_pwd.isEmpty()
         }
