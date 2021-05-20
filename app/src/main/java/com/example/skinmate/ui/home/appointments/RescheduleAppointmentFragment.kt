@@ -22,6 +22,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.bookedAppointmentResponse
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.bookingAppointment.AfternoonTimeSlotAdapter
 import com.example.skinmate.ui.home.bookingAppointment.ConfirmationFragment
@@ -49,6 +50,7 @@ class RescheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInt
 
         val view=inflater?.inflate(R.layout.schedule_appointment, container, false)
         setTitleWithBackButton("Reschedule")
+        HomeActivity.bottomNavigationView.visibility = View.GONE
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             RescheduleAppointmentFragment.appointmentDate =

@@ -19,6 +19,7 @@ import com.example.skinmate.ui.auth.AuthViewModel
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.SignUpFragment
 import com.example.skinmate.ui.auth.SuccessMessageFragment
+import com.example.skinmate.ui.home.HomeActivity
 
 
 class ChangePwdFragment : BaseFragment() {
@@ -37,6 +38,7 @@ class ChangePwdFragment : BaseFragment() {
     ): View? {
         setTitleWithBackButton("Change Password")
         changePasswordBinding = DataBindingUtil.inflate(inflater, R.layout.change_password,container,false)
+        HomeActivity.bottomNavigationView.visibility = View.GONE
 
         changePasswordBinding.btnChangePw.setOnClickListener {
 

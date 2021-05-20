@@ -19,6 +19,7 @@ import com.example.skinmate.R
 import com.example.skinmate.data.responses.AppointmentList
 import com.example.skinmate.data.responses.ResponseInformationXXXXXX
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.checkIn.CheckInActivity
 import com.example.skinmate.utils.OnClickInterface
@@ -39,6 +40,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
         val view = inflater.inflate(R.layout.appointment_list, container, false)
 
         setTitleWithBackButton("My Appointments")
+        HomeActivity.bottomNavigationView.visibility = View.VISIBLE
         val sharedPref: SharedPreferences = requireActivity()!!.getSharedPreferences(
             "SkinMate",
             Context.MODE_PRIVATE

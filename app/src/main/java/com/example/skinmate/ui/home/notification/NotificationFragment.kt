@@ -13,16 +13,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
+import com.example.skinmate.data.responses.AppointmentList
+import com.example.skinmate.data.responses.NotificationDetails
+import com.example.skinmate.data.responses.ResponseInformationXXXXXX
+import com.example.skinmate.data.responses.notificationResponse
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.accountDetails.FamilyAdapter
+import com.example.skinmate.ui.home.appointments.AppointmentListFragment
+import com.example.skinmate.utils.OnClickInterface
 
-class NotificationFragment : BaseFragment() {
+class NotificationFragment : BaseFragment(), OnClickInterface {
 
     private val viewModel by viewModels<HomeViewModel>()
     companion object {
         fun newInstance() =
             NotificationFragment()
+        var notificationResponse: List<notificationResponse>?=null
+        var details: NotificationDetails?=null
     }
 
     override fun onCreateView(
@@ -30,8 +39,9 @@ class NotificationFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setTitle("Notifications")
+        hideToolbar()
         val view = inflater.inflate(R.layout.fragment_notification, container, false)
+        HomeActivity.bottomNavigationView.visibility = View.VISIBLE
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
             Context.MODE_PRIVATE)
@@ -40,8 +50,8 @@ class NotificationFragment : BaseFragment() {
 
         viewModel.getNotification("Bearer $token",custId!!).observe(requireActivity()){
             Log.d("notification",it.toString())
-//            var notificationList =  arrayListOf<String>(it.get(0).responseInformation.)
-            val adapter = notificationAdapter(it.get(0).responseInformation,requireContext())
+            notificationResponse = it
+            val adapter = notificationAdapter(it.get(0).responseInformation,requireContext(),this)
             val dl = view.findViewById<RecyclerView>(R.id.rv_notification)
             if(it.get(0).responseInformation.size!=0){
                 dl.layoutManager = LinearLayoutManager(requireContext())
@@ -51,5 +61,10 @@ class NotificationFragment : BaseFragment() {
         }
         return view
 
+    }
+
+    override fun getViewPosition(position: Int) {
+        details = notificationResponse!!.get(0).responseInformation.get(position)
+        replace(R.id.fragment_container,NotificationDetailsFragment.newInstance())
     }
 }

@@ -24,6 +24,7 @@ import com.example.skinmate.databinding.FragmentViewEditProfileBinding
 import com.example.skinmate.ui.auth.AuthViewModel
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.SignUpFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -45,6 +46,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
     companion object {
         fun newInstance() = ViewOrEditProfileFragment()
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,6 +71,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
         viewEditProfileBinding.autocompleteBloodGrp.setEnabled(false)
         viewEditProfileBinding.etDob.setEnabled(false)
 
+        HomeActivity.bottomNavigationView.visibility = View.GONE
 
         viewModel.getCustomerDetails("Bearer $token",custId!!).observe(requireActivity()){
             Log.d("profile",it.get(0).responseInformation.get(0).firstName)

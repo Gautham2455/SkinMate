@@ -27,6 +27,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.databinding.FragmentAddFamilyMemberSetupProfileBinding
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.StringToValue
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -73,6 +74,7 @@ class AddFamilyMemberFragment : BaseFragment() {
         setTitleWithBackButton("Setup Profile")
 
         addFamilyMemberSetupProfileBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_family_member_setup_profile,container,false)
+        HomeActivity.bottomNavigationView.visibility = View.GONE
 
         val inputval= InputValidation()
         val c= Calendar.getInstance()
