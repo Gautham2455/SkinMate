@@ -22,6 +22,7 @@
         <activity android:name=".ui.auth.WelcomeActivity"/>
         <activity android:name=".ui.home.HomeActivity"/>
         <activity android:name=".ui.home.checkIn.CheckInActivity"/>
+        <activity android:name=".ui.home.bookingAppointment.BookingActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

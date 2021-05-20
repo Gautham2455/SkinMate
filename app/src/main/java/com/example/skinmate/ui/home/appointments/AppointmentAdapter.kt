@@ -63,7 +63,7 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         val min = diff.toString().subSequence(3,5).toString().toInt()
         val hr = diff.toString().subSequence(0,2).toString().toInt()
         Log.v("time",diff.toString())
-        if(hr == 23 && min >= 45)
+        if(hr == 11 && min >= 45)
             btn =  true
         return btn
     }
