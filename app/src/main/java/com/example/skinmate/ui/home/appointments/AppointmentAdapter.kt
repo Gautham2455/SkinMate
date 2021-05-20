@@ -62,9 +62,6 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
 
     }
 
-
-
-
     override fun getItemCount(): Int {
         return  apoointmentList.size
     }
