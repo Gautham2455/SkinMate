@@ -226,6 +226,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_insurance2">
 
             <RadioGroup
+                android:id="@+id/insurance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -285,7 +286,34 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
                 android:hint="@string/insurance_information"
+                android:focusableInTouchMode="true"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:drawableRight="@drawable/arrow_down"
                 app:layout_constraintTop_toBottomOf="@id/ed_insurance_info" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ed_insurance_info2"
+            style="@style/Input_layout_style"
+            app:layout_constraintTop_toBottomOf="@id/tv_insurance_information"
+            android:layout_marginLeft="@dimen/layout_magin"
+            android:layout_marginRight="@dimen/layout_magin"
+            app:hintEnabled="false"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tv_insurance_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:hint="@string/new_insurance_information"
+                app:layout_constraintTop_toBottomOf="@id/ed_insurance_info"
+                android:visibility="gone"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

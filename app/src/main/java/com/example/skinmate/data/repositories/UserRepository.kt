@@ -43,6 +43,7 @@ class UserRepository private constructor(application: Application){
     val familyMemberView = MutableLiveData<memberViewResponse>()
     val rescheduleAppointment=MutableLiveData<List<generalResponse>>()
     val notification=MutableLiveData<List<notificationResponse>>()
+    val insuraceList=MutableLiveData<InsuranceList>()
 
 
 
@@ -521,8 +522,8 @@ class UserRepository private constructor(application: Application){
         return  appointmentList
     }
 
-    fun AppointStatusCAll(token: String,appointmentId:String,status:String):MutableLiveData<List<generalResponse>>{
-        val call=SecuredRetrofitClient.apiInterface.appointmentStatus(token, appointmentId, status)
+    fun AppointStatusCAll(token: String,requestBody : RequestBody):MutableLiveData<List<generalResponse>>{
+        val call=SecuredRetrofitClient.apiInterface.appointmentStatus(token, requestBody)
         call.enqueue(object :Callback<List<generalResponse>>{
             override fun onFailure(call: Call<List<generalResponse>>, t: Throwable) {
 
@@ -633,6 +634,24 @@ class UserRepository private constructor(application: Application){
 
         })
         return notification
+    }
+
+    fun InsuranceListCall(token: String,customerId: String):MutableLiveData<InsuranceList>{
+        val call =SecuredRetrofitClient.apiInterface.insuranceList(token, customerId)
+
+        call.enqueue(object :Callback<InsuranceList>{
+            override fun onFailure(call: Call<InsuranceList>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<InsuranceList>,
+                response: Response<InsuranceList>
+            ) {
+                insuraceList.postValue(response.body())
+            }
+        })
+        return insuraceList
     }
 
 
