@@ -56,15 +56,18 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
 
         var btn : Boolean = false
         val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
-        val start = Time(currentTime.subSequence(0,2).toString().toInt(), currentTime.subSequence(3,5).toString().toInt(), 0)
+        val start = Time(currentTime!!.subSequence(0,2).toString().toInt(), currentTime.subSequence(3,5).toString().toInt(), 0)
+        Log.d("current Time",start.toString())
         val stop = Time(appointmentTime!!.subSequence(0,2).toString().toInt(), appointmentTime!!.subSequence(3,5).toString().toInt(), 0)
         val diff: Time
         diff = difference(start, stop)
         val min = diff.toString().subSequence(3,5).toString().toInt()
         val hr = diff.toString().subSequence(0,2).toString().toInt()
-        Log.v("time",diff.toString())
-        if(hr == 11 && min >= 45)
-            btn =  true
+        Log.v("Differ time",diff.toString())
+        if(hr == 0){
+            if(min == 0 || min >=45)
+                btn =  true
+        }
         return btn
     }
 
