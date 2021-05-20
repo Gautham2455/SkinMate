@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
@@ -138,12 +139,20 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
 
         val proocdBtn=view.findViewById<Button>(R.id.proceedBtn)
         proocdBtn.setOnClickListener {
-            appointmentSlots.removeAt(0)
+            if(appointmentSlots.contains("none"))
+                appointmentSlots.remove("none")
             Log.v("Slos", appointmentSlots.toString())
-
-            replace(R.id.fragment_container, AppointmentSummary.newInstance())
+            if(appointmentSlots.size==1){
+                replace(R.id.fragment_container, AppointmentSummary.newInstance())
+                appointmentSlots.removeAll(appointmentSlots)
+                appointmentSlots.add("none")
+                appointmentSlots= appointmentSlots.asReversed()
+            }
+            else{
+                Toast.makeText(requireContext(),"Select Only One Slot",0).show()
+                appointmentSlots.add("none")
+            }
         }
-
         return view
     }
 

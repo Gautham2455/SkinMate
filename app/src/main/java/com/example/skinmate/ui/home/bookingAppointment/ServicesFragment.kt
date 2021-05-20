@@ -46,6 +46,7 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
                     subServiceBinding.tvMedical.setText(it[0].responseInformation.x1.toString()!!)
                     subServiceBinding.tvSuperficialCard.setText(it[0].responseInformation.x2.toString()!!)
                 }else {
+                    subServiceBinding.card3.visibility = View.VISIBLE
                     subServiceBinding.tvMedical.setText(it[0].responseInformation.x1.toString()!!)
                     subServiceBinding.tvSuperficialCard.setText(it[0].responseInformation.x2.toString()!!)
                     subServiceBinding.tvMedical2.setText(it[0].responseInformation.x3.toString())
@@ -56,6 +57,7 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
 
         subServiceBinding.medicalCard.setOnClickListener(this)
         subServiceBinding.superficialCard.setOnClickListener(this)
+        subServiceBinding.card3.setOnClickListener(this)
         return subServiceBinding.root
     }
 
@@ -72,7 +74,6 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
             R.id.card_3 -> subServiceId ="3"
 
         }
-
         replace(R.id.fragment_container,SlectDoctorFragment.newInstance())
     }
 
