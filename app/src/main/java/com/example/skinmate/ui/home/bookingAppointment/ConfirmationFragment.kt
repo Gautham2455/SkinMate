@@ -65,9 +65,10 @@ class ConfirmationFragment:BaseFragment() {
                 val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
                 viewModel.getAppointmentStatus(token,requestBody).observe(requireActivity()){
                     Log.v("ststus",it.toString())
+                    replace(R.id.fragment_container,AppointmentListFragment.newInstance(),false)
                 }
             }
-            replace(R.id.fragment_container,AppointmentListFragment.newInstance(),false)
+
         })
 
         return view
