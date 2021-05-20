@@ -40,6 +40,7 @@ import com.example.skinmate.databinding.EnterDetailsBinding
 import com.example.skinmate.ui.home.HomeActivity
 import com.google.android.gms.location.*
 import androidx.lifecycle.observe
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -90,8 +91,6 @@ class SetupProfileFragment : BaseFragment() {
         var day=c.get(Calendar.DAY_OF_MONTH)
 
         var bloodgroups=resources.getStringArray(R.array.Bloodgroup)
-        var arrayAdapter=ArrayAdapter(requireContext(),R.layout.dropdown_menu,bloodgroups)
-        enterDetailsBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
@@ -165,6 +164,48 @@ class SetupProfileFragment : BaseFragment() {
             enterDetailsBinding.etMailingAddress.setText(getLastLocation())
 
         }}
+
+
+
+
+        enterDetailsBinding.autocompleteBloodGrp.setOnClickListener {
+            val bloodgrpBottomsheet = BottomSheetDialog(requireContext())
+            bloodgrpBottomsheet.setContentView(R.layout.bottom_dialog_blood_group)
+            bloodgrpBottomsheet.show()
+            val Opos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_o_positive)
+            val Oneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_o_negative)
+            val Apos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_a_positive)
+            val Aneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_a_negative)
+            val Bpos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_b_positive)
+            val Bneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_b_negative)
+            val ABpos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_ab_positive)
+            val ABneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_ab_negative)
+            Opos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(Opos!!.getText()) }
+            Oneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(Oneg!!.getText()) }
+            Apos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(Apos!!.getText()) }
+            Aneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(Aneg!!.getText()) }
+            Bpos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(Bpos!!.getText()) }
+            Bneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(Bneg!!.getText()) }
+            ABpos!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(ABpos!!.getText()) }
+            ABneg!!.setOnClickListener {
+                bloodgrpBottomsheet.dismiss()
+                enterDetailsBinding.autocompleteBloodGrp.setText(ABneg!!.getText()) }
+
+        }
 
 
         enterDetailsBinding.btnCreateMyAcnt.setOnClickListener {

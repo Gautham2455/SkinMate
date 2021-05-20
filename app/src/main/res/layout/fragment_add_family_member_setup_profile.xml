@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -330,7 +330,10 @@
                     android:inputType="none"
                     android:textColor="@color/theme_text"
                     android:textSize="16sp"
-                    android:maxLength="15"/>
+                    android:maxLength="15"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -344,7 +347,7 @@
                 android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -352,19 +355,22 @@
                 app:boxStrokeColor="@color/theme_background_light"
                 app:boxStrokeWidth="1dp"
                 app:cornerRadius="7dp"
-                app:hintEnabled="false">
+                app:hintEnabled="false"
+                app:endIconDrawable="@drawable/arrow_down"
+                app:endIconMode="custom">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/autocomplete_blood_grp"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_semibold"
                     android:hint="@string/select_blood_group"
                     android:inputType="none"
-                    android:paddingLeft="10dp"
-                    android:text="O+ve"
                     android:textColor="@color/theme_text"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -553,5 +559,5 @@
                 app:backgroundTint="@color/theme_button"
                 app:cornerRadius="25dp" />
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 </layout>
