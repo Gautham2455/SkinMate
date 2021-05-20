@@ -19,8 +19,10 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 class HomeActivity : BaseActivity() {
 
-    private lateinit var bottomNavigationView : BottomNavigationView
-
+//    lateinit var bottomNavigationView : BottomNavigationView
+companion object{
+    lateinit var bottomNavigationView : BottomNavigationView
+}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -43,10 +45,7 @@ class HomeActivity : BaseActivity() {
                     R.id.fragment_container,
                     NotificationFragment.newInstance()
                 )
-                R.id.navigation_account -> replace(
-                    R.id.fragment_container,
-                    AccountFragment.newInstance()
-                )
+                R.id.navigation_account -> replace(R.id.fragment_container,AccountFragment.newInstance())
             }
             true
         }

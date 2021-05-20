@@ -31,6 +31,7 @@ class EmptyAppointmentFragment : BaseFragment() {
 
 
         val view = inflater.inflate(R.layout.fragment_appointment, container, false)
+        HomeActivity.bottomNavigationView.visibility = View.VISIBLE
 
         val schedule_appointment=view.findViewById<Button>(R.id.schedule_appointment)
         schedule_appointment.setOnClickListener({

@@ -18,6 +18,7 @@ import com.example.skinmate.databinding.ProfileMenuBinding
 import com.example.skinmate.ui.auth.SetupProfileFragment
 import com.example.skinmate.ui.auth.SignInFragment
 import com.example.skinmate.ui.auth.WelcomeActivity
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -42,7 +43,7 @@ class AccountFragment : BaseFragment() {
     ): View? {
         hideToolbar()
         profileMenuBinding = DataBindingUtil.inflate(inflater,R.layout.profile_menu,container,false)
-
+        HomeActivity.bottomNavigationView.visibility = View.VISIBLE
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
         val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")

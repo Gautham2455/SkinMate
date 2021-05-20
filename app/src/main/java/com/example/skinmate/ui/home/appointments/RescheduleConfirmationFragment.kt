@@ -13,6 +13,7 @@ import androidx.lifecycle.observe
 import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.bookingAppointment.ScheduleAppointmentFragment
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -37,7 +38,7 @@ class RescheduleConfirmationFragment:BaseFragment() {
         val remaining_time=view.findViewById<TextView>(R.id.remaining_time)
         val rescheduleBtn=view.findViewById<Button>(R.id.rescheduleBtn)
 
-
+        HomeActivity.bottomNavigationView.visibility = View.GONE
         service.setText(AppointmentListFragment.appointment!!.serviceType!!)
         var app_old_date=AppointmentListFragment.appointment?.dateOfAppointment?.date?.subSequence(0,10).toString()+", "+AppointmentListFragment.appointment?.timeOfAppointment!!.time.firstOrNull()+" EST"
         existing_date.setText(app_old_date)

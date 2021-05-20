@@ -202,7 +202,7 @@
                     android:layout_height="55dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/family_icon"/>
+                    android:src="@drawable/finger_print_id"/>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/tv_touch_id"
@@ -248,7 +248,7 @@
                     android:layout_height="55dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/insurance"/>
+                    android:src="@drawable/change_pwd"/>
 
                 <TextView
                     android:id="@+id/tv_change_password"
@@ -302,7 +302,7 @@
                     android:layout_height="55dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/family_icon"/>
+                    android:src="@drawable/privacy_policy"/>
 
                 <TextView
                     android:id="@+id/tv_privacy_policy"
@@ -354,7 +354,7 @@
                     android:layout_height="55dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/insurance"/>
+                    android:src="@drawable/terms"/>
 
                 <TextView
                     android:id="@+id/tv_terms_condition"

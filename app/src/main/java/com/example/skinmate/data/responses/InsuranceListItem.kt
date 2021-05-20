@@ -1,12 +1,13 @@
 package com.example.skinmate.data.responses
 
+
 import com.google.gson.annotations.SerializedName
 
-data class notificationResponse (
+data class InsuranceListItem(
     @SerializedName("Code")
     val code: Int,
     @SerializedName("responseInformation")
-    val responseInformation:List<NotificationDetails>,
+    val responseInformation: List<ResponseInformationXXXXX>,
     @SerializedName("responseMessage")
     val responseMessage: Boolean
 )

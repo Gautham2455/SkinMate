@@ -179,13 +179,11 @@ interface   MyApi {
         @Field("customerId") customerId: String
     ):Call<AppointmentList>
 
-    @FormUrlEncoded
-    @POST("appointment/status/edit")
+
+    @PUT("appointment/status/edit")
     fun appointmentStatus(
         @Header("Authorization") token:String,
-        @Field("appointmentId") appointmentId:String,
-        @Field("status") status:String
-
+        @Body requestBody : RequestBody
     ):Call<List<generalResponse>>
 
 
@@ -220,5 +218,12 @@ interface   MyApi {
         @Header("Authorization") token:String,
         @Path("customerId") customerId:String
     ):Call<List<notificationResponse>>
+
+    @GET("customer/insurance/list/{customerId}")
+    fun insuranceList(
+        @Header("Authorization") token:String,
+        @Path("customerId") customerId:String
+    ):Call<InsuranceList>
+
 
 }

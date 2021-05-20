@@ -6,11 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <androidx.constraintlayout.widget.ConstraintLayout
-       android:id="@+id/ll"
+       android:id="@+id/notificationRow"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_margin="@dimen/layout_magin"
-       app:layout_constraintTop_toTopOf="parent">
+       app:layout_constraintTop_toTopOf="parent"
+       android:clickable="true">
 
        <RelativeLayout
            android:id="@+id/rl"
@@ -71,6 +72,6 @@
         android:layout_height="@dimen/stroke_width"
         android:layout_marginTop="20dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/ll"/>
+        app:layout_constraintTop_toBottomOf="@id/notificationRow"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

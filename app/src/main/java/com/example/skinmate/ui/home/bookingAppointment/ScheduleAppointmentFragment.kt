@@ -22,6 +22,7 @@ import com.example.skinmate.BaseFragment
 import com.example.skinmate.R
 import com.example.skinmate.data.responses.bookedAppointmentResponse
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.utils.OnClickInterface
 import com.example.skinmate.utils.OnClickInterface_
@@ -45,7 +46,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
 
         val view=inflater?.inflate(R.layout.schedule_appointment, container, false)
         setTitleWithBackButton("Setect Date and Time")
-
+        HomeActivity.bottomNavigationView.visibility = View.GONE
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             ScheduleAppointmentFragment.appointmentDate =
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))

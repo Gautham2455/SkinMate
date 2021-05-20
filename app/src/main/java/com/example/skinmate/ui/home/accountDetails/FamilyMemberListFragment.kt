@@ -26,6 +26,7 @@ import com.example.skinmate.data.responses.familyMemberList
 import com.example.skinmate.data.responses.familyMemberListItem
 import com.example.skinmate.data.responses.familyMemberResponse
 import com.example.skinmate.ui.auth.SignInFragment
+import com.example.skinmate.ui.home.HomeActivity
 import com.example.skinmate.ui.home.HomeViewModel
 import com.example.skinmate.ui.home.bookingAppointment.DoctorAdapter
 import com.example.skinmate.ui.home.bookingAppointment.ScheduleAppointmentFragment
@@ -58,6 +59,8 @@ class FamilyMemberListFragment : BaseFragment(),OnClickInterface {
         setTitleWithBackButton("Family Members")
 
         val view:View = inflater?.inflate(R.layout.family_members_option, container, false)
+
+        HomeActivity.bottomNavigationView.visibility = View.GONE
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
             Context.MODE_PRIVATE)
