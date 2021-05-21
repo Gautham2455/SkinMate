@@ -81,9 +81,9 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/pptc_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
+            android:gravity="center_horizontal"
             android:layout_marginTop="200dp"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/privacy_policy_terms_and_conditions"
