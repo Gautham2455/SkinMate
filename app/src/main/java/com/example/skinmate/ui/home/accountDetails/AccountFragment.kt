@@ -51,11 +51,6 @@ class AccountFragment : BaseFragment() {
         touch_id = sharedPref!!.getString(TOUCH_ID,"none").toBoolean()
         profileMenuBinding.tvTouchId.setChecked(touch_id)
 
-        viewModel.getCustomerDetails("Bearer $token",custId!!).observe(requireActivity()){
-            if(it.get(0).responseMessage)
-                profileMenuBinding.userName.setText(it.get(0).responseInformation.get(0).firstName +" " + it.get(0).responseInformation.get(0).lastName)
-            Log.v("name",it.get(0).responseInformation.get(0).firstName +" " + it.get(0).responseInformation.get(0).lastName)
-        }
 
 
         profileMenuBinding.profileInfoCard.setOnClickListener { replace(R.id.fragment_container,ViewOrEditProfileFragment.newInstance()) }
@@ -93,5 +88,20 @@ class AccountFragment : BaseFragment() {
         }
 
         return profileMenuBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",Context.MODE_PRIVATE)
+        val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
+        val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
+
+        viewModel.getCustomerDetails("Bearer $token",custId!!).observe(this){
+            if(it.get(0).responseMessage)
+                profileMenuBinding.userName.setText(it.get(0).responseInformation.get(0).firstName +" " + it.get(0).responseInformation.get(0).lastName)
+            Log.v("name",it.get(0).responseInformation.get(0).firstName +" " + it.get(0).responseInformation.get(0).lastName)
+        }
+
     }
 }

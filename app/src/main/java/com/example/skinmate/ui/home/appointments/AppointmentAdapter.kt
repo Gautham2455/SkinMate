@@ -48,10 +48,6 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         holder.patient_id.setText(appointment.appointmentId.toString())
         holder.dermatology_service.setText(appointment.serviceType)
 //        holder.checkinBtn.setEnabled(btnEnable(appointment.timeOfAppointment.time.firstOrNull()))
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                holder.checkinBtn.isEnabled =
-                    btnEnable(appointment.timeOfAppointment.time.firstOrNull())
-        }
         holder.checkinBtn.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 onClickPosition.getViewPosition(position)
@@ -65,26 +61,7 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun btnEnable(appointmentTime: String?) : Boolean{
 
-        var btn : Boolean = false
-        val dateFormat = SimpleDateFormat("hh.mm.ss")
-        val currentTime = dateFormat.format(Date()).toString()
-        val start = Time(currentTime!!.subSequence(0,2).toString().toInt(), currentTime.subSequence(3,5).toString().toInt(), 0)
-        Log.d("current Time",start.toString())
-        val stop = Time(appointmentTime!!.subSequence(0,2).toString().toInt(), appointmentTime!!.subSequence(3,5).toString().toInt(), 0)
-        Log.d("appointment time",stop.toString())
-        val hr = Math.abs(appointmentTime!!.subSequence(0,2).toString().toInt() - currentTime!!.subSequence(0,2).toString().toInt())
-        val min = Math.abs(appointmentTime!!.subSequence(3,5).toString().toInt() - currentTime.subSequence(3,5).toString().toInt())
-        Log.d("diff",hr.toString() + min.toString())
-        if(hr == 0 || hr == 1){
-            if(min >=0  &&  min <=15)
-                btn =  true
-        }
-
-        return btn
-    }
 
 
     override fun getItemCount(): Int {
