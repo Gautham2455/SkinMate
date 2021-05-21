@@ -48,7 +48,9 @@ class ConfirmationFragment:BaseFragment() {
 
         tv_medical_id.setText("ID - "+SlectDoctorFragment.doctorID)
         date.setText(ScheduleAppointmentFragment.appointmentDate?.split(" ")?.getOrNull(0))
-        time.setText(ScheduleAppointmentFragment.appointmentSlots.get(0))
+        time.setText(ScheduleAppointmentFragment.appointmentSlots.getOrNull(0))
+        ScheduleAppointmentFragment.appointmentSlots.removeAll(ScheduleAppointmentFragment.appointmentSlots)
+        ScheduleAppointmentFragment.appointmentSlots.add("none")
 
 
         doneBtn.setOnClickListener(View.OnClickListener {

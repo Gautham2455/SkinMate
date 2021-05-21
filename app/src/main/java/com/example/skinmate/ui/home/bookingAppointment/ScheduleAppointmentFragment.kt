@@ -144,9 +144,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
             Log.v("Slos", appointmentSlots.toString())
             if(appointmentSlots.size==1){
                 replace(R.id.fragment_container, AppointmentSummary.newInstance())
-                appointmentSlots.removeAll(appointmentSlots)
-                appointmentSlots.add("none")
-                appointmentSlots= appointmentSlots.asReversed()
+
             }
             else{
                 Toast.makeText(requireContext(),"Select Only One Slot",0).show()
