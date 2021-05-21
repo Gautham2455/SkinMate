@@ -52,6 +52,7 @@ class ConfirmationFragment:BaseFragment() {
 
 
         doneBtn.setOnClickListener(View.OnClickListener {
+            HomeActivity.bottomNavigationView.setSelectedItemId(R.id.navigation_appointment)
             replace(R.id.fragment_container,AppointmentListFragment.newInstance())
         })
 

@@ -41,33 +41,6 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
 
         setTitleWithBackButton("My Appointments")
         HomeActivity.bottomNavigationView.visibility = View.VISIBLE
-        HomeActivity.bottomNavigationView.selectedItemId = R.id.navigation_appointment
-//
-//        val sharedPref: SharedPreferences = requireActivity()!!.getSharedPreferences(
-//            "SkinMate",
-//            Context.MODE_PRIVATE
-//        )
-//        val custId = sharedPref!!.getString(SignInFragment.CUSTOMER_ID, "none")
-//        val token = "Bearer " + sharedPref!!.getString(SignInFragment.TOKEN, "none")
-//
-//        viewModel.getAppointmentList(token, custId!!).observe(requireActivity()) {
-//
-//            appointmentList=it
-//            if (it[0].code == 200) {
-//                Log.v("MAin",it[0].toString())
-//                if (it[0].responseInformation.isNullOrEmpty()) {
-//                    replace(R.id.fragment_container, EmptyAppointmentFragment.newInstance(),false)
-//                }
-//                else{
-//                    Log.v("Appim",it[0].responseInformation.toString())
-//                    val appointmentadapter=AppointmentAdapter(it[0].responseInformation,this,this)
-//                    val rv_appointment=view.findViewById<RecyclerView>(R.id.rv_appointment_list)
-//                    rv_appointment.layoutManager= LinearLayoutManager(requireContext())
-//                    rv_appointment.setAdapter(appointmentadapter)
-//                }
-//            }
-//
-//        }
 
         return view
 

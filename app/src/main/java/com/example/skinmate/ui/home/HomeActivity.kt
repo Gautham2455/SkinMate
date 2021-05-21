@@ -31,6 +31,7 @@ companion object{
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigationView.selectedItemId = R.id.navigation_home
 
+
         val networkConnection: NetworkConnection=NetworkConnection()
         registerReceiver(networkConnection, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
