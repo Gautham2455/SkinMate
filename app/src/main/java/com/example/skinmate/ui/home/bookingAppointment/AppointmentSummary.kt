@@ -127,10 +127,16 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
                 R.id.self_pay->{
                     existing_insurance.setEnabled(false)
                     add_insurance.setEnabled(false)
+                    insuranceInfo?.setText("")
+                    insuranceInfo?.setEnabled(false)
+                    tv_insurance_info.setText("")
+                    tv_insurance_info.setEnabled(false)
                 }
                 R.id.pay_insurance->{
                     existing_insurance.setEnabled(true)
                     add_insurance.setEnabled(true)
+                    insuranceInfo?.setEnabled(true)
+                    tv_insurance_info.setEnabled(true)
                 }
             }
         })
@@ -138,6 +144,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
         insurance.setOnCheckedChangeListener({radioGoup:RadioGroup,i:Int->
             when(insurance.checkedRadioButtonId){
                 R.id.existing_insurance ->{
+                    tv_insurance_info.setText("")
                     insuranceInfo?.visibility=View.VISIBLE
                     tv_insurance_info.visibility=View.GONE
                     insuranceInfo?.setOnClickListener({
@@ -160,7 +167,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
                 R.id.add_insurance ->  {
                     insuranceInfo?.visibility=View.GONE
                     tv_insurance_info.visibility=View.VISIBLE
-
+                    insuranceInfo?.setText("")
                 }
             }
         })

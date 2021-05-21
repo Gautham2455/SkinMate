@@ -38,12 +38,12 @@ class DoctorAdapter(
             }
         })
         holder.doctorCard.setOnClickListener({
+
             if(holder.done_mark.isVisible){
                 holder.done_mark.visibility=View.GONE
             }
             else
                 holder.done_mark.visibility=View.VISIBLE
-
 
         })
 
