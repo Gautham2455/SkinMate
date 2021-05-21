@@ -56,9 +56,9 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
         val r: RemainingTime = RemainingTime()
         val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd hh:mm")
         Log.v("family",currentDAteTime.toString())
-        Log.v("family","${ScheduleAppointmentFragment.appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.first()}")
+        Log.v("family","${ScheduleAppointmentFragment.appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.firstOrNull()}")
         val date1: Date = simpleDateFormat.parse(currentDAteTime.toString())
-        val date2: Date = simpleDateFormat.parse("${ScheduleAppointmentFragment.r_appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.first()}")
+        val date2: Date = simpleDateFormat.parse("${ScheduleAppointmentFragment.r_appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.firstOrNull()}")
         val s=r.printDifference(date1, date2)
         Log.v("datee",s)
 
@@ -220,13 +220,28 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
             viewModel.postAddAppointment(token,requestBody).observe(requireActivity()){
                 Log.v("Add",it.get(0).responseMessage.toString())
-                if(it.get(0).responseMessage==true){
+                if(it.firstOrNull()?.responseMessage==true){
+
+                    viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){appointmentList->
+                        val latindex=appointmentList[0].responseInformation.size-1
+                        ConfirmationFragment.lastIntex =latindex
+                        ConfirmationFragment.appointments =appointmentList
+                        Log.v("Con",latindex.toString())
+                        val jsonobject=JSONObject()
+                        jsonobject.put("appointmentId",appointmentList[0].responseInformation.lastOrNull()?.appointmentId.toString())
+                        jsonobject.put("status","Accepted")
+                        val jsonObjectString = jsonobject.toString()
+
+                        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+                        viewModel.getAppointmentStatus(token,requestBody)
+                    }
                     replace(R.id.fragment_container,ConfirmationFragment.newInstance())
                 }
                 else{
-                    Toast.makeText(requireContext(),"Not scheduled",0).show()
+                    Toast.makeText(requireContext(),"Not scheduled",Toast.LENGTH_LONG).show()
                 }
             }
+
 
         })
 

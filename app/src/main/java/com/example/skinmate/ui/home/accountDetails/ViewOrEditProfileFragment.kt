@@ -73,7 +73,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
 
         HomeActivity.bottomNavigationView.visibility = View.GONE
 
-        viewModel.getCustomerDetails("Bearer $token",custId!!).observe(requireActivity()){
+        viewModel.getCustomerDetails("Bearer $token",custId!!).observe(this){
             Log.d("profile",it.get(0).responseInformation.get(0).firstName)
 
             val editor: SharedPreferences.Editor =  sharedPref!!.edit()
@@ -113,7 +113,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
             viewModel.postEditCustomer("Bearer $token",custId!!,mailingaddress!!,email!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(requireActivity()){
                 if(it.get(0).Code == 200) {
                     replace(R.id.fragment_container,AccountFragment.newInstance())
-                    Toast.makeText(requireContext(),"Changes updated",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,"Changes updated",Toast.LENGTH_LONG).show()
                 }
             }
         }
