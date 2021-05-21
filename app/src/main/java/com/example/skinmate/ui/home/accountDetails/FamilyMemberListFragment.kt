@@ -138,7 +138,9 @@ class FamilyMemberListFragment : BaseFragment(),OnClickInterface {
             if(it.get(0).responseMessage!!) {
                 Toast.makeText(requireContext(),it.get(0).responseInformation.toString(),Toast.LENGTH_LONG).show()
                 replace(R.id.fragment_container, FamilyMemberListFragment.newInstance())
+                fragmentManager?.popBackStack()
             }
+
         }
 
     }
