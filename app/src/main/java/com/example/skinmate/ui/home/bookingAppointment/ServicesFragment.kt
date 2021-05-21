@@ -33,6 +33,18 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
         subServiceBinding=DataBindingUtil.inflate(inflater,R.layout.sub_service,container,false)
         HomeActivity.bottomNavigationView.visibility = View.GONE
         setTitleWithBackButton(HomeFragment.MainService)
+
+
+
+
+        subServiceBinding.medicalCard.setOnClickListener(this)
+        subServiceBinding.superficialCard.setOnClickListener(this)
+        subServiceBinding.card3.setOnClickListener(this)
+        return subServiceBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate", Context.MODE_PRIVATE)
         val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
         viewModel.getSubService("Bearer $token",HomeFragment.MainServiceId!!).observe(requireActivity()){
@@ -53,12 +65,6 @@ class ServicesFragment : BaseFragment(),View.OnClickListener{
                 }
             }
         }
-
-
-        subServiceBinding.medicalCard.setOnClickListener(this)
-        subServiceBinding.superficialCard.setOnClickListener(this)
-        subServiceBinding.card3.setOnClickListener(this)
-        return subServiceBinding.root
     }
 
     companion object{

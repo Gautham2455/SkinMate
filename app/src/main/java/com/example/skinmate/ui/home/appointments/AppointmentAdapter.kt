@@ -48,6 +48,7 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         holder.patient_id.setText(appointment.appointmentId.toString())
         holder.dermatology_service.setText(appointment.serviceType)
 //        holder.checkinBtn.setEnabled(btnEnable(appointment.timeOfAppointment.time.firstOrNull()))
+
         holder.checkinBtn.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 onClickPosition.getViewPosition(position)
@@ -60,7 +61,6 @@ class AppointmentAdapter(val apoointmentList:List<ResponseInformationXXXXXX>,
         })
 
     }
-
 
 
 

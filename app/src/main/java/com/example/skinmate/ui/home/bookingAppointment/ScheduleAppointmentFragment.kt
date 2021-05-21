@@ -67,7 +67,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
         val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN, "none")
 
         viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!,appointmentDate!! ).observe(
-            requireActivity()
+            this
         ){
             appointmentinfo=it
             Log.v("Book", it[0].responseInformation.toString())
@@ -104,7 +104,7 @@ class ScheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInter
             appointmentDate="$year/$month/$dayOfMonth"
             Log.v("Date","$year/$month/$dayOfMonth")
             viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!,appointmentDate!! ).observe(
-                requireActivity()
+                this
             ){
                 appointmentinfo=it
                 Log.v("Book", it[0].responseInformation.toString())
