@@ -211,6 +211,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
 
             val jsonObject= JSONObject()
             val jsonarray=JSONArray(ScheduleAppointmentFragment.appointmentSlots)
+
             val time=JSONObject()
             time.put("time",jsonarray)
             jsonObject.put("customerId",custId!!)
