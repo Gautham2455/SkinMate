@@ -186,7 +186,7 @@
             android:layout_marginTop="@dimen/layout_magin"
             app:layout_constraintTop_toBottomOf="@id/insurance_card">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="parent"
@@ -194,20 +194,20 @@
                 android:layout_marginRight="@dimen/layout_magin"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:gravity="center|left"
                 >
 
                 <ImageView
                     android:id="@+id/touch_id_icon"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/finger_print_id"/>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/tv_touch_id"
-                    android:layout_width="277dp"
-                    android:layout_height="46dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/layout_magin"
                     android:fontFamily="@font/poppins_medium"
                     android:maxHeight="10dp"
@@ -222,7 +222,7 @@
                     app:trackTint="@drawable/drawable_switch_track" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
