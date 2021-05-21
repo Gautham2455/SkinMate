@@ -41,7 +41,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
 
         setTitleWithBackButton("My Appointments")
         HomeActivity.bottomNavigationView.visibility = View.VISIBLE
-        HomeActivity.bottomNavigationView.selectedItemId = R.id.navigation_appointment
+        //HomeActivity.bottomNavigationView.selectedItemId = R.id.navigation_appointment
 //
 //        val sharedPref: SharedPreferences = requireActivity()!!.getSharedPreferences(
 //            "SkinMate",
