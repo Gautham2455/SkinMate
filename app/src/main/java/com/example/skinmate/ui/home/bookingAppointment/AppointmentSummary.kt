@@ -56,9 +56,9 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
         val r: RemainingTime = RemainingTime()
         val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd hh:mm")
         Log.v("family",currentDAteTime.toString())
-        Log.v("family","${ScheduleAppointmentFragment.appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.first()}")
+        Log.v("family","${ScheduleAppointmentFragment.appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.firstOrNull()}")
         val date1: Date = simpleDateFormat.parse(currentDAteTime.toString())
-        val date2: Date = simpleDateFormat.parse("${ScheduleAppointmentFragment.r_appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.first()}")
+        val date2: Date = simpleDateFormat.parse("${ScheduleAppointmentFragment.r_appointmentDate} ${ScheduleAppointmentFragment.appointmentSlots.firstOrNull()}")
         val s=r.printDifference(date1, date2)
         Log.v("datee",s)
 
@@ -95,18 +95,18 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
             FamilyBottomSheet.setContentView(R.layout.bootomsheet_familylist)
 
             val rv_names=FamilyBottomSheet.findViewById<RecyclerView>(R.id.rv_familyList)
-            viewModel.getFamilyMembersList(token,custId!!).observe(requireActivity()){
+            viewModel.getFamilyMembersList(token,custId!!).observe(this){
                 familyList=it
                 if(!it.get(0).responseInformation.isEmpty()){
 
-                    val namesAdapter=FamilyNamesAdapter(requireContext(),it.get(0).responseInformation,this)
-                    rv_names?.layoutManager= LinearLayoutManager(requireContext())
+                    val namesAdapter=FamilyNamesAdapter(requireContext(),it.getOrNull(0)!!.responseInformation,this)
+                    rv_names?.layoutManager= LinearLayoutManager(context)
                     rv_names?.setAdapter(namesAdapter)
                     rv_names!!.setOnClickListener(View.OnClickListener {
                         FamilyBottomSheet.dismiss()
                     })
                 }
-                Log.v("family",it.get(0).responseInformation[0].firstName)
+                Log.v("family",it.getOrNull(0)!!.responseInformation[0].firstName)
                 FamilyBottomSheet.show()
             }
             val add_Family=FamilyBottomSheet.findViewById<TextView>(R.id.tv_add_Family)
@@ -155,10 +155,10 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
                             Context.MODE_PRIVATE)
                         val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
                         val token="Bearer "+sharedPref!!.getString(SignInFragment.TOKEN,"none")
-                        viewModel.getInsuranceList(token,custId!!).observe(requireActivity()){
+                        viewModel.getInsuranceList(token,custId!!).observe(this){
                             insuranceList=it
                             val adapter=InsuranceNamesAdapter(requireContext(),it[0].responseInformation,this)
-                            rv_insurance?.layoutManager=LinearLayoutManager(requireContext())
+                            rv_insurance?.layoutManager=LinearLayoutManager(context)
                             rv_insurance?.setAdapter(adapter)
                             insuranceBottomsheet.show()
                         }
@@ -211,6 +211,7 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
 
             val jsonObject= JSONObject()
             val jsonarray=JSONArray(ScheduleAppointmentFragment.appointmentSlots)
+
             val time=JSONObject()
             time.put("time",jsonarray)
             jsonObject.put("customerId",custId!!)
@@ -226,14 +227,29 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
             viewModel.postAddAppointment(token,requestBody).observe(requireActivity()){
-                Log.v("Add",it.get(0).responseMessage.toString())
-                if(it.get(0).responseMessage==true){
+                Log.v("Add",it.getOrNull(0)?.responseMessage.toString())
+                if(it.firstOrNull()?.responseMessage==true){
+
+                    viewModel.getAppointmentList(token,custId!!).observe(requireActivity()){appointmentList->
+                        val latindex=appointmentList[0].responseInformation.size-1
+                        ConfirmationFragment.lastIntex =latindex
+                        ConfirmationFragment.appointments =appointmentList
+                        Log.v("Con",latindex.toString())
+                        val jsonobject=JSONObject()
+                        jsonobject.put("appointmentId",appointmentList[0].responseInformation.lastOrNull()?.appointmentId.toString())
+                        jsonobject.put("status","Accepted")
+                        val jsonObjectString = jsonobject.toString()
+
+                        val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+                        viewModel.getAppointmentStatus(token,requestBody)
+                    }
                     replace(R.id.fragment_container,ConfirmationFragment.newInstance())
                 }
                 else{
-                    Toast.makeText(requireContext(),"Not scheduled",0).show()
+                    Toast.makeText(context,"Not scheduled",Toast.LENGTH_LONG).show()
                 }
             }
+
 
         })
 
@@ -259,8 +275,8 @@ class AppointmentSummary :BaseFragment(),OnClickInterface,OnClickInterface_{
 
     override fun getViewPosition(position: Int) {
         FamilyBottomSheet.dismiss()
-        familyProfileId= familyList!!.get(0).responseInformation[position].familyProfileId.toString()
-        appointmentFor?.setText(familyList!!.get(0).responseInformation[position].firstName+ " "+familyList!!.get(0).responseInformation[position].lastName)
+        familyProfileId= familyList!!.getOrNull(0)!!.responseInformation[position].familyProfileId.toString()
+        appointmentFor?.setText(familyList!!.getOrNull(0)!!.responseInformation[position].firstName+ " "+familyList!!.getOrNull(0)!!.responseInformation[position]?.lastName)
     }
 
     override fun getViewPosition_(position: Int) {

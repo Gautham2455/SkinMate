@@ -105,7 +105,7 @@ class RescheduleAppointmentFragment :BaseFragment(),OnClickInterface, OnClickInt
             appointmentDate="$year/$month/$dayOfMonth"
             Log.v("Date","$year/$month/$dayOfMonth")
             viewModel.getBookedAppointments(token, SlectDoctorFragment.doctorID!!,appointmentDate!! ).observe(
-                requireActivity()
+                this
             ){
                 appointmentinfo=it
                 Log.v("Book", it[0].responseInformation.toString())

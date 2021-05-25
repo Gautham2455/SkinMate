@@ -88,8 +88,6 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
         var day=c.get(Calendar.DAY_OF_MONTH)
 
         var bloodgroups=resources.getStringArray(R.array.Bloodgroup)
-        var arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdown_menu,bloodgroups)
-        editFamilyMemberDetailsBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
@@ -105,35 +103,6 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
         editFamilyMemberDetailsBinding.autocompleteBloodGrp.setEnabled(false)
         editFamilyMemberDetailsBinding.etDob.setEnabled(false)
         editFamilyMemberDetailsBinding.etRelationshipType.setEnabled(false)
-
-
-      viewModel.getFamilyMember("Bearer $token",familyProfileId).observe(requireActivity()){
-          Log.v("Edit",it.get(0).responseMessage.toString())
-          if(it.get(0).responseMessage){
-              editFamilyMemberDetailsBinding.etFirstName.setText(it.get(0).responseInformation.firstName)
-              Log.v("Firstname",it.get(0).responseInformation.firstName)
-              editFamilyMemberDetailsBinding.etLastName.setText(it.get(0).responseInformation.lastName)
-              editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.dob)
-              editFamilyMemberDetailsBinding.etEmergencyContactName.setText(it.get(0).responseInformation.emeregencyContactName)
-              editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.emeregencyNumber)
-              editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.address)
-              editFamilyMemberDetailsBinding.etInsuranceInfo.setText(it.get(0).responseInformation.insuranceInformation)
-              editFamilyMemberDetailsBinding.etRelationshipType.setText(stringTovalue.relationIdToType(it.get(0).responseInformation.relationshipId))
-              if (it[0].responseInformation.gender == 1){
-                  editFamilyMemberDetailsBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
-                  editFamilyMemberDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
-              } else if (it[0].responseInformation.gender== 2){
-                  editFamilyMemberDetailsBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
-                  editFamilyMemberDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
-              } else {
-                  editFamilyMemberDetailsBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
-                  editFamilyMemberDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
-              }
-
-
-          }
-      }
-
 
 
 
@@ -169,11 +138,12 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
                 val jsonObjectString = jsonObject.toString()
 
                 val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-                viewModel.putFamilyMemberEdidtDetails("Bearer $token",familyProfileId,requestBody).observe(requireActivity()){
+                viewModel.putFamilyMemberEdidtDetails("Bearer $token",familyProfileId,requestBody).observe(this){
                     if(it.get(0).responseMessage==true) {
-                        replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                        //replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                        fragmentManager?.popBackStack()
                         Toast.makeText(
-                            requireContext(),
+                            context,
                             "Changes Updated Successfully",
                             Toast.LENGTH_LONG
                         ).show()
@@ -183,6 +153,63 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
         }
 
         return editFamilyMemberDetailsBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
+            Context.MODE_PRIVATE)
+        val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
+        val familyProfileId = FamilyMemberListFragment.familyProfileId.toString()
+
+        viewModel.getFamilyMember("Bearer $token",familyProfileId).observe(this){
+            Log.v("Edit",it.get(0).responseMessage.toString())
+            if(it.get(0).responseMessage){
+                editFamilyMemberDetailsBinding.etFirstName.setText(it.get(0).responseInformation.firstName)
+                Log.v("Firstname",it.get(0).responseInformation.firstName)
+                editFamilyMemberDetailsBinding.etLastName.setText(it.get(0).responseInformation.lastName)
+                editFamilyMemberDetailsBinding.etDob.setText(it.get(0).responseInformation.dob)
+                editFamilyMemberDetailsBinding.etEmergencyContactName.setText(it.get(0).responseInformation.emeregencyContactName)
+                editFamilyMemberDetailsBinding.etEmergencyContactNumber.setText(it.get(0).responseInformation.emeregencyNumber)
+                editFamilyMemberDetailsBinding.etMailingAddress.setText(it.get(0).responseInformation.address)
+                editFamilyMemberDetailsBinding.etInsuranceInfo.setText(it.get(0).responseInformation.insuranceInformation)
+                editFamilyMemberDetailsBinding.etRelationshipType.setText(stringTovalue.relationIdToType(it.get(0).responseInformation.relationshipId))
+                if (it[0].responseInformation.gender == 1){
+                    context?.let { it1 ->
+                        ContextCompat.getColor(
+                            it1, R.color.theme_background_light)
+                    }?.let { it2 ->
+                        editFamilyMemberDetailsBinding.cardMale.setCardBackgroundColor(
+                            it2
+                        )
+                    }
+                    editFamilyMemberDetailsBinding.ImageViewSelectedGenderMale.isVisible=true
+                } else if (it[0].responseInformation.gender== 2){
+                    context?.let { it1 ->
+                        ContextCompat.getColor(
+                            it1, R.color.theme_background_light)
+                    }?.let { it2 ->
+                        editFamilyMemberDetailsBinding.cardFemale.setCardBackgroundColor(
+                            it2
+                        )
+                    }
+                    editFamilyMemberDetailsBinding.ImageViewSelectedGenderFemale.isVisible=true
+                } else {
+                    context?.let { it1 ->
+                        ContextCompat.getColor(
+                            it1, R.color.theme_background_light)
+                    }?.let { it2 ->
+                        editFamilyMemberDetailsBinding.cardOther.setCardBackgroundColor(
+                            it2
+                        )
+                    }
+                    editFamilyMemberDetailsBinding.ImageViewSelectedGenderOther.isVisible=true
+                }
+
+
+            }
+        }
     }
 
     private fun getLastLocation() : String? {
@@ -242,7 +269,7 @@ class EditFamilyMemberDetailsFragment : BaseFragment() {
         var cityName: String = ""
         var countryName = ""
         var address = ""
-        var geoCoder = Geocoder(requireContext(), Locale.getDefault())
+        var geoCoder = Geocoder(context, Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)
 
         address = Adress.get(0).getAddressLine(0)

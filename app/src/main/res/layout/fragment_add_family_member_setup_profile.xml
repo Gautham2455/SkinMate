@@ -132,7 +132,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_male"
                     style="@style/cardviewstyle"
-                    android:layout_width="110dp"
+                    android:layout_width="100dp"
                     android:layout_height="110dp"
                     android:checkable="true"
                     android:clickable="true"
@@ -187,7 +187,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_female"
                     style="@style/cardviewstyle"
-                    android:layout_width="110dp"
+                    android:layout_width="100dp"
                     android:layout_height="110dp"
                     android:checkable="true"
                     android:clickable="true"
@@ -243,7 +243,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_other"
                     style="@style/cardviewstyle"
-                    android:layout_width="110dp"
+                    android:layout_width="100dp"
                     android:layout_height="110dp"
                     android:checkable="true"
                     android:clickable="true"

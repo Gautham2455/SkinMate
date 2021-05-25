@@ -73,7 +73,45 @@ class ViewOrEditProfileFragment : BaseFragment() {
 
         HomeActivity.bottomNavigationView.visibility = View.GONE
 
-        viewModel.getCustomerDetails("Bearer $token",custId!!).observe(requireActivity()){
+
+        viewEditProfileBinding.btnSaveChanges.setOnClickListener {
+
+            mailingaddress = viewEditProfileBinding.etMailingAddress.text.toString()
+            insuranceinfo = viewEditProfileBinding.etInsuranceInfo.text.toString()
+            emergencycontactname = viewEditProfileBinding.etEmergencyContactName.text.toString()
+            emergencyphonenumber = viewEditProfileBinding.etEmergencyContactNumber.text.toString()
+
+            viewModel.postEditCustomer("Bearer $token",custId!!,mailingaddress!!,email!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(this){
+                if(it.get(0).Code == 200) {
+                    replace(R.id.fragment_container,AccountFragment.newInstance())
+                    Toast.makeText(context,"Changes updated",Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+       viewEditProfileBinding.tvCurrentLocation.setOnClickListener {if (!CheckPermission()) {
+
+            RequestPermission()
+        }
+        else {
+            viewEditProfileBinding.etMailingAddress.setText(getLastLocation())
+
+        }}
+
+        return viewEditProfileBinding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val sharedPref: SharedPreferences =requireActivity()!!.getSharedPreferences("SkinMate",
+            Context.MODE_PRIVATE)
+        val custId=sharedPref!!.getString(SignInFragment.CUSTOMER_ID,"none")
+        val token=sharedPref!!.getString(SignInFragment.TOKEN,"none")
+        val email = sharedPref!!.getString(SignUpFragment.EMAIL_ID,"none")
+
+        viewModel.getCustomerDetails("Bearer $token",custId!!).observe(this){
             Log.d("profile",it.get(0).responseInformation.get(0).firstName)
 
             val editor: SharedPreferences.Editor =  sharedPref!!.edit()
@@ -91,43 +129,27 @@ class ViewOrEditProfileFragment : BaseFragment() {
                 viewEditProfileBinding.etMailingAddress.setText(it.get(0).responseInformation.get(0).address)
                 viewEditProfileBinding.etInsuranceInfo.setText(it.get(0).responseInformation.get(0).insuranceInformation)
                 if (it[0].responseInformation.get(0).gender == 1){
-                    viewEditProfileBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                    context?.let { it1 ->
+                        ContextCompat.getColor(
+                            it1, R.color.theme_background_light)
+                    }?.let { it2 -> viewEditProfileBinding.cardMale.setCardBackgroundColor(it2) }
                     viewEditProfileBinding.ImageViewSelectedGenderMale.isVisible=true
                 } else if (it[0].responseInformation.get(0).gender== 2){
-                    viewEditProfileBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                    context?.let { it1 ->
+                        ContextCompat.getColor(
+                            it1, R.color.theme_background_light)
+                    }?.let { it2 -> viewEditProfileBinding.cardFemale.setCardBackgroundColor(it2) }
                     viewEditProfileBinding.ImageViewSelectedGenderFemale.isVisible=true
                 } else {
-                    viewEditProfileBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                    context?.let { it1 ->
+                        ContextCompat.getColor(
+                            it1, R.color.theme_background_light)
+                    }?.let { it2 -> viewEditProfileBinding.cardOther.setCardBackgroundColor(it2) }
                     viewEditProfileBinding.ImageViewSelectedGenderOther.isVisible=true
                 }
             }
         }
 
-        viewEditProfileBinding.btnSaveChanges.setOnClickListener {
-
-            mailingaddress = viewEditProfileBinding.etMailingAddress.text.toString()
-            insuranceinfo = viewEditProfileBinding.etInsuranceInfo.text.toString()
-            emergencycontactname = viewEditProfileBinding.etEmergencyContactName.text.toString()
-            emergencyphonenumber = viewEditProfileBinding.etEmergencyContactNumber.text.toString()
-
-            viewModel.postEditCustomer("Bearer $token",custId!!,mailingaddress!!,email!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(requireActivity()){
-                if(it.get(0).Code == 200) {
-                    replace(R.id.fragment_container,AccountFragment.newInstance())
-                    Toast.makeText(requireContext(),"Changes updated",Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-
-       viewEditProfileBinding.tvCurrentLocation.setOnClickListener {if (!CheckPermission()) {
-
-            RequestPermission()
-        }
-        else {
-            viewEditProfileBinding.etMailingAddress.setText(getLastLocation())
-
-        }}
-
-        return viewEditProfileBinding.root
     }
 
     private fun getLastLocation() : String? {
@@ -188,7 +210,7 @@ class ViewOrEditProfileFragment : BaseFragment() {
         var cityName: String = ""
         var countryName = ""
         var address = ""
-        var geoCoder = Geocoder(requireContext(), Locale.getDefault())
+        var geoCoder = Geocoder(context, Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)
 
         address = Adress.get(0).getAddressLine(0)

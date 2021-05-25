@@ -85,8 +85,9 @@ class SignInFragment : BaseFragment() {
                     activity?.finish()
                     startActivity(Intent(requireActivity(), HomeActivity::class.java))
                 }
-                else
+                else {
                     signInBinding.textinputPassword.setError("Invalid Phone Number/Password Combination")
+                }
             }
         }
 

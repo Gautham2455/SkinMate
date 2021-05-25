@@ -86,7 +86,6 @@ class AddFamilyMemberFragment : BaseFragment() {
         var day=c.get(Calendar.DAY_OF_MONTH)
 
         var bloodgroups=resources.getStringArray(R.array.Bloodgroup)
-        var arrayAdapter= ArrayAdapter(requireContext(),R.layout.dropdown_menu,bloodgroups)
 //        addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setAdapter(arrayAdapter)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         addFamilyMemberSetupProfileBinding.etEmergencyContactNumber.addTextChangedListener(textWatcher)
@@ -97,14 +96,28 @@ class AddFamilyMemberFragment : BaseFragment() {
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderOther.isVisible=false
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderMale.isVisible=true
 
-                addFamilyMemberSetupProfileBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                context?.let { it1 ->
+                    ContextCompat.getColor(
+                        it1, R.color.theme_background_light)
+                }?.let { it2 ->
+                    addFamilyMemberSetupProfileBinding.cardMale.setCardBackgroundColor(
+                        it2
+                    )
+                }
 
                 gender = addFamilyMemberSetupProfileBinding.tvGenderMale.text.toString()
 
             }
             else {
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderMale.isVisible=false
-                addFamilyMemberSetupProfileBinding.cardMale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+                context?.let { it1 ->
+                    ContextCompat.getColor(
+                        it1, R.color.white)
+                }?.let { it2 ->
+                    addFamilyMemberSetupProfileBinding.cardMale.setCardBackgroundColor(
+                        it2
+                    )
+                }
             }
         }
 
@@ -114,13 +127,27 @@ class AddFamilyMemberFragment : BaseFragment() {
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderOther.isVisible=false
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderFemale.isVisible=true
 
-                addFamilyMemberSetupProfileBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                context?.let { it1 ->
+                    ContextCompat.getColor(
+                        it1, R.color.theme_background_light)
+                }?.let { it2 ->
+                    addFamilyMemberSetupProfileBinding.cardFemale.setCardBackgroundColor(
+                        it2
+                    )
+                }
                 gender = addFamilyMemberSetupProfileBinding.tvGenderFemale.text.toString()
 
             }
             else {
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderFemale.isVisible=false
-                addFamilyMemberSetupProfileBinding.cardFemale.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+                context?.let { it1 ->
+                    ContextCompat.getColor(
+                        it1, R.color.white)
+                }?.let { it2 ->
+                    addFamilyMemberSetupProfileBinding.cardFemale.setCardBackgroundColor(
+                        it2
+                    )
+                }
             }
         }
 
@@ -129,25 +156,42 @@ class AddFamilyMemberFragment : BaseFragment() {
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderMale.isVisible=false
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderFemale.isVisible=false
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderOther.isVisible=true
-                addFamilyMemberSetupProfileBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.theme_background_light))
+                context?.let { it1 ->
+                    ContextCompat.getColor(
+                        it1, R.color.theme_background_light)
+                }?.let { it2 ->
+                    addFamilyMemberSetupProfileBinding.cardOther.setCardBackgroundColor(
+                        it2
+                    )
+                }
 
                 gender = addFamilyMemberSetupProfileBinding.tvGenderOther.text.toString()
 
             }
             else {
                 addFamilyMemberSetupProfileBinding.ImageViewSelectedGenderOther.isVisible=false
-                addFamilyMemberSetupProfileBinding.cardOther.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+                context?.let { it1 ->
+                    ContextCompat.getColor(
+                        it1, R.color.white)
+                }?.let { it2 ->
+                    addFamilyMemberSetupProfileBinding.cardOther.setCardBackgroundColor(
+                        it2
+                    )
+                }
             }
         }
 
         addFamilyMemberSetupProfileBinding.etDob.setOnClickListener {
-            var dpd = DatePickerDialog(requireContext(),
-                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-                    var mmMonth = mMonth+1
-                    dateofbirth = "$mDay-$mmMonth-$mYear"
-                    addFamilyMemberSetupProfileBinding.etDob.setText(dateofbirth)
-                },year,month,day)
-            dpd.show()
+            var dpd = context?.let { it1 ->
+                DatePickerDialog(
+                    it1,
+                    DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                        var mmMonth = mMonth+1
+                        dateofbirth = "$mDay-$mmMonth-$mYear"
+                        addFamilyMemberSetupProfileBinding.etDob.setText(dateofbirth)
+                    },year,month,day)
+            }
+            dpd?.show()
         }
 
         addFamilyMemberSetupProfileBinding.tvCurrentLocation.setOnClickListener {if (!CheckPermission()) {
@@ -160,40 +204,40 @@ class AddFamilyMemberFragment : BaseFragment() {
         }}
 
         addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setOnClickListener {
-            val bloodgrpBottomsheet = BottomSheetDialog(requireContext())
-            bloodgrpBottomsheet.setContentView(R.layout.bottom_dialog_blood_group)
-            bloodgrpBottomsheet.show()
-            val Opos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_o_positive)
-            val Oneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_o_negative)
-            val Apos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_a_positive)
-            val Aneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_a_negative)
-            val Bpos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_b_positive)
-            val Bneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_b_negative)
-            val ABpos = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_ab_positive)
-            val ABneg = bloodgrpBottomsheet.findViewById<TextView>(R.id.tv_ab_negative)
+            val bloodgrpBottomsheet = context?.let { it1 -> BottomSheetDialog(it1) }
+            bloodgrpBottomsheet?.setContentView(R.layout.bottom_dialog_blood_group)
+            bloodgrpBottomsheet?.show()
+            val Opos = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_o_positive)
+            val Oneg = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_o_negative)
+            val Apos = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_a_positive)
+            val Aneg = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_a_negative)
+            val Bpos = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_b_positive)
+            val Bneg = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_b_negative)
+            val ABpos = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_ab_positive)
+            val ABneg = bloodgrpBottomsheet?.findViewById<TextView>(R.id.tv_ab_negative)
             Opos!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Opos!!.getText()) }
             Oneg!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Oneg!!.getText()) }
             Apos!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Apos!!.getText()) }
             Aneg!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Aneg!!.getText()) }
             Bpos!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Bpos!!.getText()) }
             Bneg!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(Bneg!!.getText()) }
             ABpos!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(ABpos!!.getText()) }
             ABneg!!.setOnClickListener {
-                bloodgrpBottomsheet.dismiss()
+                bloodgrpBottomsheet?.dismiss()
                 addFamilyMemberSetupProfileBinding.autocompleteBloodGrp.setText(ABneg!!.getText()) }
 
         }
@@ -225,13 +269,16 @@ class AddFamilyMemberFragment : BaseFragment() {
 
 
                 viewModel.postAddFamilyMember("Bearer $token",custId!!,relationshipid!!,firstname!!,lastname!!,genderId!!,dateofbirth!!
-                ,bloodgroup_user!!,mailingaddress!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(requireActivity()){
+                ,bloodgroup_user!!,mailingaddress!!,insuranceinfo!!,emergencycontactname!!,emergencyphonenumber!!).observe(this){
 
-                    if(it.get(0).Code == 200)
-                        replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                    if(it.get(0).Code == 200){
+                        //replace(R.id.fragment_container,FamilyMemberListFragment.newInstance())
+                        fragmentManager?.popBackStack()
+                    }
+
 
                     else
-                        Toast.makeText(requireContext(),"Unsuccessfull",Toast.LENGTH_LONG).show()
+                        Toast.makeText(context,"Unsuccessfull",Toast.LENGTH_LONG).show()
                 }
 
 
@@ -302,7 +349,7 @@ class AddFamilyMemberFragment : BaseFragment() {
         var cityName: String = ""
         var countryName = ""
         var address = ""
-        var geoCoder = Geocoder(requireContext(), Locale.getDefault())
+        var geoCoder = Geocoder(context, Locale.getDefault())
         var Adress = geoCoder.getFromLocation(lat, long, 3)
 
         address = Adress.get(0).getAddressLine(0)

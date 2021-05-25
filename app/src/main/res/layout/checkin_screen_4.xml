@@ -11,8 +11,9 @@
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="50dp"
             android:layout_height="99dp"
             app:shapeAppearance="@style/ShapeAppearanceOverlay_card_custom_corners_tr_bl"
@@ -79,9 +80,10 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_appointment_summary"
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="280dp"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             app:shapeAppearance="@style/ShapeAppearanceOverlay_card_custom_corners"
             android:layout_marginTop="30dp"
             app:strokeWidth="1dp"
@@ -253,13 +255,13 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:src="@drawable/checkin_completed"
-                android:layout_marginStart="170dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="35dp"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="308dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="34dp"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="95dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/checkin_completed"

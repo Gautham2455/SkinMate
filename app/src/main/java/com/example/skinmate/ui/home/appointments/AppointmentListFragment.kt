@@ -41,7 +41,14 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
 
         setTitleWithBackButton("My Appointments")
         HomeActivity.bottomNavigationView.visibility = View.VISIBLE
-        //HomeActivity.bottomNavigationView.selectedItemId = R.id.navigation_appointment
+
+        return view
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
 
         val sharedPref: SharedPreferences = requireActivity()!!.getSharedPreferences(
             "SkinMate",
@@ -49,27 +56,24 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
         )
         val custId = sharedPref!!.getString(SignInFragment.CUSTOMER_ID, "none")
         val token = "Bearer " + sharedPref!!.getString(SignInFragment.TOKEN, "none")
-
-        viewModel.getAppointmentList(token, custId!!).observe(requireActivity()) {
+        viewModel.getAppointmentList(token, custId!!).observe(this) {
 
             appointmentList=it
             if (it[0].code == 200) {
                 Log.v("MAin",it[0].toString())
                 if (it[0].responseInformation.isNullOrEmpty()) {
-                    replace(R.id.fragment_container, EmptyAppointmentFragment.newInstance(),false)
+                    replace(R.id.fragment_container, EmptyAppointmentFragment.newInstance())
                 }
                 else{
                     Log.v("Appim",it[0].responseInformation.toString())
                     val appointmentadapter=AppointmentAdapter(it[0].responseInformation,this,this)
                     val rv_appointment=view.findViewById<RecyclerView>(R.id.rv_appointment_list)
-                    rv_appointment.layoutManager= LinearLayoutManager(requireContext())
+                    rv_appointment.layoutManager= LinearLayoutManager(context)
                     rv_appointment.setAdapter(appointmentadapter)
                 }
             }
 
         }
-
-        return view
 
     }
     companion object{
@@ -82,7 +86,7 @@ class AppointmentListFragment:BaseFragment(), OnClickInterface,OnClickInterface_
 
     override fun getViewPosition(position: Int) {
         appointment = appointmentList!![0].responseInformation[position]
-        startActivity(Intent(requireActivity(), CheckInActivity::class.java))
+        startActivity(Intent(activity, CheckInActivity::class.java))
 
     }
 

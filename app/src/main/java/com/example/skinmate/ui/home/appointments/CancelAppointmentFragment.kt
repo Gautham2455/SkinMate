@@ -56,7 +56,7 @@ class CancelAppointmentFragment:BaseFragment() {
             val jsonObjectString = jsonobject.toString()
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-            viewModel.getAppointmentStatus(token,requestBody).observe(requireActivity()){
+            viewModel.getAppointmentStatus(token,requestBody).observe(this){
 
                 if(it[0].Code==200)
                     replace(R.id.fragment_container,AppointmentListFragment.newInstance())

@@ -61,7 +61,7 @@ class RescheduleConfirmationFragment:BaseFragment() {
             val jsonObjectString = jsonObject.toString()
 
             val requestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
-            viewModel.putReschedule(token,requestBody).observe(requireActivity()){
+            viewModel.putReschedule(token,requestBody).observe(this){
                 if(it[0].Code==200){
                     replace(R.id.fragment_container,ConfirmationFragment.newInstance())
                 }
